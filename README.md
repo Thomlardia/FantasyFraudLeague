@@ -7,7 +7,7 @@ for the project. It will obviosly change and grow as we decide how to setup
 Usage:
   - to launch the frontend 'make start'
 
-
+```markdown
 Directory structure target
 Wario-RW344/
 ├── frontend/                        # React frontend
