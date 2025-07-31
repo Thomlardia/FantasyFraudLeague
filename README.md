@@ -10,75 +10,36 @@ Usage:
 
 Directory structure target
 Wario-RW344/
-
 ├── frontend/                        # React frontend
-
 │   ├── public/
-
 │   ├── src/
-
 │   │   ├── assets/                 # Images, icons, etc.
-
-│   │   ├── components/            # Reusable UI components (e.g., Navbar, ToolCard)
-
-│   │   ├── pages/                 # One page per fraud type, home, login, dashboard
-
+│   │   ├── components/            # Reusable UI components
+│   │   ├── pages/                 # One page per fraud type
 │   │   │   ├── LoginPage.jsx
-
 │   │   │   ├── Dashboard.jsx
-
 │   │   │   ├── FraudPages/
-
 │   │   │   │   ├── Phishing.jsx
-
 │   │   │   │   ├── ATMFraud.jsx
-
 │   │   │   │   ├── DeepfakeFraud.jsx
-
 │   │   │   │   └── ...
-
-│   │   ├── services/              # API calls to backend or Firebase
-
-│   │   ├── contexts/              # React Contexts for auth, game state, etc.
-
 │   │   ├── App.jsx
-
 │   │   └── index.js
-
 │   ├── .env                       # Frontend config vars (e.g., Firebase)
-
 │   ├── package.json
-
 │   └── README.md
-
 │
-
 ├── backend/
-
 │   ├── still undecided software
-
 │   └── README.md
-
 │
-
 ├── database/                      # Optional: Firebase rules, schemas
-
 │   ├── schema.md                 # Human-readable DB design
-
-│   └── actual_database
-
+│   └── actualDatabase
 │
-
 ├── .gitignore
-
 ├── Makefile
-
 ├── README.md
-
-└── docs/                         # Extra docs: design choices, team notes, research
-
+└── docs/                         # Extra docs: design choices, research
     ├── fraud_types.md
-
     └── prevention_tools.md
-
-
