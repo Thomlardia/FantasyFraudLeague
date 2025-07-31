@@ -1,0 +1,13 @@
+# Node
+node_modules/
+frontend/node_modules/
+backend/node_modules/
+
+# Build output
+frontend/build/
+
+# Logs
+*.log
+
+# Local dev env files
+.env

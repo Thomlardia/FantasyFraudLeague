@@ -1,5 +1,0 @@
-EPI2
-BYT1
-BYT2
-SU1
-SU2
