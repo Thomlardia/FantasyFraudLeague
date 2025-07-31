@@ -9,40 +9,76 @@ Usage:
 
 
 Directory structure target
-Wario-RW344/\n
-├── frontend/                        # React frontend\n
-│   ├── public/\n
-│   ├── src/\n
-│   │   ├── assets/                 # Images, icons, etc.\n
-│   │   ├── components/            # Reusable UI components (e.g., Navbar, ToolCard)\n
-│   │   ├── pages/                 # One page per fraud type, home, login, dashboard\n
-│   │   │   ├── LoginPage.jsx\n
-│   │   │   ├── Dashboard.jsx\n
-│   │   │   ├── FraudPages/\n
-│   │   │   │   ├── Phishing.jsx\n
-│   │   │   │   ├── ATMFraud.jsx\n
-│   │   │   │   ├── DeepfakeFraud.jsx\n
-│   │   │   │   └── ...\n
-│   │   ├── services/              # API calls to backend or Firebase\n
-│   │   ├── contexts/              # React Contexts for auth, game state, etc.\n
-│   │   ├── App.jsx\n
-│   │   └── index.js\n
-│   ├── .env                       # Frontend config vars (e.g., Firebase)\n
-│   ├── package.json\n
-│   └── README.md\n
-│\n
-├── backend/\n
-│   ├── still undecided software\n
-│   └── README.md\n
-│\n
-├── database/                      # Optional: Firebase rules, schemas\n
-│   ├── schema.md                 # Human-readable DB design\n
-│   └── actual_database\n
-│\n
-├── .gitignore\n
-├── Makefile\n
-├── README.md\n
-└── docs/                         # Extra docs: design choices, team notes, research\n
-    ├── fraud_types.md\n
-    └── prevention_tools.md\n
+Wario-RW344/
+
+├── frontend/                        # React frontend
+
+│   ├── public/
+
+│   ├── src/
+
+│   │   ├── assets/                 # Images, icons, etc.
+
+│   │   ├── components/            # Reusable UI components (e.g., Navbar, ToolCard)
+
+│   │   ├── pages/                 # One page per fraud type, home, login, dashboard
+
+│   │   │   ├── LoginPage.jsx
+
+│   │   │   ├── Dashboard.jsx
+
+│   │   │   ├── FraudPages/
+
+│   │   │   │   ├── Phishing.jsx
+
+│   │   │   │   ├── ATMFraud.jsx
+
+│   │   │   │   ├── DeepfakeFraud.jsx
+
+│   │   │   │   └── ...
+
+│   │   ├── services/              # API calls to backend or Firebase
+
+│   │   ├── contexts/              # React Contexts for auth, game state, etc.
+
+│   │   ├── App.jsx
+
+│   │   └── index.js
+
+│   ├── .env                       # Frontend config vars (e.g., Firebase)
+
+│   ├── package.json
+
+│   └── README.md
+
+│
+
+├── backend/
+
+│   ├── still undecided software
+
+│   └── README.md
+
+│
+
+├── database/                      # Optional: Firebase rules, schemas
+
+│   ├── schema.md                 # Human-readable DB design
+
+│   └── actual_database
+
+│
+
+├── .gitignore
+
+├── Makefile
+
+├── README.md
+
+└── docs/                         # Extra docs: design choices, team notes, research
+
+    ├── fraud_types.md
+
+    └── prevention_tools.md
+
 
