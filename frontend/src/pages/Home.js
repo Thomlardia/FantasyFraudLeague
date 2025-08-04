@@ -5,7 +5,21 @@ function Home() {
         <div>
             <h1>HOME PAGE</h1>
             <Link to="/">BACK</Link>
+
+            <br />
+
+            <Link to="/defenseshop">DEFENSE SHOP</Link>
+            <br />
+            <Link to="/fraudwiki">FRAUD WIKI</Link>
+            <br />
+            <Link to="/leaderboard">LEADERBOARD</Link>
+            <br />
+            <Link to="/settings">SETTINGS</Link>
+            <br />
+            <Link to="/help">HELP</Link>
         </div>
+
+        
     );
 }
 
