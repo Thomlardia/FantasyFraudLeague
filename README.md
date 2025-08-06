@@ -4,6 +4,20 @@ for the project. It will obviosly change and grow as we decide how to setup
 
 [oh and also a lot of the stuff in here is automatically made by npx create-react-app so we can remove all unnececary stuff later]
 
+
+
+Commit Message Format:
+Header:
+<type>(<scope>): <subject>
+
+Type: Categorizes the change (e.g., feat for new features, fix for bug fixes, refactor for code restructuring, docs for documentation changes).
+
+Scope: Specifies the part of the codebase affected (e.g., auth, ui, database).
+
+Subject: A concise, imperative, present-tense summary of the change, typically limited to 50 characters and without ending punctuation.
+
+
+
 Usage:
   - to launch the frontend 'make start'
 
