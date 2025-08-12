@@ -9,7 +9,7 @@ a good job summarizing how our project should be implemented and helps explain
 the structure.  
   
 ## Unrelated Security Warning
-
+  
 You will see controllers on the server side, don't let that frighten you, this  
 is maybe a bit more complex that having it on user side, but if you put it on  
 user side to put it simply the whole program will be incredibly insecure.  
