@@ -38,14 +38,38 @@ lowercase unless necessary for things like product names as above.
   - `refactor` for code restructuring  
   - `docs` for documentation changes  
   - `chore` for changes that don’t add a feature, fix a bug, or affect user-facing behavior  
-  -  `test` for tests  
-  -  `perf` for performance related  
+  - `test` for tests  
+  - `perf` for performance related  
   - `ci` for pipeline  
 - Scope: Specifies the part of the codebase affected (e.g., `auth`, `ui`, `database`).  
 - Subject: A concise, imperative, present-tense summary of the change, typically  
            limited to 50 characters and without ending punctuation.  
 - Issue ID: Generally a story should not be covered in a single commit. Try to  
             stick to Tasks and Subtasks. But especially subtasks.  
+  
+# Merging  
+  
+Merging conventions of our git branching strategy.  
+Our git branching strategy is only properly used when we do merges as follows:
+  
+## Merging develop to feature
+
+Here feature can mean any one of the type categories above.  
+You will do this regularly while working in a branch to keep your branch updated
+with the latest stable change to develop branch (Assured given our strategy).
+  
+***Cheat Sheet:***
+  
+## Merging feature to develop
+
+Here you are done with your story or task branch and you are merging it back into  
+develop note you can only do this if you know your branch is in a working state.  
+If it is not, and your story or task is done, you create a new branch from your  
+current branch (not main) and continue.  
+  
+***Cheat Sheet:***
+ - git fetch origin
+ - 
   
   
 # Branch, Commit and Jira Strategy  
