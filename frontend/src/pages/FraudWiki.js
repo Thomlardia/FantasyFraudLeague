@@ -5,6 +5,48 @@ function FraudWiki() {
         <div>
             <h1>FraudWiki</h1>
             <Link to="/home">BACK</Link>
+            
+            <br />
+            <Link to="/frauds/Replace">Replace</Link>
+            <br />
+            <Link to="/frauds/Replace">Replace</Link>
+            <br />
+            <Link to="/frauds/Replace">Replace</Link>
+            <br />
+            <Link to="/frauds/Replace">Replace</Link>
+            <br />
+            <Link to="/frauds/Replace">Replace</Link>
+            <br />
+            <Link to="/frauds/Replace">Replace</Link>
+            <br />
+            <Link to="/frauds/Replace">Replace</Link>
+            <br />
+            <Link to="/frauds/Replace">Replace</Link>
+            <br />
+            <Link to="/frauds/Replace">Replace</Link>
+            <br />
+            <Link to="/frauds/Replace">Replace</Link>
+            <br />
+            <Link to="/frauds/Replace">Replace</Link>
+            <br />
+            <Link to="/frauds/Replace">Replace</Link>
+            <br />
+            <Link to="/frauds/Replace">Replace</Link>
+            <br />
+            <Link to="/frauds/Replace">Replace</Link>
+            <br />
+            <Link to="/frauds/Replace">Replace</Link>
+            <br />
+            <Link to="/frauds/Replace">Replace</Link>
+            <br />
+            <Link to="/frauds/Replace">Replace</Link>
+            <br />
+            <Link to="/frauds/Replace">Replace</Link>
+            <br />
+            <Link to="/frauds/Replace">Replace</Link>
+            <br />
+            <Link to="/frauds/Replace">Replace</Link>
+            <br />
         </div>
     );
 }

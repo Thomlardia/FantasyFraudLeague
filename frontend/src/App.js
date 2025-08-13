@@ -33,6 +33,28 @@ import BackgroundChecks from './pages/defenses/BackgroundChecks';
 import HttpsAndEncryption from './pages/defenses/HttpsAndEncryption';
 import VpnUsage from './pages/defenses/VpnUsage'; 
 
+// FRAUDS
+import Phishing from './pages.frauds/Phishing';
+import Ransomware from './pages.frauds/Ransomware';
+import Replace from './pages.frauds/Replace';
+import Replace from './pages.frauds/Replace';
+import Replace from './pages.frauds/Replace';
+import Replace from './pages.frauds/Replace';
+import Replace from './pages.frauds/Replace';
+import Replace from './pages.frauds/Replace';
+import Replace from './pages.frauds/Replace';
+import Replace from './pages.frauds/Replace';
+import Replace from './pages.frauds/Replace';
+import Replace from './pages.frauds/Replace';
+import Replace from './pages.frauds/Replace';
+import Replace from './pages.frauds/Replace';
+import Replace from './pages.frauds/Replace';
+import Replace from './pages.frauds/Replace';
+import Replace from './pages.frauds/Replace';
+import Replace from './pages.frauds/Replace';
+import Replace from './pages.frauds/Replace';
+import Replace from './pages.frauds/Replace';
+
 function App() {
   return (
     <Router>
@@ -69,6 +91,27 @@ function App() {
         <Route path="defenses/BackgroundChecks" element={<BackgroundChecks />} />
         <Route path="defenses/HttpsAndEncryption" element={<HttpsAndEncryption />} />
         <Route path="defenses/VpnUsage" element={<VpnUsage />} />
+
+        <Route path="frauds/Phishing" element={<Phishing />} />
+        <Route path="frauds/Ransomware" element={<Ransomware />} />
+        <Route path="frauds/Replace" element={<Replace />} />
+        <Route path="frauds/Replace" element={<Replace />} />
+        <Route path="frauds/Replace" element={<Replace />} />
+        <Route path="frauds/Replace" element={<Replace />} />
+        <Route path="frauds/Replace" element={<Replace />} />
+        <Route path="frauds/Replace" element={<Replace />} />
+        <Route path="frauds/Replace" element={<Replace />} />
+        <Route path="frauds/Replace" element={<Replace />} />
+        <Route path="frauds/Replace" element={<Replace />} />
+        <Route path="frauds/Replace" element={<Replace />} />
+        <Route path="frauds/Replace" element={<Replace />} />
+        <Route path="frauds/Replace" element={<Replace />} />
+        <Route path="frauds/Replace" element={<Replace />} />
+        <Route path="frauds/Replace" element={<Replace />} />
+        <Route path="frauds/Replace" element={<Replace />} />
+        <Route path="frauds/Replace" element={<Replace />} />
+        <Route path="frauds/Replace" element={<Replace />} />
+        <Route path="frauds/Replace" element={<Replace />} />
       </Routes>
     </Router>
   );
