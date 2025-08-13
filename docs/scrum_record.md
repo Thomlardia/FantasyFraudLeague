@@ -81,7 +81,7 @@
   
 ## Sprint 1:  
   
-### Kickoff Sprint 1 Client Meeting (with Intersekt)  
+### Kickoff Sprint 1 Client Meeting (with Entersekt)  
   
 ***Basic Details:***  
 - *Date:* 6 August 2025  
@@ -107,3 +107,33 @@ Team discusses what Items from the Product backlog is to be finished during the
 first sprint  
   
 --- 
+### Stand up (with Entersekt)
+
+***Basic Details:***  
+- *Date:* 13 August 2025  
+- *Time:* 16h00 to 16h30  
+- *Platform:* Microsoft Teams Online Meeting 
+- *Attendees (Wario):* Abraham, Corbin, Priyal, Raymond, Thomas  
+- *Attendees (Entersekt):* Daena, Gift
+
+***Agenda Items:***
+Present out "jira" board and do the typical stand up:
+- What we all work on last week.
+- What we are working on this week.
+- Any blockers/questions for Entersekt.
+
+***Progress Updates***
+- Jira board setup was completed by Raymond.
+- Research into the Scrum process was conducted.
+- Each member discussed and outlined their planned tasks for sprint 1.
+
+- Jira Board Optimization
+	Discussed strategies to use Jira more productively and efficiently, including:
+	Creating custom boards for better visualization.
+	Proper ticket creation with clear descriptions and acceptance criteria.
+	Setting up and managing Sprints within Jira.
+
+***Confirmed Sprint 1 Goal***
+1. Research fraud (to inform game mechanics and scenarios).
+2. Implement player login functionality.
+3. Set up UI pages for the game interface.
