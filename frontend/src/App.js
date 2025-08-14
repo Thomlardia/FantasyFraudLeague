@@ -33,6 +33,28 @@ import BackgroundChecks from './pages/defenses/BackgroundChecks';
 import HttpsAndEncryption from './pages/defenses/HttpsAndEncryption';
 import VpnUsage from './pages/defenses/VpnUsage'; 
 
+// FRAUDS
+import Phishing from './pages/frauds/Phishing';
+import Ransomware from './pages/frauds/Ransomware';
+import Ddos from './pages/frauds/Ddos';
+import Deepfake from './pages/frauds/Deepfake';
+import AtmSkimming from './pages/frauds/AtmSkimming';
+import InsiderFraud from './pages/frauds/InsiderFraud';
+import ManInTheMiddle from './pages/frauds/ManInTheMiddle';
+import SqlInjection from './pages/frauds/SqlInjection';
+import BusinessEmailCompromise from './pages/frauds/BusinessEmailCompromise';
+import ZeroDayExploit from './pages/frauds/ZeroDayExploit';
+import Vishing from './pages/frauds/Vishing';
+import Xss from './pages/frauds/Xss';
+import AccountTakeover from './pages/frauds/AccountTakeover';
+import InvestmentScam from './pages/frauds/InvestmentScam';
+import SimSwap from './pages/frauds/SimSwap';
+import AuthPushPayments from './pages/frauds/AuthPushPayments';
+import CryptoJacking from './pages/frauds/CryptoJacking';
+import BruteForce from './pages/frauds/BruteForce';
+import SyntIdentityTheft from './pages/frauds/SyntIdentityTheft';
+import AccAndInvFraud from './pages/frauds/AccAndInvFraud';
+
 function App() {
   return (
     <Router>
@@ -69,6 +91,27 @@ function App() {
         <Route path="defenses/BackgroundChecks" element={<BackgroundChecks />} />
         <Route path="defenses/HttpsAndEncryption" element={<HttpsAndEncryption />} />
         <Route path="defenses/VpnUsage" element={<VpnUsage />} />
+
+        <Route path="frauds/Phishing" element={<Phishing />} />
+        <Route path="frauds/Ransomware" element={<Ransomware />} />
+        <Route path="frauds/Ddos" element={<Ddos />} />
+        <Route path="frauds/Deepfake" element={<Deepfake />} />
+        <Route path="frauds/AtmSkimming" element={<AtmSkimming />} />
+        <Route path="frauds/InsiderFraud" element={<InsiderFraud />} />
+        <Route path="frauds/ManInTheMiddle" element={<ManInTheMiddle />} />
+        <Route path="frauds/SqlInjection" element={<SqlInjection />} />
+        <Route path="frauds/BusinessEmailCompromise" element={<BusinessEmailCompromise />} />
+        <Route path="frauds/ZeroDayExploit" element={<ZeroDayExploit />} />
+        <Route path="frauds/Vishing" element={<Vishing />} />
+        <Route path="frauds/Xss" element={<Xss />} />
+        <Route path="frauds/AccountTakeover" element={<AccountTakeover />} />
+        <Route path="frauds/InvestmentScam" element={<InvestmentScam />} />
+        <Route path="frauds/SimSwap" element={<SimSwap />} />
+        <Route path="frauds/AuthPushPayments" element={<AuthPushPayments />} />
+        <Route path="frauds/CryptoJacking" element={<CryptoJacking />} />
+        <Route path="frauds/BruteForce" element={<BruteForce />} />
+        <Route path="frauds/SyntIdentityTheft" element={<SyntIdentityTheft />} />
+        <Route path="frauds/AccAndInvFraud" element={<AccAndInvFraud />} />
       </Routes>
     </Router>
   );
