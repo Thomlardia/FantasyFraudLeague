@@ -1,0 +1,23 @@
+{
+  "name": "wario-rw344",
+  "version": "1.0.0",
+  "description": "Wario - Fantasy Fraud League Web App",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.cs.sun.ac.za:Computer-Science/rw344/2025/Wario-RW344.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "firebase-tools": "^14.12.0"
+  }
+}
