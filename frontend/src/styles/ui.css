@@ -1,0 +1,146 @@
+:root {
+	--bg: #ffffff;
+	--fg: #000000;
+	--muted: #6b7280;
+	--accent: #000000;
+}
+
+html, body, #root {
+	height: 100%;
+	background: var(--bg);
+	color: var(--fg);
+	font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
+}
+
+.page {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	padding: 12px 16px;
+}
+
+.topbar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+}
+
+.topbar-group {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.icon-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 36px;
+	height: 36px;
+	border: 2px solid var(--fg);
+	border-radius: 6px;
+	text-decoration: none;
+	color: var(--fg);
+	font-weight: 700;
+	background: transparent;
+	transition: transform 120ms ease, background 120ms ease;
+}
+
+.icon-button:hover {
+	transform: translateY(-1px);
+	background: #f3f4f6;
+}
+
+.money-display {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-weight: 700;
+}
+
+.money-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 28px;
+	height: 28px;
+	border: 2px solid var(--fg);
+	border-radius: 6px;
+	font-size: 14px;
+}
+
+.home-main {
+	flex: 1 1 auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	gap: 16px;
+}
+
+.headline {
+	margin-top: 12px;
+	font-size: 16px;
+	font-weight: 800;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	color: var(--fg);
+}
+
+.digital-timer {
+	font-family: 'Share Tech Mono', 'VT323', 'Courier New', Courier, monospace;
+	font-size: clamp(48px, 9vw, 120px);
+	letter-spacing: 6px;
+	font-weight: 900;
+}
+
+.cta-row {
+	display: flex;
+	gap: 36px;
+	margin-top: 10px;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+}
+
+.cta-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 240px;
+	padding: 12px 20px;
+	border: 3px solid var(--accent);
+	border-radius: 10px;
+	text-decoration: none;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 800;
+	color: var(--fg);
+	background: transparent;
+	transition: transform 120ms ease, background 120ms ease;
+}
+
+.cta-button:hover {
+	transform: translateY(-1px);
+	background: #f3f4f6;
+}
+
+.link-button {
+	text-decoration: none;
+	color: var(--fg);
+	font-weight: 700;
+	border-bottom: 2px solid transparent;
+}
+
+.link-button:hover {
+	border-bottom-color: var(--fg);
+}
+
+@media (max-width: 480px) {
+	.icon-button { width: 32px; height: 32px; }
+	.money-display { font-size: 14px; }
+}
+
+
