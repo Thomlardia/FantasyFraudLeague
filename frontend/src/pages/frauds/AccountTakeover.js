@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 
-function Replace() {
+function AccountTakeover() {
     return (
         <div>
-            <h1>Replace</h1>
+            <h1>AccountTakeover</h1>
             <Link to="/fraudwiki">BACK</Link>
         </div>
     );
 }
 
-export default Replace;
+export default AccountTakeover;

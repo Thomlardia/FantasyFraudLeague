@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 
-function Replace() {
+function Deepfake() {
     return (
         <div>
-            <h1>Replace</h1>
+            <h1>Deepfake</h1>
             <Link to="/fraudwiki">BACK</Link>
         </div>
     );
 }
 
-export default Replace;
+export default Deepfake;
