@@ -8,7 +8,7 @@ function BackgroundChecks() {
                 <h2>Defends against:</h2>
                 <ul>
                     <li>
-                        <Link to="/frauds/InsiderFraud">AtmSkimming</Link>
+                        <Link to="/frauds/InsiderFraud">Insider Fraud</Link>
                     </li>
                 </ul>
             </section>

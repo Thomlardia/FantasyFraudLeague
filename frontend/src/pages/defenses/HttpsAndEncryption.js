@@ -8,7 +8,7 @@ function HttpsAndEncryption() {
                 <h2>Defends against:</h2>
                 <ul>
                     <li>
-                        <Link to="/frauds/ManInTheMiddle">AtmSkimming</Link>
+                        <Link to="/frauds/ManInTheMiddle">Man-in-the-middle</Link>
                     </li>
                 </ul>
             </section>

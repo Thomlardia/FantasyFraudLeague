@@ -8,7 +8,7 @@ function DdosProtection() {
                 <h2>Defends against:</h2>
                 <ul>
                     <li>
-                        <Link to="/frauds/Ddos">AtmSkimming</Link>
+                        <Link to="/frauds/Ddos">Ddos</Link>
                     </li>
                 </ul>
             </section>

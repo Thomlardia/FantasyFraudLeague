@@ -8,7 +8,7 @@ function EmailFiltering() {
                 <h2>Defends against:</h2>
                 <ul>
                     <li>
-                        <Link to="/frauds/Phishing">AtmSkimming</Link>
+                        <Link to="/frauds/Phishing">Phishing</Link>
                     </li>
                 </ul>
             </section>

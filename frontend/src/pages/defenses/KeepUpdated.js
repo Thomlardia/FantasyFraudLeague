@@ -8,7 +8,7 @@ function KeepUpdated() {
                 <h2>Defends against:</h2>
                 <ul>
                     <li>
-                        <Link to="/frauds/Ransomware">AtmSkimming</Link>
+                        <Link to="/frauds/Ransomware">Ransomware</Link>
                     </li>
                     
                 </ul>

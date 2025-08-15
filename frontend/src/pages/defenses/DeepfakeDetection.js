@@ -8,7 +8,7 @@ function DeepfakeDetection() {
                 <h2>Defends against:</h2>
                 <ul>
                     <li>
-                        <Link to="/frauds/Deepfake">AtmSkimming</Link>
+                        <Link to="/frauds/Deepfake">Deepfake</Link>
                     </li>
                 </ul>
             </section>
