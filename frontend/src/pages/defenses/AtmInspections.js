@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import '../../styles/page.css';
 
 function AtmInspections() {
     return (
