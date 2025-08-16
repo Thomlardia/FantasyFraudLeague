@@ -5,6 +5,12 @@ function Ransomware() {
         <div>
             <h1>Ransomware</h1>
             <Link to="/fraudwiki">BACK</Link>
+
+            <div className="descriptionCard">
+                <p>
+                    Malicious software that encrypts victim's files and demands payment for decryption keys. Examples: CryptoLocker, WannaCry, targeting hospitals, businesses, and government systems.
+                </p>
+            </div>
         </div>
     );
 }
