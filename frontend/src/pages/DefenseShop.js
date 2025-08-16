@@ -4,8 +4,8 @@ import '../styles/shopAndWiki.css';
 function DefenseShop() {
     return (
         <div className="shopContainer">
-            <h1>Defense Shop</h1>
-            <Link to="/home">BACK</Link>
+            <h1 className="shopTitle">Defense Shop</h1>
+            <Link to="/home" className="backButton">BACK</Link>
             
             <div className="shopGrid">
                 <Link to="/defenses/MultiFactorAuth" className="shopCard">Multi-Factor Authentication</Link>
