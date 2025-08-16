@@ -97,13 +97,13 @@ html, body, #root {
 }
 
 .descriptionCard {
-  border: 1px solid #ddd;
+  border: 1px solid #000080;
   border-radius: 12px;
   padding: 16px;
   width: 45%;
   margin-top: 20px;
   background-color: #fff;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
 }
 
 .cta-row {
@@ -154,12 +154,6 @@ html, body, #root {
 
 	.descriptionCard {
 		width: 90%;
-		border: 1px solid #ddd;
-		border-radius: 12px;
-		padding: 16px;
-		margin-top: 20px;
-		background-color: #fff;
-		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 	}
 }
 
