@@ -96,6 +96,16 @@ html, body, #root {
 	font-weight: 900;
 }
 
+.descriptionCard {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 16px;
+  width: 45%;
+  margin-top: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
 .cta-row {
 	display: flex;
 	gap: 36px;
@@ -141,6 +151,16 @@ html, body, #root {
 @media (max-width: 480px) {
 	.icon-button { width: 32px; height: 32px; }
 	.money-display { font-size: 14px; }
+
+	.descriptionCard {
+		width: 90%;
+		border: 1px solid #ddd;
+		border-radius: 12px;
+		padding: 16px;
+		margin-top: 20px;
+		background-color: #fff;
+		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+	}
 }
 
 
