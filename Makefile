@@ -4,8 +4,8 @@ install:
 
 	npx firebase-tools use wario-fantasy-fraud-league
 
-rr:
+run-front:
 	npm --prefix frontend start
 
-re:
+run:
 	npx firebase-tools emulators:start
