@@ -5,6 +5,12 @@ function Xss() {
         <div>
             <h1>Xss</h1>
             <Link to="/fraudwiki">BACK</Link>
+
+            <div className="descriptionCard">
+                <p>
+                    Attacks whereby malicious script code is injected into a web application. Attackers can steal cookies, record keyboard strokes and capture personal information.
+                </p>
+            </div>
         </div>
     );
 }

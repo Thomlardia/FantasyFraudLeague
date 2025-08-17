@@ -5,6 +5,12 @@ function TrafficFiltering() {
         <div>
             <h1>TrafficFiltering</h1>
             <Link to="/defenseshop">BACK</Link>
+
+            <div className="descriptionCard">
+                <p>
+                    Traffic filtering involves analyzing incoming network traffic and blocking or limiting requests that match attack patterns or exceed normal thresholds.
+                </p>
+            </div>
         </div>
     );
 }

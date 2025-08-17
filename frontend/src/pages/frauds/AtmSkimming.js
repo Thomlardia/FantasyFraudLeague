@@ -5,6 +5,12 @@ function AtmSkimming() {
         <div>
             <h1>AtmSkimming</h1>
             <Link to="/fraudwiki">BACK</Link>
+
+            <div className="descriptionCard">
+                <p>
+                    Physical devices attached to ATMs to steal card data and PINs. Examples: card readers overlaid on ATM slots, hidden cameras recording PIN entry, Bluetooth skimmers.
+                </p>
+            </div>
         </div>
     );
 }
