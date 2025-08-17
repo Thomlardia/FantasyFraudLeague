@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Outfit:wght@519&display=swap');
+
+/* Global Styles */
+html, body {
+  height: 100%; 
+  margin: 0;
+  padding: 0;
+}
+
+/* Shop & Wiki Common Styles */
+.shopTitle, .wikiTitle {
+  color: white;
+  font-family: audiowide;
+  font-size: 40px;
+  text-align: center;
+}
+
+/* Container Styles */
+.shopContainer {
+  background-color: #114579;
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+.wikiContainer {
+  background-color: rgba(1, 41, 4, 0.795);
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+/* Grid Layout */
+.shopGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 50px;
+  margin-top: 40px;
+}
+
+/* Card Styles */
+.shopCard, .wikiCard {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 10px auto;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  font-family: audiowide;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 70%;
+}
+
+.shopCard {
+  background-color: #114579;
+}
+
+.wikiCard {
+  background-color: rgba(1, 41, 4, 0.795);
+}
+
+.shopCard:hover, .wikiCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Navigation */
+.backButton {
+  color: white;
+  font-family: audiowide;
+  margin-left: 20px;
+  text-decoration: none;
+}
+
+/* Fraud Page Specific Styles */
+.fraud-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.fraud-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.fraud-back-button {
+  padding: 8px 16px;
+  text-decoration: none;
+  background-color: #114579;
+  color: white;
+  border-radius: 4px;
+}
+
+.fraud-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.description-card {
+  background-color: #f8f8f8;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.description-card h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.description-card ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.description-card li {
+  margin-bottom: 8px;
+  color: #444;
+}
+
+/* Responsive Design */
+@media (max-width: 810px) {
+  .shopGrid { 
+    grid-template-columns: repeat(2, 1fr); 
+    padding: 20px;
+    margin: 10px auto;
+    gap: 5px;
+  }
+}
+
+@media (max-width: 500px) {
+  .shopGrid { 
+    grid-template-columns: repeat(1, 1fr); 
+    padding: 20px;
+    margin: 10px auto;
+    gap: 5px;
+  }
+}
