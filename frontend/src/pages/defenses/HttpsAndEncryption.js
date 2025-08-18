@@ -6,10 +6,20 @@ function HttpsAndEncryption() {
             <h1>HTTPs and Encryption</h1>
             <Link to="/defenseshop" className="icon-button">く</Link>
             
-            <div className="description-card">
-                <p>
-                    HTTPS and encrypted connections protect data in transit by scrambling information between users and servers, making it unreadable to attackers who intercept communications.
-                </p>
+            <div className="content-container">
+                <div className="description-card">
+                    <p>
+                        HTTPS and encrypted connections protect data in transit by scrambling information between users and servers, making it unreadable to attackers who intercept communications.
+                    </p>
+                </div>
+
+                 <div className="description-card">
+                    <h3>Common Examples:</h3>
+                        <ul>
+                            <li>Securing e-commerce transactions</li>
+                            <li>Protecting customer logins on web apps</li>
+                        </ul>
+                </div>
             </div>
         </div>
     );
