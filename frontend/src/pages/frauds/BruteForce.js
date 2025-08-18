@@ -13,6 +13,12 @@ function BruteForce() {
                 </ul>
             </section>
             <Link to="/fraudwiki">BACK</Link>
+
+            <div className="descriptionCard">
+                <p>
+                    Automated attacks using compromised credentials from data breaches to gain unauthorized access. Examples: trying stolen username/password combinations across multiple services.
+                </p>
+            </div>
         </div>
     );
 }

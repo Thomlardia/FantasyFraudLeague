@@ -19,6 +19,12 @@ function Phishing() {
                 </ul>
             </section>
             <Link to="/fraudwiki">BACK</Link>
+
+            <div className="descriptionCard">
+                <p>
+                    Fraudulent emails, websites, or messages that impersonate legitimate organizations to steal credentials, personal information, or money. Examples: fake bank emails, fake login pages, urgent payment requests.
+                </p>
+            </div>
         </div>
     );
 }

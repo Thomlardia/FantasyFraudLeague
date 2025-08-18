@@ -11,6 +11,12 @@ function InvestmentScam() {
                 </ul>
             </section>
             <Link to="/fraudwiki">BACK</Link>
+
+            <div className="descriptionCard">
+                <p>
+                    Fraudulent investment schemes promising high returns with little risk. Examples: Ponzi schemes, pump-and-dump stocks, fake cryptocurrency investments, advance fee fraud.
+                </p>
+            </div>
         </div>
     );
 }

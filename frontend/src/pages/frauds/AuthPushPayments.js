@@ -13,6 +13,12 @@ function AuthPushPayments() {
                 </ul>
             </section>
             <Link to="/fraudwiki">BACK</Link>
+
+            <div className="descriptionCard">
+                <p>
+                    Fraudsters manipulate victims into authorizing legitimate payment transfers to criminal accounts. Examples: fake emergency calls, romance scams, fake invoice fraud.
+                </p>
+            </div>
         </div>
     );
 }

@@ -16,6 +16,12 @@ function Deepfake() {
                 </ul>
             </section>
             <Link to="/fraudwiki">BACK</Link>
+
+            <div className="descriptionCard">
+                <p>
+                    AI-generated fake audio, video, or images used to impersonate individuals for fraud. Examples: fake CEO voice calls requesting wire transfers, manipulated video calls, identity theft.
+                </p>
+            </div>
         </div>
     );
 }

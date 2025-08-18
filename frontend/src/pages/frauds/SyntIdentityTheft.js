@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 function SyntIdentityTheft() {
     return (
-        <div>
+        <div className='page'>
             <h1>SyntIdentityTheft</h1>
             <section>
                 <h2>How to Defend:</h2>
@@ -11,6 +11,12 @@ function SyntIdentityTheft() {
                 </ul>
             </section>
             <Link to="/fraudwiki">BACK</Link>
+
+            <div className="descriptionCard">
+                <p>
+                    Creating fake identities using a combination of real and fabricated information to commit fraud. Examples: combining real ID nums with fake names, creating credit profiles for fraud.
+                </p>
+            </div>
         </div>
     );
 }

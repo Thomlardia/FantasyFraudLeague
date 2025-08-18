@@ -17,6 +17,12 @@ function SqlInjection() {
                 </ul>
             </section>
             <Link to="/fraudwiki">BACK</Link>
+
+            <div className="descriptionCard">
+                <p>
+                    Inserting malicious SQL code into application inputs to manipulate databases. Examples: extracting sensitive data, bypassing authentication, modifying or deleting records.
+                </p>
+            </div>
         </div>
     );
 }

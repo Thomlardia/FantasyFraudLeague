@@ -16,6 +16,12 @@ function ManInTheMiddle() {
                 </ul>
             </section>
             <Link to="/fraudwiki">BACK</Link>
+
+            <div className="descriptionCard">
+                <p>
+                    Intercepting communications between two parties to eavesdrop or manipulate data. Examples: Wi-Fi eavesdropping, SSL stripping, DNS spoofing, certificate attacks.
+                </p>
+            </div>
         </div>
     );
 }
