@@ -18,6 +18,9 @@ build:
 run: build
 	npx firebase-tools emulators:start
 
+run-functions:
+	npx firebase-tools emulators:start --only functions
+
 run-front:
 	npm --prefix frontend start
 
