@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom';
 
 function EmailFiltering() {
     return (
-        <div>
-            <h1>EmailFiltering</h1>
-            <Link to="/defenseshop">BACK</Link>
+        <div className="shop-container">
+            <h1>Email Filtering</h1>
+            <Link to="/defenseshop" className="icon-button">く</Link>
 
-            <div className="descriptionCard">
+            <div className="description-card">
                 <p>
                     Email filtering and anti-phishing tools use advanced algorithms, reputation databases, and machine learning to identify and block malicious emails before they reach users' inboxes.
                 </p>

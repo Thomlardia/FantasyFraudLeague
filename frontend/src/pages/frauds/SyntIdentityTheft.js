@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 function SyntIdentityTheft() {
     return (
-        <div>
+        <div className='page'>
             <h1>SyntIdentityTheft</h1>
             <Link to="/fraudwiki">BACK</Link>
 
