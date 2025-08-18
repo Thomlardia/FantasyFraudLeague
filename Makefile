@@ -45,8 +45,10 @@ deploy:
 # ------------- CLEAN --------------
 
 clean:
-	rm -rf node_modules frontend/node_modules functions/node_modules \
-			frontend/build frontend/dist
+	rm -rf frontend/build
+
+clean-node:
+	rm -rf node_modules frontend/node_modules functions/node_modules
 
 # This allows you to reset all the dependency versions
 clean-hard: clean
