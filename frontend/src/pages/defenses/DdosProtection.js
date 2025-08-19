@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom';
+import iconBackArrow from '../../images/icons/back_arrow.png';
 
 function DdosProtection() {
     return (
         <div className="shop-container">
             <h1>DDos Protection</h1>
-            <Link to="/defenseshop" className="icon-button">く</Link>
+            <Link to="/defenseshop" className="icon-button" title="Back">
+                <img src={iconBackArrow} alt="Back" className="icon-img" />
+            </Link>
 
             <div className="content-container">
                 <div className="description-card">

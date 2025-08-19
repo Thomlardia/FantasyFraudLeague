@@ -1,11 +1,14 @@
 import { Link } from 'react-router-dom';
 import '../styles/shopAndWiki.css';
+import iconBackArrow from '../images/icons/back_arrow.png';
 
 function DefenseShop() {
     return (
         <div className="page">
             <h1 className="shop-title">Defense Shop</h1>
-            <Link to="/home" className="icon-button">く</Link>
+            <Link to="/home" className="icon-button" title="Back">
+                <img src={iconBackArrow} alt="Back" className="icon-img" />
+            </Link>
             
             <div className="shop-grid">
                 <Link to="/defenses/MultiFactorAuth" className="shop-card">Multi-Factor Authentication</Link>
