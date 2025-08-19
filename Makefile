@@ -21,6 +21,12 @@ run: build
 run-functions:
 	npx firebase-tools emulators:start --only functions
 
+run-hosting:
+	npx firebase-tools emulators:start --only hosting
+
+run-hosting-functions:
+	npx firebase-tools emulators:start --only hosting,functions
+
 run-front:
 	npm --prefix frontend start
 
@@ -41,6 +47,9 @@ deploy-hosting:
 
 deploy-functions:
 	npx firebase-tools deploy --only functions
+
+deploy-hosting-functions:
+	npx firebase-tools deploy --only hosting,functions
 
 deploy:
 	npx firebase-tools deploy

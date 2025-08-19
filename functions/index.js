@@ -24,7 +24,7 @@ const logger = require("firebase-functions/logger");
 
 // The Firebase Admin SDK to access Firestore.
 const {initializeApp} = require("firebase-admin/app");
-const {getFirestore} = require("firebase-admin/firestore");
+// const {getFirestore} = require("firebase-admin/firestore");
 
 initializeApp();
 
@@ -33,8 +33,8 @@ setGlobalOptions({maxInstances: 10});
 // Create and deploy your first functions
 // https://firebase.google.com/docs/functions/get-started
 exports.helloWorld = onRequest((req, res) => {
-   logger.info("Hello logs!", {structuredData: true});
-   res.send("Hello from Firebase!");
- });
+  logger.info("Hello logs!", {structuredData: true});
+  res.send("Hello from Firebase!");
+});
 
-const db = getFirestore();
+// const db = getFirestore();
