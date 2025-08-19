@@ -1,36 +1,53 @@
 import { Link } from 'react-router-dom';
 import '../styles/shopAndWiki.css';
-import iconBackArrow from '../images/icons/back_arrow.png'
+import fflLogo from '../images/ffl_logo_ghost.png';
 
 function FraudWiki() {
-    return (
-        <div className='page'>
-            <h1 className='shop-title'>Fraud Wiki</h1>
-            <Link to="/home" className='icon-button' title="Back">
-                <img src={iconBackArrow} alt="Back" className="icon-img" />
-            </Link>
+    const fraudItems = [
+        { title: "Phishing", icon: "phishing", path: "/frauds/Phishing" },
+        { title: "Ransomware", icon: "lock_person", path: "/frauds/Ransomware" },
+        { title: "Distributed Denial of Service (DDoS)", icon: "cloud_off", path: "/frauds/Ddos" },
+        { title: "Deepfake Fraud", icon: "theater_comedy", path: "/frauds/Deepfake" },
+        { title: "ATM Skimming", icon: "card_membership", path: "/frauds/AtmSkimming" },
+        { title: "Insider Fraud", icon: "person_alert", path: "/frauds/InsiderFraud" },
+        { title: "Man-In-The-Middle", icon: "hub", path: "/frauds/ManInTheMiddle" },
+        { title: "SQL Injection", icon: "code", path: "/frauds/SqlInjection" },
+        { title: "Business Email Compromise", icon: "email", path: "/frauds/BusinessEmailCompromise" },
+        { title: "Zero-Day Exploit", icon: "bug_report", path: "/frauds/ZeroDayExploit" },
+        { title: "Vishing", icon: "phone_in_talk", path: "/frauds/Vishing" },
+        { title: "XSS (Cross-Site Scripting)", icon: "web_asset_off", path: "/frauds/Xss" },
+        { title: "Account Takeover", icon: "no_accounts", path: "/frauds/AccountTakeover" },
+        { title: "Investment Scams", icon: "trending_up", path: "/frauds/InvestmentScam" },
+        { title: "SIM Swap Fraud", icon: "sim_card_alert", path: "/frauds/SimSwap" },
+        { title: "Authorized Push Payments", icon: "payment", path: "/frauds/AuthPushPayments" },
+        { title: "Cryptojacking", icon: "memory", path: "/frauds/CryptoJacking" },
+        { title: "Brute Force – Credential Stuffing", icon: "lock_open", path: "/frauds/BruteForce" },
+        { title: "Synthetic Identity Theft", icon: "person_add_disabled", path: "/frauds/SyntIdentityTheft" },
+        { title: "Accounting and Invoice Fraud", icon: "receipt_long", path: "/frauds/AccAndInvFraud" }
+    ];
 
-            <div className='shop-grid'>
-                <Link to="/frauds/Phishing" className="wiki-card">Phishing</Link>
-                <Link to="/frauds/Ransomware" className="wiki-card">Ransomware</Link>
-                <Link to="/frauds/Ddos" className="wiki-card">Ddos</Link>
-                <Link to="/frauds/Deepfake" className="wiki-card">Deepfake</Link>
-                <Link to="/frauds/AtmSkimming" className="wiki-card">Atm Skimming</Link>
-                <Link to="/frauds/InsiderFraud" className="wiki-card">Insider Fraud</Link>
-                <Link to="/frauds/ManInTheMiddle" className="wiki-card">Man-In-The-Middle</Link>
-                <Link to="/frauds/SqlInjection" className="wiki-card">Sql Injection</Link>
-                <Link to="/frauds/BusinessEmailCompromise" className="wiki-card">Business Email Compromise</Link>
-                <Link to="/frauds/ZeroDayExploit" className="wiki-card">Zero Day Exploit</Link>
-                <Link to="/frauds/Vishing" className="wiki-card">Vishing</Link>
-                <Link to="/frauds/Xss" className="wiki-card">Xss</Link>
-                <Link to="/frauds/AccountTakeover" className="wiki-card">Account Takeover</Link>
-                <Link to="/frauds/InvestmentScam" className="wiki-card">Investment Scam</Link>
-                <Link to="/frauds/SimSwap" className="wiki-card">Sim Swap</Link>
-                <Link to="/frauds/AuthPushPayments" className="wiki-card">Authorized Push Payments</Link>
-                <Link to="/frauds/CryptoJacking" className="wiki-card">CryptoJacking</Link>
-                <Link to="/frauds/BruteForce" className="wiki-card">Brute Force</Link>
-                <Link to="/frauds/SyntIdentityTheft" className="wiki-card">Synthetic Identity Theft</Link>
-                <Link to="/frauds/AccAndInvFraud" className="wiki-card">Account And Invoice Fraud</Link>
+    return (
+        <div className="shop-wiki-container">
+            <div className="shop-wiki-header">
+                <Link to="/home" className="back-button" title="Back">
+                    <span className="material-symbols-outlined">arrow_back</span>
+                </Link>
+                
+                <h1 className="shop-wiki-title">
+                    <img src={fflLogo} alt="FFL Shield Logo" className="title-icon" />
+                    Fraud Wiki
+                </h1>
+                
+                <div style={{ width: "48px" }}></div> {/* Spacer for centering */}
+            </div>
+            
+            <div className="shop-wiki-grid">
+                {fraudItems.map((item, index) => (
+                    <Link key={index} to={item.path} className="wiki-card">
+                        <span className="card-icon">{item.icon}</span>
+                        <h3 className="card-title">{item.title}</h3>
+                    </Link>
+                ))}
             </div>
         </div>
     );
