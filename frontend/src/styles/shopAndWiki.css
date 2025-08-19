@@ -6,7 +6,7 @@ html, body {
   padding: 0;
 }
 
-.shop-title {
+.shop-title, wikiTitle{
   color: white;
   font-family: audiowide;
   font-size: 40px;
@@ -20,7 +20,7 @@ html, body {
   margin-top: 40px;
 }
 
-.shop-card {
+.shop-card, .wiki-card {
   border: 1px solid #e9e4e4;
   border-radius: 12px;
   padding: 20px;
@@ -36,7 +36,7 @@ html, body {
   width: 70%;
 }
 
-.shop-card:hover {
+.shop-card:hover, .wiki-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
@@ -51,6 +51,16 @@ html, body {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
+
+
+.wiki-container {
+  background-color: rgba(1, 41, 4, 0.795);
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
 
 .content-container {
   display: flex;

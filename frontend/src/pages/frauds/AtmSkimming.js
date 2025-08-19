@@ -1,23 +1,58 @@
 import { Link } from 'react-router-dom';
+import iconBackArrow from '../../images/icons/back_arrow.png'
 
 function AtmSkimming() {
     return (
-        <div>
-            <h1>AtmSkimming</h1>
-            <section>
-                <h2>How to Defend:</h2>
-                <ul>
-                    <li>
-                        <Link to="/defenses/TamperProofSeals">Tamper Proof Seals</Link>
-                    </li>
-                </ul>
-            </section>
-            <Link to="/fraudwiki">BACK</Link>
+        <div className="fraud-container">
+            <div className="header">
+                <h1>ATM Skimming</h1>
+                <Link to="/fraudwiki" className='icon-button' title="Back">
+                    <img src={iconBackArrow} alt="Back" className="icon-img" />
+                </Link>
+            </div>
 
-            <div className="descriptionCard">
-                <p>
-                    Physical devices attached to ATMs to steal card data and PINs. Examples: card readers overlaid on ATM slots, hidden cameras recording PIN entry, Bluetooth skimmers.
-                </p>
+            <div className="content-container">
+                <div className="description-card">
+                    <p>
+                        ATM skimming involves installing physical devices on ATMs to steal card data 
+                        and PINs from unsuspecting users. Skimming devices are designed to blend 
+                        seamlessly with ATM hardware. Card skimmers capture magnetic stripe data, 
+                        while hidden cameras or overlay keyboards record PIN entry. 
+                        Modern variations include contactless card shimming, deep-insert skimmers, 
+                        and Bluetooth-enabled devices.
+                    </p>
+                    <br />
+                </div>
+
+                <div className="description-card">
+                    <h3>Common Examples:</h3>
+                    <ul>
+                        <li>Overlay card readers placed over ATM slots</li>
+                        <li>Pinhole cameras positioned to capture PIN entry</li>
+                        <li>Keyboard overlays that record key presses</li>
+                        <li>Bluetooth skimmers transmitting stolen data remotely</li>
+                        <li>Shimming devices targeting chip cards</li>
+                    </ul>
+                    <br />
+                </div>
+
+                <div className="description-card">
+                    <h3>Historical Context:</h3>
+                    <p>
+                        ATM skimming emerged in the 1990s as magnetic stripe technology became widespread. 
+                        Eastern European criminal organizations pioneered many of the techniques, 
+                        which then spread worldwide with the growth of ATM networks.
+                    </p>
+                </div>
+
+                <div className="description-card">
+                    <h3>Primary Defenses:</h3>
+                    <ul>
+                        <li>
+                            <Link to="/defenses/TamperProofSeals">Tamper Proof Seals</Link>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     );
