@@ -7,6 +7,8 @@ backend/node_modules/
 # Build output
 frontend/build/
 
+.firebase/
+
 # Logs
 *.log
 
