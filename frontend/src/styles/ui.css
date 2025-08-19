@@ -22,6 +22,53 @@ html, body, #root {
 	overflow: hidden;
 }
 
+/* Form input styles for auth forms */
+.auth-form input {
+	padding: 16px;
+	border: 2px solid white;
+	border-radius: 8px;
+	background: transparent;
+	color: white;
+	font-size: 16px;
+	font-weight: 600;
+	width: 100%;
+	transition: all 120ms ease;
+}
+
+.auth-form input:focus {
+	outline: none;
+	border-color: rgba(255, 255, 255, 0.8);
+	background: rgba(255, 255, 255, 0.05);
+	transform: translateY(-1px);
+	box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+.auth-form input::placeholder {
+	color: rgba(255, 255, 255, 0.7);
+}
+
+.auth-form input:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+
+.auth-form input:hover:not(:disabled) {
+	border-color: rgba(255, 255, 255, 0.9);
+	background: rgba(255, 255, 255, 0.02);
+}
+
+/* Error message styling */
+.auth-form .error-message {
+	color: #ff6b6b;
+	text-align: center;
+	font-weight: 600;
+	font-size: 14px;
+	margin-top: 8px;
+	padding: 8px 16px;
+	background: rgba(255, 107, 107, 0.1);
+	border-radius: 6px;
+	border: 1px solid rgba(255, 107, 107, 0.3);
+}
 
 /* Splash Screen Styles */
 .splash {
@@ -92,11 +139,20 @@ html, body, #root {
 	text-decoration: none;
 	transition: transform 120ms ease, box-shadow 120ms ease;
 	min-width: 140px;
+	border: none;
+	cursor: pointer;
 }
 
 .splash-button:hover {
 	transform: translateY(-2px);
 	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.splash-button:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+	transform: none;
+	box-shadow: none;
 }
 
 .splash-button.primary {

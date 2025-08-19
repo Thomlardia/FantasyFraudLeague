@@ -40,7 +40,7 @@ export default function AuthForm({ mode = "login", redirectTo = "/home" }) {
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className="auth-form" style={{ display: "flex", flexDirection: "column", gap: "16px", width: "100%", maxWidth: "320px" }}>
       {mode === "signup" && (
         <input
           placeholder="Display name"
@@ -64,15 +64,25 @@ export default function AuthForm({ mode = "login", redirectTo = "/home" }) {
         required
         autoComplete={mode === "signup" ? "new-password" : "current-password"}
       />
-      <button type="submit" disabled={loading}>
+      <button 
+        type="submit" 
+        disabled={loading}
+        className="splash-button primary"
+        style={{ marginTop: "8px" }}
+      >
         {loading ? "Please wait…" : mode === "signup" ? "Create account" : "Log in"}
       </button>
       {mode === "login" && (
-        <button type="button" onClick={onForgot} style={{ marginLeft: 8 }}>
+        <button 
+          type="button" 
+          onClick={onForgot} 
+          className="splash-button secondary"
+          style={{ marginTop: "8px" }}
+        >
           Forgot password?
         </button>
       )}
-      {err && <p style={{ color: "red" }}>{err}</p>}
+      {err && <p className="error-message">{err}</p>}
     </form>
   );
 }
