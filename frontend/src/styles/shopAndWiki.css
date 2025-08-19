@@ -36,7 +36,7 @@ html, body {
   width: 70%;
 }
 
-.shop-card:hover {
+.shop-card:hover, .wiki-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
