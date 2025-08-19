@@ -21,10 +21,6 @@ function Hello() {
         <Link to="login" className="splash-button primary">LOGIN</Link>
         <Link to="signup" className="splash-button secondary">SIGN UP</Link>
       </div>
-      
-      <div className="splash-admin">
-        <Link to="adminlogin" className="splash-admin-link">ADMIN LOGIN</Link>
-      </div>
     </div>
   );
 }

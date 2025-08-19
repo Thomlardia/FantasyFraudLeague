@@ -1,21 +1,21 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from "react-router-dom";
+import GoogleAuthButton from "../components/GoogleAuthButton";
+import AuthForm from "../components/AuthForm";
 
-function Signup() {
-    return (
-        <div>
-            <h1>Signup</h1>
-            <Link to="/">BACK</Link>
+export default function Signup() {
+  const location = useLocation();
+  const redirectTo = location.state?.from?.pathname || "/home";
 
-            <br />
+  return (
+    <div>
+      <h1>Sign Up</h1>
+      <Link to="/">BACK</Link>
 
-            <input type="text" placeholder="Username" />
-            <input type="text" placeholder="Password" />
+      <AuthForm mode="signup" redirectTo={redirectTo} />
 
-            <Link to="/home">
-                <button>Sign up</button>
-            </Link>
-        </div>
-    );
+      <hr style={{ margin: "20px 0" }} />
+
+      <GoogleAuthButton text="Sign up with Google" redirectTo={redirectTo} />
+    </div>
+  );
 }
-
-export default Signup;

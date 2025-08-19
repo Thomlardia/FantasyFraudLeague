@@ -238,24 +238,6 @@ html, body, #root {
 	border: 2px solid white;
 }
 
-.splash-admin {
-	margin-top: 40px;
-}
-
-.splash-admin-link {
-	color: rgba(255, 255, 255, 0.7);
-	text-decoration: none;
-	font-size: 14px;
-	font-weight: 600;
-	text-transform: uppercase;
-	letter-spacing: 1px;
-	transition: color 120ms ease;
-}
-
-.splash-admin-link:hover {
-	color: white;
-}
-
 /* Updated Home styles to match aesthetic */
 .page {
 	min-height: 100vh;
