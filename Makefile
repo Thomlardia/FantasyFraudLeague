@@ -66,3 +66,8 @@ clean-node:
 clean-hard: clean
 	rm -f package-lock.json frontend/package-lock.json functions/package-lock.json
 
+
+# -------- STATS GENERATION ---------
+# Create git statistics (University Standard)
+stats:
+	gitinspector --grading --format htmlembedded > git-stats/stats.html
