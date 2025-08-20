@@ -13,7 +13,5 @@ frontend/build/
 # Logs
 *.log
 
-.firebase/
-
 # Local dev env files
 .env
