@@ -1,21 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Outfit:wght@519&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
-/* Override global overflow hidden for shop and wiki pages */
-html, body, #root {
-  overflow: auto !important;
-}
+/* Fonts (Audiowide/Outfit) are loaded globally in ui.css */
 
 /* Shop and Wiki Container */
 .shop-wiki-container {
   min-height: 100vh;
-  height: auto;
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   padding: 20px;
   color: white;
   position: relative;
   overflow-x: hidden;
-  overflow-y: visible;
 }
 
 /* Subtle background pattern */
@@ -48,7 +42,7 @@ html, body, #root {
 .shop-wiki-title {
   color: white;
   font-family: 'Audiowide', cursive;
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 700;
   text-align: center;
   flex: 1;
@@ -122,12 +116,6 @@ html, body, #root {
   }
 }
 
-@media (min-width: 1100px) and (max-width: 1399px) {
-  .shop-wiki-grid {
-    grid-template-columns: repeat(4, 1fr);
-    max-width: 1200px;
-  }
-}
 
 @media (min-width: 900px) and (max-width: 1099px) {
   .shop-wiki-grid {
@@ -311,5 +299,148 @@ html, body, #root {
   
   .title-icon.material-symbols-outlined {
     font-size: 45px;
+  }
+}
+
+/* Detail Pages (Fraud and Defense) */
+.fraud-container, .shop-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: white;
+  padding: 24px 16px 64px 16px;
+}
+
+.fraud-container .header, .shop-container .header {
+  display: grid;
+  grid-template-columns: 48px 1fr 48px;
+  align-items: center;
+  max-width: 960px;
+  margin: 0 auto 24px auto;
+}
+
+/* Grid placement for fraud headers: back button left, title center */
+.fraud-container .header .icon-button { grid-column: 1; justify-self: start; }
+.fraud-container .header h1 { grid-column: 2; }
+.fraud-container .header > :last-child { grid-column: 3; }
+
+/* Grid placement for defense headers: title center, back button right */
+/*.shop-container .header h1 { grid-column: 2; }
+.shop-container .header .icon-button { grid-column: 3; justify-self: end; }*/
+.shop-container .header .icon-button { grid-column: 1; justify-self: start; }
+.shop-container .header h1 { grid-column: 2; }
+.shop-container .header > :last-child { grid-column: 3; }
+
+.fraud-container h1, .shop-container h1 {
+  font-family: 'Audiowide', cursive;
+  font-size: clamp(24px, 4.5vw, 40px);
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin: 0;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.content-container {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Fallback for legacy defense pages without a header wrapper */
+.shop-container { position: relative; }
+.shop-container > h1 { text-align: center; }
+.shop-container > .icon-button { position: absolute; right: 16px; top: 16px; }
+
+/* Fallback for legacy fraud pages without a header wrapper */
+.fraud-container { position: relative; }
+.fraud-container > h1 { text-align: center; }
+.fraud-container > .icon-button { position: absolute; left: 16px; top: 16px; }
+
+.description-card {
+  background: rgba(255, 255, 255, 0.98);
+  color: #1a1a2e;
+  border-radius: 14px;
+  border: 2px solid transparent;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.15);
+  padding: 18px 16px;
+  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+}
+
+.description-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.description-card h3 {
+  margin: 0 0 10px 0;
+  font-family: 'Outfit', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  color: #111827;
+}
+
+.description-card p, .description-card li {
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #1f2937;
+}
+
+.description-card ul {
+  padding-left: 18px;
+}
+
+/* Link styling within detail cards */
+.description-card a {
+  color: #1a1a2e;
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+
+.description-card a:hover {
+  border-bottom-color: #1a1a2e;
+}
+
+/* Room to grow for defense meta (level/upgrade) */
+.defense-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.meta-card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 10px;
+  padding: 12px;
+  text-align: center;
+}
+
+.meta-card .label {
+  font-size: 12px;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.meta-card .value {
+  font-size: 18px;
+  font-weight: 800;
+  color: #111827;
+}
+
+@media (max-width: 640px) {
+  .fraud-container .header, .shop-container .header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
   }
 }
