@@ -7,15 +7,23 @@ import RequireVerified from "./RequireVerified";
 import Hello from "../pages/Hello";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
-import Home from "../pages/Home";
-const VerifyEmail = lazy(() => import("../pages/VerifyEmail"));
 
 // --- Lazy (everything else) ---
+// verification if needed
+const VerifyEmail = lazy(() => import("../pages/VerifyEmail"));
+
+// only load if relevant
+const Home = lazy(() => import("../pages/Home"));
+/* const AdminDashboard = lazy(() => import("../pages/AdminDashboard")); */
+
+// player related main pages
 const DefenseShop   = lazy(() => import("../pages/DefenseShop"));
-const FraudWiki     = lazy(() => import("../pages/FraudWiki"));
 const Help          = lazy(() => import("../pages/Help"));
-const Leaderboard   = lazy(() => import("../pages/Leaderboard"));
 const Settings      = lazy(() => import("../pages/Settings"));
+
+// shared pages
+const Leaderboard   = lazy(() => import("../pages/Leaderboard"));
+const FraudWiki     = lazy(() => import("../pages/FraudWiki"));
 
 // DEFENSES (lazy)
 const MultiFactorAuth           = lazy(() => import("../pages/defenses/MultiFactorAuth"));
