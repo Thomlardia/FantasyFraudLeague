@@ -1,14 +1,18 @@
 import { Link } from 'react-router-dom';
 import iconBackArrow from '../../images/icons/back_arrow.png';
+import '../../styles/ui.css';
+import '../../styles/shopAndWiki.css';
 
 function MultiFactorAuth() {
     return (
         <div className="shop-container">
-            <h1>Multi-Factor Authentication</h1>
-            <Link to="/defenseshop" className="icon-button" title="Back">
-                <img src={iconBackArrow} alt="Back" className="icon-img" />
-            </Link>
-
+            <div className="header">
+                <Link to="/defenseshop" className="icon-button" title="Back">
+                    <span className="material-symbols-outlined">arrow_back</span>
+                </Link>
+                <h1>Multi Factor Auth</h1>
+                <div></div>
+            </div>
             <div className="content-container">
                 <div className="description-card">
                     <p>

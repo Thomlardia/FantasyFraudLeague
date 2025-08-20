@@ -1,14 +1,17 @@
 import { Link } from 'react-router-dom';
 import iconBackArrow from '../../images/icons/back_arrow.png'
+import '../../styles/ui.css';
+import '../../styles/shopAndWiki.css';
 
 function CryptoJacking() {
     return (
         <div className="fraud-container">
             <div className="header">
-                <h1>Cryptojacking</h1>
-                <Link to="/fraudwiki" className='icon-button' title="Back">
-                    <img src={iconBackArrow} alt="Back" className="icon-img" />
+                <Link to="/fraudwiki" className="icon-button" title="Back">
+                    <span className="material-symbols-outlined">arrow_back</span>
                 </Link>
+                <h1>Crypto Jacking</h1>
+                <div></div>
             </div>
 
             <div className="content-container">
