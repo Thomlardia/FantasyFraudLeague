@@ -1,0 +1,11 @@
+{
+  "projects": {
+    "default": "wario-fantasy-fraud-league"
+  },
+  "targets": {},
+  "etags": {
+    "wario-fantasy-fraud-league": {
+      "extensionInstances": {}
+    }
+  }
+}

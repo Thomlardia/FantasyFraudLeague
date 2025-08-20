@@ -1,21 +1,30 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from "react-router-dom";
+import GoogleAuthButton from "../components/GoogleAuthButton";
+import AuthForm from "../components/AuthForm";
+import "../styles/ui.css";
+import fflLogo from '../images/ffl_logo_ghost.png';
 
-function Signup() {
-    return (
-        <div>
-            <h1>Signup</h1>
-            <Link to="/">BACK</Link>
+export default function Signup() {
+  const location = useLocation();
+  const redirectTo = location.state?.from?.pathname || "/home";
 
-            <br />
+  return (
+    <div className="splash">
+      <div className="splash-header">
+        <img src={fflLogo} alt="FFL Shield Logo" className="splash-logo" />
+      </div>
+      
+      <h1 className="splash-main-title">Sign Up</h1>
+      
+      <Link to="/" className="splash-button secondary" style={{ marginBottom: "20px" }}>
+        Back
+      </Link>
 
-            <input type="text" placeholder="Username" />
-            <input type="text" placeholder="Password" />
+      <AuthForm mode="signup" redirectTo={redirectTo} />
 
-            <Link to="/home">
-                <button>Sign up</button>
-            </Link>
-        </div>
-    );
+      <hr style={{ margin: "20px 0", border: "none", height: "1px", background: "rgba(255, 255, 255, 0.2)" }} />
+
+      <GoogleAuthButton text="Sign up with Google" redirectTo={redirectTo} />
+    </div>
+  );
 }
-
-export default Signup;

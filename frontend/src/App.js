@@ -1,34 +1,19 @@
-import './App.css';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import Hello from './pages/Hello';
-import AdminLogin from './pages/AdminLogin';
-import Home from './pages/Home';
-import DefenseShop from './pages/DefenseShop';
-import FraudWiki from './pages/FraudWiki';
-import Help from './pages/Help';
-import Leaderboard from './pages/Leaderboard';
-import Settings from './pages/Settings';
+import { BrowserRouter } from "react-router-dom";
+import { AuthProvider } from "./auth/AuthProvider";
+import AppRoutes from "./routes/AppRoutes";
+import Prefetcher from "./routes/Prefetcher";
+import "./App.css";
+import "./styles/ui.css";
+import "./styles/shopAndWiki.css";
 
-function App() {
+export default function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Hello />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/adminlogin" element={<AdminLogin />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/defenseshop" element={<DefenseShop />} />
-        <Route path="/fraudwiki" element={<FraudWiki />} />
-        <Route path="/help" element={<Help />} />
-        <Route path="/leaderboard" element={<Leaderboard />} />
-        <Route path="/settings" element={<Settings />} />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <BrowserRouter>
+        <Prefetcher />
+        <AppRoutes />
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
-
-export default App;
 
