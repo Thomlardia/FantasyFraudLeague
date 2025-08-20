@@ -1,7 +1,9 @@
 import { Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
+
 import RequireAuth from "./RequireAuth";
 import RequireVerified from "./RequireVerified";
+import PreloadOnAuth from "./PreloadOnAuth";
 
 // --- Eager (small, first-touch) ---
 import Hello from "../pages/Hello";
@@ -82,60 +84,62 @@ export default function AppRoutes() {
 
         {/* Private (guarded) */}
         <Route element={<RequireAuth />}>
-          <Route path="/verify-email" element={<VerifyEmail />} />
-            <Route element={<RequireVerified />}>
+          <Route element={<PreloadOnAuth />}>
+            <Route path="/verify-email" element={<VerifyEmail />} />
+              <Route element={<RequireVerified />}>
 
-              <Route path="/home" element={<Home />} />
-              <Route path="/defenseshop" element={<DefenseShop />} />
-              <Route path="/fraudwiki" element={<FraudWiki />} />
-              <Route path="/help" element={<Help />} />
-              <Route path="/leaderboard" element={<Leaderboard />} />
-              <Route path="/settings" element={<Settings />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/defenseshop" element={<DefenseShop />} />
+                <Route path="/fraudwiki" element={<FraudWiki />} />
+                <Route path="/help" element={<Help />} />
+                <Route path="/leaderboard" element={<Leaderboard />} />
+                <Route path="/settings" element={<Settings />} />
 
-              {/* DEFENSES */}
-              <Route path="/defenses/MultiFactorAuth" element={<MultiFactorAuth />} />
-              <Route path="/defenses/UserEducation" element={<UserEducation />} />
-              <Route path="/defenses/RegularAudits" element={<RegularAudits />} />
-              <Route path="/defenses/NetworkMonitoring" element={<NetworkMonitoring />} />
-              <Route path="/defenses/SegregationOfDuties" element={<SegregationOfDuties />} />
-              <Route path="/defenses/InputValidation" element={<InputValidation />} />
-              <Route path="/defenses/PrincipleOfLeastPrivilege" element={<PrincipleOfLeastPrivilege />} />
-              <Route path="/defenses/RegularPasswordChanges" element={<RegularPasswordChanges />} />
-              <Route path="/defenses/EmailFiltering" element={<EmailFiltering />} />
-              <Route path="/defenses/RegulatedAutoBackup" element={<RegulatedAutoBackup />} />
-              <Route path="/defenses/KeepUpdated" element={<KeepUpdated />} />
-              <Route path="/defenses/DdosProtection" element={<DdosProtection />} />
-              <Route path="/defenses/TrafficFiltering" element={<TrafficFiltering />} />
-              <Route path="/defenses/VerificationProtocols" element={<VerificationProtocols />} />
-              <Route path="/defenses/DeepfakeDetection" element={<DeepfakeDetection />} />
-              <Route path="/defenses/AtmInspections" element={<AtmInspections />} />
-              <Route path="/defenses/TamperProofSeals" element={<TamperProofSeals />} />
-              <Route path="/defenses/BackgroundChecks" element={<BackgroundChecks />} />
-              <Route path="/defenses/HttpsAndEncryption" element={<HttpsAndEncryption />} />
-              <Route path="/defenses/VpnUsage" element={<VpnUsage />} />
+                {/* DEFENSES */}
+                <Route path="/defenses/MultiFactorAuth" element={<MultiFactorAuth />} />
+                <Route path="/defenses/UserEducation" element={<UserEducation />} />
+                <Route path="/defenses/RegularAudits" element={<RegularAudits />} />
+                <Route path="/defenses/NetworkMonitoring" element={<NetworkMonitoring />} />
+                <Route path="/defenses/SegregationOfDuties" element={<SegregationOfDuties />} />
+                <Route path="/defenses/InputValidation" element={<InputValidation />} />
+                <Route path="/defenses/PrincipleOfLeastPrivilege" element={<PrincipleOfLeastPrivilege />} />
+                <Route path="/defenses/RegularPasswordChanges" element={<RegularPasswordChanges />} />
+                <Route path="/defenses/EmailFiltering" element={<EmailFiltering />} />
+                <Route path="/defenses/RegulatedAutoBackup" element={<RegulatedAutoBackup />} />
+                <Route path="/defenses/KeepUpdated" element={<KeepUpdated />} />
+                <Route path="/defenses/DdosProtection" element={<DdosProtection />} />
+                <Route path="/defenses/TrafficFiltering" element={<TrafficFiltering />} />
+                <Route path="/defenses/VerificationProtocols" element={<VerificationProtocols />} />
+                <Route path="/defenses/DeepfakeDetection" element={<DeepfakeDetection />} />
+                <Route path="/defenses/AtmInspections" element={<AtmInspections />} />
+                <Route path="/defenses/TamperProofSeals" element={<TamperProofSeals />} />
+                <Route path="/defenses/BackgroundChecks" element={<BackgroundChecks />} />
+                <Route path="/defenses/HttpsAndEncryption" element={<HttpsAndEncryption />} />
+                <Route path="/defenses/VpnUsage" element={<VpnUsage />} />
 
-              {/* FRAUDS */}
-              <Route path="/frauds/Phishing" element={<Phishing />} />
-              <Route path="/frauds/Ransomware" element={<Ransomware />} />
-              <Route path="/frauds/Ddos" element={<Ddos />} />
-              <Route path="/frauds/Deepfake" element={<Deepfake />} />
-              <Route path="/frauds/AtmSkimming" element={<AtmSkimming />} />
-              <Route path="/frauds/InsiderFraud" element={<InsiderFraud />} />
-              <Route path="/frauds/ManInTheMiddle" element={<ManInTheMiddle />} />
-              <Route path="/frauds/SqlInjection" element={<SqlInjection />} />
-              <Route path="/frauds/BusinessEmailCompromise" element={<BusinessEmailCompromise />} />
-              <Route path="/frauds/ZeroDayExploit" element={<ZeroDayExploit />} />
-              <Route path="/frauds/Vishing" element={<Vishing />} />
-              <Route path="/frauds/Xss" element={<Xss />} />
-              <Route path="/frauds/AccountTakeover" element={<AccountTakeover />} />
-              <Route path="/frauds/InvestmentScam" element={<InvestmentScam />} />
-              <Route path="/frauds/SimSwap" element={<SimSwap />} />
-              <Route path="/frauds/AuthPushPayments" element={<AuthPushPayments />} />
-              <Route path="/frauds/CryptoJacking" element={<CryptoJacking />} />
-              <Route path="/frauds/BruteForce" element={<BruteForce />} />
-              <Route path="/frauds/SyntIdentityTheft" element={<SyntIdentityTheft />} />
-              <Route path="/frauds/AccAndInvFraud" element={<AccAndInvFraud />} />
-            </Route>
+                {/* FRAUDS */}
+                <Route path="/frauds/Phishing" element={<Phishing />} />
+                <Route path="/frauds/Ransomware" element={<Ransomware />} />
+                <Route path="/frauds/Ddos" element={<Ddos />} />
+                <Route path="/frauds/Deepfake" element={<Deepfake />} />
+                <Route path="/frauds/AtmSkimming" element={<AtmSkimming />} />
+                <Route path="/frauds/InsiderFraud" element={<InsiderFraud />} />
+                <Route path="/frauds/ManInTheMiddle" element={<ManInTheMiddle />} />
+                <Route path="/frauds/SqlInjection" element={<SqlInjection />} />
+                <Route path="/frauds/BusinessEmailCompromise" element={<BusinessEmailCompromise />} />
+                <Route path="/frauds/ZeroDayExploit" element={<ZeroDayExploit />} />
+                <Route path="/frauds/Vishing" element={<Vishing />} />
+                <Route path="/frauds/Xss" element={<Xss />} />
+                <Route path="/frauds/AccountTakeover" element={<AccountTakeover />} />
+                <Route path="/frauds/InvestmentScam" element={<InvestmentScam />} />
+                <Route path="/frauds/SimSwap" element={<SimSwap />} />
+                <Route path="/frauds/AuthPushPayments" element={<AuthPushPayments />} />
+                <Route path="/frauds/CryptoJacking" element={<CryptoJacking />} />
+                <Route path="/frauds/BruteForce" element={<BruteForce />} />
+                <Route path="/frauds/SyntIdentityTheft" element={<SyntIdentityTheft />} />
+                <Route path="/frauds/AccAndInvFraud" element={<AccAndInvFraud />} />
+              </Route>
+          </Route>
         </Route>
 
         {/* 404 */}
