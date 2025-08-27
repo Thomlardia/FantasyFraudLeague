@@ -6,7 +6,7 @@ import { getUserBalance, updateUserBalance } from "./service.js"; /* import the 
 
 /**
  * API: Get user balance.
- * @param {string} userId
+ * @param {string} userId 
  * @returns {Promise<number>}
  */
 export async function apiGetUserBalance(userId) {

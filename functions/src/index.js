@@ -29,4 +29,5 @@ export const adminApi = onRequest(adminApp);
 
 // re-export triggers directly
 export { onUserCreated } from "./apps/triggers/identity.onUserCreated.js";
+export { onAttackEvent } from "./apps/triggers/attack.onAttackEvent.js";
 
