@@ -7,7 +7,7 @@ import { getUserBalance, updateUserBalance } from "./service.js"; /* import the 
 /**
  * API: Get user balance.
  * @param {string} userId 
- * @returns {Promise<number>}
+ * returns the service function for getting user balance
  */
 export async function apiGetUserBalance(userId) {
   return getUserBalance(userId); /* call service function to get user balance */
@@ -17,7 +17,7 @@ export async function apiGetUserBalance(userId) {
  * API: Update user balance.
  * @param {string} userId
  * @param {number} newBalance
- * @returns {Promise<void>}
+ * returns the service function for updating user balance
  */
 export async function apiUpdateUserBalance(userId, newBalance) {
   return updateUserBalance(userId, newBalance); /* call service function to update user balance */

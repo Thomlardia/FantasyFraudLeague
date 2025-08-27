@@ -10,7 +10,7 @@ const USERS_COLLECTION = "users"; /* Firestore collection name */
 /**
  * Gets the balance for a user.
  * @param {string} userId
- * @returns {Promise<number>} The user's balance (defaults to 0 if not set).
+ * returns the user's balance from the database (defaults to 0 if not set).
  */
 export async function getBalance(userId) {
   const doc = await db.collection(USERS_COLLECTION).doc(userId).get(); /* get user document */
@@ -23,7 +23,7 @@ export async function getBalance(userId) {
  * Sets the balance for a user.
  * @param {string} userId
  * @param {number} balance
- * @returns {Promise<void>}
+ * returns nothing, updates the user's balance in the database.
  */
 export async function setBalance(userId, balance) {
     /* Update or create the balance of the user in firestore*/

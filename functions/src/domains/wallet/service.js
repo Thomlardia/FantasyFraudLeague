@@ -8,7 +8,7 @@ import { getBalance, setBalance } from "./repo.js"; /* functions for firestore a
 /**
  * Calls the repository function to fetch the balance for the given user ID.
  * @param {string} userId
- * @returns {Promise<number>}
+ * returns the repository function result, the user's balance 
  */
 export async function getUserBalance(userId) {
   return getBalance(userId); 
@@ -18,7 +18,7 @@ export async function getUserBalance(userId) {
  * Updates the user's balance to a specific value.
  * @param {string} userId
  * @param {number} newBalance
- * @returns {Promise<void>}
+ * Returns noting, calls the repository function to update the balance.
  */
 export async function updateUserBalance(userId, newBalance) {
     /* Validate that the new balance is a valid number, throw an error if not.*/
