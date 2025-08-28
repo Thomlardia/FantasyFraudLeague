@@ -2,9 +2,7 @@
  * This file contains the wallet repository for accessing and updating user balance in Firestore.
  */
 
-import { getFirestore } from "firebase-admin/firestore"; 
-
-const db = getFirestore(); /* init Firestore */
+import { db } from "../../infra/db/index.js";
 const USERS_COLLECTION = "users"; /* Firestore collection name */
 
 /**

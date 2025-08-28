@@ -1,6 +1,5 @@
 /**
  * This file contains the logic for all wallet-related operations.
- * eg. getting and updating user balances.
  */
 
 import { getBalance, setBalance } from "./repo.js"; /* functions for firestore acces*/
@@ -18,13 +17,13 @@ export async function getUserBalance(userId) {
  * Updates the user's balance to a specific value.
  * @param {string} userId
  * @param {number} newBalance
- * Returns noting, calls the repository function to update the balance.
+ * Returns nothing, calls the repository function to update the balance.
  */
 export async function updateUserBalance(userId, newBalance) {
     /* Validate that the new balance is a valid number, throw an error if not.*/
   if (typeof newBalance !== "number" || isNaN(newBalance)) {
     throw new Error("Invalid balance value");
   }
-  /* Call the repository function to update the user's balance */
+  /* Call the repo function*/
   await setBalance(userId, newBalance);
 }
