@@ -18,6 +18,11 @@ Regarding future more formal usage, think things like usage guides, information 
 - [Introduction by AB](docs/ab_introduction)  
 
 ## Environment Setup
+
+***Firestore***
 $env:GOOGLE_APPLICATION_CREDENTIALS="C:\Users\trekv\OneDrive\Documenten\ai.stellenbosh\software.engineering\Wario-RW344\secrets\wario-fantasy-fraud-league-firebase-adminsdk-fbsvc-3ec64dea2d.json"
 
 >> $env:FIREBASE_CONFIG="{`"projectId`":`"wario-fantasy-fraud-league`"}"
+
+***Emulator***
+$env:FIRESTORE_EMULATOR_HOST="localhost:8080"
