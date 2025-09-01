@@ -15,3 +15,7 @@ frontend/build/
 
 # Local dev env files
 .env
+
+# Secrets
+secrets/
+*.json
