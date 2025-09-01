@@ -16,3 +16,8 @@ Regarding future more formal usage, think things like usage guides, information 
 ***Miscellaneous:***  
 - [Model View Controller and Security](docs/model_view_controller.md)  
 - [Introduction by AB](docs/ab_introduction)  
+
+## Environment Setup
+$env:GOOGLE_APPLICATION_CREDENTIALS="C:\Users\trekv\OneDrive\Documenten\ai.stellenbosh\software.engineering\Wario-RW344\secrets\wario-fantasy-fraud-league-firebase-adminsdk-fbsvc-3ec64dea2d.json"
+
+>> $env:FIREBASE_CONFIG="{`"projectId`":`"wario-fantasy-fraud-league`"}"
