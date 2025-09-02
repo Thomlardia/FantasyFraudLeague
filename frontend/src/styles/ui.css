@@ -16,7 +16,7 @@ html, body, #root {
 	width: 100%;
 	background: var(--bg);
 	color: var(--fg);
-	font-family: 'Outfit', -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
+	font-family: 'Audiowide', -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
 }
 
 /* Headings use Audiowide to match landing/home vibe */
@@ -25,6 +25,21 @@ h1, h2, h3 {
 }
 
 /* Form input styles for auth forms */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 320px;
+  align-items: center;
+}
+
+.auth-form .splash-button {
+  width: 100%;
+  max-width: 280px;
+  margin-top: 8px;
+}
+
 .auth-form input {
 	padding: 16px;
 	border: 2px solid white;
@@ -92,13 +107,72 @@ h1, h2, h3 {
 .splash-header {
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	gap: 16px;
 	margin-bottom: 40px;
+	width: 100%;
+	max-width: 400px;
 }
 
 .splash-logo {
 	width: 150px;
 	height: 150px;
+}
+
+.title-section {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+	margin-bottom: 60px;
+	width: 100%;
+	max-width: 600px;
+	position: relative;
+	padding-left: 60px;
+	padding-right: 60px;
+}
+
+.title-section .back-button {
+	position: absolute;
+	left: 60px;
+}
+
+.title-section .splash-main-title {
+	flex: 1;
+	text-align: center;
+}
+
+.spacer {
+	width: 48px;
+	height: 48px;
+}
+
+/* Back button styles - consistent with shop/wiki */
+.back-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 48px;
+	height: 48px;
+	border: 2px solid white;
+	border-radius: 8px;
+	text-decoration: none;
+	color: white;
+	font-weight: 700;
+	background: transparent;
+	transition: all 120ms ease;
+	flex-shrink: 0;
+	backdrop-filter: blur(10px);
+}
+
+.back-button:hover {
+	transform: translateY(-2px);
+	background: rgba(255, 255, 255, 0.1);
+	box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+.back-button .material-symbols-outlined {
+	font-size: 24px;
 }
 
 .splash-welcome {
@@ -117,7 +191,7 @@ h1, h2, h3 {
 	line-height: 1.1;
 	text-transform: uppercase;
 	letter-spacing: 3px;
-	margin-bottom: 60px;
+	margin-bottom: 0;
 }
 
 .splash-main-title span {
@@ -129,6 +203,9 @@ h1, h2, h3 {
 	gap: 20px;
 	flex-wrap: wrap;
 	justify-content: center;
+	align-items: center;
+	width: 100%;
+	max-width: 400px;
 }
 
 .splash-button {
@@ -313,6 +390,39 @@ h1, h2, h3 {
 	display: block;
 }
 
+/* Responsive breakpoints for better desktop layout */
+@media (min-width: 768px) {
+	.title-section {
+		max-width: 800px;
+		padding-left: 80px;
+		padding-right: 80px;
+	}
+	
+	.title-section .back-button {
+		left: 80px;
+	}
+	
+	.splash-header {
+		max-width: 600px;
+	}
+}
+
+@media (min-width: 1024px) {
+	.title-section {
+		max-width: 1000px;
+		padding-left: 100px;
+		padding-right: 100px;
+	}
+	
+	.title-section .back-button {
+		left: 100px;
+	}
+	
+	.splash-header {
+		max-width: 800px;
+	}
+}
+
 @media (max-width: 480px) {
 	.icon-button { width: 32px; height: 32px; }
 	.money-display { font-size: 14px; }
@@ -320,6 +430,8 @@ h1, h2, h3 {
 	.splash-buttons {
 		flex-direction: column;
 		align-items: center;
+		justify-content: center;
+		width: 100%;
 	}
 	
 	.splash-button {
@@ -328,13 +440,55 @@ h1, h2, h3 {
 	}
 	
 	.splash-header {
-		flex-direction: column;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
 		gap: 12px;
 		margin-bottom: 30px;
+		width: 100%;
+		max-width: 100%;
+		padding: 0 20px;
+	}
+	
+	.title-section {
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		gap: 16px;
+		margin-bottom: 40px;
+		width: 100%;
+		max-width: 100%;
+		padding: 0 20px;
+		position: static;
+	}
+	
+	.title-section .back-button {
+		position: static;
+	}
+	
+	.title-section .splash-main-title {
+		flex: none;
 	}
 	
 	.splash-logo {
 		width: 100px;
 		height: 100px;
+	}
+	
+	.spacer {
+		width: 48px;
+		height: 48px;
+	}
+	
+	/* Ensure auth forms are properly centered on mobile */
+	.auth-form {
+		width: 100%;
+		max-width: 100%;
+		padding: 0 20px;
+	}
+	
+	.auth-form .splash-button {
+		width: 100%;
+		max-width: 100%;
 	}
 }

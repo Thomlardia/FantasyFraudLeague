@@ -14,12 +14,13 @@ export default function Signup() {
         <img src={fflLogo} alt="FFL Shield Logo" className="splash-logo" />
       </div>
       
-      <h1 className="splash-main-title">Sign Up</h1>
+      <div className="title-section">
+        <Link to="/" className="back-button" title="Back to Home">
+          <span className="material-symbols-outlined">arrow_back</span>
+        </Link>
+        <h1 className="splash-main-title">Sign Up</h1>
+      </div>
       
-      <Link to="/" className="splash-button secondary" style={{ marginBottom: "20px" }}>
-        Back
-      </Link>
-
       <AuthForm mode="signup" redirectTo={redirectTo} />
 
       <hr style={{ margin: "20px 0", border: "none", height: "1px", background: "rgba(255, 255, 255, 0.2)" }} />

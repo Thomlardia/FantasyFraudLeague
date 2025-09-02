@@ -210,7 +210,7 @@
 
 /* Level Indicator (Shop Only) */
 .card-level {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Audiowide', cursive;
   font-size: 14px;
   font-weight: 500;
   color: #6b7280;
@@ -376,14 +376,14 @@
 
 .description-card h3 {
   margin: 0 0 10px 0;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Audiowide', cursive;
   font-size: 18px;
   font-weight: 800;
   color: #111827;
 }
 
 .description-card p, .description-card li {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Audiowide', cursive;
   font-size: 15px;
   line-height: 1.6;
   color: #1f2937;
