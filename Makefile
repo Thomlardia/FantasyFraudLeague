@@ -33,6 +33,20 @@ run-front:
 run-front-warnings:
 	npm --tracewarnings --prefix frontend start
 
+# ----------DATABASE SEEDING --------
+# Seed commands for development (requries emulator to be running)
+seed:
+	FIRESTORE_EMULATOR_HOST=localhost:8080 node functions/scripts/seed.js seed
+
+seed-clear:
+	FIRESTORE_EMULATOR_HOST=localhost:8080 node functions/scripts/seed.js clear
+
+seed-list:
+	FIRESTORE_EMULATOR_HOST=localhost:8080 node functions/scripts/seed.js list
+
+seed-prod:
+	node functions/scripts/seed.js --production --force
+
 # ------------- LINTER --------------
 
 lint:
