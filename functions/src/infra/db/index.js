@@ -1,6 +1,9 @@
+// Firebase Admin SDK initialization and configuration module
+
 import admin from "firebase-admin";
 import { getFirestore } from "firebase-admin/firestore";
 
+// Initialize Firebase Admin SDK only if not already initialized
 if (!admin.apps.length) {
   admin.initializeApp({
       projectId: 'wario-fantasy-fraud-league',           // which firebase app to connect to
@@ -17,9 +20,11 @@ export const auth = admin.auth();
 let isEmulator = false;
 let environment = 'development';
 
+// Detect environment based on environment variables
 const isProduction = process.env.NODE_ENV === 'production' || process.env.USE_PRODUCTION === 'true';
 const useEmulator = process.env.FUNCTIONS_EMULATOR || process.env.FIRESTORE_EMULATOR_HOST || !isProduction;
 
+// Set environment detection variables
 if (useEmulator && !isProduction) {
   isEmulator = true;
   environment = 'emulator';

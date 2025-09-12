@@ -35,17 +35,57 @@ run-front-warnings:
 
 # ----------DATABASE SEEDING --------
 # Seed commands for development (requries emulator to be running)
-seed:
-	FIRESTORE_EMULATOR_HOST=localhost:8080 node functions/scripts/seed.js seed
 
-seed-clear:
-	FIRESTORE_EMULATOR_HOST=localhost:8080 node functions/scripts/seed.js clear
+EMULATOR_ENV = FIRESTORE_EMULATOR_HOST=localhost:8080 FIREBASE_AUTH_EMULATOR_HOST=localhost:9099
 
-seed-list:
-	FIRESTORE_EMULATOR_HOST=localhost:8080 node functions/scripts/seed.js list
+# seed defenses for all users (explicit)
+seed-users-defenses:
+	$(EMULATOR_ENV) node functions/scripts/seed.js seed all-users-defenses
+
+# seed all users
+seed-users-from-auth:
+	$(EMULATOR_ENV) node functions/scripts/seed.js seed users-from-auth
+
+# seed users and defenses
+seed-complete:
+	$(EMULATOR_ENV) node functions/scripts/seed.js seed users-from-auth
+	$(EMULATOR_ENV) node functions/scripts/seed.js seed all-users-defenses	
+
+# seed defenses for specific user (usage: make seed-user USER=user123)
+seed-user:
+	$(EMULATOR_ENV) node functions/scripts/seed.js seed user-defenses --user $(USER)
+
+# Update defense summary for specific user (usage: make update-user-defense-summary USER=user123)
+update-user-defense-summary:
+	$(EMULATOR_ENV) node functions/scripts/seed.js update user-defense-summary --user $(USER)
+
+# Update defense summaries for all users
+update-all-users-defense-summaries:
+	$(EMULATOR_ENV) node functions/scripts/seed.js update all-users-defense-summaries
+
+# Complete seed and update process (seed users, defenses, then update summaries)
+seed-complete-with-summaries:
+	$(EMULATOR_ENV) node functions/scripts/seed.js seed users-from-auth
+	$(EMULATOR_ENV) node functions/scripts/seed.js seed all-users-defenses
+	$(EMULATOR_ENV) node functions/scripts/seed.js update all-users-defense-summaries
+
+# clear defenses summaries for specific user (usage: make clear-user USER=user123)
+clear-user-defense-summaries:
+	$(EMULATOR_ENV) node functions/scripts/seed.js clear user-defenses --user $(USER)
+
+# list all users
+seed-list-users:
+	$(EMULATOR_ENV) node functions/scripts/seed.js list users
+
+# usage: make seed-list-user USER=user123
+seed-list-user:
+	$(EMULATOR_ENV) node functions/scripts/seed.js list user-defenses --user $(USER)
 
 seed-prod:
-	node functions/scripts/seed.js --production --force
+	node functions/scripts/seed.js seed --production --force
+
+seed-prod-user:
+	node functions/scripts/seed.js seed user-defenses --user $(USER) --production --force
 
 # ------------- LINTER --------------
 
