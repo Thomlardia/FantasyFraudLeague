@@ -1,37 +1,42 @@
 import { buyDefense, upgradeDefense } from "./src/domains/defense/service.js";
 import { getUserBalance, updateUserBalance } from "./src/domains/wallet/service.js";
+import { getAllDefenses } from "./src/domains/defense/repo.js";
 
 async function run() {
-  const testUserId = "testuser456";
-  console.log("Testing defenses for user:", testUserId);
+  const testUserId = "egoiYvgpczH6WJRiy797fH7LZ7XB";
 
-  // give the user some balance first
-  await updateUserBalance(testUserId, 500);
-  console.log("Set user balance to 500");
+  // Give user starting balance
+  await updateUserBalance(testUserId, 1000000);
 
-  // try buying a defense
-  try {
-    const defense = await buyDefense(testUserId, "atmInspection");
-    console.log("Bought defense:", defense);
-  } catch (err) {
-    console.error("Error buying defense:", err.message);
+  console.log("Seeded defenses and set balance to 1,000,000");
+
+  // Test buying defenses
+  const defenseIds = ["atmInspection", "backgroundChecks", "ddosProtection", "deepfakeDetection"];
+  for (const id of defenseIds) {
+    try {
+      const bought = await buyDefense(testUserId, id);
+      console.log(`Bought ${id}:`, bought);
+    } catch (err) {
+      console.error(`Error buying ${id}:`, err.message);
+    }
   }
 
-  // check user balance after purchase
-  const balanceAfterBuy = await getUserBalance(testUserId);
-  console.log("Balance after buying defense:", balanceAfterBuy);
-
-  // try upgrading the defense
-  try {
-    const upgraded = await upgradeDefense(testUserId, "atmInspection");
-    console.log("Upgraded defense:", upgraded);
-  } catch (err) {
-    console.error("Error upgrading defense:", err.message);
+  // Test upgrading
+  // const id = "inputValidation" // make sure you can't upgrade a defense you don't own
+  for (const id of defenseIds) {
+    try {
+      const upgraded = await upgradeDefense(testUserId, id);
+      console.log(`Upgraded ${id}:`, upgraded);
+    } catch (err) {
+      console.error(`Error upgrading ${id}:`, err.message);
+    }
   }
 
-  // final balance after upgrade
-  const finalBalance = await getUserBalance(testUserId);
-  console.log("Final balance after upgrade:", finalBalance);
+  const balance = await getUserBalance(testUserId);
+  console.log("Final balance:", balance);
+
+  const userDefenses = await getAllDefenses(testUserId);
+  console.log("Owned defenses:", userDefenses.filter(d => d.owned));
 }
 
 run().catch(console.error);

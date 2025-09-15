@@ -1,6 +1,9 @@
 // User management and seeding operations for Firestore database
 import { db, createBatch, isEmulator, environment, auth, getCollection} from "../index.js";
 import { defenses as defensesObject } from "./defenses.js";
+import { updateUserDefenseSummary } from "../../../domains/defense/repo.js";
+import { getAllUsers } from "./index.js";
+import { getUserBalance } from "../../../domains/wallet/service.js";
 
 // Convert defenses object to array
 export const defenses = Object.values(defensesObject);
@@ -249,71 +252,9 @@ export const seedUsersFromAuth = async (options = {}) => {
  * @param {Object} options - Configuration options
  * @returns {Promise} Result of the update operation
  */
-export const updateUserDefensesSummary = async (userId, options = {}) => {
-    const { force = false } = options;
-
-    if (!userId) {
-        throw new Error('User ID is required');
-    }
-
-    console.log(`Updating defense summary for user ${userId}`);
-
-    // Safety check for production operations
-    if (!isEmulator && !force) {
-        throw new Error('Production operations require --force flag for safety');
-    }
-
-    try {
-        // Get all defenses for this user
-        const userDefenses = await getUserDefenses(userId);
-        
-        // Filter owned defenses and create summary
-        const ownedDefenses = userDefenses.filter(defense => defense.owned === true);
-        
-        // Create defense summary object
-        const defenseSummary = {};
-        const defensesList = [];
-        
-        ownedDefenses.forEach(defense => {
-            // Add to summary object (for easy querying)
-            defenseSummary[defense.defenseId] = {
-                owned: true,
-                level: defense.level,
-                buyCost: defense.buyCost,
-                upgradeCost: defense.upgradeCost,
-                nextLevelCost: calculateNextLevelCost(defense),
-                defendsAgainst: defense.defendsAgainst
-            };
-            
-            // Add to list format (for easy display)
-            defensesList.push({
-                defenseId: defense.defenseId,
-                level: defense.level,
-                nextLevelCost: calculateNextLevelCost(defense)
-            });
-        });
-
-        // Update user document with defense information
-        const userDoc = db.collection('users').doc(userId);
-        await userDoc.update({
-            ownedDefenses: defenseSummary,
-            ownedDefensesList: defensesList,
-            totalDefensesOwned: ownedDefenses.length,
-        });
-
-        console.log(`Updated defense summary for user ${userId} - ${ownedDefenses.length} defenses owned`);
-        
-        return {
-            success: true,
-            defensesOwned: ownedDefenses.length,
-            summary: defenseSummary
-        };
-
-    } catch (error) {
-        console.error(`Error updating defense summary for user ${userId}:`, error);
-        throw error;
-    }
-};
+export async function updateUserDefensesSummary(userId, { force } = {}) {
+  return updateUserDefenseSummary(userId);
+}
 
 /**
  * Calculate the cost for the next level of a defense
@@ -331,38 +272,9 @@ const calculateNextLevelCost = (defense) => {
  * @param {Object} options - Configuration options
  * @returns {Promise} Results of the operation
  */
-export const updateAllUsersDefensesSummary = async (options = {}) => {
-    const { force = false } = options;
-
-    console.log('Updating defense summaries for all users');
-
-    // Safety check for production operations
-    if (!isEmulator && !force) {
-        throw new Error('Production operations require --force flag for safety');
-    }
-
-    // Get all users from Firestore
-    const userSnapshot = await db.collection('users').get();
-    let successCount = 0;
-    let errorCount = 0;
-
-    // Process each user sequentially
-    for (const userDoc of userSnapshot.docs) {
-        try {
-            await updateUserDefensesSummary(userDoc.id, { force });
-            successCount++;
-        } catch (error) {
-            console.error(`Failed to update defense summary for ${userDoc.id}:`, error);
-            errorCount++;
-        }
-    }
-
-    console.log(`Completed defense summary updates: ${successCount} successful, ${errorCount} failed`);
-    
-    return {
-        success: true,
-        successCount,
-        errorCount,
-        environment
-    };
-};
+export async function updateAllUsersDefensesSummary({ force } = {}) {
+  const users = await getAllUsers();
+  for (const user of users) {
+    await updateUserDefenseSummary(user.id);
+  }
+}
