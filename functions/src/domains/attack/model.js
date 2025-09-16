@@ -1,185 +1,30 @@
-// FraudAttack model file
-// Each class represents a different fraud attack with a single attribute: damageDone
-
-class AccAndInvFraud {
-  constructor(baseDamage, dangerLevel = 3, attackId = "accAndInvFraud") {
+export class Attack {
+  constructor(baseDamage, dangerLevel, attackId) {
     this.baseDamage = baseDamage;
     this.dangerLevel = dangerLevel;
     this.attackId = attackId;
   }
 }
 
-class AccountTakeover {
-  constructor(baseDamage, dangerLevel = 3, attackId = "accountTakeover") {
-    this.baseDamage = baseDamage;
-    this.dangerLevel = dangerLevel;
-    this.attackId = attackId;
-  }
-}
-
-class AtmSkimming {
-  constructor(baseDamage, dangerLevel = 2, attackId = "atmSkimming") {
-    this.baseDamage = baseDamage;
-    this.dangerLevel = dangerLevel;
-    this.attackId = attackId;
-  }
-}
-
-class AuthPushPayments {
-  constructor(baseDamage, dangerLevel = 2, attackId = "authPushPayments") {
-    this.baseDamage = baseDamage;
-    this.dangerLevel = dangerLevel;
-    this.attackId = attackId;
-  }
-}
-
-class BruteForce {
-  constructor(baseDamage, dangerLevel = 2, attackId = "bruteForce") {
-    this.baseDamage = baseDamage;
-    this.dangerLevel = dangerLevel;
-    this.attackId = attackId;
-  }
-}
-
-class BusinessEmailCompromise {
-  constructor(baseDamage, dangerLevel = 3, attackId = "businessEmailCompromise") {
-    this.baseDamage = baseDamage;
-    this.dangerLevel = dangerLevel;
-    this.attackId = attackId;
-  }
-}
-
-class CryptoJacking {
-  constructor(baseDamage, dangerLevel = 1, attackId = "cryptoJacking") {
-    this.baseDamage = baseDamage;
-    this.dangerLevel = dangerLevel;
-    this.attackId = attackId;
-  }
-}
-
-class Ddos {
-  constructor(baseDamage, dangerLevel = 2, attackId = "ddos") {
-    this.baseDamage = baseDamage;
-    this.dangerLevel = dangerLevel;
-    this.attackId = attackId;
-  }
-}
-
-class Deepfake {
-  constructor(baseDamage, dangerLevel = 2, attackId = "deepfake") {
-    this.baseDamage = baseDamage;
-    this.dangerLevel = dangerLevel;
-    this.attackId = attackId;
-  }
-}
-
-class InsiderFraud {
-  constructor(baseDamage, dangerLevel = 3, attackId = "insiderFraud") {
-    this.baseDamage = baseDamage;
-    this.dangerLevel = dangerLevel;
-    this.attackId = attackId;
-  }
-}
-
-class InvestmentScam {
-  constructor(baseDamage, dangerLevel = 2, attackId = "investmentScam") {
-    this.baseDamage = baseDamage;
-    this.dangerLevel = dangerLevel;
-    this.attackId = attackId;
-  }
-}
-
-class ManInTheMiddle {
-  constructor(baseDamage, dangerLevel = 2, attackId = "manInTheMiddle") {
-    this.baseDamage = baseDamage;
-    this.dangerLevel = dangerLevel;
-    this.attackId = attackId;
-  }
-}
-
-class Phishing {
-  constructor(baseDamage, dangerLevel = 2, attackId = "phishing") {
-    this.baseDamage = baseDamage;
-    this.dangerLevel = dangerLevel;
-    this.attackId = attackId;
-  }
-}
-
-class Ransomware {
-  constructor(baseDamage, dangerLevel = 3, attackId = "ransomware") {
-    this.baseDamage = baseDamage;
-    this.dangerLevel = dangerLevel;
-    this.attackId = attackId;
-  }
-}
-
-class SimSwap {
-  constructor(baseDamage, dangerLevel = 2, attackId = "simSwap") {
-    this.baseDamage = baseDamage;
-    this.dangerLevel = dangerLevel;
-    this.attackId = attackId;
-  }
-}
-
-class SqlInjection {
-  constructor(baseDamage, dangerLevel = 2, attackId = "sqlInjection") {
-    this.baseDamage = baseDamage;
-    this.dangerLevel = dangerLevel;
-    this.attackId = attackId;
-  }
-}
-
-class SyntIdentityTheft {
-  constructor(baseDamage, dangerLevel = 2, attackId = "syntIdentityTheft") {
-    this.baseDamage = baseDamage;
-    this.dangerLevel = dangerLevel;
-    this.attackId = attackId;
-  }
-}
-
-class Vishing {
-  constructor(baseDamage, dangerLevel = 2, attackId = "vishing") {
-    this.baseDamage = baseDamage;
-    this.dangerLevel = dangerLevel;
-    this.attackId = attackId;
-  }
-}
-
-class Xss {
-  constructor(baseDamage, dangerLevel = 1, attackId = "xss") {
-    this.baseDamage = baseDamage;
-    this.dangerLevel = dangerLevel;
-    this.attackId = attackId;
-  }
-}
-
-class ZeroDayExploit {
-  constructor(baseDamage, dangerLevel = 3, attackId = "zeroDayExploit") {
-    this.baseDamage = baseDamage;
-    this.dangerLevel = dangerLevel;
-    this.attackId = attackId;
-  }
-}
-
-module.exports = {
-  AccAndInvFraud,
-  AccountTakeover,
-  AtmSkimming,
-  AuthPushPayments,
-  BruteForce,
-  BusinessEmailCompromise,
-  CryptoJacking,
-  Ddos,
-  Deepfake,
-  InsiderFraud,
-  InvestmentScam,
-  ManInTheMiddle,
-  Phishing,
-  Ransomware,
-  SimSwap,
-  SqlInjection,
-  SyntIdentityTheft,
-  Vishing,
-  Xss,
-  ZeroDayExploit
-};
+export const attacks = [
+  new Attack(100, 3, "accAndInvFraud"),
+  new Attack(90, 3, "accountTakeover"),
+  new Attack(60, 2, "atmSkimming"),
+  new Attack(70, 2, "authPushPayments"),
+  new Attack(50, 2, "bruteForce"),
+  new Attack(120, 3, "businessEmailCompromise"),
+  new Attack(30, 1, "cryptoJacking"),
+  new Attack(80, 2, "ddos"),
+  new Attack(75, 2, "deepfake"),
+  new Attack(110, 3, "insiderFraud"),
+  new Attack(85, 2, "investmentScam"),
+  new Attack(65, 2, "manInTheMiddle"),
+  new Attack(60, 2, "phishing"),
+  new Attack(130, 3, "ransomware"),
+  new Attack(70, 2, "simSwap"),
+  new Attack(90, 2, "sqlInjection"),
+  new Attack(80, 2, "syntIdentityTheft"),
+  new Attack(55, 2, "vishing"),
+  new Attack(40, 1, "xss"),
+  new Attack(140, 3, "zeroDayExploit")
+];
