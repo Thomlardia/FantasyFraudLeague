@@ -1,5 +1,5 @@
 // This file contains the attack repository for accessing attack info directly from the model.
-// the attack info is not yet stored in the database. 
+// the attack info is not stored in the database. 
 import { attacks } from "./model.js";
 
 /**

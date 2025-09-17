@@ -11,8 +11,8 @@ export function getAttackInfo(attackId) {
 }
 
 /**
- * Generates a random wave of 5 unique attacks.
- * returns array of 5 attack objects
+ * Generates a random wave of 4 attacks.
+ * returns array of 4 attack objects
  */
 export function getRandomWave() {
   const attacksList = [...getAllAttacks()];
@@ -20,5 +20,47 @@ export function getRandomWave() {
     const randomIndex = Math.floor(Math.random() * (currentIndex + 1));
     [attacksList[currentIndex], attacksList[randomIndex]] = [attacksList[randomIndex], attacksList[currentIndex]];
   }
-  return attacksList.slice(0, 5);
+  return attacksList.slice(0, 4);
+}
+
+/**
+ * Generates an easy wave: 3 attacks, dangerLevel 1-2
+ * returns array of 3 attack objects
+ */
+export function getEasyWave() {
+  const eligibleAttacks = getAllAttacks().filter(attack => attack.dangerLevel >= 1 && attack.dangerLevel <= 2);
+  const shuffledAttacks = [...eligibleAttacks];
+  for (let currentIndex = shuffledAttacks.length - 1; currentIndex > 0; currentIndex--) {
+    const randomIndex = Math.floor(Math.random() * (currentIndex + 1));
+    [shuffledAttacks[currentIndex], shuffledAttacks[randomIndex]] = [shuffledAttacks[randomIndex], shuffledAttacks[currentIndex]];
+  }
+  return shuffledAttacks.slice(0, 3);
+}
+
+/**
+ * Generates a medium wave: 4 attacks, dangerLevel 1-3
+ * returns array of 4 attack obj
+ */
+export function getMediumWave() {
+  const eligibleAttacks = getAllAttacks().filter(attack => attack.dangerLevel >= 1 && attack.dangerLevel <= 3);
+  const shuffledAttacks = [...eligibleAttacks];
+  for (let currentIndex = shuffledAttacks.length - 1; currentIndex > 0; currentIndex--) {
+    const randomIndex = Math.floor(Math.random() * (currentIndex + 1));
+    [shuffledAttacks[currentIndex], shuffledAttacks[randomIndex]] = [shuffledAttacks[randomIndex], shuffledAttacks[currentIndex]];
+  }
+  return shuffledAttacks.slice(0, 4);
+}
+
+/**
+ * Generates a hard wave: 5 attacks, dangerLevel 2-4
+ * returns array of 5 attack obj
+ */
+export function getHardWave() {
+  const eligibleAttacks = getAllAttacks().filter(attack => attack.dangerLevel >= 2 && attack.dangerLevel <= 4);
+  const shuffledAttacks = [...eligibleAttacks];
+  for (let currentIndex = shuffledAttacks.length - 1; currentIndex > 0; currentIndex--) {
+    const randomIndex = Math.floor(Math.random() * (currentIndex + 1));
+    [shuffledAttacks[currentIndex], shuffledAttacks[randomIndex]] = [shuffledAttacks[randomIndex], shuffledAttacks[currentIndex]];
+  }
+  return shuffledAttacks.slice(0, 5);
 }
