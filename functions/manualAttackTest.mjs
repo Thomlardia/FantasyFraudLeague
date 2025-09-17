@@ -1,5 +1,5 @@
 // simple manual tests for attack info functions.
-import { getAttackInfo } from "./src/domains/attack/service.js";
+import { getAttackInfo, getRandomWave } from "./src/domains/attack/service.js";
 
 async function run() {
   const testAttackId = "phishing";
@@ -19,6 +19,16 @@ async function run() {
     console.log("Correctly returned null for non-existent attackId:", fakeId);
   } else {
     console.log("unnexpectedly found attack for id:", fakeId, missing);
+  }
+
+  // Test getRandomWave
+  console.log("\nTesting getRandomWave (should return 5 unique attacks):");
+  const wave = getRandomWave();
+  console.log(wave);
+  if (wave.length === 5 && new Set(wave.map(a => a.attackId)).size === 5) {
+    console.log("Random wave test passed.");
+  } else {
+    console.log("random wave test failed.");
   }
 }
 
