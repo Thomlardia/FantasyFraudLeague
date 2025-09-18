@@ -4,7 +4,6 @@
 export const defenses = {
   atmInspection: {
     defenseId: "atmInspection",
-    owned: false,
     level: 1,
     cost: [55000, 35000, 50000],
     defendsAgainst: {
@@ -14,7 +13,6 @@ export const defenses = {
   },
   backgroundChecks: {
     defenseId: "backgroundChecks",
-    owned: false,
     level: 1,
     cost: [50000, 30000, 40000],
     defendsAgainst: {
@@ -23,7 +21,6 @@ export const defenses = {
   },
   ddosProtection: {
     defenseId: "ddosProtection",
-    owned: false,
     level: 1,
     cost: [150000, 125000, 175000],
     defendsAgainst: {
@@ -32,7 +29,6 @@ export const defenses = {
   },
   deepfakeDetection: {
     defenseId: "deepfakeDetection",
-    owned: false,
     level: 1,
     cost: [95000, 65000, 95000],
     defendsAgainst: {
@@ -42,7 +38,6 @@ export const defenses = {
   },
   emailFiltering: {
     defenseId: "emailFiltering",
-    owned: false,
     level: 1,
     cost: [80000, 50000, 70000],
     defendsAgainst: {
@@ -52,7 +47,6 @@ export const defenses = {
   },
   httpsEncryption: {
     defenseId: "httpsEncryption",
-    owned: false,
     level: 1,
     cost: [100000, null, null],
     defendsAgainst: {
@@ -61,7 +55,6 @@ export const defenses = {
   },
   inputValidation: {
     defenseId: "inputValidation",
-    owned: false,
     level: 1,
     cost: [70000, 45000, 65000],
     defendsAgainst: {
@@ -71,7 +64,6 @@ export const defenses = {
   },
   keepSoftwareUpdated: {
     defenseId: "keepSoftwareUpdated",
-    owned: false,
     level: 1,
     cost: [45000, 30000, 40000],
     defendsAgainst: {
@@ -80,7 +72,6 @@ export const defenses = {
   },
   mfa: {
     defenseId: "mfa",
-    owned: false,
     level: 1,
     cost: [150000, 100000, 150000],
     defendsAgainst: {
@@ -92,7 +83,6 @@ export const defenses = {
   },
   networkMonitoring: {
     defenseId: "networkMonitoring",
-    owned: false,
     level: 1,
     cost: [110000, 70000, 110000],
     defendsAgainst: {
@@ -104,7 +94,6 @@ export const defenses = {
   },
   principleOfLeastPrivilege: {
     defenseId: "principleOfLeastPrivilege",
-    owned: false,
     level: 1,
     cost: [60000, 35000, 55000],
     defendsAgainst: {
@@ -116,7 +105,6 @@ export const defenses = {
   },
   regularAudits: {
     defenseId: "regularAudits",
-    owned: false,
     level: 1,
     cost: [60000, 35000, 50000],
     defendsAgainst: {
@@ -127,7 +115,6 @@ export const defenses = {
   },
   passwordPolicies: {
     defenseId: "passwordPolicies",
-    owned: false,
     level: 1,
     cost: [20000, 15000, 25000],
     defendsAgainst: {
@@ -138,7 +125,6 @@ export const defenses = {
   },
   automatedBackups: {
     defenseId: "automatedBackups",
-    owned: false,
     level: 1,
     cost: [120000, 80000, null],
     defendsAgainst: {
@@ -148,7 +134,6 @@ export const defenses = {
   },
   segregationOfDuties: {
     defenseId: "segregationOfDuties",
-    owned: false,
     level: 1,
     cost: [75000, 40000, 65000],
     defendsAgainst: {
@@ -160,7 +145,6 @@ export const defenses = {
   },
   trafficFiltering: {
     defenseId: "trafficFiltering",
-    owned: false,
     level: 1,
     cost: [65000, 40000, null],
     defendsAgainst: {
@@ -170,7 +154,6 @@ export const defenses = {
   },
   userEducation: {
     defenseId: "userEducation",
-    owned: false,
     level: 1,
     cost: [40000, 25000, 35000],
     defendsAgainst: {
@@ -181,7 +164,6 @@ export const defenses = {
   },
   verificationProtocols: {
     defenseId: "verificationProtocols",
-    owned: false,
     level: 1,
     cost: [90000, 60000, 90000],
     defendsAgainst: {
@@ -192,7 +174,6 @@ export const defenses = {
   },
   vpnUsage: {
     defenseId: "vpnUsage",
-    owned: false,
     level: 1,
     cost: [30000, null, null],
     defendsAgainst: {
@@ -201,7 +182,6 @@ export const defenses = {
   },
   applicationSandboxing: {
     defenseId: "applicationSandboxing",
-    owned: false,
     level: 1,
     cost: [130000, 85000, 120000],
     defendsAgainst: {

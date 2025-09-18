@@ -1,10 +1,7 @@
 // User management and seeding operations for Firestore database
 import { db, createBatch, isEmulator, environment, auth, getCollection} from "../index.js";
 import { defenses as defensesObject } from "./defenses.js";
-import { updateUserDefenseSummary } from "../../../domains/defense/repo.js";
-import { getAllUsers } from "./index.js";
-import { getUserBalance } from "../../../domains/wallet/service.js";
-import { getUserDefenses } from "./index.js";
+import { updateUserDefenseSummary, getAllUsers } from "../../../domains/defense/repo.js";
 
 // Convert defenses object to array
 export const defenses = Object.values(defensesObject);
@@ -117,75 +114,16 @@ export const seedUsersFromAuth = async (options = {}) => {
  * @param {Object} options - Configuration options
  * @returns {Promise} Result of the update operation
  */
-<<<<<<< HEAD
 export async function updateUserDefensesSummary(userId, { force } = {}) {
+  if (!userId) {
+    throw new Error('User ID is required');
+  }
+  console.log(`Updating defense summary for user ${userId}`);
+  if (!isEmulator && !force) {
+    throw new Error('Production operations require --force flag for safety');
+  }
   return updateUserDefenseSummary(userId);
 }
-=======
-export const updateUserDefensesSummary = async (userId, options = {}) => {
-    const { force = false } = options;
-
-    if (!userId) {
-        throw new Error('User ID is required');
-    }
-
-    console.log(`Updating defense summary for user ${userId}`);
-
-    // Safety check for production operations
-    if (!isEmulator && !force) {
-        throw new Error('Production operations require --force flag for safety');
-    }
-
-    try {
-        // Get all defenses for this user
-        const userDefenses = await getUserDefenses(userId);
-        
-        // Filter owned defenses and create summary
-        const ownedDefenses = userDefenses.filter(defense => defense.owned === true);
-        
-        // Create defense summary object
-        const defenseSummary = {};
-        const defensesList = [];
-        
-        ownedDefenses.forEach(defense => {
-            // Add to summary object (for easy querying)
-            defenseSummary[defense.defenseId] = {
-                owned: true,
-                level: defense.level,
-                buyCost: defense.buyCost,
-                upgradeCost: defense.upgradeCost,
-                defendsAgainst: defense.defendsAgainst
-            };
-            
-            // Add to list format (for easy display)
-            defensesList.push({
-                defenseId: defense.defenseId,
-                level: defense.level,
-            });
-        });
-
-        // Update user document with defense information
-        const userDoc = db.collection('users').doc(userId);
-        await userDoc.update({
-            ownedDefenses: defenseSummary,
-            ownedDefensesList: defensesList,
-            totalDefensesOwned: ownedDefenses.length,
-        });
-
-        console.log(`Updated defense summary for user ${userId} - ${ownedDefenses.length} defenses owned`);
-        
-        return {
-            success: true,
-            defensesOwned: ownedDefenses.length,
-            summary: defenseSummary
-        };
-
-    } catch (error) {
-        console.error(`Error updating defense summary for user ${userId}:`, error);
-        throw error;
-    }
-};
->>>>>>> origin/develop
 
 /**
  * Updates defense summaries for all users

@@ -1,9 +1,8 @@
 import { buyDefense, upgradeDefense } from "./src/domains/defense/service.js";
 import { getUserBalance, updateUserBalance } from "./src/domains/wallet/service.js";
-import { getAllDefenses } from "./src/domains/defense/repo.js";
 
 async function run() {
-  const testUserId = "egoiYvgpczH6WJRiy797fH7LZ7XB";
+  const testUserId = "qY64ulORsCP2DldLdi9TbNOubOsF";
 
   // Give user starting balance
   await updateUserBalance(testUserId, 1000000);
@@ -35,8 +34,6 @@ async function run() {
   const balance = await getUserBalance(testUserId);
   console.log("Final balance:", balance);
 
-  const userDefenses = await getAllDefenses(testUserId);
-  console.log("Owned defenses:", userDefenses.filter(d => d.owned));
 }
 
 run().catch(console.error);

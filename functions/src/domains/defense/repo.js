@@ -1,48 +1,26 @@
-// repo.js
 import { db } from "../../infra/db/index.js";
 
 /**
- * Saves a defense object to Firestore for a given user
- * @param {Object} defense - The defense object to save
- * @returns {Promise} Result of the save operation
+ * Retrieves all users from Firestore
+ * @returns {Promise<Array<Object>>} Array of user objects with data
  */
-export async function saveDefense(defense) {
-  await db.collection("users")
-    .doc(defense.userId)
-    .collection("defenses")
-    .doc(defense.defenseId)
-    .set(defense.toJSON(), { merge: true });
+export const getAllUsers = async () => {
+  const usersCollection = db.collection("users");
+  const snapshot = await usersCollection.get();
+  const users = [];
+  snapshot.forEach(doc => {
+    const data = doc.data();
+    users.push({ id: doc.id, ...data});
+  });
+  return users;
 }
 
-
 /**
- * Retrieves a specific defense for a given user
- * @param {string} userId - The user ID to retrieve the defense for
- * @param {string} defenseId - The defense ID to retrieve
- * @returns {Promise<Object | null>} The defense object if it exists, null otherwise.
+ * Retrieves all  documents from the "defenses" collection in the Firestore database.
+ * @returns {Promise<Array<Object>>} Array of defense template objects with data
  */
-export async function getDefense(userId, defenseId) {
-  const doc = await db.collection("users")
-    .doc(userId)
-    .collection("defenses")
-    .doc(defenseId)
-    .get();
-
-  return doc.exists ? doc.data() : null;
-}
-
-
-/**
- * Retrieves all defenses for a given user
- * @param {string} userId - The user ID to retrieve the defenses for
- * @returns {Promise<Array>} Array of defense objects for the user
- */
-export async function getAllDefenses(userId) {
-  const querySnapshot = await db.collection("users")
-    .doc(userId)
-    .collection("defenses")
-    .get();
-
+export async function getAllDefenseTemplates() {
+  const querySnapshot = await db.collection("defenses").get();
   return querySnapshot.docs.map(doc => ({
     defenseId: doc.id,
     ...doc.data(),
@@ -50,42 +28,94 @@ export async function getAllDefenses(userId) {
 }
 
 /**
- * Retrieves defense summaries for a user from a Firestore database.
- * It calls the asynchronous function, getAllDefenses, to retrieve all the defenses for the user. 
- * It then filters the defenses to only include those that are owned by the user.
- * Populates the defenseSummary object with the defense details (level, buy cost, upgrade cost, and the defenses it can protect against). 
- * It also adds the defense details to the defensesList array.
-
-Finally, it updates the user document in the Firestore database with the ownedDefenses, ownedDefensesList, and totalDefensesOwned
- * 
- * @param {string} userId - The user ID to retrieve the defenses for.
- * @returns {Promise<Object>} Defense summary object with data.
- * @param {Object} defenseSummary
- * @param {Array} ownedDefensesList
- * @param {number} totalDefensesOwned
+ * Retrieves a single defense template from the "defenses" collection in the Firestore database.
+ * @param {string} defenseId - The ID of the defense to retrieve
+ * @returns {Promise<Object|Null>} Defense template object with data, or null if it doesn't exist
  */
-export async function updateUserDefenseSummary(userId) {
-  const allDefenses = await getAllDefenses(userId);
-  const ownedDefenses = allDefenses.filter(d => d.owned);
+export async function getDefenseTemplate(defenseId) {
+  const doc = await db.collection("defenses").doc(defenseId).get();
+  return doc.exists ? { defenseId: doc.id, ...doc.data() } : null;
+}
 
-  const defenseSummary = {};
-  const defensesList = [];
 
-  ownedDefenses.forEach(d => {
-    defenseSummary[d.defenseId] = {
-      owned: true,
-      level: d.level,
-      buyCost: d.buyCost,
-      upgradeCost: d.upgradeCost,
-      defendsAgainst: d.defendsAgainst,
-    };
-    defensesList.push({ defenseId: d.defenseId, level: d.level });
-  });
+/**
+ * Retrieves the list of owned defense templates for a user from the "users" collection in the Firestore database.
+ * @param {string} userId - The ID of the user to retrieve owned defenses for
+ * @returns {Promise<Array<Object>>} Array of owned defense templates with data
+ */
+export async function getUserOwnedDefenses(userId) {
+  const userDoc = await db.collection("users").doc(userId).get();
+  
+  if (!userDoc.exists) {
+    return [];
+  }
+  
+  const userData = userDoc.data();
+  return userData.ownedDefensesList || [];
+}
 
+/**
+ * Updates a user's owned defense templates list in the "users" collection in the Firestore database.
+ * @param {string} userId - The ID of the user to update owned defenses for
+ * @param {string} defenseId - The ID of the defense to update
+ * @param {number} level - The level of the defense to update
+ * @returns {Promise<void>} Result of the update operation
+ */
+export async function updateUserDefenseOwnership(userId, defenseId, level) {
+  const userDoc = await db.collection("users").doc(userId).get();
+  const userData = userDoc.data() || {};
+  const currentList = userData.ownedDefensesList || [];
+  
+  // update or add the defense
+  const existingIndex = currentList.findIndex(d => d.defenseId === defenseId);
+  if (existingIndex >= 0) {
+    currentList[existingIndex].level = level;
+  } else {
+    currentList.push({ defenseId, level });
+  }
+  
   await db.collection("users").doc(userId).update({
-    ownedDefenses: defenseSummary,
-    ownedDefensesList: defensesList,
-    totalDefensesOwned: ownedDefenses.length,
+    ownedDefensesList: currentList
   });
 }
 
+/**
+ * Updates a user's defense summary in the "users" collection in the Firestore database.
+ * 
+ * This function retrieves the user's owned defenses and all defense templates from Firestore,
+ * creates a lookup map for the defense templates, and then populates the defense summary
+ * object with the relevant data from the owned defenses and defense templates.
+ * 
+ * @param {string} userId - The ID of the user to update the defense summary for
+ * @returns {Promise<void>} Result of the update operation
+ */
+export async function updateUserDefenseSummary(userId) {
+  const [ownedDefenses, templates] = await Promise.all([
+    getUserOwnedDefenses(userId),
+    getAllDefenseTemplates()
+  ]);
+  
+  // create template lookup map
+  const templateMap = new Map(templates.map(t => [t.defenseId, t]));
+  
+  const defenseSummary = {};
+  
+  // populate summary
+  ownedDefenses.forEach(ownedDefense => {
+    const template = templateMap.get(ownedDefense.defenseId);
+    if (template) {
+      defenseSummary[ownedDefense.defenseId] = {
+        level: ownedDefense.level,
+        buyCost: template.cost[0],
+        upgradeCost: template.cost[ownedDefense.level] || 0,
+        defendsAgainst: template.defendsAgainst,
+      };
+    }
+  });
+  
+  await db.collection("users").doc(userId).update({
+    ownedDefenses: defenseSummary,
+    ownedDefensesList: ownedDefenses, // Keep in sync
+    totalDefensesOwned: ownedDefenses.length,
+  });
+}
