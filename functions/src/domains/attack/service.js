@@ -1,5 +1,6 @@
 // This file contains the logic for all attack related operations.
 import { getAllAttacks } from "./repo.js";
+import { getUserBalance, updateUserBalance} from "../wallet/service.js";
 
 /**
  * Finds and returns the attack object for a given attack id
@@ -63,4 +64,22 @@ export function getHardWave() {
     [shuffledAttacks[currentIndex], shuffledAttacks[randomIndex]] = [shuffledAttacks[randomIndex], shuffledAttacks[currentIndex]];
   }
   return shuffledAttacks.slice(0, 5);
+}
+
+/**
+ * Deducts money from the user's wallet after an attack wave. Assumes no defense are in place
+ * @param {string} userId - The user's ID
+ * @param {Array<object>} wave - Array of attack objects (each with baseDamage)
+ * returns the new user balance after deduction
+ */
+export async function attackDeduction(userId, wave) {
+  // Calculate total damage from the wave
+  const totalDamage = wave.reduce((sum, attack) => sum + (attack.baseDamage || 0), 0);
+  // Get current user balance
+  const currentBalance = await getUserBalance(userId);
+  // Deduct damage, but don't allow negative balance
+  const newBalance = Math.max(0, currentBalance - totalDamage);
+  // Update user balance
+  await updateUserBalance(userId, newBalance);
+  return newBalance;
 }

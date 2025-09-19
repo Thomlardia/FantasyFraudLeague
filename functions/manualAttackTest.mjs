@@ -1,7 +1,12 @@
 // simple manual tests for attack info functions.
-import { getAttackInfo, getRandomWave, getEasyWave, getMediumWave, getHardWave } from "./src/domains/attack/service.js";
+import { getAttackInfo, getRandomWave, getEasyWave, getMediumWave, getHardWave, attackDeduction } from "./src/domains/attack/service.js";
+import { updateUserBalance, getUserBalance } from "./src/domains/wallet/service.js";
 
 async function run() {
+  // Setup test user
+  const testUserId = "testuser456";
+  await updateUserBalance(testUserId, 1000); // Set initial balance
+
   const testAttackId = "phishing";
   console.log("Testing the getAttackInfo for:", testAttackId);
 
@@ -71,6 +76,20 @@ async function run() {
     console.log("Hard wave test passed.");
   } else {
     console.log("Hard wave test failed.");
+  }
+  // Test applyWaveDamageToWallet
+  console.log("\nTesting applyWaveDamageToWallet with a random wave:");
+  const wave = getHardWave();
+  const beforeBalance = await getUserBalance(testUserId);
+  console.log("User balance before wave:", beforeBalance);
+  const newBalance = await attackDeduction(testUserId, wave);
+  console.log("Wave baseDamages:", wave.map(a => a.baseDamage));
+  console.log("User balance after wave:", newBalance);
+  const expected = Math.max(0, beforeBalance - wave.reduce((sum, a) => sum + (a.baseDamage || 0), 0));
+  if (newBalance === expected) {
+    console.log("attackDeduction test passed.");
+  } else {
+    console.log("attackDeduction test failed. Expected:", expected, "but got:", newBalance);
   }
 }
 
