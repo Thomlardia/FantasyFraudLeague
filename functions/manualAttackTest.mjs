@@ -77,9 +77,9 @@ async function run() {
   } else {
     console.log("Hard wave test failed.");
   }
-  // Test applyWaveDamageToWallet
+  // Test attackDeduction
   console.log("\nTesting attackDeduction with a random wave:");
-  const wave = getRandomWave();
+  const wave = getHardWave();
   const beforeBalance = await getUserBalance(testUserId);
   console.log("User balance before wave:", beforeBalance);
   const newBalance = await attackDeduction(testUserId, wave);

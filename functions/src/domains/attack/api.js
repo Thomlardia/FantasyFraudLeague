@@ -1,5 +1,5 @@
 // This file exposes the attack operations to the api layer.
-import { getAttackInfo} from "./service.js";
+import { getAttackInfo, getEasyWave, getHardWave, getMediumWave, apiGetRandomWave, attackDeduction} from "./service.js";
 
 /**
  * API: Get attack info.
@@ -40,4 +40,11 @@ export function apiGetMediumWave() {
  */
 export function apiGetHardWave() {
 	return getHardWave();
+}
+
+/**
+ * API: * Deduct money after attack wave
+ */
+export function apiAttackDeduction() {
+	return attackDeduction();
 }
