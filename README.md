@@ -26,3 +26,5 @@ $env:GOOGLE_APPLICATION_CREDENTIALS="C:\Users\trekv\OneDrive\Documenten\ai.stell
 
 ***Emulator***
 $env:FIRESTORE_EMULATOR_HOST="localhost:8080"
+
+>> $env:FIREBASE_CONFIG="{`"projectId`":`"wario-fantasy-fraud-league`"}"
