@@ -16,7 +16,7 @@ export const getAllUsers = async () => {
 }
 
 /**
- * Retrieves all  documents from the "defenses" collection in the Firestore database.
+ * Retrieves all documents from the "defenses" collection in the Firestore database.
  * @returns {Promise<Array<Object>>} Array of defense template objects with data
  */
 export async function getAllDefenseTemplates() {
@@ -37,9 +37,22 @@ export async function getDefenseTemplate(defenseId) {
   return doc.exists ? { defenseId: doc.id, ...doc.data() } : null;
 }
 
+/**
+ * Returns the complete owned defense data of the fraud attacks each defense owned protest against & effectiveness levels,
+ * buy & upgrade cost for the currently owned defense, and the level that the user currently owns the defense at.
+ * @param {string} userId - The ID of the user to retrieve owned defenses for
+ * @returns {Promise<Object>} Owned defense templates object with complete data
+ */
+export async function getUserOwnedDefensesComplete(userId) {
+  const userDoc = await db.collection("users").doc(userId).get();
+  if (!userDoc.exists) return {};
+  return userDoc.data().ownedDefenses || {};
+}
+
 
 /**
  * Retrieves the list of owned defense templates for a user from the "users" collection in the Firestore database.
+ * This retrieves the a list of defense id and associated level only i.e. "ownedDefensesList" field in the user document.
  * @param {string} userId - The ID of the user to retrieve owned defenses for
  * @returns {Promise<Array<Object>>} Array of owned defense templates with data
  */

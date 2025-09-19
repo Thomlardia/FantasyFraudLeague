@@ -2,7 +2,7 @@ import { buyDefense, upgradeDefense } from "./src/domains/defense/service.js";
 import { getUserBalance, updateUserBalance } from "./src/domains/wallet/service.js";
 
 async function run() {
-  const testUserId = "qY64ulORsCP2DldLdi9TbNOubOsF";
+  const testUserId = "gTXVXDqXyUjWt6KNHCHN7OHVEnnQ";
 
   // Give user starting balance
   await updateUserBalance(testUserId, 1000000);
