@@ -73,13 +73,9 @@ export function getHardWave() {
  * returns the new user balance after deduction
  */
 export async function attackDeduction(userId, wave) {
-  // Calculate total damage from the wave
-  const totalDamage = wave.reduce((sum, attack) => sum + (attack.baseDamage || 0), 0);
-  // Get current user balance
+  const totalDamage = wave.reduce((sum, attack) => sum + (attack.baseDamage || 0), 0); // Calculate total damage from the wave
   const currentBalance = await getUserBalance(userId);
-  // Deduct damage, but don't allow negative balance
-  const newBalance = Math.max(0, currentBalance - totalDamage);
-  // Update user balance
+  const newBalance = Math.max(0, currentBalance - totalDamage); // Deduct damage, but don't allow negative balance
   await updateUserBalance(userId, newBalance);
   return newBalance;
 }
