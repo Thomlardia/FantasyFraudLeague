@@ -64,7 +64,6 @@ function VerificationProtocols() {
                 <div className="upgrade-section">
                     <div className="upgrade-header">
                         <h3>Defense Level: {currentLevel}</h3>
-                        <p>Upgrade your REPLACE_ME defense to increase effectiveness</p>
                     </div>
                     
                     <div className="upgrade-info">
