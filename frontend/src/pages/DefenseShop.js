@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import '../styles/shopAndWiki.css';
 import fflLogo from '../images/ffl_logo_ghost.png';
+import MoneyBar from '../components/MoneyBar';
 
 function DefenseShop() {
     const defenseItems = [
@@ -38,7 +39,7 @@ function DefenseShop() {
                     Defense Shop
                 </h1>
                 
-                <div style={{ width: "48px" }}></div> {/* Spacer for centering */}
+                <MoneyBar />
             </div>
             
             <div className="shop-wiki-grid">

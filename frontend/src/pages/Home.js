@@ -4,7 +4,7 @@ import iconClose from '../images/icons/close.png';
 import iconLeaderboard from '../images/icons/leaderboard.png';
 import iconHelp from '../images/icons/help.png';
 import iconSettings from '../images/icons/settings.png';
-import iconMoneyDollar from '../images/icons/money_dollar.png';
+import MoneyBar from '../components/MoneyBar';
 
 function Home() {
     return (
@@ -18,12 +18,7 @@ function Home() {
                         <img src={iconLeaderboard} alt="Leaderboard" className="icon-img" />
                     </Link>
                 </div>
-                <div className="money-display" title="Bank">
-                    <span className="money-icon">
-                        <img src={iconMoneyDollar} alt="Bank" className="icon-img--small" />
-                    </span>
-                    <span>$1,000,000</span>
-                </div>
+                <MoneyBar />
                 <div className="topbar-group">
                     <Link to="/help" className="icon-button" title="Help">
                         <img src={iconHelp} alt="Help" className="icon-img" />
