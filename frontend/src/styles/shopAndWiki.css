@@ -440,3 +440,130 @@
     align-items: stretch;
   }
 }
+
+/* Upgrade Section Styles for Defense Pages */
+.upgrade-section {
+  background: rgba(255, 255, 255, 0.98);
+  color: #1a1a2e;
+  border-radius: 14px;
+  border: 2px solid transparent;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.15);
+  padding: 20px;
+  margin-top: 16px;
+  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+}
+
+.upgrade-section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+  border-color: rgba(5, 150, 105, 0.3);
+}
+
+.upgrade-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.upgrade-header h3 {
+  margin: 0 0 8px 0;
+  font-family: 'Audiowide', cursive;
+  font-size: 20px;
+  font-weight: 800;
+  color: #111827;
+}
+
+.upgrade-header p {
+  margin: 0;
+  font-family: 'Audiowide', cursive;
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 1.4;
+}
+
+.upgrade-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+.upgrade-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: center;
+}
+
+.upgrade-cost {
+  font-family: 'Audiowide', cursive;
+  font-size: 16px;
+  font-weight: 700;
+  color: #059669;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.upgrade-level {
+  font-family: 'Audiowide', cursive;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.upgrade-button {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-family: 'Audiowide', cursive;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 200ms ease;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+  min-width: 200px;
+}
+
+.upgrade-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #047857 0%, #065f46 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(5, 150, 105, 0.4);
+}
+
+.upgrade-button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.upgrade-button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(5, 150, 105, 0.3);
+}
+
+/* Responsive design for upgrade section */
+@media (max-width: 768px) {
+  .upgrade-section {
+    padding: 16px;
+  }
+  
+  .upgrade-header h3 {
+    font-size: 18px;
+  }
+  
+  .upgrade-header p {
+    font-size: 13px;
+  }
+  
+  .upgrade-button {
+    font-size: 14px;
+    padding: 10px 20px;
+    min-width: 180px;
+  }
+}

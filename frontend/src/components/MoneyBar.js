@@ -3,11 +3,10 @@ import iconMoneyDollar from '../images/icons/money_dollar.png';
 
 /**
  * Placeholder function to get current money amount
- * This will be replaced by a teammate with actual implementation
+ * This will be replaced
  * @returns {number} Current money amount
  */
 function getCurrentMoney() {
-    // Placeholder implementation - returns a fake number for now
     return 1250000;
 }
 
@@ -22,7 +21,7 @@ function formatMoney(amount) {
 
 /**
  * MoneyBar component that displays the player's current money
- * Refreshes whenever the component renders to show the latest value
+ * Refreshes whenever the component renders to show the slatest value
  */
 function MoneyBar() {
     const currentMoney = getCurrentMoney();

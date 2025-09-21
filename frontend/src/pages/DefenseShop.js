@@ -39,7 +39,6 @@ function DefenseShop() {
                     Defense Shop
                 </h1>
                 
-                <MoneyBar />
             </div>
             
             <div className="shop-wiki-grid">

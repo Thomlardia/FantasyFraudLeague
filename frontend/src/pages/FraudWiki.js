@@ -39,7 +39,6 @@ function FraudWiki() {
                     Fraud Wiki
                 </h1>
                 
-                <MoneyBar />
             </div>
             
             <div className="shop-wiki-grid">
