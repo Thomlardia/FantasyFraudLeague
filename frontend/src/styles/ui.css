@@ -175,6 +175,13 @@ h1, h2, h3 {
 	font-size: 24px;
 }
 
+/* Left-positioned back button for login/signup pages */
+.back-button-left {
+	position: absolute;
+	left: 20px;
+	top: 20px;
+}
+
 .splash-welcome {
 	color: white;
 	font-size: 16px;

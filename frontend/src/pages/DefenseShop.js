@@ -26,6 +26,9 @@ function DefenseShop() {
         { title: "Use HTTPS and Encrypted Connections", icon: "https", path: "/defenses/HttpsAndEncryption" },
         { title: "VPN Usage for Remote Connections", icon: "vpn_lock", path: "/defenses/VpnUsage" }
     ];
+    function getDefenseLevelPLACEHOLDER(index) { // TAKE PARAM index that maps to a defense
+        return 0; // Starting at level 0
+    }
 
     return (
         <div className="shop-wiki-container">
@@ -46,7 +49,7 @@ function DefenseShop() {
                     <Link key={index} to={item.path} className="shop-card">
                         <span className="card-icon">{item.icon}</span>
                         <h3 className="card-title">{item.title}</h3>
-                        <p className="card-level">Level 1</p>
+                        <p className="card-level">Level {getDefenseLevelPLACEHOLDER(index)}</p>
                     </Link>
                 ))}
             </div>
