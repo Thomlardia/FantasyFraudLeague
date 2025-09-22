@@ -8,14 +8,19 @@ import iconSettings from '../images/icons/settings.png';
 import MoneyBar from '../components/MoneyBar';
 
 function Home() {
-    const { hasRole } = useAuth();
+    const { hasRole, logout } = useAuth();
     return (
         <div className="page">
             <div className="topbar">
                 <div className="topbar-group">
-                    <Link to="/" className="icon-button" title="LogOut">
+                    <button
+                        type="button"
+                        className="icon-button"
+                        title="Log out"
+                        onClick={logout}
+                    >
                         <img src={iconClose} alt="Log out" className="icon-img" />
-                    </Link>
+                    </button>
                     <Link to="/leaderboard" className="icon-button" title="Leaderboard">
                         <img src={iconLeaderboard} alt="Leaderboard" className="icon-img" />
                     </Link>
