@@ -57,8 +57,12 @@ function Xss() {
                 <div className="description-card">
                     <h3>Primary Defenses:</h3>
                     <ul>
-                        <li>Output encoding to neutralize malicious input</li>
-                        <li>Content Security Policy (CSP) to restrict script execution</li>
+                        <li>
+                            <Link to="/defenses/InputValidation">Input Validation and Sanitation</Link>
+                        </li>
+                        <li>
+                            <Link to="/defenses/KeepUpdated">Keep Software Updated</Link>
+                        </li>
                     </ul>
                 </div>
             </div>

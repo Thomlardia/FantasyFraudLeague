@@ -57,8 +57,7 @@ function InvestmentScam() {
                 <div className="description-card">
                     <h3>Primary Defenses:</h3>
                     <ul>
-                        <li>Use only licensed and regulated brokers</li>
-                        <li>Be cautious of guaranteed high returns</li>
+                        <li><Link to="/defenses/UserEducation">User Education</Link></li>
                     </ul>
                 </div>
             </div>

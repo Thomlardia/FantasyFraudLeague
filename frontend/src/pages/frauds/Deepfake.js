@@ -62,7 +62,7 @@ function Deepfake() {
                             <Link to="/defenses/VerificationProtocols">Verification Protocols</Link>
                         </li>
                         <li>
-                            <Link to="/defenses/TamperProofSeals">Tamper Proof Seals</Link>
+                            <Link to="/defenses/DeepfakeDetection">Deepfake Detection</Link>
                         </li>
                     </ul>
                 </div>

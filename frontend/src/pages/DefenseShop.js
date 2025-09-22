@@ -21,10 +21,10 @@ function DefenseShop() {
         { title: "Verification Protocols (Code Words)", icon: "verified", path: "/defenses/VerificationProtocols" },
         { title: "DeepFake Detection Software", icon: "visibility", path: "/defenses/DeepfakeDetection" },
         { title: "ATM Inspections", icon: "card_membership", path: "/defenses/AtmInspections" },
-        { title: "Tamper Proof Seals", icon: "verified_user", path: "/defenses/TamperProofSeals" },
         { title: "Background Checks and Regular Screenings", icon: "person_search", path: "/defenses/BackgroundChecks" },
         { title: "Use HTTPS and Encrypted Connections", icon: "https", path: "/defenses/HttpsAndEncryption" },
-        { title: "VPN Usage for Remote Connections", icon: "vpn_lock", path: "/defenses/VpnUsage" }
+        { title: "VPN Usage for Remote Connections", icon: "vpn_lock", path: "/defenses/VpnUsage" },
+        { title: "Application Sandboxing", icon: "grid_view", path: "/defenses/ApplicationSandboxing" }
     ];
     function getDefenseLevelPLACEHOLDER(index) { // TAKE PARAM index that maps to a defense
         return 0; // Starting at level 0

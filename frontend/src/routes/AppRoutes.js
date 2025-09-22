@@ -44,10 +44,10 @@ const TrafficFiltering          = lazy(() => import("../pages/defenses/TrafficFi
 const VerificationProtocols     = lazy(() => import("../pages/defenses/VerificationProtocols"));
 const DeepfakeDetection         = lazy(() => import("../pages/defenses/DeepfakeDetection"));
 const AtmInspections            = lazy(() => import("../pages/defenses/AtmInspections"));
-const TamperProofSeals          = lazy(() => import("../pages/defenses/TamperProofSeals"));
 const BackgroundChecks          = lazy(() => import("../pages/defenses/BackgroundChecks"));
 const HttpsAndEncryption        = lazy(() => import("../pages/defenses/HttpsAndEncryption"));
 const VpnUsage                  = lazy(() => import("../pages/defenses/VpnUsage"));
+const ApplicationSandboxing     = lazy(() => import("../pages/defenses/ApplicationSandboxing"));
 
 // FRAUDS (lazy)
 const Phishing                  = lazy(() => import("../pages/frauds/Phishing"));
@@ -112,10 +112,10 @@ export default function AppRoutes() {
                 <Route path="/defenses/VerificationProtocols" element={<VerificationProtocols />} />
                 <Route path="/defenses/DeepfakeDetection" element={<DeepfakeDetection />} />
                 <Route path="/defenses/AtmInspections" element={<AtmInspections />} />
-                <Route path="/defenses/TamperProofSeals" element={<TamperProofSeals />} />
                 <Route path="/defenses/BackgroundChecks" element={<BackgroundChecks />} />
                 <Route path="/defenses/HttpsAndEncryption" element={<HttpsAndEncryption />} />
                 <Route path="/defenses/VpnUsage" element={<VpnUsage />} />
+                <Route path="/defenses/ApplicationSandboxing" element={<ApplicationSandboxing />} />
 
                 {/* FRAUDS */}
                 <Route path="/frauds/Phishing" element={<Phishing />} />

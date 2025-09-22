@@ -57,8 +57,12 @@ function SyntIdentityTheft() {
                 <div className="description-card">
                     <h3>Primary Defenses:</h3>
                     <ul>
-                        <li>Biometric verification and document authentication</li>
-                        <li>Enhanced credit monitoring systems</li>
+                        <li>
+                            <Link to="/defenses/BackgroundChecks">Background Checks</Link>
+                        </li>
+                        <li>
+                            <Link to="/defenses/RegularPasswordChanges">Regular Password Changes</Link>
+                        </li>
                     </ul>
                 </div>
             </div>
