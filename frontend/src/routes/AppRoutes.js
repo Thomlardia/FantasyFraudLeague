@@ -4,6 +4,7 @@ import { Suspense, lazy } from "react";
 import RequireAuth from "./RequireAuth";
 import RequireVerified from "./RequireVerified";
 import PreloadOnAuth from "./PreloadOnAuth";
+import RequireRole from "./RequireRole";
 
 // --- Eager (small, first-touch) ---
 import Hello from "../pages/Hello";
@@ -16,7 +17,7 @@ const VerifyEmail = lazy(() => import("../pages/VerifyEmail"));
 
 // only load if relevant
 const Home = lazy(() => import("../pages/Home"));
-/* const AdminDashboard = lazy(() => import("../pages/AdminDashboard")); */
+const AdminDashboard = lazy(() => import("../pages/AdminDashboard"));
 
 // player related main pages
 const DefenseShop   = lazy(() => import("../pages/DefenseShop"));
@@ -88,6 +89,12 @@ export default function AppRoutes() {
             <Route path="/verify-email" element={<VerifyEmail />} />
               <Route element={<RequireVerified />}>
 
+                {/* ADMIN-only route */}
+                <Route element={<RequireRole role="admin" />}>
+                  <Route path="/admin" element={<AdminDashboard />} />
+                </Route>
+
+                {/* Normal app routes (no auto-redirect for admins) */}
                 <Route path="/home" element={<Home />} />
                 <Route path="/defenseshop" element={<DefenseShop />} />
                 <Route path="/fraudwiki" element={<FraudWiki />} />
@@ -148,4 +155,3 @@ export default function AppRoutes() {
     </Suspense>
   );
 }
-
