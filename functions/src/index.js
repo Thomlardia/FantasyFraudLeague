@@ -9,7 +9,7 @@
  */
 // import { initializeApp } from "firebase-admin/app";
 import { setGlobalOptions } from "firebase-functions/v2";
-import { onRequest } from "firebase-functions/v2/https";
+// import { onRequest } from "firebase-functions/v2/https";
 
 // init + defaults
 // Firebase Admin is initialized in infra/db/index.js
@@ -28,6 +28,6 @@ setGlobalOptions({
 //export const adminApi = onRequest(adminApp);
 
 // re-export triggers directly
-//export { onUserCreated } from "./apps/triggers/identity.onUserCreated.js";
+export { onUserCreated } from "./apps/triggers/identity.onUserCreated.js";
 export { onAttackDeduction } from "./apps/triggers/wallet.onWalletUpdate.js";
 
