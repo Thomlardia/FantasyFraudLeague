@@ -2,15 +2,23 @@ import { Link } from 'react-router-dom';
 import iconBackArrow from '../../images/icons/back_arrow.png'
 import '../../styles/ui.css';
 import '../../styles/shopAndWiki.css';
+import MoneyBar from '../../components/MoneyBar';
 
 function SqlInjection() {
     return (
 
         <div className="fraud-container">
-            <div className="header">
+            <div className="topbar">
+            <div className="topbar-group">
                 <Link to="/fraudwiki" className="icon-button" title="Back">
                     <span className="material-symbols-outlined">arrow_back</span>
                 </Link>
+            </div>
+            <MoneyBar />
+            <div className="topbar-group"></div>
+            </div>
+            <div className="header">
+
                 <h1>Sql Injection</h1>
                 <div></div>
             </div>

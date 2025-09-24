@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Outlet } from "react-router-dom";
+import { useAuth } from "../auth/useAuth";
 
 /** Remember to keep in sync with lazy() paths in AppRoutes.js */
 const PRELOAD_TARGETS = [
@@ -13,6 +14,8 @@ const PRELOAD_TARGETS = [
 
 export default function PreloadOnAuth() {
   const did = useRef(false);
+  const didAdmin = useRef(false);
+  const { hasRole } = useAuth();
 
   useEffect(() => {
     if (did.current) return;
@@ -30,7 +33,23 @@ export default function PreloadOnAuth() {
     }
   }, []);
 
+  // Preload admin dashboard only for admins
+  useEffect(() => {
+    if (didAdmin.current) return;
+    if (!hasRole || !hasRole("admin")) return;
+    didAdmin.current = true;
+
+    const preloadAdmin = () => {
+      import("../pages/AdminDashboard");
+    };
+
+    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+      window.requestIdleCallback(preloadAdmin);
+    } else {
+      setTimeout(preloadAdmin, 0);
+    }
+  }, [hasRole]);
+
   // must render an Outlet so this can act as a route wrapper
   return <Outlet />;
 }
-

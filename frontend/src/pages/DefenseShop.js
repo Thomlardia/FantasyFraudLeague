@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import '../styles/shopAndWiki.css';
 import fflLogo from '../images/ffl_logo_ghost.png';
+import MoneyBar from '../components/MoneyBar';
 
 function DefenseShop() {
     const defenseItems = [
@@ -20,11 +21,14 @@ function DefenseShop() {
         { title: "Verification Protocols (Code Words)", icon: "verified", path: "/defenses/VerificationProtocols" },
         { title: "DeepFake Detection Software", icon: "visibility", path: "/defenses/DeepfakeDetection" },
         { title: "ATM Inspections", icon: "card_membership", path: "/defenses/AtmInspections" },
-        { title: "Tamper Proof Seals", icon: "verified_user", path: "/defenses/TamperProofSeals" },
         { title: "Background Checks and Regular Screenings", icon: "person_search", path: "/defenses/BackgroundChecks" },
         { title: "Use HTTPS and Encrypted Connections", icon: "https", path: "/defenses/HttpsAndEncryption" },
-        { title: "VPN Usage for Remote Connections", icon: "vpn_lock", path: "/defenses/VpnUsage" }
+        { title: "VPN Usage for Remote Connections", icon: "vpn_lock", path: "/defenses/VpnUsage" },
+        { title: "Application Sandboxing", icon: "grid_view", path: "/defenses/ApplicationSandboxing" }
     ];
+    function getDefenseLevelPLACEHOLDER(index) { // TAKE PARAM index that maps to a defense
+        return 0; // Starting at level 0
+    }
 
     return (
         <div className="shop-wiki-container">
@@ -38,7 +42,6 @@ function DefenseShop() {
                     Defense Shop
                 </h1>
                 
-                <div style={{ width: "48px" }}></div> {/* Spacer for centering */}
             </div>
             
             <div className="shop-wiki-grid">
@@ -46,7 +49,7 @@ function DefenseShop() {
                     <Link key={index} to={item.path} className="shop-card">
                         <span className="card-icon">{item.icon}</span>
                         <h3 className="card-title">{item.title}</h3>
-                        <p className="card-level">Level 1</p>
+                        <p className="card-level">Level {getDefenseLevelPLACEHOLDER(index)}</p>
                     </Link>
                 ))}
             </div>

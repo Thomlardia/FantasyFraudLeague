@@ -4,6 +4,7 @@ import { Suspense, lazy } from "react";
 import RequireAuth from "./RequireAuth";
 import RequireVerified from "./RequireVerified";
 import PreloadOnAuth from "./PreloadOnAuth";
+import RequireRole from "./RequireRole";
 
 // --- Eager (small, first-touch) ---
 import Hello from "../pages/Hello";
@@ -16,7 +17,7 @@ const VerifyEmail = lazy(() => import("../pages/VerifyEmail"));
 
 // only load if relevant
 const Home = lazy(() => import("../pages/Home"));
-/* const AdminDashboard = lazy(() => import("../pages/AdminDashboard")); */
+const AdminDashboard = lazy(() => import("../pages/AdminDashboard"));
 
 // player related main pages
 const DefenseShop   = lazy(() => import("../pages/DefenseShop"));
@@ -44,10 +45,10 @@ const TrafficFiltering          = lazy(() => import("../pages/defenses/TrafficFi
 const VerificationProtocols     = lazy(() => import("../pages/defenses/VerificationProtocols"));
 const DeepfakeDetection         = lazy(() => import("../pages/defenses/DeepfakeDetection"));
 const AtmInspections            = lazy(() => import("../pages/defenses/AtmInspections"));
-const TamperProofSeals          = lazy(() => import("../pages/defenses/TamperProofSeals"));
 const BackgroundChecks          = lazy(() => import("../pages/defenses/BackgroundChecks"));
 const HttpsAndEncryption        = lazy(() => import("../pages/defenses/HttpsAndEncryption"));
 const VpnUsage                  = lazy(() => import("../pages/defenses/VpnUsage"));
+const ApplicationSandboxing     = lazy(() => import("../pages/defenses/ApplicationSandboxing"));
 
 // FRAUDS (lazy)
 const Phishing                  = lazy(() => import("../pages/frauds/Phishing"));
@@ -88,6 +89,12 @@ export default function AppRoutes() {
             <Route path="/verify-email" element={<VerifyEmail />} />
               <Route element={<RequireVerified />}>
 
+                {/* ADMIN-only route */}
+                <Route element={<RequireRole role="admin" />}>
+                  <Route path="/admin" element={<AdminDashboard />} />
+                </Route>
+
+                {/* Normal app routes (no auto-redirect for admins) */}
                 <Route path="/home" element={<Home />} />
                 <Route path="/defenseshop" element={<DefenseShop />} />
                 <Route path="/fraudwiki" element={<FraudWiki />} />
@@ -112,10 +119,10 @@ export default function AppRoutes() {
                 <Route path="/defenses/VerificationProtocols" element={<VerificationProtocols />} />
                 <Route path="/defenses/DeepfakeDetection" element={<DeepfakeDetection />} />
                 <Route path="/defenses/AtmInspections" element={<AtmInspections />} />
-                <Route path="/defenses/TamperProofSeals" element={<TamperProofSeals />} />
                 <Route path="/defenses/BackgroundChecks" element={<BackgroundChecks />} />
                 <Route path="/defenses/HttpsAndEncryption" element={<HttpsAndEncryption />} />
                 <Route path="/defenses/VpnUsage" element={<VpnUsage />} />
+                <Route path="/defenses/ApplicationSandboxing" element={<ApplicationSandboxing />} />
 
                 {/* FRAUDS */}
                 <Route path="/frauds/Phishing" element={<Phishing />} />
@@ -148,4 +155,3 @@ export default function AppRoutes() {
     </Suspense>
   );
 }
-

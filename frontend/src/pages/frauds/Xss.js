@@ -2,14 +2,22 @@ import { Link } from 'react-router-dom';
 import iconBackArrow from '../../images/icons/back_arrow.png'
 import '../../styles/ui.css';
 import '../../styles/shopAndWiki.css';
+import MoneyBar from '../../components/MoneyBar';
 
 function Xss() {
     return (
         <div className="fraud-container">
-            <div className="header">
+            <div className="topbar">
+            <div className="topbar-group">
                 <Link to="/fraudwiki" className="icon-button" title="Back">
                     <span className="material-symbols-outlined">arrow_back</span>
                 </Link>
+            </div>
+            <MoneyBar />
+            <div className="topbar-group"></div>
+            </div>
+            <div className="header">
+
                 <h1>XXS</h1>
                 <div></div>
             </div>
@@ -49,8 +57,12 @@ function Xss() {
                 <div className="description-card">
                     <h3>Primary Defenses:</h3>
                     <ul>
-                        <li>Output encoding to neutralize malicious input</li>
-                        <li>Content Security Policy (CSP) to restrict script execution</li>
+                        <li>
+                            <Link to="/defenses/InputValidation">Input Validation and Sanitation</Link>
+                        </li>
+                        <li>
+                            <Link to="/defenses/KeepUpdated">Keep Software Updated</Link>
+                        </li>
                     </ul>
                 </div>
             </div>

@@ -21,7 +21,7 @@ run: build
 run-functions:
 	npx firebase-tools emulators:start --only functions
 
-run-hosting:
+run-hosting: build
 	npx firebase-tools emulators:start --only hosting
 
 run-hosting-functions:

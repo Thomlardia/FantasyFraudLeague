@@ -10,14 +10,14 @@ export default function Signup() {
 
   return (
     <div className="splash">
+      <Link to="/" className="back-button back-button-left" title="Back to Home">
+          <span className="material-symbols-outlined">arrow_back</span>
+        </Link>
       <div className="splash-header">
         <img src={fflLogo} alt="FFL Shield Logo" className="splash-logo" />
       </div>
       
       <div className="title-section">
-        <Link to="/" className="back-button" title="Back to Home">
-          <span className="material-symbols-outlined">arrow_back</span>
-        </Link>
         <h1 className="splash-main-title">Sign Up</h1>
       </div>
       
