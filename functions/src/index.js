@@ -1,13 +1,9 @@
 /**
  * Main entrypoint for Firebase Functions.
 */
-import { setGlobalOptions } from "firebase-functions/v2";
-
 setGlobalOptions({
-  region: "africa-south1",
   maxInstances: 10,
   concurrency: 80,
-  timeoutSeconds: 60,
 });
 
 // Callable function exports (user)

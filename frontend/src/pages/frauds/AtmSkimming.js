@@ -60,7 +60,7 @@ function AtmSkimming() {
                     <h3>Primary Defenses:</h3>
                     <ul>
                         <li>
-                            <Link to="/defenses/TamperProofSeals">Tamper Proof Seals</Link>
+                            <Link to="/defenses/AtmInspections">ATM inspections</Link>
                         </li>
                     </ul>
                 </div>

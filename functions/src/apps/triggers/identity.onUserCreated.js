@@ -9,7 +9,7 @@ export const userDocOnCreate = functionsV1
     if (!user) return;
     const uid = user.uid;
     const email = user.email || null;
-    const name = user.displayName || (email ? email.split("@")[0] : "Unknown User");
+    const name = user.displayName || email.split("@")[0] || "Unknown User";
 
     const ref = db.collection("users").doc(uid);
     const snap = await ref.get();

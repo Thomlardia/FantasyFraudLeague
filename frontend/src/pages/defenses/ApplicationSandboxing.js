@@ -4,7 +4,8 @@ import '../../styles/ui.css';
 import '../../styles/shopAndWiki.css';
 import MoneyBar from '../../components/MoneyBar';
 
-function TamperProofSeals() {
+function ApplicationSandboxing() {
+    
     function getDefenseLevelPLACEHOLDER() {
         return 0; // Starting at level 0
     }
@@ -15,11 +16,12 @@ function TamperProofSeals() {
     }
 
     function handleUpgradePLACEHOLDER() {
-        console.log('Upgrading ATM Inspections - upgrade logic not implemented yet');
+        console.log('Upgrading ApplicationSandboxing - upgrade logic not implemented yet');
     }
 
     const currentLevel = getDefenseLevelPLACEHOLDER();
     const upgradeCost = getUpgradeCostPLACEHOLDER(currentLevel);
+
     return (
         <div className="shop-container">
             <div className="topbar">
@@ -31,36 +33,40 @@ function TamperProofSeals() {
             <MoneyBar />
             <div className="topbar-group"></div>
             </div>
+
             
             <div className="header">
-
-                <h1>Tamper Proof Seals</h1>
+                <h1>Application Sandboxing</h1>
                 <div></div>
             </div>
             <div className="content-container">
                 <div className="description-card">
                     <p>
-                        Tamper proof seals are specialized security devices that provide visual evidence if ATM components have been accessed or modified. These seals use unique patterns, materials, or technologies that make them extremely difficult to remove and replace without leaving obvious signs of tampering.
+                        Application sandboxing isolates applications within restricted environments that limit their access to system resources, files, and network connections. This containment approach prevents malicious code from escaping the sandbox and affecting the broader system, even if the application is compromised through a zero-day exploit.
                     </p>
                 </div>
 
                 <div className="description-card">
                     <h3>Common Examples:</h3>
                         <ul>
-                            <li>Securing medication shipments</li>
-                            <li>Protecting voting machines</li>
-                            <li>Packaging of high-value electronics</li>
+                            <li>Running browsers in sandboxed environments</li>
+                            <li>Isolating financial applications from general processes</li>
+                            <li>Containerizing untrusted third-party apps</li>
                         </ul>
                 </div>
-
+                
                 <div className="description-card">
                     <h3>Defends against:</h3>
                     <ul>
                         <li>
-                            <Link to="/frauds/AtmSkimming">AtmSkimming</Link>
+                            <Link to="/frauds/Ransomware">Ransomware</Link>
+                        </li>
+                        <li>
+                            <Link to="/frauds/ZeroDayExploit">Zero-Day Exploit</Link>
                         </li>
                     </ul>
                 </div>
+
                 <div className="upgrade-section">
                     <div className="upgrade-header">
                         <h3>Defense Level: {currentLevel}</h3>
@@ -86,4 +92,4 @@ function TamperProofSeals() {
     );
 }
 
-export default TamperProofSeals;
+export default ApplicationSandboxing;
