@@ -42,6 +42,12 @@ function VerificationProtocols() {
                     <p>
                         Verification protocols using code words or phrases establish predetermined authentication methods for voice and video communications. These protocols involve agreeing on specific questions, phrases, or information that only legitimate parties would know.
                     </p>
+                    <br />
+                    <p>
+                        <a href="https://www.fraud.com/post/kyc-process" target="_blank" rel="noopener noreferrer">
+                            Reference: Verification Protocols
+                        </a>
+                    </p>
                 </div>
 
                 <div className="description-card">

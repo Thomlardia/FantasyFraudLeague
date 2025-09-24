@@ -41,6 +41,12 @@ function MultiFactorAuth() {
                     <p>
                         MFA adds layers of security by requiring users to provide two or more verification factors to gain access to accounts or systems. This typically combines something you know (a password) and something you have (phone, app) and something you are (biometric data).
                     </p>
+                    <br />
+                    <p>
+                        <a href="https://csrc.nist.gov/glossary/term/multi_factor_authentication" target="_blank" rel="noopener noreferrer">
+                            Reference: Multi-Factor Authentication
+                        </a>.
+                    </p>
                 </div>
 
                 <div className="description-card">

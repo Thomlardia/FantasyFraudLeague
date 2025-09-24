@@ -31,6 +31,12 @@ function InvestmentScam() {
                         and aggressive sales tactics to build credibility.
                     </p>
                     <br />
+                    <p>
+                        <a href="https://consumer.ftc.gov/articles/investment-scams" target="_blank" rel="noopener noreferrer">
+                            Reference: Investment Scams
+                        </a>.
+                    </p>
+                    <br />
                 </div>
 
                 <div className="description-card">

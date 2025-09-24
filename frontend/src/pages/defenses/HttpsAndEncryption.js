@@ -42,6 +42,12 @@ function HttpsAndEncryption() {
                     <p>
                         HTTPS and encrypted connections protect data in transit by scrambling information between users and servers, making it unreadable to attackers who intercept communications.
                     </p>
+                    <br />
+                    <p>
+                        <a href="https://www.cloudflare.com/learning/ssl/what-is-https/" target="_blank" rel="noopener noreferrer">
+                            Reference: HTTPS and Encryption
+                        </a>
+                    </p>
                 </div>
 
                 <div className="description-card">

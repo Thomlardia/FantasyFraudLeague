@@ -42,6 +42,12 @@ function NetworkMonitoring() {
                     <p>
                         Network monitoring involves continuous surveillance of network traffic and performance metrics to detect anomalies that may indicate attacks.
                     </p>
+                    <br />
+                    <p>
+                        <a href="https://netmonk.id/blog/the-importance-of-network-monitoring-in-preventing-ddos-attacks" target="_blank" rel="noopener noreferrer">
+                            Reference: Network Monitoring
+                        </a>.
+                    </p>
                 </div>
 
                 <div className="description-card">
@@ -57,7 +63,7 @@ function NetworkMonitoring() {
                     <h3>Defends against:</h3>
                     <ul>
                         <li>
-                            <Link to="/frauds/Ddos">Ddos</Link>
+                            <Link to="/frauds/Ddos">DDoS</Link>
                         </li>
                         <li>
                             <Link to="/frauds/CryptoJacking">Crypto Jacking</Link>

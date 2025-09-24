@@ -41,6 +41,12 @@ function UserEducation() {
                     <p>
                         User education forms the human firewall against social engineering attacks. Training programs teach employees and users to recognize suspicious emails, phone calls and websites. This includes: Urgent language, requests for sensitive information, suspicious sender addresses. 
                     </p>
+                    <br />
+                    <p>
+                        <a href="https://www.paiementor.com/fraud-prevention-psd3-customer-education/" target="_blank" rel="noopener noreferrer">
+                            Reference: User Education
+                        </a>
+                    </p>
                 </div>
 
                 <div className="description-card">

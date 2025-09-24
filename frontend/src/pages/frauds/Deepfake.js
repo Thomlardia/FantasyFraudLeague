@@ -31,6 +31,12 @@ function Deepfake() {
                         to authorize fraudulent transactions or gain access to sensitive information.
                     </p>
                     <br />
+                    <p>
+                        <a href="https://www.feedzai.com/blog/deepfake-fraud/" target="_blank" rel="noopener noreferrer">
+                            Reference: Deepfake
+                        </a>.
+                    </p>
+                    <br />
                 </div>
 
                 <div className="description-card">

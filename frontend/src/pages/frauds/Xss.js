@@ -30,6 +30,12 @@ function Xss() {
                         redirect users, or modify website content.
                     </p>
                     <br />
+                    <p>
+                        <a href="https://portswigger.net/web-security/cross-site-scripting" target="_blank" rel="noopener noreferrer">
+                            Reference: Cross-Site Scripting
+                        </a>.
+                    </p>
+                    <br />
                 </div>
 
                 <div className="description-card">

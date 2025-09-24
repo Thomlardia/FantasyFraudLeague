@@ -42,6 +42,12 @@ function PrincipleOfLeastPrivilege() {
                     <p>
                         The principle of least privilege grants users, applications, and systems only the minimum level of access necessary to perform their required functions. For databases, certain accounts have limited query capabilities and employees only access systems relevant to their jobs.
                     </p>
+                    <br />
+                    <p>
+                        <a href="https://www.cyberark.com/what-is/least-privilege/" target="_blank" rel="noopener noreferrer">
+                            Reference: Principle of Least Privilege
+                        </a>
+                    </p>
                 </div>
 
                 <div className="description-card">

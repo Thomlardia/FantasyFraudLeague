@@ -32,6 +32,12 @@ function BruteForce() {
                         profitable for attackers.
                     </p>
                     <br />
+                    <p>
+                        <a href="https://owasp.org/www-community/attacks/Credential_stuffing" target="_blank" rel="noopener noreferrer">
+                            Reference: Brute Force
+                        </a>.
+                    </p>
+                    <br />
                 </div>
 
                 <div className="description-card">

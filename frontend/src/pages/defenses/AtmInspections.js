@@ -44,6 +44,12 @@ function AtmInspections() {
                     <p>
                         ATM inspection is the process of regularly checking ATMs to ensure they haven’t been tampered with or compromised. This involves looking for signs of skimming devices, hidden cameras, fake keypads, or any unusual attachments, as well as verifying the machine’s software and cash units. The goal is to detect and prevent fraud attempts before customers use the ATM.
                     </p>
+                    <br />
+                    <p>
+                        <a href="https://investinatmmachines.com/blog/atm-inspections-and-audits/" target="_blank" rel="noopener noreferrer">
+                            Reference: ATM Inspections
+                        </a>
+                    </p>
                 </div>
 
                 <div className="description-card">

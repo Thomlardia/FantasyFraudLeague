@@ -31,6 +31,12 @@ function AccountTakeover() {
                         to launch further attacks.
                     </p>
                     <br />
+                    <p>
+                        <a href="https://www.proofpoint.com/us/threat-reference/account-takeover-fraud" target="_blank" rel="noopener noreferrer">
+                            Reference: Account Takeover
+                        </a>.
+                    </p>
+                    <br />
                 </div>
 
                 <div className="description-card">

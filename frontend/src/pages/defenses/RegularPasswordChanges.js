@@ -42,6 +42,12 @@ function RegularPasswordChanges() {
                     <p>
                         Regular password changes involve establishing policies that require users to update their passwords at defined intervals, typically every 60-90 days.
                     </p>
+                    <br />
+                    <p>
+                        <a href="https://www.kaspersky.com/resource-center/preemptive-safety/how-often-password-change" target="_blank" rel="noopener noreferrer">
+                            Reference: Regular Password Changes
+                        </a>
+                    </p>
                 </div>
 
                 <div className="description-card">

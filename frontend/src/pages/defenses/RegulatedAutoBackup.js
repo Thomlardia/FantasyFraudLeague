@@ -42,6 +42,12 @@ function RegulatedAutoBackup() {
                     <p>
                         Regulated automated backups involve systematic, scheduled creation of data copies following established policies and procedures. In the event of ransomware encryption, organizations can restore systems and data from clean backups rather than paying ransom demands.
                     </p>
+                    <br />
+                    <p>
+                        <a href="https://www.techtarget.com/searchdatabackup/tip/Automated-backup-How-it-works-and-why-you-should-use-it" target="_blank" rel="noopener noreferrer">
+                            Reference: Regulated Automated Backups
+                        </a>.
+                    </p>
                 </div>
 
                 <div className="description-card">

@@ -42,6 +42,12 @@ function SegregationOfDuties() {
                     <p>
                     Segregation of duties divides critical processes among multiple individuals to prevent any single person from having complete control over sensitive operations. For example, the person who approves payments should be different from the person who processes them, and the individual who reconciles accounts should be separate from those who handle transactions.
                     </p>
+                    <br />
+                    <p>
+                        <a href="https://hyperproof.io/resource/segregation-of-duties/" target="_blank" rel="noopener noreferrer">
+                            Reference: Segregation Of Duties
+                        </a>.
+                    </p>
                 </div>
 
                 <div className="description-card">

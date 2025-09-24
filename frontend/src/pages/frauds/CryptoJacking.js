@@ -31,6 +31,12 @@ function CryptoJacking() {
                         This leads to degraded performance, higher electricity bills, and potential hardware damage.
                     </p>
                     <br />
+                    <p>
+                        <a href="https://www.fortinet.com/resources/cyberglossary/cryptojacking" target="_blank" rel="noopener noreferrer">
+                            Reference: Cryptojacking
+                        </a>.
+                    </p>
+                    <br />
                 </div>
 
                 <div className="description-card">

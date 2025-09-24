@@ -41,6 +41,12 @@ function BackgroundChecks() {
                     <p>
                         Background checks and regular screenings involve verification of employees' criminal history, financial status, references, and other relevant factors before hiring AND periodically throughout employment. This process helps identify individuals who may pose higher risks for fraudulent behavior due to financial pressures, criminal history, or other concerning factors. Ongoing screenings can detect changes in an employee's circumstances that might increase fraud risk.
                     </p>
+                    <br />
+                    <p>
+                        <a href="https://www.fticonsulting.com/insights/articles/safeguard-against-fraud-importance-background-checks" target="_blank" rel="noopener noreferrer">
+                            Reference: Background Checks
+                        </a>.
+                    </p>
                 </div>
 
                 <div className="description-card">
