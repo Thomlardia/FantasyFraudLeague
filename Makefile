@@ -46,6 +46,9 @@ seed-global-defenses:
 seed-users-from-auth:
 	$(EMULATOR_ENV) node functions/scripts/seed.js seed users-from-auth
 
+seed-test-users:
+	$(EMULATOR_ENV) node functions/scripts/seed.js seed test-users
+
 # seed users and defenses
 seed-complete:
 	$(EMULATOR_ENV) node functions/scripts/seed.js seed users-from-auth
@@ -59,8 +62,11 @@ seed-complete-with-summaries:
 	$(EMULATOR_ENV) node functions/scripts/seed.js update all-users-defense-summaries
 
 # list all users
-seed-list-users:
+list-users:
 	$(EMULATOR_ENV) node functions/scripts/seed.js list users
+
+clear-users:
+	$(EMULATOR_ENV) node functions/scripts/seed.js clear users
 
 seed-prod:
 	node functions/scripts/seed.js seed --production --force
