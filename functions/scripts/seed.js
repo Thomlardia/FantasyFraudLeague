@@ -73,7 +73,7 @@ const main = async () => {
           console.log(`Found ${users.length} users:`);
           users.forEach(user => {
             console.log(`  - ${user.uid} - Name: ${user.displayName} email: (${user.email})`);
-            console.log(`   Balance: $${user.currentBalance?.toLocaleString() || 0}`);
+            console.log(`   Balance: $${user.balance?.toLocaleString() || 0}`);
           });
         }
         break;

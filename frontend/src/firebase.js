@@ -5,7 +5,7 @@ import { initializeApp } from "firebase/app";
 // Adding SDK for the authentication service
 import { getAuth, GoogleAuthProvider, connectAuthEmulator } from "firebase/auth";
 
-// Adding SDK for the database on firestone
+// Adding SDK for the database on Firestore
 import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
 
 // Adding SDK for the function in database service
@@ -34,10 +34,15 @@ export const db = getFirestore(app);
 // Initialize Functions and get a reference to the service
 export const functions = getFunctions(app, "africa-south1");
 
-// Connect Emulartors to the correct ports
-if (window.location.hostname === "localhost") {
-  connectAuthEmulator(auth, "http://localhost:9099");
-  connectFirestoreEmulator(db, "localhost", 8080);
-  connectFunctionsEmulator(functions, "localhost", 5001);
-}
+// Connect Emulators to the correct ports
+// Use env flag or common local hostnames to decide
+const shouldUseEmulators =
+  process.env.REACT_APP_USE_EMULATORS === "1" ||
+  ["localhost", "127.0.0.1"].includes(window.location.hostname);
 
+if (shouldUseEmulators) {
+  // Disable warning banner for emulator connections
+  connectAuthEmulator(auth, "http://127.0.0.1:9099", { disableWarnings: true });
+  connectFirestoreEmulator(db, "127.0.0.1", 8080);
+  connectFunctionsEmulator(functions, "127.0.0.1", 5001);
+}
