@@ -1,11 +1,6 @@
 /**
  * Main entrypoint for Firebase Functions.
 */
-setGlobalOptions({
-  maxInstances: 10,
-  concurrency: 80,
-});
-
 // Callable function exports (user)
 export {
   user_getBalance,
