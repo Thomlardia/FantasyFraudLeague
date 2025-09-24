@@ -1,14 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { httpsCallable } from 'firebase/functions';
+import { functions } from '../firebase';
 import iconMoneyDollar from '../images/icons/money_dollar.png';
-
-/**
- * Placeholder function to get current money amount
- * This will be replaced
- * @returns {number} Current money amount
- */
-function getCurrentMoney() {
-    return 1250000;
-}
 
 /**
  * Formats a number as currency with commas
@@ -16,24 +9,47 @@ function getCurrentMoney() {
  * @returns {string} Formatted currency string
  */
 function formatMoney(amount) {
-    return `${amount.toLocaleString()}`;
+  return `${amount.toLocaleString()}`;
 }
 
 /**
  * MoneyBar component that displays the player's current money
- * Refreshes whenever the component renders to show the slatest value
+ * Refreshes on mount and after updates to show the latest value
  */
 function MoneyBar() {
-    const currentMoney = getCurrentMoney();
-    
-    return (
-        <div className="money-display" title="Bank">
-            <span className="money-icon">
-                <img src={iconMoneyDollar} alt="Bank" className="icon-img--small" />
-            </span>
-            <span>{formatMoney(currentMoney)}</span>
-        </div>
-    );
+  const [balance, setBalance] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+    const load = async () => {
+      setLoading(true);
+      try {
+        const call = httpsCallable(functions, 'user_getBalance');
+        const res = await call();
+        if (!active) return;
+        const value = typeof res?.data === 'number' ? res.data : 0;
+        setBalance(value);
+      } catch (_e) {
+        if (active) setBalance(0);
+      } finally {
+        if (active) setLoading(false);
+      }
+    };
+    load();
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  return (
+    <div className="money-display" title="Bank">
+      <span className="money-icon">
+        <img src={iconMoneyDollar} alt="Bank" className="icon-img--small" />
+      </span>
+      <span>{balance == null || loading ? '—' : formatMoney(balance)}</span>
+    </div>
+  );
 }
 
 export default MoneyBar;
