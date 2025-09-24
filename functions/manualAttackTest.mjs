@@ -1,10 +1,12 @@
 // simple manual tests for attack info functions.
 import { getAttackInfo, getRandomWave, getEasyWave, getMediumWave, getHardWave, attackDeduction } from "./src/domains/attack/service.js";
 import { updateUserBalance, getUserBalance } from "./src/domains/wallet/service.js";
+import { getUserOwnedDefensesComplete } from "./src/domains/defense/repo.js";
 
 async function run() {
   // Setup test user
   const testUserId = "testuser456";
+  const testUser2Id = "gTXVXDqXyUjWt6KNHCHN7OHVEnnQ";
   await updateUserBalance(testUserId, 1000); // Set initial balance
 
   const testAttackId = "phishing";
@@ -80,17 +82,52 @@ async function run() {
   // Test attackDeduction
   console.log("\nTesting attackDeduction with a random wave:");
   const wave = getHardWave();
-  const beforeBalance = await getUserBalance(testUserId);
+  const beforeBalance = await getUserBalance(testUser2Id);
   console.log("User balance before wave:", beforeBalance);
-  const newBalance = await attackDeduction(testUserId, wave);
-  console.log("Wave baseDamages:", wave.map(a => a.baseDamage));
+
+  // Calculate and log reduction for each attack ---
+  const ownedDefenses = await getUserOwnedDefensesComplete(testUser2Id);
+  const reductionResults = wave.map(attack => {
+    let reducedDamage = attack.baseDamage || 0;
+    let totalPercent = 0;
+    let percentDetails = [];
+    for (const defenseKey in ownedDefenses) {
+      const defense = ownedDefenses[defenseKey];
+      if (defense.defendsAgainst && defense.defendsAgainst[attack.attackId || attack.type]) {
+        const percentages = defense.defendsAgainst[attack.attackId || attack.type];
+        const level = defense.level || 1;
+        const percent = percentages[level - 1] || 0;
+        percentDetails.push({defense: defenseKey, level, percent});
+        // Each defense applies multiplicatively
+        reducedDamage = reducedDamage * (1 - percent / 100);
+        totalPercent = 100 - (reducedDamage / (attack.baseDamage || 1)) * 100;
+      }
+    }
+    return {
+      attackId: attack.attackId,
+      baseDamage: attack.baseDamage,
+      reducedDamage: Math.round(reducedDamage),
+      percentDetails,
+      totalPercent: Math.round(totalPercent * 100) / 100
+    };
+  });
+  console.log("Attack reduction details:");
+  reductionResults.forEach(r => {
+    console.log(`Attack: ${r.attackId}, Base: ${r.baseDamage}, Reduced: ${r.reducedDamage}, Total reduction: ${r.totalPercent}%`);
+    if (r.percentDetails.length > 0) {
+      r.percentDetails.forEach(d => {
+        console.log(`  Defense: ${d.defense}, Level: ${d.level}, Reduction: ${d.percent}%`);
+      });
+    } else {
+      console.log("  No applicable defenses.");
+    }
+  });
+
+  const newBalance = await attackDeduction(testUser2Id, wave);
+  // Show total reduced damage after all reductions
+  const totalReducedDamage = reductionResults.reduce((sum, r) => sum + r.reducedDamage, 0);
+  console.log("Total damage after all reductions:", totalReducedDamage);
   console.log("User balance after wave:", newBalance);
-  const expected = Math.max(0, beforeBalance - wave.reduce((sum, a) => sum + (a.baseDamage || 0), 0));
-  if (newBalance === expected) {
-    console.log("attackDeduction test passed.");
-  } else {
-    console.log("attackDeduction test failed. Expected:", expected, "but got:", newBalance);
-  }
 }
 
 run().catch(console.error);

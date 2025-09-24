@@ -1,6 +1,7 @@
 // This file contains the logic for all attack related operations.
 import { getAllAttacks } from "./repo.js";
 import { getUserBalance, updateUserBalance} from "../wallet/service.js";
+import { getUserOwnedDefensesComplete } from "../defense/repo.js";
 
 /**
  * Finds and returns the attack object for a given attack id
@@ -67,15 +68,36 @@ export function getHardWave() {
 }
 
 /**
- * Deducts money from the user's wallet after an attack wave. Assumes no defense are in place
+ * Deducts money from the user's wallet after an attack wave, considering owned defenses.
  * @param {string} userId - The user's ID
- * @param {Array<object>} wave - Array of attack objects (each with baseDamage)
+ * @param {Array<object>} wave - Array of attack objects 
  * returns the new user balance after deduction
  */
 export async function attackDeduction(userId, wave) {
-  const totalDamage = wave.reduce((sum, attack) => sum + (attack.baseDamage || 0), 0); // Calculate total damage from the wave
+  // Get user's owned defenses with details
+  const ownedDefenses = await getUserOwnedDefensesComplete(userId);
+
+  // Calculate total damage after applying defenses
+  let totalDamage = 0;
+  for (const attack of wave) {
+    let reducedDamage = attack.baseDamage || 0;
+    // For each defense, check if it defends against this attack
+    for (const defenseKey in ownedDefenses) {
+      const defense = ownedDefenses[defenseKey];
+      if (defense.defendsAgainst && defense.defendsAgainst[attack.attackId || attack.type]) {
+        const percentages = defense.defendsAgainst[attack.attackId || attack.type];
+        const level = defense.level || 1;
+        // Level is 1-based, array is 0-based
+        const percent = percentages[level - 1] || 0;
+        // Reduce damage by this percentage
+        reducedDamage = reducedDamage * (1 - percent / 100);
+      }
+    }
+    totalDamage += reducedDamage;
+  }
+
   const currentBalance = await getUserBalance(userId);
-  const newBalance = Math.max(0, currentBalance - totalDamage); // Deduct damage, but don't allow negative balance
+  const newBalance = Math.max(0, currentBalance - Math.round(totalDamage)); // Deduct, round to nearest int
   await updateUserBalance(userId, newBalance);
   return newBalance;
 }
