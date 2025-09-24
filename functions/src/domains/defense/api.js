@@ -5,6 +5,10 @@ import {
   clearDefenseCache
 } from "./service.js";
 
+
+/*TODO: Change, this export for compatibility fix only change to handle with errors */
+export { getUserDefenses, buyDefense, upgradeDefense } from "./service.js";
+
 /**
  * API handler for getting all defenses with user's ownership status
  * This is a thin facade that handles HTTP concerns and delegates to service layer
