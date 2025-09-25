@@ -16,4 +16,4 @@ test:
     - cd functions
     - FIRESTORE_EMULATOR_HOST=localhost:8080 FIREBASE_AUTH_EMULATOR_HOST=localhost:9099 node scripts/seed.js seed test-users
     - FIRESTORE_EMULATOR_HOST=localhost:8080 FIREBASE_AUTH_EMULATOR_HOST=localhost:9099 node scripts/seed.js seed global-defense
-    - node functions/__tests__/test-runner.js
+    - node __tests__/test-runner.js
