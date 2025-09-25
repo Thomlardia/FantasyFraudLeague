@@ -3,7 +3,7 @@
 import { getUserBalance, updateUserBalance } from "./src/domains/wallet/service.js";
 
 async function run() {
-  const testUserId = "testuser123";
+  const testUserId = "e6Mv8cYxBmx4195NFwJaGarsAh9n";
   console.log("Testing wallet functions for user:", testUserId);
 
   // Set balance
@@ -15,7 +15,7 @@ async function run() {
   console.log("Current balance:", balance);
 
   // Update balance
-  await updateUserBalance(testUserId, 50);
+  await updateUserBalance(testUserId, 1000000);
   console.log("Updated balance to 50");
 
   // Get updated balance
