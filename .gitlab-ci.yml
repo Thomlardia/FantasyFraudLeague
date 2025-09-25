@@ -2,7 +2,7 @@ image: node:22
 
 test:
   tags:
-    - shared-docker-runnner
+    - shared-docker-runner
 
   before_script:
     - apt-get update -qy && apt-get install -y openjdk-11-jdk make
