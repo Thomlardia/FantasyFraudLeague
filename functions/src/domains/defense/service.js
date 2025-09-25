@@ -77,6 +77,17 @@ export async function getUserDefenses(userId) {
 }
 
 /**
+ * Get a specific defense with user's ownership status (uses cache)
+ * @param {string} userId - User ID
+ * @param {string} defenseId - Defense ID to get
+ * @returns {Promise<Object|null>} Defense object with user's level
+ */
+export async function getUserDefense(userId, defenseId) {
+  const allDefenses = await getUserDefenses(userId);
+  return allDefenses.find(d => d.defenseId === defenseId) || null;
+}
+
+/**
  * Buys a defense for a user if they don't already own it and have enough balance.
  * Uses Firestore transaction to prevent concurrency issues.
  * @param {string} userId - The ID of the user to buy the defense for
