@@ -42,6 +42,12 @@ function VpnUsage() {
                     <p>
                         VPNs create encrypted tunnels between remote users and corporate networks, protecting communications from interception and manipulation. VPNs encrypt all traffic between the user's device and the VPNs server, preventing attackers on local networks (such as public Wi-Fi) from accessing sensitive data or injecting malicious content.
                     </p>
+                    <br />
+                    <p>
+                        <a href="https://www.computershare.com/hk/en/antifraud-vpn" target="_blank" rel="noopener noreferrer">
+                            Reference: VPN Usage
+                        </a>
+                    </p>
                 </div>
 
                 <div className="description-card">

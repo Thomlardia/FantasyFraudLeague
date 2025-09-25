@@ -42,6 +42,12 @@ function KeepUpdated() {
                     <p>
                         Maintaining current systems and software involves promptly applying security patches, updating operating systems, and ensuring all applications run the latest stable versions. Many ransomware attacks exploit KNOWN vulnerabilities that have patches, so keeping systems up to date is effective.
                     </p>
+                    <br />
+                    <p>
+                        <a href="https://tech.rochester.edu/news-item/software-protect-your-data-by-keeping-software-updated/" target="_blank" rel="noopener noreferrer">
+                            Reference: Keeping Software Updated
+                        </a>
+                    </p>
                 </div>
 
                 <div className="description-card">

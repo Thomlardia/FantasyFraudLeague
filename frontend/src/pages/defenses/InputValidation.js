@@ -42,6 +42,12 @@ function InputValidation() {
                     <p>
                         Input validation and sanitisation involves checking and cleaning all data entered into applications before processing. For databases, this prevents malicious SQL code from being executed, while for web applications, it stops harmful scripts from being embedded in pages.
                     </p>
+                    <br />
+                    <p>
+                        <a href="https://medium.com/@cdxlabs.abhiram/input-validation-and-sanitization-protecting-your-application-from-malicious-input-28fee92ea0d3" target="_blank" rel="noopener noreferrer">
+                            Reference: Input Validation
+                        </a>.
+                    </p>
                 </div>
 
                 <div className="description-card">

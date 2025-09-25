@@ -32,6 +32,12 @@ function SqlInjection() {
                         modify or delete records, and in some cases execute commands on the database server.
                     </p>
                     <br />
+                    <p>
+                        <a href="https://www.fortinet.com/resources/cyberglossary/sql-injection" target="_blank" rel="noopener noreferrer">
+                            Reference: SQL Injection
+                        </a>.
+                    </p>
+                    <br />
                 </div>
 
                 <div className="description-card">

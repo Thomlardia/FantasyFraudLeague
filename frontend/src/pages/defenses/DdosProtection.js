@@ -41,6 +41,12 @@ function DdosProtection() {
                     <p>
                         DDoS protection services provide specialized infrastructure and techniques to absorb and mitigate large-scale traffic attacks.
                     </p>
+                    <br />
+                    <p>
+                        <a href="https://www.ibm.com/think/topics/ddos-protection" target="_blank" rel="noopener noreferrer">
+                            Reference: DDoS Protection
+                        </a>
+                    </p>
                 </div>
 
                 <div className="description-card">

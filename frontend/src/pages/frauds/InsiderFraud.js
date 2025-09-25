@@ -32,6 +32,12 @@ function InsiderFraud() {
                         makes their actions particularly difficult to detect.
                     </p>
                     <br />
+                    <p>
+                        <a href="https://www.fraud.net/glossary/internal-fraud-insider-fraud#what-is-insider-fraud" target="_blank" rel="noopener noreferrer">
+                            Reference: Insider Fraud
+                        </a>.
+                    </p>
+                    <br />
                 </div>
 
                 <div className="description-card">

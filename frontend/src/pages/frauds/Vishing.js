@@ -31,6 +31,12 @@ function Vishing() {
                         and social engineering tactics such as urgency, fear, or authority.
                     </p>
                     <br />
+                    <p>
+                        <a href="https://www.terranovasecurity.com/solutions/security-awareness-training/what-is-vishing" target="_blank" rel="noopener noreferrer">
+                            Reference: Vishing
+                        </a>.
+                    </p>
+                    <br />
                 </div>
 
                 <div className="description-card">

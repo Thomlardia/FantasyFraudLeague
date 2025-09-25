@@ -33,6 +33,12 @@ function ManInTheMiddle() {
                         communications.
                     </p>
                     <br />
+                    <p>
+                        <a href="https://www.ibm.com/think/topics/man-in-the-middle" target="_blank" rel="noopener noreferrer">
+                            Reference: Man In The Middle
+                        </a>.
+                    </p>
+                    <br />
                 </div>
 
                 <div className="description-card">

@@ -29,6 +29,12 @@ function Phishing() {
                       evolved from simple email scams to sophisticated techniques like spear phishing, clone phishing, and whaling, targeting specific individuals or organizations.
                 </p>
                 <br />
+                <p>
+                    <a href="https://www.cloudflare.com/learning/access-management/phishing-attack" target="_blank" rel="noopener noreferrer">
+                        Reference: Phishing
+                    </a>.
+                </p>
+                <br />
                 </div>
                 <div className="description-card">
                     <h3>Common Examples:</h3>

@@ -41,6 +41,12 @@ function RegularAudits() {
                     <p>
                         Regular audits involve systematic examination of financial records, processes, and controls to detect irregularities and ensure compliance. These reviews analyze transaction patterns, verify the legitimacy of vendors and invoices.
                     </p>
+                    <br />
+                    <p>
+                        <a href="https://www.capptions.com/blog/what-is-an-audit" target="_blank" rel="noopener noreferrer">
+                            Reference: Regular Audits
+                        </a>.
+                    </p>
                 </div>
 
                 <div className="description-card">

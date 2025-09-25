@@ -43,6 +43,12 @@ function EmailFiltering() {
                     <p>
                         Email filtering and anti-phishing tools use advanced algorithms, reputation databases, and machine learning to identify and block malicious emails before they reach users' inboxes.
                     </p>
+                    <br />
+                    <p>
+                        <a href="https://www.titanhq.com/phishing-protection/anti-phishing-filter/" target="_blank" rel="noopener noreferrer">
+                            Reference: Email Filtering & Anti-Phishing
+                        </a>
+                    </p>
                 </div>
 
                 <div className="description-card">

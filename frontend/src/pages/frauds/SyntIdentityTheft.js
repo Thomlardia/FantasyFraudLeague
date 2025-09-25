@@ -31,6 +31,12 @@ function SyntIdentityTheft() {
                         this type of fraud can go undetected for years.
                     </p>
                     <br />
+                    <p>
+                        <a href="https://www.equifax.com/personal/education/identity-theft/articles/-/learn/synthetic-identity-theft/" target="_blank" rel="noopener noreferrer">
+                            Reference: Synthetic Identity Theft
+                        </a>.
+                    </p>
+                    <br />
                 </div>
 
                 <div className="description-card">

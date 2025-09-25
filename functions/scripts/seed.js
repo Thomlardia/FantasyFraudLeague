@@ -1,9 +1,7 @@
 // Main seed script that handles database seeding operations via Command Line
 // Usage: node scripts/seed.js [command] [subCommand] [options]
 
-import {
-  seedGlobalDefenses,
-} from '../src/infra/db/seeds/index.js'
+import { seedGlobalDefenses } from '../src/infra/db/seeds/index.js'
 
 // Import user seeding functions specifically for authentication users
 import {
@@ -11,6 +9,8 @@ import {
   updateAllUsersDefensesSummary,
   getAllAuthenticatedUsers
 } from '../src/infra/db/seeds/users.js';
+
+import { seedTestUsers, clearTestUsers } from '../src/infra/db/seeds/testUsers.js';
 
 // Emulator or Production
 import { environment } from '../src/infra/db/index.js';
@@ -52,6 +52,8 @@ const main = async () => {
           await seedGlobalDefenses({force: flags.force});
         } else if (subCommand === 'users-from-auth') {
           await seedUsersFromAuth({ force: flags.force})
+        } else if (subCommand === 'test-users') {
+          await seedTestUsers();
         } else {
           console.log('Running complete seeding: users from auth + all user defenses');
           await seedUsersFromAuth({ force: flags.force});
@@ -77,7 +79,12 @@ const main = async () => {
           });
         }
         break;
-
+      case 'clear':
+        if (subCommand === 'users') {
+          await clearTestUsers();
+        }
+        break;
+  
       default:
         console.error(`Unknown command: ${command}`);
         process.exit(1);

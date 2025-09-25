@@ -33,6 +33,12 @@ function Ddos() {
                         to multiply attack traffic.
                     </p>
                     <br />
+                    <p>
+                        <a href="https://www.cloudflare.com/learning/ddos/what-is-a-ddos-attack/" target="_blank" rel="noopener noreferrer">
+                            Reference: DDoS
+                        </a>.
+                    </p>
+                    <br />
                 </div>
 
                 <div className="description-card">

@@ -42,6 +42,12 @@ function TrafficFiltering() {
                     <p>
                         Traffic filtering involves analyzing incoming network traffic and blocking or limiting requests that match attack patterns or exceed normal thresholds.
                     </p>
+                    <br />
+                    <p>
+                        <a href="https://www.techslang.com/definition/what-is-traffic-filtering/" target="_blank" rel="noopener noreferrer">
+                            Reference: Traffic Filtering
+                        </a>
+                    </p>
                 </div>
 
                 <div className="description-card">

@@ -32,6 +32,12 @@ function Ransomware() {
                         (RaaS) model has made these attacks accessible to less technical criminals.
                     </p>
                     <br />
+                    <p>
+                    <a href="https://www.fbi.gov/how-we-can-help-you/scams-and-safety/common-frauds-and-scams/ransomware" target="_blank" rel="noopener noreferrer">
+                        Reference: Ransomware
+                    </a>.
+                </p>
+                    <br />
                 </div>
 
                 <div className="description-card">

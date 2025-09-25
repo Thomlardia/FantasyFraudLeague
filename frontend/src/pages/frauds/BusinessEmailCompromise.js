@@ -33,6 +33,12 @@ function BusinessEmailCompromise() {
                         convincing requests.
                     </p>
                     <br />
+                    <p>
+                        <a href="https://www.microsoft.com/en-za/security/business/security-101/what-is-business-email-compromise-bec" target="_blank" rel="noopener noreferrer">
+                            Reference: Business Email Compromise
+                        </a>.
+                    </p>
+                    <br />
                 </div>
 
                 <div className="description-card">

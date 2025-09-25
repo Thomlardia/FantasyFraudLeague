@@ -31,6 +31,12 @@ function AccAndInvFraud() {
                         This type of fraud ranges from simple expense manipulation to large-scale corporate scandals.
                     </p>
                     <br />
+                    <p>
+                        <a href="https://precoro.com/blog/what-is-invoice-fraud/" target="_blank" rel="noopener noreferrer">
+                            Reference: Accounting and Invoice Fraud
+                        </a>.
+                    </p>
+                    <br />
                 </div>
 
                 <div className="description-card">

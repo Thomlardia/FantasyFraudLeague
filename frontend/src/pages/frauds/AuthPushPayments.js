@@ -32,6 +32,12 @@ function AuthPushPayments() {
                         instant transfers.
                     </p>
                     <br />
+                    <p>
+                        <a href="https://www.fico.com/blogs/what-authorised-push-payment-fraud" target="_blank" rel="noopener noreferrer">
+                            Reference: Auth Push Payments
+                        </a>.
+                    </p>
+                    <br />
                 </div>
 
                 <div className="description-card">

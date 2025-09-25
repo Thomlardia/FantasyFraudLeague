@@ -31,6 +31,12 @@ function SimSwap() {
                         enabling financial theft or account takeovers.
                     </p>
                     <br />
+                    <p>
+                        <a href="https://www.capitecbank.co.za/fraud-centre/sim-swap-fraud/" target="_blank" rel="noopener noreferrer">
+                            Reference: Sim Swap
+                        </a>.
+                    </p>
+                    <br />
                 </div>
 
                 <div className="description-card">

@@ -42,6 +42,12 @@ function DeepfakeDetection() {
                     <p>
                         Deepfake detection software uses artificial intelligence and machine learning algorithms to identify artificially generated or manipulated audio, video, and image content.
                     </p>
+                    <br />
+                    <p>
+                        <a href="https://www.edps.europa.eu/data-protection/technology-monitoring/techsonar/deepfake-detection_en" target="_blank" rel="noopener noreferrer">
+                            Reference: Deepfake Detection
+                        </a>
+                    </p>
                 </div>
 
                 <div className="description-card">

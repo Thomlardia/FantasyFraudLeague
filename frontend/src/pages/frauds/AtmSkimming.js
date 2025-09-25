@@ -33,6 +33,12 @@ function AtmSkimming() {
                         and Bluetooth-enabled devices.
                     </p>
                     <br />
+                    <p>
+                        <a href="https://www.absa.co.za/self-service/safety-security/card-skimming/" target="_blank" rel="noopener noreferrer">
+                            Reference: ATM Skimming
+                        </a>.
+                    </p>
+                    <br />
                 </div>
 
                 <div className="description-card">
