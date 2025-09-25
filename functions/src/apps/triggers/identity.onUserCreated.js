@@ -24,7 +24,6 @@ export const userDocOnCreate = functionsV1
         ownedDefensesList: [],
         ownedDefenses: {},
         totalDefensesOwned: 0,
-        userType: "player",
         createdAt: new Date(),
       },
       { merge: true }
