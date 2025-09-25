@@ -1,0 +1,17 @@
+image: node:22
+
+test:
+  tags:
+    - shared-docker-runnner
+
+  before_script:
+    - apt-get update -qy && apt-get install -y openjdk-11-jdk make
+    - npm install -g firebase-tools
+    - make install
+  script:
+    - make run &
+    - sleep 15
+    - export FIRESTORE_EMULATOR_HOST="localhost:8080"
+    - make seed-test-users
+    - make seed-global-defenses
+    - node functions/__tests__/test-runner.js
