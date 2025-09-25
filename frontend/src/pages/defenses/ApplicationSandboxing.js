@@ -1,45 +1,82 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { useDefenseOperations } from '../../hooks/useDefenseOperations.js';
 import iconBackArrow from '../../images/icons/back_arrow.png';
 import '../../styles/ui.css';
 import '../../styles/shopAndWiki.css';
 import MoneyBar from '../../components/MoneyBar';
 
 function ApplicationSandboxing() {
+    const { defense, loading, actionLoading, error, successMessage, handleBuy, handleUpgrade } = useDefenseOperations('applicationSandboxing');
     
-    function getDefenseLevelPLACEHOLDER() {
-        return 0; // Starting at level 0
+    // Simplified logic using the updated service response
+    function getDefenseLevel() {
+        return defense?.displayLevel || 0;
     }
 
-    function getUpgradeCostPLACEHOLDER(currentLevel) {
-        const baseCost = 1000;
-        return baseCost * (currentLevel + 1); // Cost increases with level
+    function getUpgradeCost() {
+        return defense?.nextActionCost || 0;
     }
 
-    function handleUpgradePLACEHOLDER() {
-        console.log('Upgrading ApplicationSandboxing - upgrade logic not implemented yet');
+    function handleUpgradeAction() {
+        if (!defense) return;
+
+        if (defense.isOwned) {
+            handleUpgrade();
+        } else {
+            handleBuy();
+        }
     }
 
-    const currentLevel = getDefenseLevelPLACEHOLDER();
-    const upgradeCost = getUpgradeCostPLACEHOLDER(currentLevel);
+    const currentLevel = getDefenseLevel();
+    const upgradeCost = getUpgradeCost();
+    const isOwned = defense?.isOwned || false;
+    const isMaxLevel = defense?.isMaxLevel || false;
+
+    // ADD: Loading state
+    if (loading) {
+        return (
+            <div className="shop-container">
+                <div className="content-container">
+                    <div className="description-card">Loading defense data...</div>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="shop-container">
             <div className="topbar">
-            <div className="topbar-group">
-                <Link to="/defenseshop" className="icon-button" title="Back">
-                    <span className="material-symbols-outlined">arrow_back</span>
-                </Link>
-            </div>
-            <MoneyBar />
-            <div className="topbar-group"></div>
+                <div className="topbar-group">
+                    <Link to="/defenseshop" className="icon-button" title="Back">
+                        <span className="material-symbols-outlined">arrow_back</span>
+                    </Link>
+                </div>
+                <MoneyBar />
+                <div className="topbar-group"></div>
             </div>
 
-            
             <div className="header">
                 <h1>Application Sandboxing</h1>
                 <div></div>
             </div>
+            
             <div className="content-container">
+                {/* ADD: Error display */}
+                {error && (
+                    <div className="description-card" style={{ backgroundColor: '#f8d7da', color: '#721c24' }}>
+                        Error: {error}
+                    </div>
+                )}
+
+                {/* ADD: Success display */}
+                {successMessage && (
+                    <div className="description-card" style={{ backgroundColor: '#d4edda', color: '#155724' }}>
+                        {successMessage}
+                    </div>
+                )}
+
+                {/* Your existing content stays the same */}
                 <div className="description-card">
                     <p>
                         Application sandboxing isolates applications within restricted environments that limit their access to system resources, files, and network connections. This containment approach prevents malicious code from escaping the sandbox and affecting the broader system, even if the application is compromised through a zero-day exploit.
@@ -54,11 +91,11 @@ function ApplicationSandboxing() {
 
                 <div className="description-card">
                     <h3>Common Examples:</h3>
-                        <ul>
-                            <li>Running browsers in sandboxed environments</li>
-                            <li>Isolating financial applications from general processes</li>
-                            <li>Containerizing untrusted third-party apps</li>
-                        </ul>
+                    <ul>
+                        <li>Running browsers in sandboxed environments</li>
+                        <li>Isolating financial applications from general processes</li>
+                        <li>Containerizing untrusted third-party apps</li>
+                    </ul>
                 </div>
                 
                 <div className="description-card">
@@ -76,20 +113,31 @@ function ApplicationSandboxing() {
                 <div className="upgrade-section">
                     <div className="upgrade-header">
                         <h3>Defense Level: {currentLevel}</h3>
+                        <p>Status: {isOwned ? 'Owned' : 'Not Owned'}</p>
                     </div>
                     
                     <div className="upgrade-info">
                         <div className="upgrade-details">
                             <span className="upgrade-cost">Cost: ${upgradeCost.toLocaleString()}</span>
-                            <span className="upgrade-level">Next: Level {Math.min(currentLevel + 1, 5)}</span>
+                            <span className="upgrade-level">
+                                {isOwned 
+                                    ? `Next: Level ${currentLevel + 1}`
+                                    : 'Purchase to Own'
+                                }
+                            </span>
                         </div>
                         
                         <button 
                             className="upgrade-button"
-                            onClick={handleUpgradePLACEHOLDER}
-                            disabled={currentLevel >= 5}
+                            onClick={handleUpgradeAction}  // FIX: Use correct handler
+                            disabled={actionLoading || isMaxLevel}
                         >
-                            {currentLevel >= 5 ? 'Max Level Reached' : 'Upgrade Defense'}
+                            {actionLoading 
+                                ? (isOwned ? 'Upgrading...' : 'Purchasing...')
+                                : isMaxLevel 
+                                    ? 'Max Level Reached' 
+                                    : (isOwned ? 'Upgrade Defense' : 'Purchase Defense')  // FIX: Show correct text
+                            }
                         </button>
                     </div>
                 </div>
