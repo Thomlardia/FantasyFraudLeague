@@ -69,11 +69,37 @@ export async function getUserDefenses(userId) {
   
   return allTemplates.map(template => {
     const userLevel = ownedMap.get(template.defenseId);
+    
+    // More consistent level handling:
+    // - If not owned: level = 0, displayLevel = 0
+    // - If owned at level 1: level = 1, displayLevel = 1
+    // - If owned at level 2: level = 2, displayLevel = 2, etc.
+    
+    const actualLevel = userLevel || 0;
+    const isOwned = actualLevel > 0;
+    
     return {
-      ...template,              // defense template data (cost, defendsAgainst, etc.)
-      level: userLevel || 1,
+      ...template,
+      level: actualLevel,
+      isOwned: isOwned,
+      displayLevel: actualLevel,
+      // Add cost for next action (buy if not owned, upgrade if owned)
+      nextActionCost: isOwned ? template.cost[actualLevel] || 0 : template.cost[0] || 0,
+      canUpgrade: isOwned && actualLevel < (template.cost.length - 1),
+      isMaxLevel: isOwned && actualLevel >= (template.cost.length - 1)
     };
   });
+}
+
+/**
+ * Get a specific defense with user's ownership status (uses cache)
+ * @param {string} userId - User ID
+ * @param {string} defenseId - Defense ID to get
+ * @returns {Promise<Object|null>} Defense object with user's level
+ */
+export async function getUserDefense(userId, defenseId) {
+  const allDefenses = await getUserDefenses(userId);
+  return allDefenses.find(d => d.defenseId === defenseId) || null;
 }
 
 /**
@@ -129,6 +155,7 @@ export async function buyDefense(userId, defenseId) {
     const newOwnedDefenses = {
       ...currentOwnedDefenses,
       [defenseId]: {
+        defenseId: defenseId,
         level: 1,
         buyCost: template.cost[0],
         upgradeCost: template.cost[1] || 0,
@@ -212,6 +239,7 @@ export async function upgradeDefense(userId, defenseId) {
     const newOwnedDefenses = {
       ...currentOwnedDefenses,
       [defenseId]: {
+        defenseId: defenseId,
         level: newLevel,
         buyCost: template.cost[0],
         upgradeCost: template.cost[newLevel] || 0,

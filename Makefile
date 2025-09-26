@@ -65,7 +65,7 @@ seed-complete-with-summaries:
 list-users:
 	$(EMULATOR_ENV) node functions/scripts/seed.js list users
 
-clear-users:
+clear-test-users:
 	$(EMULATOR_ENV) node functions/scripts/seed.js clear users
 
 seed-prod:

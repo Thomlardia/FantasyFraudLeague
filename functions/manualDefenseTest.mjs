@@ -2,7 +2,7 @@ import { buyDefense, upgradeDefense, getUserDefenses, clearDefenseCache } from "
 import { getUserBalance, updateUserBalance } from "./src/domains/wallet/service.js";
 
 async function testDefenses() {
-  const testUserId = "03xwrOGroFQn8bS6o6XRU6Ozgwzo";
+  const testUserId = "testuser1";
   
   console.log("Starting Defense Domain Tests...\n");
   
@@ -11,8 +11,8 @@ async function testDefenses() {
     clearDefenseCache();
     
     // give user starting balance
-    await updateUserBalance(testUserId, 1000000);
-    console.log("Seeded balance to 1,000,000");
+    // await updateUserBalance(testUserId, 1000000);
+    // console.log("Seeded balance to 1,000,000");
     
     // test getting user defenses (should show all available defenses with user's levels)
     console.log("\n Getting user defenses...");
