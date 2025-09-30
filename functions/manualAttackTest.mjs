@@ -123,11 +123,39 @@ async function run() {
     }
   });
 
-  const newBalance = await attackDeduction(testUserId, wave);
+  const attackResult = await attackDeduction(testUserId, wave);
   // Show total reduced damage after all reductions
   const totalReducedDamage = reductionResults.reduce((sum, r) => sum + r.reducedDamage, 0);
   console.log("Total damage after all reductions:", totalReducedDamage);
-  console.log("User balance after wave:", newBalance);
+  console.log("User balance after wave:", attackResult.newBalance);
+
+  // Test and display the complete attack log
+  console.log("\n=== COMPLETE ATTACK LOG ===");
+  console.log(JSON.stringify(attackResult, null, 2));
+
+  console.log("\n=== FORMATTED ATTACK LOG SUMMARY ===");
+  console.log(`Old Balance: $${attackResult.oldBalance}`);
+  console.log(`New Balance: $${attackResult.newBalance}`);
+  console.log(`Total Damage Taken: $${attackResult.totalDamage}`);
+  console.log(`Total Damage Prevent: $${attackResult.attacks.reduce((sum, attack) => sum + attack.damageReduced, 0)}`);
+  
+  console.log("\nAttack Details:");
+  attackResult.attacks.forEach((attack, index) => {
+    console.log(`\n  Attack ${index + 1}: ${attack.attackName}`);
+    console.log(`    Original Damage: $${attack.originalDamage}`);
+    console.log(`    Final Damage: $${attack.finalDamage}`);
+    console.log(`    damage Reduced: $${attack.damageReduced} (${attack.reductionPercent}%)`);
+    
+    if (attack.defensesApplied.length > 0) {
+      console.log(`    Defenses Applied:`);
+      attack.defensesApplied.forEach(defense => {
+        console.log(`      - ${defense.defenseName} (Level ${defense.level}): ${defense.reductionPercent}% reduction`);
+        console.log(`        Damage: $${Math.round(defense.damageBeforeDefense)} → $${Math.round(defense.damageAfterDefense)}`);
+      });
+    } else {
+      console.log(`    No defenses applied`);
+    }
+  });
 }
 
 run().catch(console.error);

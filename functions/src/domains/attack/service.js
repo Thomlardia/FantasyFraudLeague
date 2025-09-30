@@ -71,16 +71,29 @@ export function getHardWave() {
  * Deducts money from the user's wallet after an attack wave, considering owned defenses.
  * @param {string} userId - The user's ID
  * @param {Array<object>} wave - Array of attack objects 
- * returns the new user balance after deduction
+ * @returns {object} Attack log containing old balance, attack details, defense effectiveness, and new balance
  */
 export async function attackDeduction(userId, wave) {
   // Get user's owned defenses with details
   const ownedDefenses = await getUserOwnedDefensesComplete(userId);
+  const currentBalance = await getUserBalance(userId);
+
+  // Initialize attack log
+  const attackLog = {
+    oldBalance: currentBalance,
+    attacks: [],
+    totalDamage: 0,
+    newBalance: 0
+  };
 
   // Calculate total damage after applying defenses
   let totalDamage = 0;
+  
   for (const attack of wave) {
     let reducedDamage = attack.baseDamage || 0;
+    const originalDamage = reducedDamage;
+    const defensesApplied = [];
+    
     // For each defense, check if it defends against this attack
     for (const defenseKey in ownedDefenses) {
       const defense = ownedDefenses[defenseKey];
@@ -89,15 +102,43 @@ export async function attackDeduction(userId, wave) {
         const level = defense.level || 1;
         // Level is 1-based, array is 0-based
         const percent = percentages[level - 1] || 0;
-        // Reduce damage by this percentage
-        reducedDamage = reducedDamage * (1 - percent / 100);
+        
+        if (percent > 0) {
+          // Record defense effectiveness
+          defensesApplied.push({
+            defenseName: defense.name || defenseKey,
+            level: level,
+            reductionPercent: percent,
+            damageBeforeDefense: reducedDamage,
+            damageAfterDefense: reducedDamage * (1 - percent / 100)
+          });
+          
+          // Reduce damage by this percentage
+          reducedDamage = reducedDamage * (1 - percent / 100);
+        }
       }
     }
+    
+    // Add attack details to log
+    attackLog.attacks.push({
+      attackId: attack.attackId || attack.type,
+      attackName: attack.name || attack.attackId || attack.type,
+      originalDamage: originalDamage,
+      finalDamage: Math.round(reducedDamage),
+      damageReduced: Math.round(originalDamage - reducedDamage),
+      reductionPercent: originalDamage > 0 ? Math.round(((originalDamage - reducedDamage) / originalDamage) * 100) : 0,
+      defensesApplied: defensesApplied
+    });
+    
     totalDamage += reducedDamage;
   }
 
-  const currentBalance = await getUserBalance(userId);
-  const newBalance = Math.max(0, currentBalance - Math.round(totalDamage)); // Deduct, round to nearest int
+  const newBalance = Math.max(0, currentBalance - Math.round(totalDamage));
+  
+  // Complete the attack log
+  attackLog.totalDamage = Math.round(totalDamage);
+  attackLog.newBalance = newBalance;
+  
   await updateUserBalance(userId, newBalance);
-  return newBalance;
+  return attackLog;
 }
