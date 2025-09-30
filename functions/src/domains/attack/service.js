@@ -1,7 +1,7 @@
 // This file contains the logic for all attack related operations.
 import { getAllAttacks } from "./repo.js";
 import { getUserBalance, updateUserBalance} from "../wallet/service.js";
-import { getUserOwnedDefensesComplete } from "../defense/repo.js";
+import { getUserOwnedDefensesComplete, getAllUsers } from "../defense/repo.js";
 
 /**
  * Finds and returns the attack object for a given attack id
@@ -141,4 +141,37 @@ export async function attackDeduction(userId, wave) {
   
   await updateUserBalance(userId, newBalance);
   return attackLog;
+}
+
+/**
+ * Executes attacks against all users in the system, using the attackDeduction function.
+ * @param {Array<object>} wave - Array of attack objects 
+ * @returns {Array<object>} Array of attack logs for each user
+ */
+export async function massAttackDeduction(wave) {
+  // Get all users
+  const allUsers = await getAllUsers();
+  const userAttackResults = [];
+
+  // Process each user using the existing attackDeduction function
+  for (const user of allUsers) {
+    try {
+      // Use the existing attackDeduction function to process the attack for this user
+      const userAttackResult = await attackDeduction(user.id, wave);
+      userAttackResults.push(userAttackResult);
+      
+    } catch (error) {
+      // Log error for this user but continue with others
+      userAttackResults.push({
+        userId: user.id,
+        error: `Failed to process attack: ${error.message}`,
+        oldBalance: 0,
+        attacks: [],
+        totalDamage: 0,
+        newBalance: 0
+      });
+    }
+  }
+
+  return userAttackResults;
 }

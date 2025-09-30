@@ -1,5 +1,5 @@
 // This file exposes the attack operations to the api layer.
-import { getAttackInfo, getEasyWave, getHardWave, getMediumWave, apiGetRandomWave, attackDeduction} from "./service.js";
+import { getAttackInfo, getEasyWave, getHardWave, getMediumWave, getRandomWave, attackDeduction, massAttackDeduction} from "./service.js";
 
 /**
  * API: Get attack info.
@@ -44,7 +44,19 @@ export function apiGetHardWave() {
 
 /**
  * API: * Deduct money after attack wave
+ * @param {string} userId - The user's ID
+ * @param {Array<object>} wave - Array of attack objects 
  */
-export function apiAttackDeduction() {
-	return attackDeduction();
+export function apiAttackDeduction(userId, wave) {
+	return attackDeduction(userId, wave);
 }
+
+/**
+ * API: Execute mass attack against all users
+ * @param {Array<object>} wave - Array of attack objects 
+ * returns array of attack logs for each user
+ */
+export function apiMassAttackDeduction(wave) {
+	return massAttackDeduction(wave);
+}
+

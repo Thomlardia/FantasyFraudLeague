@@ -13,6 +13,11 @@ export {
 export {
   admin_listUsers,
   admin_grantAdmin,
+  admin_massAttackWithWave,
+  admin_massAttackEasy,
+  admin_massAttackMedium,
+  admin_massAttackHard,
+  admin_massAttackRandom,
 } from "./apps/admin-api/app.js";
 
 // Background triggers
