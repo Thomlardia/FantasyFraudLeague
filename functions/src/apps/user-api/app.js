@@ -3,9 +3,9 @@ import { requireAuth, requireVerified } from "../common/authzn.js";
 import { apiGetUserBalance, apiUpdateUserBalance } from "../../domains/wallet/api.js";
 import { getUserDefenses, buyDefense, upgradeDefense } from "../../domains/defense/api.js";
 
-export const user_getBalance = onCall({ region: "africa-south1" }, async (_req, ctx) => {
-  requireAuth(ctx);
-  return apiGetUserBalance(ctx.auth.uid);
+export const user_getBalance = onCall({ region: "africa-south1" }, async (_req) => {
+  
+  return apiGetUserBalance(_req.auth.uid);
 });
 
 export const user_updateBalance = onCall({ region: "africa-south1" }, async (_req, ctx) => {
