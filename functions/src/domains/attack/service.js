@@ -6,7 +6,7 @@ import { getUserOwnedDefensesComplete, getAllUsers } from "../defense/repo.js";
 /**
  * Finds and returns the attack object for a given attack id
  * @param {string} attackId
- * returns the attack object or null if the object isnt found.
+ * @returns {object|null} The attack object or null if the object isn't found.
  */
 export function getAttackInfo(attackId) {
   return getAllAttacks().find(a => a.attackId === attackId) || null;
@@ -14,7 +14,7 @@ export function getAttackInfo(attackId) {
 
 /**
  * Generates a random wave of 4 attacks.
- * returns array of 4 attack objects
+ * @returns {Array<object>} Array of 4 attack objects
  */
 export function getRandomWave() {
   const attacksList = [...getAllAttacks()];
@@ -27,7 +27,7 @@ export function getRandomWave() {
 
 /**
  * Generates an easy wave: 3 attacks, dangerLevel 1-2
- * returns array of 3 attack objects
+ * @returns {Array<object>} Array of 3 attack objects
  */
 export function getEasyWave() {
   const eligibleAttacks = getAllAttacks().filter(attack => attack.dangerLevel >= 1 && attack.dangerLevel <= 2);
@@ -41,7 +41,7 @@ export function getEasyWave() {
 
 /**
  * Generates a medium wave: 4 attacks, dangerLevel 1-3
- * returns array of 4 attack obj
+ * @returns {Array<object>} array of 4 attack objects
  */
 export function getMediumWave() {
   const eligibleAttacks = getAllAttacks().filter(attack => attack.dangerLevel >= 1 && attack.dangerLevel <= 3);
@@ -55,7 +55,7 @@ export function getMediumWave() {
 
 /**
  * Generates a hard wave: 5 attacks, dangerLevel 2-4
- * returns array of 5 attack obj
+ * @returns {Array<object>} Array of 5 attack objects
  */
 export function getHardWave() {
   const eligibleAttacks = getAllAttacks().filter(attack => attack.dangerLevel >= 2 && attack.dangerLevel <= 4);

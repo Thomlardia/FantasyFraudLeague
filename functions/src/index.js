@@ -13,7 +13,7 @@ export {
 export {
   admin_listUsers,
   admin_grantAdmin,
-  admin_massAttackWithWave,
+  admin_massAttackCostum,
   admin_massAttackEasy,
   admin_massAttackMedium,
   admin_massAttackHard,

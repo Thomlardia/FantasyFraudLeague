@@ -26,3 +26,9 @@ export async function getAttackDeduction() {
   const result = await fn();
   return result.data;
 }
+
+export async function adminMassAttackCustom(customWave) {
+  const fn = httpsCallable(functions, "admin_massAttackCostum");
+  const result = await fn({ wave: customWave });
+  return result.data;
+}

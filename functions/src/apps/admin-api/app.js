@@ -26,7 +26,7 @@ export const admin_grantAdmin = onCall({ region: "africa-south1" }, async (req, 
 });
 
 // Mass attack functions
-export const admin_massAttackWithWave = onCall({ region: "africa-south1" }, async (req, ctx) => {
+export const admin_massAttackCostum = onCall({ region: "africa-south1" }, async (req, ctx) => {
 	requireRole(ctx, "admin");
 	const { wave } = req.data || {};
 	
