@@ -5,9 +5,10 @@ import { getUserOwnedDefensesComplete } from "./src/domains/defense/repo.js";
 
 async function run() {
   // Setup test user
-  const testUserId = "testuser456";
+
+  const testUserId = "testuser1";
   const testUser2Id = "gTXVXDqXyUjWt6KNHCHN7OHVEnnQ";
-  await updateUserBalance(testUserId, 1000); // Set initial balance
+  // await updateUserBalance(testUserId, 125000); // Set initial balance
 
   const testAttackId = "phishing";
   console.log("Testing the getAttackInfo for:", testAttackId);
@@ -82,11 +83,11 @@ async function run() {
   // Test attackDeduction
   console.log("\nTesting attackDeduction with a random wave:");
   const wave = getHardWave();
-  const beforeBalance = await getUserBalance(testUser2Id);
+  const beforeBalance = await getUserBalance(testUserId);
   console.log("User balance before wave:", beforeBalance);
 
   // Calculate and log reduction for each attack ---
-  const ownedDefenses = await getUserOwnedDefensesComplete(testUser2Id);
+  const ownedDefenses = await getUserOwnedDefensesComplete(testUserId);
   const reductionResults = wave.map(attack => {
     let reducedDamage = attack.baseDamage || 0;
     let totalPercent = 0;
@@ -123,7 +124,7 @@ async function run() {
     }
   });
 
-  const newBalance = await attackDeduction(testUser2Id, wave);
+  const newBalance = await attackDeduction(testUserId, wave);
   // Show total reduced damage after all reductions
   const totalReducedDamage = reductionResults.reduce((sum, r) => sum + r.reducedDamage, 0);
   console.log("Total damage after all reductions:", totalReducedDamage);

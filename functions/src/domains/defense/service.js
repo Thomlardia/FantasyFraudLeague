@@ -152,6 +152,7 @@ export async function buyDefense(userId, defenseId) {
     const newOwnedDefenses = {
       ...currentOwnedDefenses,
       [defenseId]: {
+        defenseId: defenseId,
         level: 1,
         buyCost: template.cost[0],
         upgradeCost: template.cost[1] || 0,
@@ -235,6 +236,7 @@ export async function upgradeDefense(userId, defenseId) {
     const newOwnedDefenses = {
       ...currentOwnedDefenses,
       [defenseId]: {
+        defenseId: defenseId,
         level: newLevel,
         buyCost: template.cost[0],
         upgradeCost: template.cost[newLevel] || 0,

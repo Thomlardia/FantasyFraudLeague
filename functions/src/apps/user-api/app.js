@@ -1,11 +1,16 @@
 import { onCall, HttpsError } from "firebase-functions/v2/https";
 import { requireAuth, requireVerified } from "../common/authzn.js";
-import { apiGetUserBalance } from "../../domains/wallet/api.js";
+import { apiGetUserBalance, apiUpdateUserBalance } from "../../domains/wallet/api.js";
 import { apiGetUserDefenses, apiBuyDefense, apiUpgradeDefense } from "../../domains/defense/api.js";
 
-export const user_getBalance = onCall({ region: "africa-south1" }, async (_req, ctx) => {
+export const user_getBalance = onCall({ region: "africa-south1" }, async (_req) => {
+  
+  return apiGetUserBalance(_req.auth.uid);
+});
+
+export const user_updateBalance = onCall({ region: "africa-south1" }, async (_req, ctx) => {
   requireAuth(ctx);
-  return apiGetUserBalance(ctx.auth.uid);
+  return apiUpdateUserBalance(ctx.auth.uid);
 });
 
 export const user_getDefenses = onCall({ region: "africa-south1" }, async (req) => {

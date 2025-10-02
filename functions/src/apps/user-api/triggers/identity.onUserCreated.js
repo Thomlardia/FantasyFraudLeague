@@ -1,5 +1,5 @@
 import * as functionsV1 from "firebase-functions/v1";
-import { db } from "../../infra/db/index.js";
+import { db } from "../../../infra/db/index.js";
 
 export const userDocOnCreate = functionsV1
   .region("europe-west1")
@@ -24,7 +24,6 @@ export const userDocOnCreate = functionsV1
         ownedDefensesList: [],
         ownedDefenses: {},
         totalDefensesOwned: 0,
-        userType: "player",
         createdAt: new Date(),
       },
       { merge: true }
