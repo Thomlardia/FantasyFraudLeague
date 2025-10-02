@@ -79,7 +79,7 @@ export const seedUsersFromAuth = async (options = {}) => {
                     id: authUser.uid,
                     email: authUser.email,
                     name: authUser.displayName || authUser.email?.split('@')[0] || 'Unknown User',
-                    currentBalance: 55_000, // Starting balance
+                    currentBalance: 1_000_000, // Starting balance
                     userType: 'player',
                     ownedDefenses: {},
                     totalDefensesOwned: 0
