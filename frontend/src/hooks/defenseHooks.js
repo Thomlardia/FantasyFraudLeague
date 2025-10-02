@@ -3,6 +3,22 @@ import { httpsCallable } from 'firebase/functions';
 import { onAuthStateChanged } from 'firebase/auth';
 import { functions, auth } from '../firebase';
 
+/**
+ * Hook to manage defense operations (Buy and Upgrade).
+ *
+ * @param {string} defenseId - The ID of the defense to load
+ * @returns {Object} An object containing the defense data, loading state, action loading state, error message, success message, handleBuy, handleUpgrade, and refetch functions.
+ * @property {Object} defense - The defense data
+ * @property {boolean} loading - Whether the defense data is being loaded
+ * @property {boolean} actionLoading - Whether the buy or upgrade action is being performed.
+ * @property {string|null} error - The error message if an error occurred while loading the defense data.
+ * @property {string|null} successMessage - The success message if the buy or upgrade action was successful.
+ * @property {function} handleBuy - Function to handle the buy action.
+ * @property {function} handleUpgrade - Function to handle the upgrade action.
+ * @property {function} refetch - Function to refetch the defense data.
+ * @property {Object|null} user - The user object or null if the user is not signed in.
+ * @property {boolean} authenticated - Whether the user is signed in or not.
+ */
 export function useDefenseOperations(defenseId) {
   const [defense, setDefense] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -30,10 +46,8 @@ export function useDefenseOperations(defenseId) {
   // Load defense data when auth or defenseId changes
   useEffect(() => {
     if (!authLoading) {
-      if (user && user.emailVerified) loadDefenseData();
-      else if (user && !user.emailVerified) {
-        setError('Please verify your email address to access defenses');
-        setLoading(false);
+      if (user) {
+        loadDefenseData();
       } else {
         setError('Please sign in to access defenses');
         setLoading(false);
@@ -42,8 +56,8 @@ export function useDefenseOperations(defenseId) {
   }, [defenseId, user, authLoading]);
 
   const loadDefenseData = async () => {
-    if (!user || !user.emailVerified) {
-      setError('Please sign in and verify your email to access defenses');
+    if (!user) {
+      setError('Please sign in to access defenses');
       setLoading(false);
       return;
     }
@@ -75,8 +89,14 @@ export function useDefenseOperations(defenseId) {
     }
   };
 
+  /**
+   * Handles the buy action for the defense with the given ID.
+   * If the user is not signed in, sets an error message.
+   * If the buy action is successful, sets a success message and reloads the defense data.
+   * If the buy action fails, sets an error message.
+   */
   const handleBuy = async () => {
-    if (!user || !user.emailVerified) return setError('Please sign in and verify your email');
+    if (!user) return setError('Please sign in to purchase defenses');
 
     try {
       setActionLoading(true);
@@ -97,8 +117,14 @@ export function useDefenseOperations(defenseId) {
     }
   };
 
+  /**
+   * Handles the upgrade action for the defense with the given ID.
+   * If the user is not signed in, sets an error message.
+   * If the upgrade action is successful, sets a success message and reloads the defense data.
+   * If the upgrade action fails, sets an error message.
+   */
   const handleUpgrade = async () => {
-    if (!user || !user.emailVerified) return setError('Please sign in and verify your email');
+    if (!user) return setError('Please sign in to upgrade defenses');
 
     try {
       setActionLoading(true);
@@ -129,6 +155,6 @@ export function useDefenseOperations(defenseId) {
     handleUpgrade,
     refetch: loadDefenseData,
     user,
-    isAuthenticated: user && user.emailVerified
+    isAuthenticated: !!user
   };
 }

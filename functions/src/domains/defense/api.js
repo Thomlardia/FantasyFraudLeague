@@ -2,8 +2,12 @@ import {
   getUserDefenses, 
   buyDefense, 
   upgradeDefense,
-  clearDefenseCache
+  clearDefenseCache,
+  InsufficientFundsError,
+  NotFoundError,
+  AlreadyOwnedError
 } from "./service.js";
+import { HttpsError } from "firebase-functions/v2/https";
 
 /**
  * API: Get user defenses with ownership status.
@@ -11,7 +15,12 @@ import {
  * @returns {Promise<Array>} Array of defense objects with user levels
  */
 export async function apiGetUserDefenses(userId) {
-  return getUserDefenses(userId);
+  try {
+    return getUserDefenses(userId);
+  } catch (err) {
+    throw new HttpsError("internal", err.message);
+  }
+  
 }
 
 /**
@@ -21,7 +30,20 @@ export async function apiGetUserDefenses(userId) {
  * @returns {Promise<Object>} Purchased defense object
  */
 export async function apiBuyDefense(userId, defenseId) {
-  return buyDefense(userId, defenseId);
+  try {
+    return await buyDefense(userId, defenseId);
+  } catch (err) {
+    if (err instanceof InsufficientFundsError) {
+      throw new HttpsError("failed-precondition", "Not enough funds to buy defense");
+    }
+    if (err instanceof AlreadyOwnedError) {
+      throw new HttpsError("already-exists", "You already own this defense");
+    }
+    if (err instanceof NotFoundError) {
+      throw new HttpsError("not-found", "Defense not found");
+    }
+    throw new HttpsError("internal", err.message);
+  }
 }
 
 /**
@@ -31,7 +53,17 @@ export async function apiBuyDefense(userId, defenseId) {
  * @returns {Promise<Object>} Upgraded defense object
  */
 export async function apiUpgradeDefense(userId, defenseId) {
-  return upgradeDefense(userId, defenseId);
+  try {
+    return await upgradeDefense(userId, defenseId);
+  } catch (err) {
+    if (err instanceof InsufficientFundsError) {
+      throw new HttpsError("failed-precondition", "Not enough funds to upgrade defense");
+    }
+    if (err instanceof NotFoundError) {
+      throw new HttpsError("not-found", "Defense not found");
+    }
+    throw new HttpsError("internal", err.message);
+  }
 }
 
 /**
@@ -42,3 +74,4 @@ export async function apiUpgradeDefense(userId, defenseId) {
 export async function apiClearDefenseCache(adminUserId) {
   return clearDefenseCache();
 }
+

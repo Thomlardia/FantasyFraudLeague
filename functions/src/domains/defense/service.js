@@ -1,8 +1,5 @@
 import { 
-  getDefenseTemplate,
   getAllDefenseTemplates,
-  updateUserDefenseOwnership, 
-  updateUserDefenseSummary,
   getUserOwnedDefenses 
 } from "./repo.js";
 import { db } from "../../infra/db/index.js";
@@ -85,8 +82,8 @@ export async function getUserDefenses(userId) {
       displayLevel: actualLevel,
       // Add cost for next action (buy if not owned, upgrade if owned)
       nextActionCost: isOwned ? template.cost[actualLevel] || 0 : template.cost[0] || 0,
-      canUpgrade: isOwned && actualLevel < (template.cost.length - 1),
-      isMaxLevel: isOwned && actualLevel >= (template.cost.length - 1)
+      canUpgrade: isOwned && actualLevel < template.cost.length,
+      isMaxLevel: isOwned && actualLevel >= template.cost.length
     };
   });
 }
@@ -114,7 +111,7 @@ export async function buyDefense(userId, defenseId) {
   // check if defense template exists from cache
   const template = await getCachedDefenseTemplate(defenseId);
   if (!template) {
-    throw new Error("Defense not found");
+    throw new NotFoundError();
   }
 
   const buyCost = template.cost[0]; // first element is buy cost
@@ -138,12 +135,12 @@ export async function buyDefense(userId, defenseId) {
     // check if user already owns the defense
     const alreadyOwned = ownedDefensesList.some(d => d.defenseId === defenseId);
     if (alreadyOwned) {
-      throw new Error("You already own this defense");
+      throw new AlreadyOwnedError();
     }
 
     // check if user has enough balance
     if (currentBalance < buyCost) {
-      throw new Error("Insufficient funds");
+      throw new InsufficientFundsError();
     }
 
     // update user's balance atomically
@@ -188,7 +185,7 @@ export async function upgradeDefense(userId, defenseId) {
   // get template from cache
   const template = await getCachedDefenseTemplate(defenseId);  
   if (!template) {
-    throw new Error("Defense not found");
+    throw new NotFoundError();
   }
   
   // use Firestore transaction to prevent concurrency issues
@@ -211,7 +208,7 @@ export async function upgradeDefense(userId, defenseId) {
     }
 
     const currentLevel = ownedDefensesList[ownedIndex].level;
-    if (currentLevel >= template.cost.length - 1) {
+    if (currentLevel >= template.cost.length) {
       throw new Error("This defense has reached its maximum level");
     }
 
@@ -222,7 +219,7 @@ export async function upgradeDefense(userId, defenseId) {
 
     // check if user has enough balance
     if (currentBalance < upgradeCost) {
-      throw new Error("Insufficient funds");
+      throw new InsufficientFundsError();
     }
 
     // update user's balance atomically
@@ -267,4 +264,41 @@ export function clearDefenseCache() {
   defenseTemplatesCache = null;
   cacheLastUpdated = null;
   cachePromise = null;
+}
+
+export class InsufficientFundsError extends Error {
+/**
+ * Constructor for InsufficientFundsError class.
+ * 
+ * @param {string} [message] - Optional message to be passed to the Error constructor.
+ */
+  constructor() {
+    super("Insufficient funds");
+    this.name = "InsufficientFundsError";
+  }
+}
+
+export class AlreadyOwnedError extends Error {
+/**
+ * Constructor for AlreadyOwnedError class.
+ * 
+ * @param {string} [message] - Optional message to be passed to the Error constructor.
+ */
+  constructor() {
+    super("You already own this defense");
+    this.name = "AlreadyOwnedError";
+  }
+}
+
+export class NotFoundError extends Error {
+/**
+ * Constructor for NotFoundError class.
+ * 
+ * @param {string} [message] - Optional message to be passed to the Error constructor.
+ * Defaults to "Defense not found".
+ */
+  constructor(message = "Defense not found") {
+    super(message);
+    this.name = "NotFoundError";
+  }
 }

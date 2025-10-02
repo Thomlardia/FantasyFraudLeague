@@ -8,25 +8,34 @@ export const user_getBalance = onCall({ region: "africa-south1" }, async (_req, 
   return apiGetUserBalance(ctx.auth.uid);
 });
 
-export const user_getDefenses = onCall({ region: "africa-south1" }, async (_req, ctx) => {
-  requireVerified(ctx);
-  return apiGetUserDefenses(ctx.auth.uid);
+export const user_getDefenses = onCall({ region: "africa-south1" }, async (req) => {
+  if (!req.auth) {
+    throw new HttpsError("unauthenticated", "User must be signed in");
+  }
+  return apiGetUserDefenses(req.auth.uid);
 });
 
-export const user_buyDefense = onCall({ region: "africa-south1" }, async (req, ctx) => {
-  requireVerified(ctx);
+export const user_buyDefense = onCall({ region: "africa-south1" }, async (req) => {
+  if (!req.auth) {
+    throw new HttpsError("unauthenticated", "User must be signed in");
+  }
+
   const { defenseId } = req.data || {};
   if (typeof defenseId !== "string" || !defenseId) {
     throw new HttpsError("invalid-argument", "defenseId must be a non-empty string");
   }
-  return apiBuyDefense(ctx.auth.uid, defenseId);
+  return apiBuyDefense(req.auth.uid, defenseId);
 });
 
-export const user_upgradeDefense = onCall({ region: "africa-south1" }, async (req, ctx) => {
-  requireVerified(ctx);
+export const user_upgradeDefense = onCall({ region: "africa-south1" }, async (req) => {
+  if (!req.auth) {
+    throw new HttpsError("unauthenticated", "User must be signed in");
+  }
+
   const { defenseId } = req.data || {};
   if (typeof defenseId !== "string" || !defenseId) {
     throw new HttpsError("invalid-argument", "defenseId must be a non-empty string");
   }
-  return apiUpgradeDefense(ctx.auth.uid, defenseId);
+  return apiUpgradeDefense(req.auth.uid, defenseId);
 });
+

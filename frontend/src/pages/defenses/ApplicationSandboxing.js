@@ -1,7 +1,5 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import { useDefenseOperations } from '../../hooks/useDefenseOperations.js';
-import iconBackArrow from '../../images/icons/back_arrow.png';
+import { useDefenseOperations } from '../../hooks/defenseHooks.js';
 import '../../styles/ui.css';
 import '../../styles/shopAndWiki.css';
 import MoneyBar from '../../components/MoneyBar';
@@ -9,7 +7,6 @@ import MoneyBar from '../../components/MoneyBar';
 function ApplicationSandboxing() {
     const { defense, loading, actionLoading, error, successMessage, handleBuy, handleUpgrade } = useDefenseOperations('applicationSandboxing');
     
-    // Simplified logic using the updated service response
     function getDefenseLevel() {
         return defense?.displayLevel || 0;
     }
@@ -33,7 +30,7 @@ function ApplicationSandboxing() {
     const isOwned = defense?.isOwned || false;
     const isMaxLevel = defense?.isMaxLevel || false;
 
-    // ADD: Loading state
+    // loading state
     if (loading) {
         return (
             <div className="shop-container">
@@ -62,21 +59,20 @@ function ApplicationSandboxing() {
             </div>
             
             <div className="content-container">
-                {/* ADD: Error display */}
+                {/* error display */}
                 {error && (
                     <div className="description-card" style={{ backgroundColor: '#f8d7da', color: '#721c24' }}>
                         Error: {error}
                     </div>
                 )}
 
-                {/* ADD: Success display */}
+                {/* success display */}
                 {successMessage && (
                     <div className="description-card" style={{ backgroundColor: '#d4edda', color: '#155724' }}>
                         {successMessage}
                     </div>
                 )}
 
-                {/* Your existing content stays the same */}
                 <div className="description-card">
                     <p>
                         Application sandboxing isolates applications within restricted environments that limit their access to system resources, files, and network connections. This containment approach prevents malicious code from escaping the sandbox and affecting the broader system, even if the application is compromised through a zero-day exploit.
@@ -129,14 +125,14 @@ function ApplicationSandboxing() {
                         
                         <button 
                             className="upgrade-button"
-                            onClick={handleUpgradeAction}  // FIX: Use correct handler
+                            onClick={handleUpgradeAction}
                             disabled={actionLoading || isMaxLevel}
                         >
                             {actionLoading 
                                 ? (isOwned ? 'Upgrading...' : 'Purchasing...')
                                 : isMaxLevel 
                                     ? 'Max Level Reached' 
-                                    : (isOwned ? 'Upgrade Defense' : 'Purchase Defense')  // FIX: Show correct text
+                                    : (isOwned ? 'Upgrade Defense' : 'Purchase Defense')
                             }
                         </button>
                     </div>
