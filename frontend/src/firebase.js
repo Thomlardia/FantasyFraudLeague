@@ -27,6 +27,17 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
+// Determine if we should use emulators
+const shouldUseEmulators =
+  process.env.REACT_APP_USE_EMULATORS === "1" ||
+  ["localhost", "127.0.0.1"].includes(window.location.hostname);
+
+// Enable AppCheck debug tokens in local development
+// This bypasses reCAPTCHA and generates fake tokens (like Auth Emulator does for JWTs)
+if (shouldUseEmulators) {
+  window.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
+}
+
 // Initialize Firebase App Check (reCAPTCHA Enterprise) with auto refresh
 // this is a public site key
 const appCheckSiteKey = "6Le9b9QrAAAAAGA5Hh0rxlqA_6GqQATw9r6V3EeR";
@@ -45,15 +56,10 @@ export const db = getFirestore(app);
 // Initialize Functions and get a reference to the service
 export const functions = getFunctions(app, "africa-south1");
 
-// Connect Emulators to the correct ports
-// Use env flag or common local hostnames to decide
-const shouldUseEmulators =
-  process.env.REACT_APP_USE_EMULATORS === "1" ||
-  ["localhost", "127.0.0.1"].includes(window.location.hostname);
-
+// Connect to Firebase Emulators in local development
 if (shouldUseEmulators) {
-  // Disable warning banner for emulator connections
   connectAuthEmulator(auth, "http://127.0.0.1:9099", { disableWarnings: true });
   connectFirestoreEmulator(db, "127.0.0.1", 8080);
   connectFunctionsEmulator(functions, "127.0.0.1", 5001);
+  console.log("Connected to Firebase Emulators");
 }

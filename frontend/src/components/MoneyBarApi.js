@@ -1,22 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { httpsCallable } from 'firebase/functions';
-import { functions } from '../firebase';
 import iconMoneyDollar from '../images/icons/money_dollar.png';
+import { getUserBalance } from '../hooks/walletHooks';
 
-/**
- * Formats a number as currency with commas
- * @param {number} amount - The amount to format
- * @returns {string} Formatted currency string
- */
 function formatMoney(amount) {
   return `${amount.toLocaleString()}`;
 }
 
-/**
- * MoneyBar component that displays the player's current money
- * Refreshes on mount and after updates to show the latest value
- */
-function MoneyBar() {
+function MoneyBarApi() {
   const [balance, setBalance] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -25,17 +15,12 @@ function MoneyBar() {
     const load = async () => {
       setLoading(true);
       try {
-        const call = httpsCallable(functions, 'user_getBalance');
-        const res = await call();
-        console.log("user_getBalance response:", res);
+        const value = await getUserBalance();
+        console.log("getUserBalance result:", value); // Debug: log the result
         if (!active) return;
-        const value = typeof res?.data === 'number' ? res.data : 0;
-        setBalance(value);
+        setBalance(typeof value === 'number' ? value : 0);
       } catch (e) {
-        console.error("MoneyBar error:", e);
-        console.error("Error code:", e.code);
-        console.error("Error message:", e.message);
-        console.error("Error details:", e.details);
+        console.error("getUserBalance error:", e); // Debug: log the error
         if (active) setBalance(0);
       } finally {
         if (active) setLoading(false);
@@ -57,4 +42,4 @@ function MoneyBar() {
   );
 }
 
-export default MoneyBar;
+export default MoneyBarApi;

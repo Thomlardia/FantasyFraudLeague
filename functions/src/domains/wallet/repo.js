@@ -11,10 +11,18 @@ const USERS_COLLECTION = "users"; /* Firestore collection name */
  * returns the user's balance from the database (defaults to 0 if not set).
  */
 export async function getBalance(userId) {
+  console.log("getBalance called for userId:", userId);
   const doc = await db.collection(USERS_COLLECTION).doc(userId).get(); /* get user document */
-  if (!doc.exists) return 0; /* if no document, return 0 */
+  console.log("Document exists:", doc.exists);
+  if (!doc.exists) {
+    console.log("User document not found, returning 0");
+    return 0; /* if no document, return 0 */
+  }
   const data = doc.data(); /* get document data */
-  return typeof data.balance === "number" ? data.balance : 0; /* return balance if it exists, else 0 */
+  console.log("Document data:", JSON.stringify(data));
+  const balance = typeof data.balance === "number" ? data.balance : 0;
+  console.log("Returning balance:", balance);
+  return balance; /* return balance if it exists, else 0 */
 }
 
 /**

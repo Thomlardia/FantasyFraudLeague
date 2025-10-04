@@ -5,6 +5,7 @@ import { getUserOwnedDefensesComplete } from "./src/domains/defense/repo.js";
 
 async function run() {
   // Setup test user
+
   const testUserId = "testuser1";
   const testUser2Id = "gTXVXDqXyUjWt6KNHCHN7OHVEnnQ";
   // await updateUserBalance(testUserId, 125000); // Set initial balance

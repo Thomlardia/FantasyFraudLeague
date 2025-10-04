@@ -4,6 +4,7 @@
 // Callable function exports (user)
 export {
   user_getBalance,
+  user_updateBalance,
   user_getDefenses,
   user_buyDefense,
   user_upgradeDefense,
@@ -16,4 +17,4 @@ export {
 } from "./apps/admin-api/app.js";
 
 // Background triggers
-export { userDocOnCreate } from "./apps/triggers/identity.onUserCreated.js";
+export { userDocOnCreate } from "./apps/user-api/triggers/identity.onUserCreated.js";

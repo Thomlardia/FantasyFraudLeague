@@ -1,26 +1,45 @@
 import { Link } from 'react-router-dom';
-import iconBackArrow from '../../images/icons/back_arrow.png';
+import { useDefenseOperations } from '../../hooks/defenseHooks.js';
 import '../../styles/ui.css';
 import '../../styles/shopAndWiki.css';
 import MoneyBar from '../../components/MoneyBar';
 
 function AtmInspections() {
+    const { defense, loading, actionLoading, error, successMessage, handleBuy, handleUpgrade } = useDefenseOperations('atmInspection');
     
-    function getDefenseLevelPLACEHOLDER() {
-        return 0; // Starting at level 0
+    function getDefenseLevel() {
+        return defense?.displayLevel || 0;
     }
 
-    function getUpgradeCostPLACEHOLDER(currentLevel) {
-        const baseCost = 1000;
-        return baseCost * (currentLevel + 1); // Cost increases with level
+    function getUpgradeCost() {
+        return defense?.nextActionCost || 0;
     }
 
-    function handleUpgradePLACEHOLDER() {
-        console.log('Upgrading ATM Inspections - upgrade logic not implemented yet');
+    function handleUpgradeAction() {
+        if (!defense) return;
+
+        if (defense.isOwned) {
+            handleUpgrade();
+        } else {
+            handleBuy();
+        }
     }
 
-    const currentLevel = getDefenseLevelPLACEHOLDER();
-    const upgradeCost = getUpgradeCostPLACEHOLDER(currentLevel);
+    const currentLevel = getDefenseLevel();
+    const upgradeCost = getUpgradeCost();
+    const isOwned = defense?.isOwned || false;
+    const isMaxLevel = defense?.isMaxLevel || false;
+
+    // loading state
+    if (loading) {
+        return (
+            <div className="shop-container">
+                <div className="content-container">
+                    <div className="description-card">Loading defense data...</div>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="shop-container">
@@ -39,7 +58,22 @@ function AtmInspections() {
                 <h1>ATM Inspections</h1>
                 <div></div>
             </div>
+
             <div className="content-container">
+                {/* error display */}
+                {error && (
+                    <div className="description-card" style={{ backgroundColor: '#f8d7da', color: '#721c24' }}>
+                        Error: {error}
+                    </div>
+                )}
+
+                {/* success display */}
+                {successMessage && (
+                    <div className="description-card" style={{ backgroundColor: '#d4edda', color: '#155724' }}>
+                        {successMessage}
+                    </div>
+                )}
+
                 <div className="description-card">
                     <p>
                         ATM inspection is the process of regularly checking ATMs to ensure they haven’t been tampered with or compromised. This involves looking for signs of skimming devices, hidden cameras, fake keypads, or any unusual attachments, as well as verifying the machine’s software and cash units. The goal is to detect and prevent fraud attempts before customers use the ATM.
@@ -73,20 +107,31 @@ function AtmInspections() {
                 <div className="upgrade-section">
                     <div className="upgrade-header">
                         <h3>Defense Level: {currentLevel}</h3>
+                        <p>Status: {isOwned ? 'Owned' : 'Not Owned'}</p>
                     </div>
                     
                     <div className="upgrade-info">
                         <div className="upgrade-details">
                             <span className="upgrade-cost">Cost: ${upgradeCost.toLocaleString()}</span>
-                            <span className="upgrade-level">Next: Level {Math.min(currentLevel + 1, 5)}</span>
+                            <span className="upgrade-level">
+                                {isOwned 
+                                    ? `Next: Level ${currentLevel + 1}`
+                                    : 'Purchase to Own'
+                                }
+                            </span>
                         </div>
                         
                         <button 
                             className="upgrade-button"
-                            onClick={handleUpgradePLACEHOLDER}
-                            disabled={currentLevel >= 5}
+                            onClick={handleUpgradeAction}
+                            disabled={actionLoading || isMaxLevel}
                         >
-                            {currentLevel >= 5 ? 'Max Level Reached' : 'Upgrade Defense'}
+                            {actionLoading 
+                                ? (isOwned ? 'Upgrading...' : 'Purchasing...')
+                                : isMaxLevel 
+                                    ? 'Max Level Reached' 
+                                    : (isOwned ? 'Upgrade Defense' : 'Purchase Defense')
+                            }
                         </button>
                     </div>
                 </div>

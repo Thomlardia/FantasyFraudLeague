@@ -2,9 +2,10 @@ import { buyDefense, upgradeDefense, getUserDefenses, clearDefenseCache } from "
 import { getUserBalance, updateUserBalance } from "./src/domains/wallet/service.js";
 
 async function testDefenses() {
-  const testUserId = "testuser1";
+const testUserId = "AU6dSewjoQe3CJjEzaOwZpwuESjH";
+
   
-  console.log("Starting Defense Domain Tests...\n");
+console.log("Starting Defense Domain Tests...\n");
   
   try {
     // clear cache to ensure fresh data
