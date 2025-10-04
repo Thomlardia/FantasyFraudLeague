@@ -19,7 +19,7 @@ build:
   artifacts:
     paths:
       - functions/node_modules/
-    expire-in: 1 hour
+    expire_in: 1 hour
 
 test:
   stage: test
