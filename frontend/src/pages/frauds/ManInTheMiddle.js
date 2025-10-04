@@ -2,15 +2,23 @@ import { Link } from 'react-router-dom';
 import iconBackArrow from '../../images/icons/back_arrow.png'
 import '../../styles/ui.css';
 import '../../styles/shopAndWiki.css';
+import MoneyBar from '../../components/MoneyBar';
 
 function ManInTheMiddle() {
     return (
 
         <div className="fraud-container">
-            <div className="header">
+            <div className="topbar">
+            <div className="topbar-group">
                 <Link to="/fraudwiki" className="icon-button" title="Back">
                     <span className="material-symbols-outlined">arrow_back</span>
                 </Link>
+            </div>
+            <MoneyBar />
+            <div className="topbar-group"></div>
+            </div>
+            <div className="header">
+
                 <h1>Man In The Middle</h1>
                 <div></div>
             </div>
@@ -23,6 +31,12 @@ function ManInTheMiddle() {
                         Attackers often achieve this by compromising network infrastructure or creating rogue 
                         access points. These attacks can target protocols such as HTTP, HTTPS, DNS, and wireless 
                         communications.
+                    </p>
+                    <br />
+                    <p>
+                        <a href="https://www.ibm.com/think/topics/man-in-the-middle" target="_blank" rel="noopener noreferrer">
+                            Reference: Man In The Middle
+                        </a>.
                     </p>
                     <br />
                 </div>

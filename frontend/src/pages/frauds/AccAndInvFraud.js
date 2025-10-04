@@ -2,14 +2,22 @@ import { Link } from 'react-router-dom';
 import iconBackArrow from '../../images/icons/back_arrow.png'
 import '../../styles/ui.css';
 import '../../styles/shopAndWiki.css';
+import MoneyBar from '../../components/MoneyBar';
 
 function AccAndInvFraud() {
     return (
         <div className="fraud-container">
-            <div className="header">
+            <div className="topbar">
+            <div className="topbar-group">
                 <Link to="/fraudwiki" className="icon-button" title="Back">
                     <span className="material-symbols-outlined">arrow_back</span>
                 </Link>
+            </div>
+            <MoneyBar />
+            <div className="topbar-group"></div>
+            </div>
+            <div className="header">
+
                 <h1>Accountng and invoice fraud</h1>
                 <div></div>
             </div>
@@ -21,6 +29,12 @@ function AccAndInvFraud() {
                         to divert funds or misrepresent financial health. It may be carried out by employees 
                         with insider access or external actors infiltrating accounting systems. 
                         This type of fraud ranges from simple expense manipulation to large-scale corporate scandals.
+                    </p>
+                    <br />
+                    <p>
+                        <a href="https://precoro.com/blog/what-is-invoice-fraud/" target="_blank" rel="noopener noreferrer">
+                            Reference: Accounting and Invoice Fraud
+                        </a>.
                     </p>
                     <br />
                 </div>

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import '../styles/shopAndWiki.css';
 import fflLogo from '../images/ffl_logo_ghost.png';
+import MoneyBar from '../components/MoneyBar';
 
 function FraudWiki() {
     const fraudItems = [
@@ -38,7 +39,6 @@ function FraudWiki() {
                     Fraud Wiki
                 </h1>
                 
-                <div style={{ width: "48px" }}></div> {/* Spacer for centering */}
             </div>
             
             <div className="shop-wiki-grid">

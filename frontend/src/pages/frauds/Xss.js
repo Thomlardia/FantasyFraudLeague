@@ -2,14 +2,22 @@ import { Link } from 'react-router-dom';
 import iconBackArrow from '../../images/icons/back_arrow.png'
 import '../../styles/ui.css';
 import '../../styles/shopAndWiki.css';
+import MoneyBar from '../../components/MoneyBar';
 
 function Xss() {
     return (
         <div className="fraud-container">
-            <div className="header">
+            <div className="topbar">
+            <div className="topbar-group">
                 <Link to="/fraudwiki" className="icon-button" title="Back">
                     <span className="material-symbols-outlined">arrow_back</span>
                 </Link>
+            </div>
+            <MoneyBar />
+            <div className="topbar-group"></div>
+            </div>
+            <div className="header">
+
                 <h1>XXS</h1>
                 <div></div>
             </div>
@@ -20,6 +28,12 @@ function Xss() {
                         scripts into web pages that are then executed in other users' browsers. 
                         This allows attackers to steal session cookies, hijack accounts, 
                         redirect users, or modify website content.
+                    </p>
+                    <br />
+                    <p>
+                        <a href="https://portswigger.net/web-security/cross-site-scripting" target="_blank" rel="noopener noreferrer">
+                            Reference: Cross-Site Scripting
+                        </a>.
                     </p>
                     <br />
                 </div>
@@ -49,8 +63,12 @@ function Xss() {
                 <div className="description-card">
                     <h3>Primary Defenses:</h3>
                     <ul>
-                        <li>Output encoding to neutralize malicious input</li>
-                        <li>Content Security Policy (CSP) to restrict script execution</li>
+                        <li>
+                            <Link to="/defenses/InputValidation">Input Validation and Sanitation</Link>
+                        </li>
+                        <li>
+                            <Link to="/defenses/KeepUpdated">Keep Software Updated</Link>
+                        </li>
                     </ul>
                 </div>
             </div>

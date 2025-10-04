@@ -2,14 +2,22 @@ import { Link } from 'react-router-dom';
 import iconBackArrow from '../../images/icons/back_arrow.png'
 import '../../styles/ui.css';
 import '../../styles/shopAndWiki.css';
+import MoneyBar from '../../components/MoneyBar';
 
 function SyntIdentityTheft() {
     return (
         <div className="fraud-container">
-            <div className="header">
+            <div className="topbar">
+            <div className="topbar-group">
                 <Link to="/fraudwiki" className="icon-button" title="Back">
                     <span className="material-symbols-outlined">arrow_back</span>
                 </Link>
+            </div>
+            <MoneyBar />
+            <div className="topbar-group"></div>
+            </div>
+            <div className="header">
+
                 <h1>Synthetic Identity Theft</h1>
                 <div></div>
             </div>
@@ -21,6 +29,12 @@ function SyntIdentityTheft() {
                         fabricated personal information. Criminals build credit histories with these identities 
                         and use them to commit fraud. Because no single victim experiences the full impact, 
                         this type of fraud can go undetected for years.
+                    </p>
+                    <br />
+                    <p>
+                        <a href="https://www.equifax.com/personal/education/identity-theft/articles/-/learn/synthetic-identity-theft/" target="_blank" rel="noopener noreferrer">
+                            Reference: Synthetic Identity Theft
+                        </a>.
                     </p>
                     <br />
                 </div>
@@ -49,8 +63,12 @@ function SyntIdentityTheft() {
                 <div className="description-card">
                     <h3>Primary Defenses:</h3>
                     <ul>
-                        <li>Biometric verification and document authentication</li>
-                        <li>Enhanced credit monitoring systems</li>
+                        <li>
+                            <Link to="/defenses/BackgroundChecks">Background Checks</Link>
+                        </li>
+                        <li>
+                            <Link to="/defenses/RegularPasswordChanges">Regular Password Changes</Link>
+                        </li>
                     </ul>
                 </div>
             </div>

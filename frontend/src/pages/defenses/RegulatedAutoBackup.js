@@ -1,23 +1,88 @@
 import { Link } from 'react-router-dom';
-import iconBackArrow from '../../images/icons/back_arrow.png';
+import { useDefenseOperations } from '../../hooks/defenseHooks.js';
 import '../../styles/ui.css';
 import '../../styles/shopAndWiki.css';
+import MoneyBar from '../../components/MoneyBar';
 
 function RegulatedAutoBackup() {
+    const { defense, loading, actionLoading, error, successMessage, handleBuy, handleUpgrade } = useDefenseOperations('automatedBackups');
+    
+    function getDefenseLevel() {
+        return defense?.displayLevel || 0;
+    }
+
+    function getUpgradeCost() {
+        return defense?.nextActionCost || 0;
+    }
+
+    function handleUpgradeAction() {
+        if (!defense) return;
+
+        if (defense.isOwned) {
+            handleUpgrade();
+        } else {
+            handleBuy();
+        }
+    }
+
+    const currentLevel = getDefenseLevel();
+    const upgradeCost = getUpgradeCost();
+    const isOwned = defense?.isOwned || false;
+    const isMaxLevel = defense?.isMaxLevel || false;
+
+    // loading state
+    if (loading) {
+        return (
+            <div className="shop-container">
+                <div className="content-container">
+                    <div className="description-card">Loading defense data...</div>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="shop-container">
-            
-            <div className="header">
+            <div className="topbar">
+            <div className="topbar-group">
                 <Link to="/defenseshop" className="icon-button" title="Back">
                     <span className="material-symbols-outlined">arrow_back</span>
                 </Link>
+            </div>
+            <MoneyBar />
+            <div className="topbar-group"></div>
+            </div>
+            
+            <div className="header">
+
                 <h1>Regulated Auto Backup</h1>
                 <div></div>
             </div>
+
             <div className="content-container">
+                {/* error display */}
+                {error && (
+                    <div className="description-card" style={{ backgroundColor: '#f8d7da', color: '#721c24' }}>
+                        Error: {error}
+                    </div>
+                )}
+
+                {/* success display */}
+                {successMessage && (
+                    <div className="description-card" style={{ backgroundColor: '#d4edda', color: '#155724' }}>
+                        {successMessage}
+                    </div>
+                )}
+
                 <div className="description-card">
                     <p>
                         Regulated automated backups involve systematic, scheduled creation of data copies following established policies and procedures. In the event of ransomware encryption, organizations can restore systems and data from clean backups rather than paying ransom demands.
+                    </p>
+                    <br />
+                    <p>
+                        <a href="https://www.techtarget.com/searchdatabackup/tip/Automated-backup-How-it-works-and-why-you-should-use-it" target="_blank" rel="noopener noreferrer">
+                            Reference: Regulated Automated Backups
+                        </a>.
                     </p>
                 </div>
 
@@ -37,6 +102,38 @@ function RegulatedAutoBackup() {
                             <Link to="/frauds/Ransomware">Ransomware</Link>
                         </li>
                     </ul>
+                </div>
+                
+                <div className="upgrade-section">
+                    <div className="upgrade-header">
+                        <h3>Defense Level: {currentLevel}</h3>
+                        <p>Status: {isOwned ? 'Owned' : 'Not Owned'}</p>
+                    </div>
+                    
+                    <div className="upgrade-info">
+                        <div className="upgrade-details">
+                            <span className="upgrade-cost">Cost: ${upgradeCost.toLocaleString()}</span>
+                            <span className="upgrade-level">
+                                {isOwned 
+                                    ? `Next: Level ${currentLevel + 1}`
+                                    : 'Purchase to Own'
+                                }
+                            </span>
+                        </div>
+                        
+                        <button 
+                            className="upgrade-button"
+                            onClick={handleUpgradeAction}
+                            disabled={actionLoading || isMaxLevel}
+                        >
+                            {actionLoading 
+                                ? (isOwned ? 'Upgrading...' : 'Purchasing...')
+                                : isMaxLevel 
+                                    ? 'Max Level Reached' 
+                                    : (isOwned ? 'Upgrade Defense' : 'Purchase Defense')
+                            }
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

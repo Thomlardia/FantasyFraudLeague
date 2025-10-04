@@ -2,14 +2,22 @@ import { Link } from 'react-router-dom';
 import iconBackArrow from '../../images/icons/back_arrow.png'
 import '../../styles/ui.css';
 import '../../styles/shopAndWiki.css';
+import MoneyBar from '../../components/MoneyBar';
 
 function SimSwap() {
     return (
         <div className="fraud-container">
-            <div className="header">
+            <div className="topbar">
+            <div className="topbar-group">
                 <Link to="/fraudwiki" className="icon-button" title="Back">
                     <span className="material-symbols-outlined">arrow_back</span>
                 </Link>
+            </div>
+            <MoneyBar />
+            <div className="topbar-group"></div>
+            </div>
+            <div className="header">
+
                 <h1>Sim Swap</h1>
                 <div></div>
             </div>
@@ -21,6 +29,12 @@ function SimSwap() {
                         to their own SIM card. This allows them to intercept calls and text messages, 
                         including one-time passcodes for account authentication, 
                         enabling financial theft or account takeovers.
+                    </p>
+                    <br />
+                    <p>
+                        <a href="https://www.capitecbank.co.za/fraud-centre/sim-swap-fraud/" target="_blank" rel="noopener noreferrer">
+                            Reference: Sim Swap
+                        </a>.
                     </p>
                     <br />
                 </div>

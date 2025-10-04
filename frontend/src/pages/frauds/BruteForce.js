@@ -2,14 +2,22 @@ import { Link } from 'react-router-dom';
 import iconBackArrow from '../../images/icons/back_arrow.png'
 import '../../styles/ui.css';
 import '../../styles/shopAndWiki.css';
+import MoneyBar from '../../components/MoneyBar';
 
 function BruteForce() {
     return (
         <div className="fraud-container">
-            <div className="header">
+            <div className="topbar">
+            <div className="topbar-group">
                 <Link to="/fraudwiki" className="icon-button" title="Back">
                     <span className="material-symbols-outlined">arrow_back</span>
                 </Link>
+            </div>
+            <MoneyBar />
+            <div className="topbar-group"></div>
+            </div>
+            <div className="header">
+
                 <h1>Brute Force</h1>
                 <div></div>
             </div>
@@ -22,6 +30,12 @@ function BruteForce() {
                         It exploits the fact that many users reuse the same credentials 
                         across multiple services, making even small success rates 
                         profitable for attackers.
+                    </p>
+                    <br />
+                    <p>
+                        <a href="https://owasp.org/www-community/attacks/Credential_stuffing" target="_blank" rel="noopener noreferrer">
+                            Reference: Brute Force
+                        </a>.
                     </p>
                     <br />
                 </div>

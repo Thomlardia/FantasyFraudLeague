@@ -40,7 +40,7 @@ export default function AuthForm({ mode = "login", redirectTo = "/home" }) {
   };
 
   return (
-    <form onSubmit={onSubmit} className="auth-form" style={{ display: "flex", flexDirection: "column", gap: "16px", width: "100%", maxWidth: "320px" }}>
+    <form onSubmit={onSubmit} className="auth-form">
       {mode === "signup" && (
         <input
           placeholder="Display name"
@@ -68,7 +68,6 @@ export default function AuthForm({ mode = "login", redirectTo = "/home" }) {
         type="submit" 
         disabled={loading}
         className="splash-button primary"
-        style={{ marginTop: "8px" }}
       >
         {loading ? "Please wait…" : mode === "signup" ? "Create account" : "Log in"}
       </button>
@@ -77,7 +76,6 @@ export default function AuthForm({ mode = "login", redirectTo = "/home" }) {
           type="button" 
           onClick={onForgot} 
           className="splash-button secondary"
-          style={{ marginTop: "8px" }}
         >
           Forgot password?
         </button>

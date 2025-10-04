@@ -11,10 +11,14 @@ function Hello() {
       
       <div className="splash-welcome">WELCOME TO</div>
       
-      <div className="splash-main-title">
-        <span>FANTASY</span>
-        <span>FRAUD</span>
-        <span>LEAGUE</span>
+      <div className="title-section">
+        <div className="spacer"></div>
+        <div className="splash-main-title">
+          <span>FANTASY</span>
+          <span>FRAUD</span>
+          <span>LEAGUE</span>
+        </div>
+        <div className="spacer"></div>
       </div>
       
       <div className="splash-buttons">

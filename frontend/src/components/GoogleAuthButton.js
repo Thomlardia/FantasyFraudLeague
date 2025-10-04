@@ -24,12 +24,11 @@ export default function GoogleAuthButton({ text = "Continue with Google", redire
   };
 
   return (
-    <div className="auth-form" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "16px" }}>
+    <div className="auth-form">
       <button 
         onClick={handleClick} 
         disabled={loading}
         className="splash-button secondary"
-        style={{ minWidth: "280px" }}
       >
         {loading ? "Please wait…" : text}
       </button>

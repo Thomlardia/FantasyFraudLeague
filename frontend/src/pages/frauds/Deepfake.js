@@ -1,14 +1,22 @@
 import { Link } from 'react-router-dom';
 import '../../styles/ui.css';
 import '../../styles/shopAndWiki.css';
+import MoneyBar from '../../components/MoneyBar';
 
 function Deepfake() {
     return (
         <div className="fraud-container">
-            <div className="header">
+            <div className="topbar">
+            <div className="topbar-group">
                 <Link to="/fraudwiki" className="icon-button" title="Back">
                     <span className="material-symbols-outlined">arrow_back</span>
                 </Link>
+            </div>
+            <MoneyBar />
+            <div className="topbar-group"></div>
+            </div>
+            <div className="header">
+
                 <h1>Deepfake</h1>
                 <div></div>
             </div>
@@ -21,6 +29,12 @@ function Deepfake() {
                         generative adversarial networks (GANs) to create realistic fake content. 
                         Attackers typically target high-value individuals like CEOs or trusted contacts 
                         to authorize fraudulent transactions or gain access to sensitive information.
+                    </p>
+                    <br />
+                    <p>
+                        <a href="https://www.feedzai.com/blog/deepfake-fraud/" target="_blank" rel="noopener noreferrer">
+                            Reference: Deepfake
+                        </a>.
                     </p>
                     <br />
                 </div>
@@ -54,7 +68,7 @@ function Deepfake() {
                             <Link to="/defenses/VerificationProtocols">Verification Protocols</Link>
                         </li>
                         <li>
-                            <Link to="/defenses/TamperProofSeals">Tamper Proof Seals</Link>
+                            <Link to="/defenses/DeepfakeDetection">Deepfake Detection</Link>
                         </li>
                     </ul>
                 </div>

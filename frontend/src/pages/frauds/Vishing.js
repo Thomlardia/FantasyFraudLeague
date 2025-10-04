@@ -2,14 +2,22 @@ import { Link } from 'react-router-dom';
 import iconBackArrow from '../../images/icons/back_arrow.png'
 import '../../styles/ui.css';
 import '../../styles/shopAndWiki.css';
+import MoneyBar from '../../components/MoneyBar';
 
 function Vishing() {
     return (
         <div className="fraud-container">
-            <div className="header">
+            <div className="topbar">
+            <div className="topbar-group">
                 <Link to="/fraudwiki" className="icon-button" title="Back">
                     <span className="material-symbols-outlined">arrow_back</span>
                 </Link>
+            </div>
+            <MoneyBar />
+            <div className="topbar-group"></div>
+            </div>
+            <div className="header">
+
                 <h1>Vishing</h1>
                 <div></div>
             </div>
@@ -21,6 +29,12 @@ function Vishing() {
                         revealing sensitive information or performing actions that compromise security. 
                         Attackers often exploit trust in voice conversations, using caller ID spoofing 
                         and social engineering tactics such as urgency, fear, or authority.
+                    </p>
+                    <br />
+                    <p>
+                        <a href="https://www.terranovasecurity.com/solutions/security-awareness-training/what-is-vishing" target="_blank" rel="noopener noreferrer">
+                            Reference: Vishing
+                        </a>.
                     </p>
                     <br />
                 </div>

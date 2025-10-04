@@ -210,7 +210,7 @@
 
 /* Level Indicator (Shop Only) */
 .card-level {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Audiowide', cursive;
   font-size: 14px;
   font-weight: 500;
   color: #6b7280;
@@ -376,14 +376,14 @@
 
 .description-card h3 {
   margin: 0 0 10px 0;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Audiowide', cursive;
   font-size: 18px;
   font-weight: 800;
   color: #111827;
 }
 
 .description-card p, .description-card li {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Audiowide', cursive;
   font-size: 15px;
   line-height: 1.6;
   color: #1f2937;
@@ -438,5 +438,359 @@
     flex-direction: column;
     gap: 12px;
     align-items: stretch;
+  }
+}
+
+/* Upgrade Section Styles for Defense Pages */
+.upgrade-section {
+  background: rgba(255, 255, 255, 0.98);
+  color: #1a1a2e;
+  border-radius: 14px;
+  border: 2px solid transparent;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.15);
+  padding: 20px;
+  margin-top: 16px;
+  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+}
+
+.upgrade-section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+  border-color: rgba(5, 150, 105, 0.3);
+}
+
+.upgrade-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.upgrade-header h3 {
+  margin: 0 0 8px 0;
+  font-family: 'Audiowide', cursive;
+  font-size: 20px;
+  font-weight: 800;
+  color: #111827;
+}
+
+.upgrade-header p {
+  margin: 0;
+  font-family: 'Audiowide', cursive;
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 1.4;
+}
+
+.upgrade-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+.upgrade-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: center;
+}
+
+.upgrade-cost {
+  font-family: 'Audiowide', cursive;
+  font-size: 16px;
+  font-weight: 700;
+  color: #059669;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.upgrade-level {
+  font-family: 'Audiowide', cursive;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.upgrade-button {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-family: 'Audiowide', cursive;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 200ms ease;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+  min-width: 200px;
+}
+
+.upgrade-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #047857 0%, #065f46 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(5, 150, 105, 0.4);
+}
+
+.upgrade-button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.upgrade-button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(5, 150, 105, 0.3);
+}
+
+/* Responsive design for upgrade section */
+@media (max-width: 768px) {
+  .upgrade-section {
+    padding: 16px;
+  }
+  
+  .upgrade-header h3 {
+    font-size: 18px;
+  }
+  
+  .upgrade-header p {
+    font-size: 13px;
+  }
+  
+  .upgrade-button {
+    font-size: 14px;
+    padding: 10px 20px;
+    min-width: 180px;
+  }
+}
+
+/* Leaderboard Styles */
+.leaderboard-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px 40px 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.leaderboard-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: 2px solid transparent;
+  transition: all 200ms ease;
+}
+
+.leaderboard-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.leaderboard-header {
+  text-align: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid rgba(26, 26, 46, 0.1);
+}
+
+.leaderboard-subtitle {
+  font-family: 'Audiowide', cursive;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.leaderboard-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.leaderboard-row {
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+  align-items: center;
+  padding: 12px 16px;
+  background: rgba(26, 26, 46, 0.02);
+  border-radius: 8px;
+  border: 1px solid rgba(26, 26, 46, 0.05);
+  transition: all 150ms ease;
+  gap: 16px;
+}
+
+.leaderboard-row:hover {
+  background: rgba(26, 26, 46, 0.05);
+  transform: translateX(4px);
+  border-color: rgba(26, 26, 46, 0.1);
+}
+
+.leaderboard-row:nth-child(1) {
+  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+  border-color: #ffd700;
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+}
+
+.leaderboard-row:nth-child(2) {
+  background: linear-gradient(135deg, #c0c0c0 0%, #e5e5e5 100%);
+  border-color: #c0c0c0;
+  box-shadow: 0 2px 8px rgba(192, 192, 192, 0.3);
+}
+
+.leaderboard-row:nth-child(3) {
+  background: linear-gradient(135deg, #cd7f32 0%, #daa520 100%);
+  border-color: #cd7f32;
+  box-shadow: 0 2px 8px rgba(205, 127, 50, 0.3);
+}
+
+.rank-column {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rank-number {
+  font-family: 'Audiowide', cursive;
+  font-size: 18px;
+  font-weight: 800;
+  color: #1a1a2e;
+  background: rgba(26, 26, 46, 0.1);
+  padding: 6px 12px;
+  border-radius: 20px;
+  min-width: 36px;
+  text-align: center;
+}
+
+.leaderboard-row:nth-child(1) .rank-number,
+.leaderboard-row:nth-child(2) .rank-number,
+.leaderboard-row:nth-child(3) .rank-number {
+  background: rgba(26, 26, 46, 0.2);
+  color: #1a1a2e;
+}
+
+.player-column {
+  display: flex;
+  align-items: center;
+}
+
+.player-name {
+  font-family: 'Audiowide', cursive;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a2e;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.score-column {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.player-score {
+  font-family: 'Audiowide', cursive;
+  font-size: 16px;
+  font-weight: 700;
+  color: #059669;
+  background: rgba(5, 150, 105, 0.1);
+  padding: 4px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(5, 150, 105, 0.2);
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  .leaderboard-content {
+    padding: 0 16px 30px 16px;
+  }
+  
+  .leaderboard-card {
+    padding: 20px 16px;
+  }
+  
+  .leaderboard-subtitle {
+    font-size: 18px;
+  }
+  
+  .leaderboard-row {
+    grid-template-columns: 50px 1fr auto;
+    padding: 10px 12px;
+    gap: 12px;
+  }
+  
+  .rank-number {
+    font-size: 16px;
+    padding: 4px 8px;
+    min-width: 32px;
+  }
+  
+  .player-name {
+    font-size: 14px;
+  }
+  
+  .player-score {
+    font-size: 14px;
+    padding: 3px 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .leaderboard-content {
+    padding: 0 12px 24px 12px;
+  }
+  
+  .leaderboard-card {
+    padding: 16px 12px;
+  }
+  
+  .leaderboard-subtitle {
+    font-size: 16px;
+  }
+  
+  .leaderboard-row {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    padding: 12px;
+    gap: 8px;
+    text-align: center;
+  }
+  
+  .rank-column {
+    order: 1;
+    justify-content: center;
+  }
+  
+  .player-column {
+    order: 2;
+    justify-content: center;
+  }
+  
+  .score-column {
+    order: 3;
+    justify-content: center;
+  }
+  
+  .rank-number {
+    font-size: 14px;
+    padding: 3px 6px;
+    min-width: 28px;
+  }
+  
+  .player-name {
+    font-size: 13px;
+  }
+  
+  .player-score {
+    font-size: 13px;
+    padding: 2px 6px;
   }
 }

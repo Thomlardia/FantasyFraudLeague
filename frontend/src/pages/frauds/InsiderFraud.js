@@ -2,14 +2,22 @@ import { Link } from 'react-router-dom';
 import iconBackArrow from '../../images/icons/back_arrow.png'
 import '../../styles/ui.css';
 import '../../styles/shopAndWiki.css';
+import MoneyBar from '../../components/MoneyBar';
 
 function InsiderFraud() {
     return (
         <div className="fraud-container">
-            <div className="header">
+            <div className="topbar">
+            <div className="topbar-group">
                 <Link to="/fraudwiki" className="icon-button" title="Back">
                     <span className="material-symbols-outlined">arrow_back</span>
                 </Link>
+            </div>
+            <MoneyBar />
+            <div className="topbar-group"></div>
+            </div>
+            <div className="header">
+
                 <h1>Insider Fraud</h1>
                 <div></div>
             </div>
@@ -22,6 +30,12 @@ function InsiderFraud() {
                         or data. Insiders may act maliciously for personal gain or unintentionally 
                         cause harm through negligence. Their knowledge of security controls 
                         makes their actions particularly difficult to detect.
+                    </p>
+                    <br />
+                    <p>
+                        <a href="https://www.fraud.net/glossary/internal-fraud-insider-fraud#what-is-insider-fraud" target="_blank" rel="noopener noreferrer">
+                            Reference: Insider Fraud
+                        </a>.
                     </p>
                     <br />
                 </div>

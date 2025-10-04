@@ -21,7 +21,7 @@ run: build
 run-functions:
 	npx firebase-tools emulators:start --only functions
 
-run-hosting:
+run-hosting: build
 	npx firebase-tools emulators:start --only hosting
 
 run-hosting-functions:
@@ -32,6 +32,47 @@ run-front:
 
 run-front-warnings:
 	npm --tracewarnings --prefix frontend start
+
+# ----------DATABASE SEEDING --------
+# Seed commands for development (requries emulator to be running)
+
+EMULATOR_ENV = FIRESTORE_EMULATOR_HOST=localhost:8080 FIREBASE_AUTH_EMULATOR_HOST=localhost:9099
+
+# seed defenses for all users (global)
+seed-global-defenses:
+	$(EMULATOR_ENV) node functions/scripts/seed.js seed global-defense
+
+# seed all users
+seed-users-from-auth:
+	$(EMULATOR_ENV) node functions/scripts/seed.js seed users-from-auth
+
+seed-test-users:
+	$(EMULATOR_ENV) node functions/scripts/seed.js seed test-users
+
+# seed users and defenses
+seed-complete:
+	$(EMULATOR_ENV) node functions/scripts/seed.js seed users-from-auth
+	$(EMULATOR_ENV) node functions/scripts/seed.js seed global-defenses
+
+
+# Complete seed and update process (seed users, defenses, then update summaries)
+seed-complete-with-summaries:
+	$(EMULATOR_ENV) node functions/scripts/seed.js seed users-from-auth
+	$(EMULATOR_ENV) node functions/scripts/seed.js seed global-defenses
+	$(EMULATOR_ENV) node functions/scripts/seed.js update all-users-defense-summaries
+
+# list all users
+list-users:
+	$(EMULATOR_ENV) node functions/scripts/seed.js list users
+
+clear-test-users:
+	$(EMULATOR_ENV) node functions/scripts/seed.js clear users
+
+seed-prod:
+	node functions/scripts/seed.js seed --production --force
+
+seed-prod-global-defenses:
+	node functions/scripts/seed.js seed global-defenses --production --force
 
 # ------------- LINTER --------------
 
@@ -66,3 +107,8 @@ clean-node:
 clean-hard: clean
 	rm -f package-lock.json frontend/package-lock.json functions/package-lock.json
 
+
+# -------- STATS GENERATION ---------
+# Create git statistics (University Standard)
+stats:
+	gitinspector --grading --format htmlembedded > git-stats/stats.html

@@ -1,29 +1,31 @@
 import { Link } from 'react-router-dom';
+import { useAuth } from "../auth/useAuth";
 import '../styles/ui.css';
 import iconClose from '../images/icons/close.png';
 import iconLeaderboard from '../images/icons/leaderboard.png';
 import iconHelp from '../images/icons/help.png';
 import iconSettings from '../images/icons/settings.png';
-import iconMoneyDollar from '../images/icons/money_dollar.png';
+import MoneyBarApi from '../components/MoneyBarApi';
 
 function Home() {
+    const { hasRole, logout } = useAuth();
     return (
         <div className="page">
             <div className="topbar">
                 <div className="topbar-group">
-                    <Link to="/" className="icon-button" title="LogOut">
+                    <button
+                        type="button"
+                        className="icon-button"
+                        title="Log out"
+                        onClick={logout}
+                    >
                         <img src={iconClose} alt="Log out" className="icon-img" />
-                    </Link>
+                    </button>
                     <Link to="/leaderboard" className="icon-button" title="Leaderboard">
                         <img src={iconLeaderboard} alt="Leaderboard" className="icon-img" />
                     </Link>
                 </div>
-                <div className="money-display" title="Bank">
-                    <span className="money-icon">
-                        <img src={iconMoneyDollar} alt="Bank" className="icon-img--small" />
-                    </span>
-                    <span>$1,000,000</span>
-                </div>
+                <MoneyBarApi />
                 <div className="topbar-group">
                     <Link to="/help" className="icon-button" title="Help">
                         <img src={iconHelp} alt="Help" className="icon-img" />
@@ -31,6 +33,11 @@ function Home() {
                     <Link to="/settings" className="icon-button" title="Settings">
                         <img src={iconSettings} alt="Settings" className="icon-img" />
                     </Link>
+                    {hasRole("admin") && (
+                        <Link to="/admin" className="icon-button" title="Admin">
+                            <span style={{ color: 'white', fontSize: 12 }}>Admin</span>
+                        </Link>
+                    )}
                 </div>
             </div>
 

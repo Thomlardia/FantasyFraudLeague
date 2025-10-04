@@ -1,14 +1,22 @@
 import { Link } from 'react-router-dom';
 import '../../styles/ui.css';
 import '../../styles/shopAndWiki.css';
+import MoneyBar from '../../components/MoneyBar';
 
 function Phishing() {
     return (
         <div className="fraud-container">
-            <div className="header">
+            <div className="topbar">
+            <div className="topbar-group">
                 <Link to="/fraudwiki" className="icon-button" title="Back">
                     <span className="material-symbols-outlined">arrow_back</span>
                 </Link>
+            </div>
+            <MoneyBar />
+            <div className="topbar-group"></div>
+            </div>
+            <div className="header">
+
                 <h1><span className="title-icon material-symbols-outlined">phishing</span>Phishing</h1>
                 <div></div>
             </div>
@@ -19,6 +27,12 @@ function Phishing() {
                     Phishing is a cybercrime where attackers impersonate legitimate organizations through fraudulent emails, websites, or messages to steal sensitive information such as credentials, personal data or money.
                      Phishing attacks exploit human psychology by creating a sense of urgency or trust. Attackers often replicate the visual design and communication style of trusted brands to deceive victims. These attacks
                       evolved from simple email scams to sophisticated techniques like spear phishing, clone phishing, and whaling, targeting specific individuals or organizations.
+                </p>
+                <br />
+                <p>
+                    <a href="https://www.cloudflare.com/learning/access-management/phishing-attack" target="_blank" rel="noopener noreferrer">
+                        Reference: Phishing
+                    </a>.
                 </p>
                 <br />
                 </div>

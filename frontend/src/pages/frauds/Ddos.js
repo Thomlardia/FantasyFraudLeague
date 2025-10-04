@@ -1,14 +1,22 @@
 import { Link } from 'react-router-dom';
 import '../../styles/ui.css';
 import '../../styles/shopAndWiki.css';
+import MoneyBar from '../../components/MoneyBar';
 
 function Ddos() {
     return (
         <div className="fraud-container">
-            <div className="header">
+            <div className="topbar">
+            <div className="topbar-group">
                 <Link to="/fraudwiki" className="icon-button" title="Back">
                     <span className="material-symbols-outlined">arrow_back</span>
                 </Link>
+            </div>
+            <MoneyBar />
+            <div className="topbar-group"></div>
+            </div>
+            <div className="header">
+
                 <h1>Ddos</h1>
                 <div></div>
             </div>
@@ -23,6 +31,12 @@ function Ddos() {
                         Modern attacks can reach hundreds of gigabits per second and may employ volumetric, 
                         protocol, or application-layer techniques, often using amplification methods 
                         to multiply attack traffic.
+                    </p>
+                    <br />
+                    <p>
+                        <a href="https://www.cloudflare.com/learning/ddos/what-is-a-ddos-attack/" target="_blank" rel="noopener noreferrer">
+                            Reference: DDoS
+                        </a>.
                     </p>
                     <br />
                 </div>

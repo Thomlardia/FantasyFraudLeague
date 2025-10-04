@@ -2,14 +2,22 @@ import { Link } from 'react-router-dom';
 import iconBackArrow from '../../images/icons/back_arrow.png'
 import '../../styles/ui.css';
 import '../../styles/shopAndWiki.css';
+import MoneyBar from '../../components/MoneyBar';
 
 function AccountTakeover() {
     return (
         <div className="fraud-container">
-            <div className="header">
+            <div className="topbar">
+            <div className="topbar-group">
                 <Link to="/fraudwiki" className="icon-button" title="Back">
                     <span className="material-symbols-outlined">arrow_back</span>
                 </Link>
+            </div>
+            <MoneyBar />
+            <div className="topbar-group"></div>
+            </div>
+            <div className="header">
+
                 <h1>Account Takeover</h1>
                 <div></div>
             </div>
@@ -21,6 +29,12 @@ function AccountTakeover() {
                         social engineering, or exploitation of weak security mechanisms. Once an attacker gains 
                         access, they can steal data, make fraudulent purchases, or leverage the account 
                         to launch further attacks.
+                    </p>
+                    <br />
+                    <p>
+                        <a href="https://www.proofpoint.com/us/threat-reference/account-takeover-fraud" target="_blank" rel="noopener noreferrer">
+                            Reference: Account Takeover
+                        </a>.
                     </p>
                     <br />
                 </div>
