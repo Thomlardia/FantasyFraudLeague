@@ -2,6 +2,7 @@ import { onCall, HttpsError } from "firebase-functions/v2/https";
 import { requireAuth, requireVerified, requireAppCheck } from "../common/authzn.js";
 import { apiGetUserBalance, apiUpdateUserBalance } from "../../domains/wallet/api.js";
 import { apiGetUserDefenses, apiBuyDefense, apiUpgradeDefense } from "../../domains/defense/api.js";
+import { apiGetLeaderboard, apiGetLeaderboardWithUser, apiGetUserRank } from "../../domains/leaderboard/api.js";
 
 // Using your proper (request) signature with AppCheck enforcement
 export const user_getBalance = onCall({ region: "africa-south1", enforceAppCheck: true }, async (request) => {
@@ -50,3 +51,15 @@ export const user_upgradeDefense = onCall({ region: "africa-south1", enforceAppC
   }
   return apiUpgradeDefense(request.auth.uid, defenseId);
 });
+
+export const user_getLeaderboardWithUser = onCall({ region: "africa-south1", enforceAppCheck:true }, async (request) => {
+  requireAppCheck(request);
+  requireVerified(request);
+  return apiGetLeaderboardWithUser(ctx.auth.uid);
+});
+
+export const user_getUserRank = onCall({ region: "africa-south1", enforceAppCheck: true }, async (request) => {
+  requireAppCheck(request);
+  requireVerified(request);
+  return apiGetUserRank(request.auth.uid);
+})
