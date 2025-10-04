@@ -2,6 +2,7 @@ import { onCall, HttpsError } from "firebase-functions/v2/https";
 import { requireAuth, requireVerified } from "../common/authzn.js";
 import { apiGetUserBalance } from "../../domains/wallet/api.js";
 import { apiGetUserDefenses, apiBuyDefense, apiUpgradeDefense } from "../../domains/defense/api.js";
+import { apiGetLeaderboard, apiGetLeaderboardWithUser, apiGetUserRank } from "../../domains/leaderboard/api.js";
 
 export const user_getBalance = onCall({ region: "africa-south1" }, async (_req, ctx) => {
   requireAuth(ctx);
@@ -30,3 +31,18 @@ export const user_upgradeDefense = onCall({ region: "africa-south1" }, async (re
   }
   return apiUpgradeDefense(ctx.auth.uid, defenseId);
 });
+
+export const user_getLeaderboard = onCall({ region: "africa-south1" }, async (_req, ctx) => {
+  requireAuth(ctx);
+  return apiGetLeaderboard(ctx.auth.uid);
+});
+
+export const user_getLeaderboardWithUser = onCall({ region: "africa-south1" }, async (_req, ctx) => {
+  requireAuth(ctx);
+  return apiGetLeaderboardWithUser(ctx.auth.uid);
+});
+
+export const user_getUserRank = onCall({ region: "africa-south1" }, async (_req, ctx) => {
+  requireAuth(ctx);
+  return apiGetUserRank(ctx.auth.uid);
+})

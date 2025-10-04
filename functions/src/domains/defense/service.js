@@ -6,6 +6,7 @@ import {
   getUserOwnedDefenses 
 } from "./repo.js";
 import { db } from "../../infra/db/index.js";
+import { FieldValue } from "firebase-admin/firestore";
 
 // in-memory cache for defense templates
 let defenseTemplatesCache = null;
@@ -163,11 +164,18 @@ export async function buyDefense(userId, defenseId) {
       }
     };
 
+    // update total spent and net worth
+
+    const newTotalSpent = (userData.totalSpent) + buyCost
+    const newNetWorth = newBalance + newTotalSpent;
+
     transaction.update(userDocRef, {
       balance: newBalance,
       ownedDefensesList: newOwnedList,
       ownedDefenses: newOwnedDefenses,
       totalDefensesOwned: newOwnedList.length,
+      totalSpent: newTotalSpent,
+      netWorth: newNetWorth,
     });
     
     return {
@@ -247,11 +255,17 @@ export async function upgradeDefense(userId, defenseId) {
       }
     };
 
+    // update total spent and net worth
+    const newTotalSpent = (userData.totalSpent) + upgradeCost;
+    const newNetWorth = newBalance + newTotalSpent;
+
     transaction.update(userDocRef, {
       balance: newBalance,
       ownedDefensesList: newOwnedList,
       ownedDefenses: newOwnedDefenses,
       totalDefensesOwned: newOwnedList.length,
+      totalSpent: newTotalSpent,
+      netWorth: newNetWorth,
     });
     
     return {
