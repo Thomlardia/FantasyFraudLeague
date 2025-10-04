@@ -23,7 +23,7 @@ const prefetchSmall = {
   "/defenses/BackgroundChecks":          () => import("../pages/defenses/BackgroundChecks"),
   "/defenses/HttpsAndEncryption":        () => import("../pages/defenses/HttpsAndEncryption"),
   "/defenses/VpnUsage":                  () => import("../pages/defenses/VpnUsage"),
-  "defenses/ApplicationSandboxing":      () => import("../pages/defenses/ApplicationSandboxing"),
+  "/defenses/ApplicationSandboxing":      () => import("../pages/defenses/ApplicationSandboxing"),
 
   // --- FRAUDS ---
   "/frauds/Phishing":                () => import("../pages/frauds/Phishing"),

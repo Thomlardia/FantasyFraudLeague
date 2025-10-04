@@ -2,6 +2,9 @@
 // https://firebase.google.com/docs/web/setup#available-libraries
 import { initializeApp } from "firebase/app";
 
+// Adding SDK for the appcheck service
+import { initializeAppCheck, ReCaptchaEnterpriseProvider } from "firebase/app-check";
+
 // Adding SDK for the authentication service
 import { getAuth, GoogleAuthProvider, connectAuthEmulator } from "firebase/auth";
 
@@ -23,6 +26,14 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+// Initialize Firebase App Check (reCAPTCHA Enterprise) with auto refresh
+// this is a public site key
+const appCheckSiteKey = "6Le9b9QrAAAAAGA5Hh0rxlqA_6GqQATw9r6V3EeR";
+export const appCheck = initializeAppCheck(app, {
+  provider: new ReCaptchaEnterpriseProvider(appCheckSiteKey),
+  isTokenAutoRefreshEnabled: true,
+});
 
 // Initialize Firebase Authentication and get a reference to the service
 export const auth = getAuth(app);
