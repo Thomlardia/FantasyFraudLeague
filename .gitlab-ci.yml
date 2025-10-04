@@ -1,13 +1,33 @@
-image: node:22
+stages:
+  - build
+  - test
 
-test:
+default:
+  image: node:22
   tags:
     - shared-docker-runner
 
+build:
+  stage: build
   before_script:
     - apt-get update -qy && apt-get install -y default-jdk
     - npm install -g firebase-tools
+  script:
+    - echo "Installing dependencies"
     - cd functions && npm install && cd ..
+    - echo "Build completed successfully"
+  artifacts:
+    paths:
+      - functions/node_modules/
+    expire-in: 1 hour
+
+test:
+  stage: test
+  dependencies:
+    - build
+  before_script:
+    - apt-get update -qy && apt-get install -y default-jdk
+    - npm install -g firebase-tools
   script:
     - firebase emulators:start --project=test-projtect --only firestore,auth &
     - sleep 20
