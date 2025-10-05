@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom';
 import '../styles/shopAndWiki.css';
 import fflLogo from '../images/ffl_logo_ghost.png';
 import MoneyBar from '../components/MoneyBar';
-import { useUserDefenses } from '../hooks/shopHooks';
+import { useDefense } from '../contexts/DefenseContext';
 
 function DefenseShop() {
-    const { defenses, loading } = useUserDefenses();
+    const { defenses, loading } = useDefense();
 
     const defenseItems = [
         { title: "Multi-Factor Authentication (MFA)", icon: "security", path: "/defenses/MultiFactorAuth", id: "mfa" },

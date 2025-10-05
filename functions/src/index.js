@@ -4,7 +4,6 @@
 // Callable function exports (user)
 export {
   user_getBalance,
-  user_updateBalance,
   user_getDefenses,
   user_buyDefense,
   user_upgradeDefense,
