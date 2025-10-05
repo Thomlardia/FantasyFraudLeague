@@ -1,7 +1,7 @@
 /**
  * Triggers for updating the wallet balance of a user
  */
-import { apiGetUserBalance, apiUpdateUserBalance } from "../../../domains/wallet/api.js"; 
+import { apiGetUserBalance, apiUpdateUserBalance } from "../../domains/wallet/api.js"; 
 
 /**
  * This function still needs to be changed after calculating the actual damage, for now it assumes no defenses.

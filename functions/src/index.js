@@ -16,4 +16,4 @@ export {
 } from "./apps/admin-api/app.js";
 
 // Background triggers
-export { userDocOnCreate } from "./apps/user-api/triggers/identity.onUserCreated.js";
+export { userDocOnCreate } from "./apps/triggers/identity.onUserCreated.js";
