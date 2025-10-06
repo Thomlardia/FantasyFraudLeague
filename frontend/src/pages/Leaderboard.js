@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import '../styles/shopAndWiki.css';
-import fflLogo from '../images/ffl_logo_ghost.png';
+import PageHeader from '../components/PageHeader';
 import { useLeaderboard } from '../contexts/LeaderboardContext';
 
 function Leaderboard() {
@@ -15,15 +14,7 @@ function Leaderboard() {
     if (loading) {
         return (
             <div className="shop-wiki-container">
-                <div className="shop-wiki-header">
-                    <Link to="/home" className="back-button" title="Back">
-                        <span className="material-symbols-outlined">arrow_back</span>
-                    </Link>
-                    <h1 className="shop-wiki-title">
-                        <img src={fflLogo} alt="FFL Shield Logo" className="title-icon" />
-                        Leaderboard
-                    </h1>
-                </div>
+                <PageHeader title="Leaderboard" backPath="/home" />
                 <p style={{ textAlign: 'center', marginTop: '2rem' }}>Loading leaderboard...</p>
             </div>
         );
@@ -32,15 +23,7 @@ function Leaderboard() {
     if (error) {
         return (
             <div className="shop-wiki-container">
-                <div className="shop-wiki-header">
-                    <Link to="/home" className="back-button" title="Back">
-                        <span className="material-symbols-outlined">arrow_back</span>
-                    </Link>
-                    <h1 className="shop-wiki-title">
-                        <img src={fflLogo} alt="FFL Shield Logo" className="title-icon" />
-                        Leaderboard
-                    </h1>
-                </div>
+                <PageHeader title="Leaderboard" backPath="/home" />
                 <p style={{ textAlign: 'center', marginTop: '2rem', color: 'red' }}>Error: {error}</p>
             </div>
         );
@@ -48,16 +31,7 @@ function Leaderboard() {
 
     return (
         <div className="shop-wiki-container">
-            <div className="shop-wiki-header">
-                <Link to="/home" className="back-button" title="Back">
-                    <span className="material-symbols-outlined">arrow_back</span>
-                </Link>
-
-                <h1 className="shop-wiki-title">
-                    <img src={fflLogo} alt="FFL Shield Logo" className="title-icon" />
-                    Leaderboard
-                </h1>
-
+            <PageHeader title="Leaderboard" backPath="/home">
                 <button
                     onClick={refreshLeaderboard}
                     className="refresh-button"
@@ -66,7 +40,7 @@ function Leaderboard() {
                 >
                     <span className="material-symbols-outlined">refresh</span>
                 </button>
-            </div>
+            </PageHeader>
 
             <div className="leaderboard-content">
                 <div className="leaderboard-card">

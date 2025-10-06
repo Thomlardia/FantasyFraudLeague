@@ -1,10 +1,13 @@
-import { Link } from 'react-router-dom';
+import '../styles/ui.css';
+import PageHeader from '../components/PageHeader';
 
 function Help() {
     return (
-        <div>
-            <h1>Help PAGE</h1>
-            <Link to="/home">BACK</Link>
+        <div className="page">
+            <PageHeader title="Help" backPath="/home" />
+            <main className="home-main">
+                <p>Help page (to be implemented)</p>
+            </main>
         </div>
     );
 }
