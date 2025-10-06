@@ -1,6 +1,6 @@
 import { onCall, HttpsError } from "firebase-functions/v2/https";
 import { requireAuth, requireVerified, requireAppCheck } from "../common/authzn.js";
-import { apiGetUserBalance, apiUpdateUserBalance } from "../../domains/wallet/api.js";
+import { apiGetUserBalance } from "../../domains/wallet/api.js";
 import { apiGetUserDefenses, apiBuyDefense, apiUpgradeDefense } from "../../domains/defense/api.js";
 import { apiGetLeaderboard, apiGetLeaderboardWithUser, apiGetUserRank } from "../../domains/leaderboard/api.js";
 
@@ -12,17 +12,6 @@ export const user_getBalance = onCall({ region: "africa-south1", enforceAppCheck
   const balance = await apiGetUserBalance(request.auth.uid);
   console.log("user_getBalance returning:", balance, "type:", typeof balance);
   return balance;
-});
-
-// Adding the user_updateBalance function from develop, but with proper signature
-export const user_updateBalance = onCall({ region: "africa-south1", enforceAppCheck: true }, async (request) => {
-  requireAppCheck(request);
-  requireAuth(request);
-  const { newBalance } = request.data || {};
-  if (typeof newBalance !== "number" || isNaN(newBalance)) {
-    throw new HttpsError("invalid-argument", "newBalance must be a valid number");
-  }
-  return apiUpdateUserBalance(request.auth.uid, newBalance);
 });
 
 // All defense functions use proper (request) signature with AppCheck

@@ -5,7 +5,7 @@ import iconClose from '../images/icons/close.png';
 import iconLeaderboard from '../images/icons/leaderboard.png';
 import iconHelp from '../images/icons/help.png';
 import iconSettings from '../images/icons/settings.png';
-import MoneyBarApi from '../components/MoneyBarApi';
+import MoneyBar from '../components/MoneyBar';
 
 function Home() {
     const { hasRole, logout } = useAuth();
@@ -25,7 +25,7 @@ function Home() {
                         <img src={iconLeaderboard} alt="Leaderboard" className="icon-img" />
                     </Link>
                 </div>
-                <MoneyBarApi />
+                <MoneyBar />
                 <div className="topbar-group">
                     <Link to="/help" className="icon-button" title="Help">
                         <img src={iconHelp} alt="Help" className="icon-img" />

@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { httpsCallable } from 'firebase/functions';
-import { functions } from '../firebase';
+import React from 'react';
+import { useWallet } from '../contexts/WalletContext';
 import iconMoneyDollar from '../images/icons/money_dollar.png';
 
 /**
@@ -14,38 +13,11 @@ function formatMoney(amount) {
 
 /**
  * MoneyBar component that displays the player's current money
- * Refreshes on mount and after updates to show the latest value
+ * Uses WalletContext for global balance state
+ * Automatically refreshes when balance changes via refreshBalance()
  */
 function MoneyBar() {
-  const [balance, setBalance] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    let active = true;
-    const load = async () => {
-      setLoading(true);
-      try {
-        const call = httpsCallable(functions, 'user_getBalance');
-        const res = await call();
-        console.log("user_getBalance response:", res);
-        if (!active) return;
-        const value = typeof res?.data === 'number' ? res.data : 0;
-        setBalance(value);
-      } catch (e) {
-        console.error("MoneyBar error:", e);
-        console.error("Error code:", e.code);
-        console.error("Error message:", e.message);
-        console.error("Error details:", e.details);
-        if (active) setBalance(0);
-      } finally {
-        if (active) setLoading(false);
-      }
-    };
-    load();
-    return () => {
-      active = false;
-    };
-  }, []);
+  const { balance, loading } = useWallet();
 
   return (
     <div className="money-display" title="Bank">
