@@ -17,6 +17,7 @@ export const getTopTen = async() => {
         const user = doc.data();
         // returns inside the map callback
         return {
+            id: doc.id,
             name: user.name,
             rank: index + 1,
             netWorth: user.netWorth 
@@ -32,8 +33,9 @@ export const getTopTen = async() => {
 export const getUserRankByNetWorth = async(userId) => {
     const userDoc = await db.collection('users').doc(userId).get();
 
-    const userData = userDoc.data();
-    const userNetWorth = userData.netWorth;
+    const userData = userDoc.data() || {};
+    const userNetWorth = typeof userData.netWorth === 'number' ? userData.netWorth : 0;
+    const displayName = userData.name || userData.email || userId;
 
     // Count how many users are above this user
     const snapshot = await db.collection('users')
@@ -43,7 +45,7 @@ export const getUserRankByNetWorth = async(userId) => {
     const rank = snapshot.size + 1;
 
     return {
-        name: userData.name,
+        name: displayName,
         rank: rank,
         netWorth: userNetWorth
     };
