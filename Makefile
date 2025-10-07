@@ -14,6 +14,14 @@ install-dependencies:
 build:
 	npm --prefix frontend run build
 
+# ---------- BUILD FRONTEND (Vite) -----------
+
+vbuild:
+	cd frontend && npm run build:vite
+	rm -rf frontend/build
+	mkdir -p frontend/build
+	cp -a frontend/dist/. frontend/build/
+
 # ------------- RUNNING --------------
 run: build
 	npx firebase-tools emulators:start
@@ -27,11 +35,25 @@ run-hosting: build
 run-hosting-functions:
 	npx firebase-tools emulators:start --only hosting,functions
 
+# ------------- RUNNING (Vite) --------------
+
+vrun: vbuild
+	npx firebase-tools emulators:start
+
+vrun-hosting: vbuild
+	npx firebase-tools emulators:start --only hosting
+
+vrun-hosting-functions: vbuild
+	npx firebase-tools emulators:start --only hosting,functions
+
 run-front:
 	npm --prefix frontend start
 
 run-front-warnings:
 	npm --tracewarnings --prefix frontend start
+
+vrun-front:
+	cd frontend && npm run dev
 
 # ----------DATABASE SEEDING --------
 # Seed commands for development (requries emulator to be running)
@@ -99,6 +121,17 @@ deploy-hosting-functions:
 deploy:
 	npx firebase-tools deploy
 
+# ------------- DEPLOY (Vite) --------------
+
+vdeploy-hosting: vbuild
+	npx firebase-tools deploy --only hosting
+
+vdeploy-hosting-functions: vbuild
+	npx firebase-tools deploy --only hosting,functions
+
+vdeploy: vbuild
+	npx firebase-tools deploy
+
 # ------------- CLEAN --------------
 
 clean:
@@ -110,6 +143,10 @@ clean-node:
 # This allows you to reset all the dependency versions
 clean-hard: clean
 	rm -f package-lock.json frontend/package-lock.json functions/package-lock.json
+
+# Vite-specific clean
+vclean:
+	rm -rf frontend/dist frontend/node_modules/.vite
 
 
 # -------- STATS GENERATION ---------

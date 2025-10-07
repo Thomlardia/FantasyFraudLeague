@@ -10,6 +10,13 @@
 
 # production
 /build
+// also ignore Vite production output
+/dist
+
+# Vite cache
+/.vite
+
+# keep local Vite cache only
 
 # misc
 .DS_Store

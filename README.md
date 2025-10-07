@@ -28,3 +28,25 @@ $env:GOOGLE_APPLICATION_CREDENTIALS="C:\Users\trekv\OneDrive\Documenten\ai.stell
 $env:FIRESTORE_EMULATOR_HOST="localhost:8080"
 
 >> $env:FIREBASE_CONFIG="{`"projectId`":`"wario-fantasy-fraud-league`"}"
+
+## Frontend Development (CRA and Vite)
+
+This repo supports running the frontend with either CRA (react-scripts) or Vite.
+
+- CRA (default)
+  - Dev: `make run-front` (or `npm --prefix frontend start`)
+  - Build: `make build` (outputs to `frontend/build/`)
+
+- Vite (optional, faster dev/builds)
+  - Dev: `make vrun-front` (or `npm --prefix frontend run dev`)
+  - Build: `make vbuild` (builds to `frontend/dist/` then copies into `frontend/build/` for Firebase Hosting)
+  - Emulator with Vite build: `make vrun-hosting` or `make vrun`
+
+Environment variables
+- The frontend checks `REACT_APP_USE_EMULATORS=1` at build time. Set it when running locally if needed, e.g.:
+  - `REACT_APP_USE_EMULATORS=1 make vrun-front`
+  - `REACT_APP_USE_EMULATORS=1 make run-front`
+
+Notes
+- Firebase Hosting stays configured to `frontend/build/`. The Vite build flow copies `dist/` into `build/` to remain compatible.
+- Keeping both toolchains is supported but requires avoiding tool-specific config drift. Prefer one for production builds to reduce maintenance.
