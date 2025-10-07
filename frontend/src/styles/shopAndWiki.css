@@ -59,7 +59,7 @@
   color: white;
   font-family: 'Audiowide', cursive;
   font-size: 28px;
-  font-weight: 700;
+  font-weight: 500;
   text-align: center;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   margin: 0;
@@ -69,11 +69,11 @@
 }
 
 .page-header-title-inline {
-  color: white;
+  color: rgba(255, 255, 255, 0.85);
   font-family: 'Audiowide', cursive;
   font-size: 20px;
-  font-weight: 700;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  font-weight: 500;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
   margin: 0;
   white-space: nowrap;
   overflow: hidden;

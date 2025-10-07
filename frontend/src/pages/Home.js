@@ -48,8 +48,14 @@ function Home() {
                 <div className="digital-timer" aria-live="polite">42 SECS</div>
 
                 <div className="cta-row">
-                    <Link className="cta-button" to="/defenseshop">Cyber Defense Shop</Link>
-                    <Link className="cta-button" to="/fraudwiki">Fraud Wiki</Link>
+                    <Link className="cta-button" to="/defenseshop">
+                        Cyber Defense Shop
+                        <span className="material-symbols-outlined">chevron_right</span>
+                    </Link>
+                    <Link className="cta-button" to="/fraudwiki">
+                        Fraud Wiki
+                        <span className="material-symbols-outlined">chevron_right</span>
+                    </Link>
                 </div>
             </main>
         </div>

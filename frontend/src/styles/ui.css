@@ -397,35 +397,100 @@ h1, h2, h3 {
 	color: white;
 }
 
+/* Desktop: Content-based horizontal layout */
 .cta-row {
 	display: flex;
-	gap: 36px;
+	gap: 32px;
 	margin-top: 10px;
-	flex-wrap: wrap;
-	align-items: center;
+	flex-wrap: nowrap;
+	align-items: stretch;
 	justify-content: center;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .cta-button {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	min-width: 240px;
-	padding: 12px 20px;
-	border: 3px solid white;
-	border-radius: 10px;
+	gap: 8px;
+	flex: 0 1 auto;
+	min-width: 280px;
+	padding: 16px 32px;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 12px;
 	text-decoration: none;
 	text-transform: uppercase;
 	letter-spacing: 1px;
-	font-weight: 800;
-	color: white;
-	background: transparent;
-	transition: transform 120ms ease, background 120ms ease;
+	font-weight: 600;
+	color: rgba(255, 255, 255, 0.85);
+	white-space: nowrap;
+	line-height: 1.2;
+
+	/* Glassmorphic styling matching header */
+	background: rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(10px);
+
+	/* Material Design elevation with inset highlight */
+	box-shadow:
+		0 2px 8px rgba(0, 0, 0, 0.15),
+		inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+	transition: all 120ms ease;
+}
+
+/* Tablet: Vertical stack with large margins */
+@media (max-width: 1024px) and (min-width: 769px) {
+	.cta-row {
+		flex-direction: column;
+		padding: 0 80px;
+	}
+
+	.cta-button {
+		width: 100%;
+	}
+}
+
+/* Mobile (portrait and landscape): Vertical stack with medium margins */
+@media (max-width: 768px),
+       (max-height: 500px) and (orientation: landscape) {
+	.cta-row {
+		flex-direction: column;
+		padding: 0 20px;
+	}
+
+	.cta-button {
+		width: 100%;
+	}
+}
+
+/* Landscape phone specific: Slightly larger margins */
+@media (max-height: 500px) and (orientation: landscape) {
+	.cta-row {
+		padding: 0 24px;
+	}
 }
 
 .cta-button:hover {
-	transform: translateY(-1px);
-	background: rgba(255, 255, 255, 0.1);
+	transform: translateY(-1px) scale(1.03);
+	background: rgba(255, 255, 255, 0.15);
+	border-color: rgba(255, 255, 255, 0.3);
+	box-shadow:
+		0 4px 12px rgba(0, 0, 0, 0.2),
+		inset 0 1px 0 rgba(255, 255, 255, 0.15);
+	color: rgba(255, 255, 255, 0.95);
+}
+
+.cta-button .material-symbols-outlined {
+	font-size: 20px;
+	line-height: 1;
+	display: flex;
+	align-items: center;
+	transition: transform 120ms ease;
+}
+
+.cta-button:hover .material-symbols-outlined {
+	transform: translateX(2px);
 }
 
 .link-button {
