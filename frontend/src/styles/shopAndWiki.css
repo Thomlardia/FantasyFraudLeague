@@ -29,10 +29,18 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   padding: 0 20px;
   position: relative;
   z-index: 2;
+}
+
+/* Money Bar Container */
+.money-bar-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+  padding: 0 20px;
 }
 
 .shop-wiki-title {
@@ -225,6 +233,34 @@
   border: 1px solid rgba(107, 114, 128, 0.2);
 }
 
+/* Card Meta Container (Level and Cost) */
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* Cost Indicator (Shop Only) */
+.card-cost {
+  font-family: 'Audiowide', cursive;
+  font-size: 14px;
+  font-weight: 700;
+  color: #059669;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  z-index: 1;
+  background: rgba(5, 150, 105, 0.1);
+  padding: 4px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(5, 150, 105, 0.2);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .shop-wiki-header {
@@ -263,6 +299,16 @@
   .card-title {
     font-size: 14px;
   }
+  
+  .card-meta {
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .card-level, .card-cost {
+    font-size: 12px;
+    padding: 3px 8px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -286,6 +332,11 @@
   
   .card-title {
     font-size: 13px;
+  }
+  
+  .card-level, .card-cost {
+    font-size: 11px;
+    padding: 2px 6px;
   }
   
   .title-icon {

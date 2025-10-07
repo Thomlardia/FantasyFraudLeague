@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import '../styles/shopAndWiki.css';
 import fflLogo from '../images/ffl_logo_ghost.png';
 import MoneyBar from '../components/MoneyBar';
+import { useDefenseOperations } from '../hooks/defenseHooks.js';
 import { useDefense } from '../contexts/DefenseContext';
 
 function DefenseShop() {
@@ -45,19 +46,28 @@ function DefenseShop() {
                     Defense Shop
                 </h1>
                 
+                <div></div>
+            </div>
+            
+            <div className="money-bar-container">
+                <MoneyBar />
             </div>
             
             <div className="shop-wiki-grid">
                 {defenseItems.map((item, index) => {
                     const myDefense = defenses.find(d => d.defenseId === item.id);
-                    console.log(myDefense);
-                    const level = myDefense?.level || 0;
+                    const level = myDefense?.displayLevel || 0;
+                    const cost = myDefense?.nextActionCost || 0;
+                    const isOwned = myDefense?.isOwned || false;
 
                     return (
                         <Link key={index} to={item.path} className="shop-card">
                             <span className="card-icon">{item.icon}</span>
                             <h3 className="card-title">{item.title}</h3>
-                            <p className="card-level">Level {level}</p>
+                            <div className="card-meta">
+                                <p className="card-level">Level {level}</p>
+                                <p className="card-cost">${cost.toLocaleString()}</p>
+                            </div>
                         </Link>
                     );
                 })}
