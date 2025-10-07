@@ -1,11 +1,14 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import mdx from '@mdx-js/rollup';
 
 // Vite config tailored to coexist with CRA
 // - Keeps CRA env var usage by defining process.env.REACT_APP_USE_EMULATORS at build time
 // - Serves on port 3000 to match CRA defaults
 export default defineConfig(() => ({
   plugins: [
+    // Process .mdx files to React components
+    mdx(),
     // Enable React fast-refresh and JSX transform
     react({ jsxRuntime: 'automatic' }),
   ],
