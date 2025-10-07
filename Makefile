@@ -61,6 +61,10 @@ seed-complete-with-summaries:
 	$(EMULATOR_ENV) node functions/scripts/seed.js seed global-defenses
 	$(EMULATOR_ENV) node functions/scripts/seed.js update all-users-defense-summaries
 
+lazy:
+	$(MAKE) seed-test-users
+	$(MAKE) seed-global-defenses
+
 # list all users
 list-users:
 	$(EMULATOR_ENV) node functions/scripts/seed.js list users

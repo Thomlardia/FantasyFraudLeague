@@ -21,6 +21,9 @@ export const userDocOnCreate = functionsV1
         email,
         name,
         balance: 1_000_000,
+        // Initialize financial aggregates to avoid downstream leaderboard errors
+        totalSpent: 0,
+        netWorth: 1_000_000,
         ownedDefensesList: [],
         ownedDefenses: {},
         totalDefensesOwned: 0,

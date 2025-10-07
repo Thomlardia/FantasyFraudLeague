@@ -41,14 +41,15 @@ export const user_upgradeDefense = onCall({ region: "africa-south1", enforceAppC
   return apiUpgradeDefense(request.auth.uid, defenseId);
 });
 
-export const user_getLeaderboardWithUser = onCall({ region: "africa-south1", enforceAppCheck:true }, async (request) => {
+export const user_getLeaderboardWithUser = onCall({ region: "africa-south1", enforceAppCheck: true }, async (request) => {
   requireAppCheck(request);
   requireVerified(request);
-  return apiGetLeaderboardWithUser(ctx.auth.uid);
+  return apiGetLeaderboardWithUser(request.auth.uid);
 });
 
 export const user_getUserRank = onCall({ region: "africa-south1", enforceAppCheck: true }, async (request) => {
   requireAppCheck(request);
   requireVerified(request);
   return apiGetUserRank(request.auth.uid);
-})
+});
+
