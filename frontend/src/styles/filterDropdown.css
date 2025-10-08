@@ -33,6 +33,7 @@
   justify-content: space-between;
   width: 100%;
   padding: 16px 18px;
+  min-height: var(--control-height);
   border-radius: 14px;
   border: 1px solid transparent;
   background: var(--color-surface-pill);

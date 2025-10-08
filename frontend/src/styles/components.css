@@ -21,6 +21,7 @@
 	font-size: 16px;
 	font-weight: 600;
 	width: 100%;
+	min-height: var(--control-height);
 	transition: all 120ms ease;
 }
 
@@ -148,7 +149,7 @@
 	margin: 0 auto;
 	padding: 0 28px;
 	box-sizing: border-box;
-	gap: 24px;
+	gap: 28px;
 }
 
 .landing-hero {
@@ -175,6 +176,7 @@
 	gap: 10px;
 	padding: 12px 24px;
 	min-width: 160px;
+	min-height: var(--control-height);
 	border-radius: 12px;
 	font-weight: 700;
 	font-size: 15px;
@@ -231,7 +233,6 @@
 	flex-direction: column;
 	align-items: stretch;
 	gap: 24px;
-	padding: 0 24px;
 	box-sizing: border-box;
 }
 
@@ -338,9 +339,9 @@
 	}
 
 	.landing-stack {
-		max-width: 360px;
-		padding: 0 20px;
-		gap: 22px;
+		max-width: 320px;
+		padding: 0 10px;
+		gap: 12px;
 	}
 
 	.splash-buttons {
@@ -353,8 +354,7 @@
 	}
 
 	.auth-stack {
-		max-width: 340px;
-		padding: 0 20px;
-		gap: 22px;
+		max-width: 320px;
+		gap: 14px;
 	}
 }
