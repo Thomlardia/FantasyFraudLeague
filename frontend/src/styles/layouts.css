@@ -38,6 +38,7 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
+	margin-bottom: calc(var(--space-header-gap) * 4);
 }
 
 .splash-logo {
@@ -50,7 +51,7 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	gap: 12px;
+	gap: calc(var(--space-control-gap));
 	width: 100%;
 	position: relative;
 }
@@ -132,8 +133,8 @@
 	gap: 8px;
 	flex: 0 1 auto;
 	min-width: 280px;
-	padding: 16px 32px;
-	min-height: var(--control-height);
+	padding: 0 32px;
+	height: var(--control-button-height);
 	border: 1px solid var(--color-border-soft);
 	border-radius: 12px;
 	text-decoration: none;
@@ -258,6 +259,15 @@
 		padding: 4px;
 	}
 
+	.topbar {
+		padding: 10px 0;
+		gap: calc(var(--space-header-gap) * 1.5);
+	}
+
+	.topbar-group {
+		gap: calc(var(--space-header-gap) * 1.5);
+	}
+
 	.splash-buttons {
 		flex-direction: column;
 		align-items: center;
@@ -291,10 +301,6 @@
 	.splash-logo {
 		width: 100px;
 		height: 100px;
-	}
-
-	.auth-page {
-		padding: 8px;
 	}
 
 }

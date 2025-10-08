@@ -1,18 +1,30 @@
 :root {
 	--space-header-gap: 8px;
-	--control-height: 56px;
+	--space-stack-gap: calc(var(--space-header-gap) * 3);
+	--space-control-gap: calc(var(--space-header-gap) * 2);
+	--space-control-gap-small: calc(var(--space-header-gap) * 1.5);
+	--control-input-height: 54px;
+	--control-button-height: 48px;
 }
 
 @media (max-width: 1024px) {
 	:root {
 		--space-header-gap: 6px;
-		--control-height: 48px;
+		--space-stack-gap: calc(var(--space-header-gap) * 3);
+		--space-control-gap: calc(var(--space-header-gap) * 2);
+		--space-control-gap-small: calc(var(--space-header-gap) * 1.5);
+		--control-input-height: 50px;
+		--control-button-height: 44px;
 	}
 }
 
 @media (max-width: 600px) {
 	:root {
 		--space-header-gap: 3px;
-		--control-height: 38px;
+		--space-stack-gap: calc(var(--space-header-gap) * 3);
+		--space-control-gap: calc(var(--space-header-gap) * 2);
+		--space-control-gap-small: calc(var(--space-header-gap) * 1.5);
+		--control-input-height: 42px;
+		--control-button-height: 36px;
 	}
 }

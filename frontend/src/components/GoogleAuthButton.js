@@ -28,7 +28,7 @@ export default function GoogleAuthButton({ text = "Continue with Google", redire
       <button
         onClick={handleClick}
         disabled={loading}
-        className="splash-button"
+        className="splash-button auth-google-button"
       >
         {loading ? "Please wait…" : text}
       </button>
@@ -36,4 +36,3 @@ export default function GoogleAuthButton({ text = "Continue with Google", redire
     </div>
   );
 }
-
