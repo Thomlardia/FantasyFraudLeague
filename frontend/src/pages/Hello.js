@@ -11,21 +11,21 @@ function Hello() {
             <img src={fflLogo} alt="FFL Shield Logo" className="splash-logo" />
           </div>
 
-          <div className="splash-welcome">WELCOME TO</div>
+          <div className="landing-hero">
+            <div className="splash-welcome">WELCOME TO</div>
 
-          <div className="title-section">
-            <div className="spacer"></div>
+            <div className="title-section">
             <div className="splash-main-title">
               <span>FANTASY</span>
               <span>FRAUD</span>
               <span>LEAGUE</span>
             </div>
-            <div className="spacer"></div>
+          </div>
           </div>
 
           <div className="splash-buttons">
-            <Link to="login" className="splash-button">LOGIN</Link>
-            <Link to="signup" className="splash-button">SIGN UP</Link>
+            <Link to="login" className="splash-button">Log in</Link>
+            <Link to="signup" className="splash-button">Sign up</Link>
           </div>
         </div>
       </div>

@@ -8,9 +8,9 @@
 	--shadow-focus: 0 4px 12px rgba(255, 255, 255, 0.1);
 
 	--color-app-background: #222C30;
-	--color-page-surface: #6F7D85;
+	--color-page-surface: #D5D7D7;
 	--color-page-surface-contrast: #0f1f32;
-	--color-page-pattern-dot: rgba(14, 24, 34, 0.7);
+	--color-page-pattern-dot: #182125;
 	--color-auth-backdrop: #222C30;
 	--color-matrix-base: #0e1822;
 	--color-matrix-base-rgb: 14, 24, 34;
@@ -24,19 +24,35 @@
 	--color-app-background: #222C30;
 	--color-app-foreground: #f8fafc;
 
-	--color-page-surface: #6F7D85;
+	--color-page-surface: #D5D7D7;
 	--color-page-surface-contrast: #0f1f32;
-	--color-page-pattern-dot: rgba(14, 24, 34, 0.7);
+	--color-page-pattern-dot: #182125;
 	--color-auth-backdrop: #222C30;
 	--color-matrix-base: #0e1822;
 	--color-matrix-base-rgb: 14, 24, 34;
 	--matrix-trail-opacity: 0.05;
 
-	--color-text-primary: #333F48;
-	--color-text-secondary: #B2B4BD;
-	--color-text-muted: #B2B4BD;
-	--color-text-emphasis: #B2B4BD;
+	--color-text-primary: #2E3538;
+	--color-text-secondary: #374043;
+	--color-text-muted: #374043;
+	--color-text-emphasis: #374043;
 	--color-text-inverse: #14203b;
+
+	/* Extended text palette pulled from component usage */
+	--color-text-surface: #1a1a2e;
+	--color-text-heading-surface: #1f2937;
+	--color-text-label: #6b7280;
+	--color-text-success: #059669;
+	--color-text-error-strong: #721c24;
+	--color-text-success-strong: #155724;
+	--color-text-alert: #cc0000;
+	--color-text-code: #eeeeee;
+
+	/* Accent tokens */
+	--color-accent-matrix: #70A253;
+	--color-accent-gold: #ffd700;
+	--color-accent-silver: #c0c0c0;
+	--color-accent-bronze: #cd7f32;
 
 	--color-border-strong: #ffffff;
 	--color-border-soft: rgba(255, 255, 255, 0.2);
@@ -99,6 +115,22 @@
 	--color-text-muted: rgba(55, 65, 81, 0.7);
 	--color-text-emphasis: rgba(17, 24, 39, 0.95);
 	--color-text-inverse: #f8fafc;
+
+	/* Extended text palette pulled from component usage */
+	--color-text-surface: #1a1a2e;
+	--color-text-heading-surface: #1f2937;
+	--color-text-label: #6b7280;
+	--color-text-success: #059669;
+	--color-text-error-strong: #721c24;
+	--color-text-success-strong: #155724;
+	--color-text-alert: #cc0000;
+	--color-text-code: #1f2937;
+
+	/* Accent tokens */
+	--color-accent-matrix: #70A253;
+	--color-accent-gold: #ffd700;
+	--color-accent-silver: #c0c0c0;
+	--color-accent-bronze: #cd7f32;
 
 	--color-border-strong: #111827;
 	--color-border-soft: rgba(17, 24, 39, 0.15);

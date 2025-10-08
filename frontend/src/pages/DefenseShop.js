@@ -68,6 +68,7 @@ function DefenseShop() {
     };
 
     const filteredDefenses = getFilteredDefenses();
+    const hasResults = filteredDefenses.length > 0;
 
     if (loading) return <p>Loading Defenses...</p>;
 
@@ -110,15 +111,23 @@ function DefenseShop() {
                 </div>
             </PageHeader>
 
-            <div className="shop-wiki-grid">
-                {filteredDefenses.map((item, index) => (
-                    <Link key={index} to={item.path} className="shop-card">
-                        <span className="card-icon">{item.icon}</span>
-                        <h3 className="card-title">{item.title}</h3>
-                        <p className="card-level">Level {item.level}</p>
-                    </Link>
-                ))}
-            </div>
+            {hasResults ? (
+                <div className="shop-wiki-grid">
+                    {filteredDefenses.map((item, index) => (
+                        <Link key={index} to={item.path} className="shop-card">
+                            <span className="card-icon">{item.icon}</span>
+                            <h3 className="card-title">{item.title}</h3>
+                            <p className="card-level">Level {item.level}</p>
+                        </Link>
+                    ))}
+                </div>
+            ) : (
+                <div className="shop-wiki-empty" role="status">
+                    <span className="material-symbols-outlined">filter_alt_off</span>
+                    <h3>No defenses match this filter</h3>
+                    <p>Adjust your filters to see the full catalog.</p>
+                </div>
+            )}
         </div>
     );
 }
