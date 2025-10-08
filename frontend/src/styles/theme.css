@@ -1,0 +1,144 @@
+:root {
+	--font-body: 'Audiowide', -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
+	--font-display: 'Audiowide', cursive;
+
+	--shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+	--shadow-md: 0 2px 8px rgba(0, 0, 0, 0.15);
+	--shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.2);
+	--shadow-focus: 0 4px 12px rgba(255, 255, 255, 0.1);
+
+	--color-app-background: #222C30;
+	--color-page-surface: #6F7D85;
+	--color-page-surface-contrast: #0f1f32;
+	--color-page-pattern-dot: rgba(14, 24, 34, 0.7);
+	--color-auth-backdrop: #222C30;
+	--color-matrix-base: #0e1822;
+	--color-matrix-base-rgb: 14, 24, 34;
+	--matrix-trail-opacity: 0.05;
+	--page-pattern-size: 18px;
+	--page-pattern-dot-size: 2px;
+}
+
+:root,
+[data-theme="dark"] {
+	--color-app-background: #222C30;
+	--color-app-foreground: #f8fafc;
+
+	--color-page-surface: #6F7D85;
+	--color-page-surface-contrast: #0f1f32;
+	--color-page-pattern-dot: rgba(14, 24, 34, 0.7);
+	--color-auth-backdrop: #222C30;
+	--color-matrix-base: #0e1822;
+	--color-matrix-base-rgb: 14, 24, 34;
+	--matrix-trail-opacity: 0.05;
+
+	--color-text-primary: #333F48;
+	--color-text-secondary: #B2B4BD;
+	--color-text-muted: #B2B4BD;
+	--color-text-emphasis: #B2B4BD;
+	--color-text-inverse: #14203b;
+
+	--color-border-strong: #ffffff;
+	--color-border-soft: rgba(255, 255, 255, 0.2);
+	--color-border-hover: rgba(255, 255, 255, 0.3);
+	--color-divider: rgba(255, 255, 255, 0.2);
+
+	--color-surface-glass: rgba(255, 255, 255, 0.2);
+	--color-surface-glass-hover: rgba(255, 255, 255, 0.25);
+	--color-surface-pill: rgba(255, 255, 255, 0.12);
+	--color-surface-pill-hover: rgba(255, 255, 255, 0.15);
+	--color-surface-icon: rgba(255, 255, 255, 0.2);
+
+	--color-button-primary-bg: #ffffff;
+	--color-button-primary-text: #14203b;
+
+	--color-input-border: #ffffff;
+	--color-input-border-strong: rgba(255, 255, 255, 0.9);
+	--color-input-background-hover: rgba(255, 255, 255, 0.02);
+	--color-input-background-focus: rgba(255, 255, 255, 0.05);
+	--color-input-placeholder: rgba(255, 255, 255, 0.7);
+
+	--color-error: #ff6b6b;
+	--color-error-bg: rgba(255, 107, 107, 0.1);
+	--color-error-border: rgba(255, 107, 107, 0.3);
+
+	/* Button Glass Effects */
+	--button-glass-gradient-start: rgba(255, 255, 255, 0.18);
+	--button-glass-gradient-end: rgba(255, 255, 255, 0.08);
+	--button-glass-inset-highlight: rgba(255, 255, 255, 0.1);
+	--button-glass-inset-highlight-hover: rgba(255, 255, 255, 0.15);
+
+	--button-primary-gradient-start: rgba(255, 255, 255, 0.32);
+	--button-primary-gradient-end: rgba(255, 255, 255, 0.16);
+	--button-primary-border: rgba(255, 255, 255, 0.45);
+	--button-primary-inset-highlight: rgba(255, 255, 255, 0.22);
+
+	--button-secondary-gradient-start: rgba(255, 255, 255, 0.12);
+	--button-secondary-gradient-end: rgba(255, 255, 255, 0.05);
+	--button-secondary-border: rgba(255, 255, 255, 0.25);
+
+	--button-disabled-background: rgba(255, 255, 255, 0.06);
+	--button-disabled-border: rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="light"] {
+	/* Placeholder values for light theme; adjust when enabling theme switching. */
+	--color-app-background: #e7ecf7;
+	--color-app-foreground: #111827;
+
+	--color-page-surface: #f4f6fb;
+	--color-page-surface-contrast: #dbe3f4;
+	--color-page-pattern-dot: rgba(148, 163, 184, 0.35);
+	--color-auth-backdrop: #e7ecf7;
+	--color-matrix-base: #94a3b8;
+	--color-matrix-base-rgb: 148, 163, 184;
+	--matrix-trail-opacity: 0.05;
+
+	--color-text-primary: #111827;
+	--color-text-secondary: rgba(17, 24, 39, 0.85);
+	--color-text-muted: rgba(55, 65, 81, 0.7);
+	--color-text-emphasis: rgba(17, 24, 39, 0.95);
+	--color-text-inverse: #f8fafc;
+
+	--color-border-strong: #111827;
+	--color-border-soft: rgba(17, 24, 39, 0.15);
+	--color-border-hover: rgba(17, 24, 39, 0.25);
+	--color-divider: rgba(17, 24, 39, 0.2);
+
+	--color-surface-glass: rgba(255, 255, 255, 0.7);
+	--color-surface-glass-hover: rgba(255, 255, 255, 0.85);
+	--color-surface-pill: rgba(255, 255, 255, 0.9);
+	--color-surface-pill-hover: #ffffff;
+	--color-surface-icon: rgba(15, 23, 42, 0.08);
+
+	--color-button-primary-bg: #111827;
+	--color-button-primary-text: #f8fafc;
+
+	--color-input-border: rgba(17, 24, 39, 0.3);
+	--color-input-border-strong: rgba(17, 24, 39, 0.45);
+	--color-input-background-hover: rgba(17, 24, 39, 0.02);
+	--color-input-background-focus: rgba(17, 24, 39, 0.04);
+	--color-input-placeholder: rgba(55, 65, 81, 0.6);
+
+	--color-error: #dc2626;
+	--color-error-bg: rgba(220, 38, 38, 0.12);
+	--color-error-border: rgba(220, 38, 38, 0.4);
+
+	/* Button Glass Effects */
+	--button-glass-gradient-start: rgba(255, 255, 255, 0.85);
+	--button-glass-gradient-end: rgba(255, 255, 255, 0.7);
+	--button-glass-inset-highlight: rgba(255, 255, 255, 0.9);
+	--button-glass-inset-highlight-hover: rgba(255, 255, 255, 1);
+
+	--button-primary-gradient-start: rgba(255, 255, 255, 1);
+	--button-primary-gradient-end: rgba(255, 255, 255, 0.9);
+	--button-primary-border: rgba(17, 24, 39, 0.2);
+	--button-primary-inset-highlight: rgba(255, 255, 255, 1);
+
+	--button-secondary-gradient-start: rgba(255, 255, 255, 0.8);
+	--button-secondary-gradient-end: rgba(255, 255, 255, 0.65);
+	--button-secondary-border: rgba(17, 24, 39, 0.15);
+
+	--button-disabled-background: rgba(255, 255, 255, 0.5);
+	--button-disabled-border: rgba(17, 24, 39, 0.1);
+}

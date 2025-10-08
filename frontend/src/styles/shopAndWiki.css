@@ -170,7 +170,10 @@
 /* Shop and Wiki Container */
 .shop-wiki-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  background-color: var(--color-page-surface);
+  background-image: radial-gradient(circle, var(--color-page-pattern-dot) calc(var(--page-pattern-dot-size) / 2), transparent calc(var(--page-pattern-dot-size) / 2 + 1px));
+  background-size: var(--page-pattern-size) var(--page-pattern-size);
+  background-repeat: repeat;
   padding: 12px;
   color: white;
   position: relative;
@@ -526,7 +529,10 @@
 /* Detail Pages (Fraud and Defense) */
 .fraud-container, .shop-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  background-color: var(--color-page-surface);
+  background-image: radial-gradient(circle, var(--color-page-pattern-dot) calc(var(--page-pattern-dot-size) / 2), transparent calc(var(--page-pattern-dot-size) / 2 + 1px));
+  background-size: var(--page-pattern-size) var(--page-pattern-size);
+  background-repeat: repeat;
   color: white;
   padding: 24px 16px 64px 16px;
 }

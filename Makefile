@@ -17,7 +17,7 @@ build:
 # ---------- BUILD FRONTEND (Vite) -----------
 
 vbuild:
-	cd frontend && npm run build:vite
+	npm --prefix frontend run build:vite
 	rm -rf frontend/build
 	mkdir -p frontend/build
 	cp -a frontend/dist/. frontend/build/
@@ -53,7 +53,7 @@ run-front-warnings:
 	npm --tracewarnings --prefix frontend start
 
 vrun-front:
-	cd frontend && npm run dev
+	npm --prefix frontend run dev
 
 # ----------DATABASE SEEDING --------
 # Seed commands for development (requries emulator to be running)

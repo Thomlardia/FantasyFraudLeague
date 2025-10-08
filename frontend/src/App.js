@@ -5,6 +5,7 @@ import { DefenseProvider } from "./contexts/DefenseContext";
 import { LeaderboardProvider } from "./contexts/LeaderboardContext";
 import AppRoutes from "./routes/AppRoutes";
 import Prefetcher from "./routes/Prefetcher";
+import MatrixBackgroundLayer from "./components/MatrixBackgroundLayer";
 import "./App.css";
 import "./styles/ui.css";
 import "./styles/shopAndWiki.css";
@@ -16,6 +17,7 @@ export default function App() {
         <DefenseProvider>
           <LeaderboardProvider>
             <BrowserRouter>
+              <MatrixBackgroundLayer />
               <Prefetcher />
               <AppRoutes />
             </BrowserRouter>
