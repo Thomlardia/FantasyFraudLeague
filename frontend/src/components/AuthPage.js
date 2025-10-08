@@ -20,17 +20,17 @@ export default function AuthPage({ mode, redirectTo }) {
             <img src={fflLogo} alt="FFL Shield Logo" className="splash-logo" />
           </div>
 
-          <div className="title-section">
-            <h1 className="splash-main-title">{title}</h1>
+          <div className="auth-stack">
+            <div className="title-section">
+              <h1 className="splash-main-title">{title}</h1>
+            </div>
+
+            <AuthForm mode={mode} redirectTo={redirectTo} />
+
+            <hr className="auth-divider" />
+
+            <GoogleAuthButton text={googleText} redirectTo={redirectTo} />
           </div>
-
-          <AuthForm mode={mode} redirectTo={redirectTo} />
-
-          <hr className="auth-divider" />
-
-          <GoogleAuthButton text={googleText} redirectTo={redirectTo} />
-
-          <div className="auth-bottom-spacer" />
         </div>
       </div>
     </div>

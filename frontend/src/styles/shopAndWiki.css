@@ -308,7 +308,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 24px;
-  max-width: 1400px;
+  width: min(100%, 1400px);
+  box-sizing: border-box;
   margin: 0 auto;
   padding: 24px;
   position: relative;
@@ -333,45 +334,45 @@
 @media (min-width: 1400px) {
   .shop-wiki-grid {
     grid-template-columns: repeat(4, 1fr);
-    max-width: 1400px;
+    width: min(100%, 1400px);
   }
 
   .shop-wiki-empty {
-    max-width: 1400px;
+    width: min(100%, 1400px);
   }
 }
 
 
-@media (min-width: 900px) and (max-width: 1099px) {
+@media (min-width: 900px) and (max-width: 1239px) {
   .shop-wiki-grid {
     grid-template-columns: repeat(3, 1fr);
-    max-width: 900px;
+    width: min(100%, 1080px);
   }
 
   .shop-wiki-empty {
-    max-width: 900px;
+    width: min(100%, 1080px);
   }
 }
 
 @media (min-width: 600px) and (max-width: 899px) {
   .shop-wiki-grid {
     grid-template-columns: repeat(2, 1fr);
-    max-width: 600px;
+    width: min(100%, 640px);
   }
 
   .shop-wiki-empty {
-    max-width: 600px;
+    width: min(100%, 640px);
   }
 }
 
 @media (max-width: 599px) {
   .shop-wiki-grid {
     grid-template-columns: 1fr;
-    max-width: 400px;
+    width: min(100%, 400px);
   }
 
   .shop-wiki-empty {
-    max-width: 400px;
+    width: min(100%, 400px);
   }
 }
 
@@ -406,8 +407,8 @@
   justify-content: center;
   gap: 12px;
   text-align: center;
-  width: 100%;
-  max-width: 1400px;
+  width: min(100%, 1400px);
+  box-sizing: border-box;
   min-height: 220px;
   padding: 48px 32px;
   background: rgba(255, 255, 255, 0.05);

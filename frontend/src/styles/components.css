@@ -3,14 +3,13 @@
 	flex-direction: column;
 	gap: 16px;
 	width: 100%;
-	max-width: 320px;
-	align-items: center;
+	align-items: stretch;
 }
 
 .auth-form .splash-button {
 	width: 100%;
-	max-width: 320px;
-	margin-top: 12px;
+	max-width: 100%;
+	margin-top: 8px;
 }
 
 .auth-form input {
@@ -90,8 +89,8 @@
 
 .back-button-left {
 	position: absolute;
-	left: 20px;
-	top: 20px;
+	left: 16px;
+	top: 16px;
 }
 
 .icon-button {
@@ -123,7 +122,7 @@
 	font-weight: 600;
 	text-transform: uppercase;
 	letter-spacing: 2px;
-	margin-bottom: 20px;
+	margin: 0;
 }
 
 .splash-main-title {
@@ -133,32 +132,40 @@
 	line-height: 1.1;
 	text-transform: uppercase;
 	letter-spacing: 3px;
-	margin-bottom: 0;
+	margin: 0;
 }
 
 .splash-main-title span {
 	display: block;
 }
 
-.landing-hero {
+.landing-stack {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	width: 100%;
+	max-width: 420px;
+	margin: 0 auto;
+	padding: 0 28px;
+	box-sizing: border-box;
+	gap: 24px;
 }
 
-.landing-hero .splash-welcome {
-	margin-bottom: 0;
+.landing-hero {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 12px;
+	width: 100%;
 }
 
 .splash-buttons {
 	display: flex;
-	gap: 20px;
+	gap: 16px;
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
 	width: 100%;
-	max-width: 400px;
 }
 
 .splash-button {
@@ -214,6 +221,22 @@
 .splash-button:focus-visible {
 	outline: 2px solid var(--color-border-hover);
 	outline-offset: 3px;
+}
+
+.auth-stack {
+	width: 100%;
+	max-width: 360px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	gap: 24px;
+	padding: 0 24px;
+	box-sizing: border-box;
+}
+
+.auth-stack .auth-divider {
+	margin: 0;
 }
 
 .money-display {
@@ -288,14 +311,9 @@
 }
 
 .auth-divider {
-	margin: 20px 0;
 	border: none;
 	height: 1px;
 	background: var(--color-divider);
-}
-
-.auth-bottom-spacer {
-	height: 100px;
 }
 
 @media (max-width: 480px) {
@@ -319,19 +337,24 @@
 		height: 20px;
 	}
 
+	.landing-stack {
+		max-width: 360px;
+		padding: 0 20px;
+		gap: 22px;
+	}
+
+	.splash-buttons {
+		flex-direction: column;
+		gap: 12px;
+	}
+
 	.splash-button {
 		width: 100%;
-		max-width: 100%;
 	}
 
-	.auth-form {
-		width: 100%;
-		max-width: 100%;
+	.auth-stack {
+		max-width: 340px;
 		padding: 0 20px;
-	}
-
-	.auth-form .splash-button {
-		width: 100%;
-		max-width: 100%;
+		gap: 22px;
 	}
 }
