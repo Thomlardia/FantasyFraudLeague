@@ -1,0 +1,69 @@
+/* Detail Content Styling - For fraud and defense information pages */
+
+/* Main Detail Title */
+.detail-title {
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Section Headings with Icons */
+.info-section-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  color: var(--color-text-emphasis);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+}
+
+.info-section-heading .material-symbols-outlined {
+  font-size: 24px;
+}
+
+/* Paragraph Typography */
+.info-paragraph {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--color-text-secondary);
+}
+
+/* List Styling */
+.info-list {
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+/* Internal Page Links (to other frauds/defenses) */
+.info-link {
+  color: var(--color-text-primary);
+  text-decoration: underline;
+  font-weight: normal;
+  transition: all 120ms ease;
+}
+
+.info-link:hover {
+  font-weight: bold;
+}
+
+/* External Reference Links */
+.info-external-link {
+  display: inline;
+  color: var(--color-text-primary);
+  text-decoration: underline;
+  font-weight: normal;
+  transition: all 120ms ease;
+}
+
+.info-external-link:hover {
+  font-weight: bold;
+}
+
+.info-external-link .material-symbols-outlined {
+  display: inline-block;
+  font-size: 18px;
+  margin-left: 4px;
+  vertical-align: middle;
+  text-decoration: none;
+}

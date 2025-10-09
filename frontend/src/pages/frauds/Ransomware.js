@@ -7,14 +7,17 @@ function Ransomware() {
             title="Ransomware"
             infoContent={
                 <>
-                    <p>
+                    <p className="info-paragraph">
                         Ransomware encrypts a victim&apos;s files and demands payment—usually in cryptocurrency—for the decryption
                         key. Modern attacks frequently use double extortion: encrypting files while exfiltrating data and
                         threatening to leak it.
                     </p>
                     <div className="info-section">
-                        <h3>Common Examples</h3>
-                        <ul>
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">list</span>
+                            Common Examples
+                        </h3>
+                        <ul className="info-list">
                             <li>CryptoLocker (2013) — early large-scale ransomware family</li>
                             <li>WannaCry (2017) — global outbreak impacting hospitals and governments</li>
                             <li>NotPetya (2017) — destructive campaign initially targeting Ukraine</li>
@@ -22,37 +25,50 @@ function Ransomware() {
                         </ul>
                     </div>
                     <div className="info-section">
-                        <h3>Historical Context</h3>
-                        <p>
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">history_edu</span>
+                            Historical Context
+                        </h3>
+                        <p className="info-paragraph">
                             Ransomware dates back to the 1989 AIDS Trojan, but cryptocurrencies in the 2010s enabled anonymous
                             payments. The 2017 WannaCry outbreak showcased the global disruption potential.
                         </p>
                     </div>
                     <div className="info-section">
-                        <h3>Primary Defenses</h3>
-                        <ul>
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">security</span>
+                            Primary Defenses
+                        </h3>
+                        <ul className="info-list">
                             <li>
-                                <Link to="/defenses/RegulatedAutoBackup">Regulated Automated Backups</Link>
+                                <Link to="/defenses/RegulatedAutoBackup" className="info-link">Regulated Automated Backups</Link>
                             </li>
                             <li>
-                                <Link to="/defenses/KeepUpdated">Keep Updated</Link>
+                                <Link to="/defenses/KeepUpdated" className="info-link">Keep Updated</Link>
                             </li>
                             <li>
-                                <Link to="/defenses/UserEducation">User Education</Link>
+                                <Link to="/defenses/UserEducation" className="info-link">User Education</Link>
                             </li>
                         </ul>
                     </div>
                     <div className="info-section">
-                        <h3>Reference</h3>
-                        <p>
-                            <a
-                                href="https://www.fbi.gov/how-we-can-help-you/scams-and-safety/common-frauds-and-scams/ransomware"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                Ransomware
-                            </a>
-                        </p>
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">link</span>
+                            Reference
+                        </h3>
+                        <ul className="info-list">
+                            <li>
+                                <a
+                                    href="https://www.fbi.gov/how-we-can-help-you/scams-and-safety/common-frauds-and-scams/ransomware"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="info-external-link"
+                                >
+                                    Ransomware
+                                    <span className="material-symbols-outlined">open_in_new</span>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </>
             }

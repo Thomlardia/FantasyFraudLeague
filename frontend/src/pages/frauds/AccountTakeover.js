@@ -7,14 +7,17 @@ function AccountTakeover() {
             title="Account Takeover"
             infoContent={
                 <>
-                    <p>
+                    <p className="info-paragraph">
                         Account takeover occurs when attackers gain unauthorised access to user accounts via stolen credentials,
                         social engineering, or weak security controls. Once inside, they can steal data, drain funds, or pivot to
                         additional targets.
                     </p>
                     <div className="info-section">
-                        <h3>Common Examples</h3>
-                        <ul>
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">list</span>
+                            Common Examples
+                        </h3>
+                        <ul className="info-list">
                             <li>Credential stuffing using leaked usernames and passwords</li>
                             <li>Session hijacking through malware or network interception</li>
                             <li>Social engineering to reset account credentials</li>
@@ -23,34 +26,47 @@ function AccountTakeover() {
                         </ul>
                     </div>
                     <div className="info-section">
-                        <h3>Historical Context</h3>
-                        <p>
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">history_edu</span>
+                            Historical Context
+                        </h3>
+                        <p className="info-paragraph">
                             As online services and credential dumps exploded, account takeover evolved into a major threat. Dark web
                             marketplaces and credential stuffing tools lowered the bar for attackers to monetise compromised access.
                         </p>
                     </div>
                     <div className="info-section">
-                        <h3>Primary Defenses</h3>
-                        <ul>
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">security</span>
+                            Primary Defenses
+                        </h3>
+                        <ul className="info-list">
                             <li>
-                                <Link to="/defenses/MultiFactorAuth">Multi Factor Authentication</Link>
+                                <Link to="/defenses/MultiFactorAuth" className="info-link">Multi Factor Authentication</Link>
                             </li>
                             <li>
-                                <Link to="/defenses/RegularPasswordChanges">Regular Password Changes</Link>
+                                <Link to="/defenses/RegularPasswordChanges" className="info-link">Regular Password Changes</Link>
                             </li>
                         </ul>
                     </div>
                     <div className="info-section">
-                        <h3>Reference</h3>
-                        <p>
-                            <a
-                                href="https://www.proofpoint.com/us/threat-reference/account-takeover-fraud"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                Account Takeover
-                            </a>
-                        </p>
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">link</span>
+                            Reference
+                        </h3>
+                        <ul className="info-list">
+                            <li>
+                                <a
+                                    href="https://www.proofpoint.com/us/threat-reference/account-takeover-fraud"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="info-external-link"
+                                >
+                                    Account Takeover
+                                    <span className="material-symbols-outlined">open_in_new</span>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </>
             }

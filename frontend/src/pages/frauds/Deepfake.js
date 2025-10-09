@@ -7,13 +7,16 @@ function Deepfake() {
             title="Deepfake"
             infoContent={
                 <>
-                    <p>
+                    <p className="info-paragraph">
                         Deepfake fraud uses AI-generated synthetic media to impersonate trusted voices or faces. Attackers craft
                         realistic audio, video, or images to authorise payments or extract sensitive information.
                     </p>
                     <div className="info-section">
-                        <h3>Common Examples</h3>
-                        <ul>
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">list</span>
+                            Common Examples
+                        </h3>
+                        <ul className="info-list">
                             <li>Fake CEO voice calls requesting urgent wire transfers</li>
                             <li>Manipulated video calls during business negotiations</li>
                             <li>Synthetic identities used to open accounts</li>
@@ -22,35 +25,48 @@ function Deepfake() {
                         </ul>
                     </div>
                     <div className="info-section">
-                        <h3>Historical Context</h3>
-                        <p>
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">history_edu</span>
+                            Historical Context
+                        </h3>
+                        <p className="info-paragraph">
                             Coined in 2017 by combining &quot;deep learning&quot; and &quot;fake,&quot; the first known deepfake
                             fraud occurred in 2019 when a CEO&apos;s voice was mimicked to authorise a wire transfer. The threat has
                             grown rapidly since.
                         </p>
                     </div>
                     <div className="info-section">
-                        <h3>Primary Defenses</h3>
-                        <ul>
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">security</span>
+                            Primary Defenses
+                        </h3>
+                        <ul className="info-list">
                             <li>
-                                <Link to="/defenses/VerificationProtocols">Verification Protocols</Link>
+                                <Link to="/defenses/VerificationProtocols" className="info-link">Verification Protocols</Link>
                             </li>
                             <li>
-                                <Link to="/defenses/DeepfakeDetection">Deepfake Detection</Link>
+                                <Link to="/defenses/DeepfakeDetection" className="info-link">Deepfake Detection</Link>
                             </li>
                         </ul>
                     </div>
                     <div className="info-section">
-                        <h3>Reference</h3>
-                        <p>
-                            <a
-                                href="https://www.feedzai.com/blog/deepfake-fraud/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                Deepfake
-                            </a>
-                        </p>
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">link</span>
+                            Reference
+                        </h3>
+                        <ul className="info-list">
+                            <li>
+                                <a
+                                    href="https://www.feedzai.com/blog/deepfake-fraud/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="info-external-link"
+                                >
+                                    Deepfake
+                                    <span className="material-symbols-outlined">open_in_new</span>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </>
             }

@@ -641,10 +641,10 @@
 	font-weight: 800;
 	letter-spacing: 1px;
 	margin: 0;
-	text-align: center;
-	display: inline-flex;
+	text-align: left;
+	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-start;
 	gap: 12px;
 	flex-wrap: wrap;
 }
@@ -683,9 +683,13 @@
   font-weight: 900;
   line-height: 1.15;
   letter-spacing: 1px;
-  text-align: center;
+  text-align: left;
   color: var(--color-text-primary);
   margin: 0 0 16px 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: flex-start;
 }
 
 .description-card {
@@ -730,16 +734,6 @@
   margin: 0;
 }
 
-.description-card a {
-  color: var(--color-text-primary);
-  font-weight: 700;
-  text-decoration: none;
-  border-bottom: 2px solid transparent;
-}
-
-.description-card a:hover {
-  border-bottom-color: var(--color-text-primary);
-}
 
 .info-card {
   display: flex;

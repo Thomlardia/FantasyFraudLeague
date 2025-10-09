@@ -8,42 +8,55 @@ function SegregationOfDuties() {
             title="Segregation Of Duties"
             infoContent={
                 <>
-                    <p>
+                    <p className="info-paragraph">
                         Segregation of duties divides sensitive processes between multiple people so no single individual controls an
                         entire transaction. Splitting responsibilities reduces the chance that fraud can go undetected.
                     </p>
                     <div className="info-section">
-                        <h3>Common Examples</h3>
-                        <ul>
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">list</span>
+                            Common Examples
+                        </h3>
+                        <ul className="info-list">
                             <li>Separating software developers from production deployments</li>
                             <li>One employee approves payments while another executes them</li>
                             <li>Different staff handle cash collection and account reconciliation</li>
                         </ul>
                     </div>
                     <div className="info-section">
-                        <h3>Reference</h3>
-                        <p>
-                            <a
-                                href="https://hyperproof.io/resource/segregation-of-duties/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                Segregation Of Duties
-                            </a>
-                        </p>
-                    </div>
-                    <div className="info-section">
-                        <h3>Defends Against</h3>
-                        <ul>
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">shield</span>
+                            Defends Against
+                        </h3>
+                        <ul className="info-list">
                             <li>
-                                <Link to="/frauds/InsiderFraud">Insider Fraud</Link>
+                                <Link to="/frauds/InsiderFraud" className="info-link">Insider Fraud</Link>
                             </li>
                             <li>
-                                <Link to="/frauds/AccAndInvFraud">Account and Invoice Fraud</Link>
+                                <Link to="/frauds/AccAndInvFraud" className="info-link">Account and Invoice Fraud</Link>
                             </li>
                         </ul>
                     </div>
-                </>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">link</span>
+                            Reference
+                        </h3>
+                        <ul className="info-list">
+                            <li>
+                                <a
+                                    href="https://hyperproof.io/resource/segregation-of-duties/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="info-external-link"
+                                >
+                                    Segregation Of Duties
+                                    <span className="material-symbols-outlined">open_in_new</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    </>
             }
         />
     );
