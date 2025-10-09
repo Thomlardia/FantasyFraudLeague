@@ -34,7 +34,7 @@ function Leaderboard() {
             <PageHeader title="Leaderboard" backPath="/home">
                 <button
                     onClick={refreshLeaderboard}
-                    className="refresh-button"
+                    className="icon-button"
                     title="Refresh Leaderboard"
                     disabled={loading}
                 >

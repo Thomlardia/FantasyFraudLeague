@@ -22,7 +22,7 @@ export default function AuthPage({ mode, redirectTo }) {
 
           <div className="auth-stack">
             <div className="title-section">
-              <h1 className="splash-main-title">{title}</h1>
+              <h1 className="splash-main-title auth-page-title">{title}</h1>
             </div>
 
             <AuthForm mode={mode} redirectTo={redirectTo} />

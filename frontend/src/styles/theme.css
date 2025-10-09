@@ -12,11 +12,11 @@
 	--color-page-surface-contrast: #0f1f32;
 	--color-page-pattern-dot: #182125;
 	--color-auth-backdrop: #222C30;
-	--color-matrix-base: #0e1822;
-	--color-matrix-base-rgb: 14, 24, 34;
+	--color-matrix-base: #d3d3d3;
+	--color-matrix-base-rgb: 211, 211, 211;
 	--matrix-trail-opacity: 0.05;
 	--page-pattern-size: 18px;
-	--page-pattern-dot-size: 2px;
+	--page-pattern-dot-size: 1px;
 }
 
 :root,
@@ -28,8 +28,8 @@
 	--color-page-surface-contrast: #0f1f32;
 	--color-page-pattern-dot: #182125;
 	--color-auth-backdrop: #222C30;
-	--color-matrix-base: #0e1822;
-	--color-matrix-base-rgb: 14, 24, 34;
+	--color-matrix-base: #d3d3d3;
+	--color-matrix-base-rgb: 211, 211, 211;
 	--matrix-trail-opacity: 0.05;
 
 	--color-text-primary: #2E3538;
@@ -106,8 +106,8 @@
 	--color-page-surface-contrast: #dbe3f4;
 	--color-page-pattern-dot: rgba(148, 163, 184, 0.35);
 	--color-auth-backdrop: #e7ecf7;
-	--color-matrix-base: #94a3b8;
-	--color-matrix-base-rgb: 148, 163, 184;
+	--color-matrix-base: #d3d3d3;
+	--color-matrix-base-rgb: 211, 211, 211;
 	--matrix-trail-opacity: 0.05;
 
 	--color-text-primary: #111827;

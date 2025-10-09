@@ -17,17 +17,17 @@
 }
 
 .splash-scrollable {
-	width: 100%;
-	min-height: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: flex-start;
-	gap: clamp(24px, 6vw, 40px);
-	padding: clamp(32px, 5vw, 56px) clamp(24px, 6vw, 48px);
-	box-sizing: border-box;
-	text-align: center;
-	background: transparent;
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: clamp(12px, 3vw, 18px);
+    padding: clamp(32px, 5vw, 56px) clamp(24px, 6vw, 48px);
+    box-sizing: border-box;
+    text-align: center;
+    background: transparent;
 }
 
 .auth-scrollable {
@@ -40,10 +40,10 @@
 }
 
 .splash-header {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	margin-bottom: calc(var(--space-header-gap) * 4);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0;
 }
 
 .auth-header {
@@ -72,6 +72,10 @@
 .title-section .splash-main-title {
 	text-align: center;
 	width: 100%;
+}
+
+.auth-page-title {
+	margin-bottom: calc(var(--space-control-gap) * 0.5);
 }
 
 .page {
@@ -328,6 +332,10 @@
 	.splash-logo {
 		width: 100px;
 		height: 100px;
+	}
+
+	.auth-page-title {
+		margin-bottom: calc(var(--space-control-gap) * 1);
 	}
 
 }
