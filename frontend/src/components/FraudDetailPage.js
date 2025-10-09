@@ -20,6 +20,7 @@ function FraudDetailPage({ title, infoContent, secondaryCardContent }) {
             >
             </PageHeader>
             <div className="detail-grid">
+                <div className="placeholder-left"></div>
                 <div className="description-card info-card">
                     <h1 className="detail-title">{title}</h1>
                     <div className="info-content">{infoContent}</div>
