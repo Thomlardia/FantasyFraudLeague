@@ -4,6 +4,7 @@ import '../styles/ui.css';
 import '../styles/shopAndWiki.css';
 import MoneyBar from './MoneyBar';
 import PageHeader from './PageHeader';
+import NavigationPanel from './NavigationPanel';
 
 function DefenseDetailPage({ defenseKey, title, infoContent }) {
     const {
@@ -62,7 +63,7 @@ function DefenseDetailPage({ defenseKey, title, infoContent }) {
                 >
                 </PageHeader>
                 <div className="detail-grid">
-                    <div className="placeholder-left"></div>
+                    <NavigationPanel />
                     <div className="description-card info-card">
                         <h1 className="detail-title">{title}</h1>
                         <div className="status-banner status-neutral">
@@ -93,7 +94,7 @@ function DefenseDetailPage({ defenseKey, title, infoContent }) {
             >
             </PageHeader>
             <div className="detail-grid">
-                <div className="placeholder-left"></div>
+                <NavigationPanel />
                 <div className="description-card info-card">
                     <h1 className="detail-title">{title}</h1>
                     {statusMessage}

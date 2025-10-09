@@ -9,6 +9,7 @@ import MatrixBackgroundLayer from "./components/MatrixBackgroundLayer";
 import "./App.css";
 import "./styles/ui.css";
 import "./styles/shopAndWiki.css";
+import "./styles/navigationPanel.css";
 
 export default function App() {
   return (

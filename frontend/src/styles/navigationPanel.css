@@ -1,0 +1,217 @@
+/* Navigation Panel - Left Sidebar for Desktop ONLY */
+.navigation-panel {
+  /* Hidden by default on mobile/tablet - only shows on desktop */
+  display: none;
+}
+
+@media (min-width: 1280px) {
+  .navigation-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: fit-content;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    /* Glassmorphism card effect */
+    background: var(--color-surface-pill);
+    backdrop-filter: blur(8px);
+    border-radius: 16px;
+    border: 1px solid var(--color-border-card);
+    box-shadow:
+      var(--shadow-md),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+    padding: 16px;
+
+    /* Smooth scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+  }
+
+  .navigation-panel::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .navigation-panel::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .navigation-panel::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+  }
+
+  .navigation-panel::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+}
+
+/* Search Box Placeholder */
+.nav-search-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-border-search-input);
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+
+.nav-search-icon {
+  font-size: 20px;
+  color: var(--color-text-muted);
+}
+
+.nav-search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.nav-search-input::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.6;
+}
+
+.nav-search-input:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Section Container */
+.nav-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Section Header (Clickable) */
+.nav-section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-border-nav-section);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 120ms ease;
+  color: var(--color-text-emphasis);
+  font-family: 'Audiowide', cursive;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.nav-section-header:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--color-border-nav-hover);
+  transform: translateX(2px);
+}
+
+.nav-section-header:active {
+  transform: scale(0.98);
+}
+
+.nav-section-icon {
+  font-size: 20px;
+  color: var(--color-text-secondary);
+}
+
+.nav-section-title {
+  flex: 1;
+  text-align: left;
+}
+
+.nav-section-arrow {
+  font-size: 20px;
+  color: var(--color-text-muted);
+  transition: transform 200ms ease;
+}
+
+.nav-section-arrow.expanded {
+  transform: rotate(180deg);
+}
+
+/* Navigation List */
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-left: 8px;
+  overflow: hidden;
+  transition: max-height 200ms ease, opacity 200ms ease;
+}
+
+.nav-list.expanded {
+  max-height: 2000px;
+  opacity: 1;
+}
+
+.nav-list.collapsed {
+  max-height: 0;
+  opacity: 0;
+}
+
+/* Navigation Item */
+.nav-item {
+  margin: 0;
+}
+
+/* Navigation Link */
+.nav-link {
+  display: block;
+  padding: 10px 12px;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 8px;
+  border-left: 3px solid transparent;
+  transition: all 120ms ease;
+  background: transparent;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-text-emphasis);
+  border-left-color: var(--color-border-nav-item);
+  transform: translateX(2px);
+}
+
+/* Active Link Highlight */
+.nav-link.active {
+  background: rgba(5, 150, 105, 0.15);
+  color: #10b981;
+  font-weight: 700;
+  border-left-color: #10b981;
+  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.2);
+}
+
+.nav-link.active:hover {
+  background: rgba(5, 150, 105, 0.2);
+  color: #059669;
+  border-left-color: #059669;
+}
+
+/* Keyboard Focus Styles */
+.nav-section-header:focus-visible,
+.nav-link:focus-visible {
+  outline: 2px solid rgba(16, 185, 129, 0.6);
+  outline-offset: 2px;
+}
+
+/* Responsive - Hide on mobile/tablet (inherited from placeholder-left) */
+/* This is already handled by .placeholder-left display rules in shopAndWiki.css */

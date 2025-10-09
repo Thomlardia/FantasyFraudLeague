@@ -3,7 +3,7 @@
 /* Main Detail Title */
 .detail-title {
   padding-bottom: 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--color-border-title-underline);
 }
 
 /* Section Headings with Icons */
@@ -13,7 +13,7 @@
   gap: 10px;
   font-size: 20px;
   color: var(--color-text-emphasis);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--color-border-section-divider);
   padding-bottom: 8px;
   margin-bottom: 16px;
 }

@@ -34,10 +34,10 @@
 	--color-matrix-dot: rgba(52, 64, 74, 0.35);
 	--matrix-trail-opacity: 0.05;
 
-	--color-text-primary: #2E3538;
-	--color-text-secondary: #374043;
-	--color-text-muted: #374043;
-	--color-text-emphasis: #374043;
+	--color-text-primary: #1a2226;
+	--color-text-secondary: #2d3538;
+	--color-text-muted: #4a5457;
+	--color-text-emphasis: #0f1517;
 	--color-text-inverse: #14203b;
 
 	/* Extended text palette pulled from component usage */
@@ -60,6 +60,17 @@
 	--color-border-soft: rgba(255, 255, 255, 0.2);
 	--color-border-hover: rgba(255, 255, 255, 0.3);
 	--color-divider: rgba(255, 255, 255, 0.2);
+
+	/* Specific border/divider variables for detail pages */
+	--color-border-card: #687C83;
+	--color-border-section-divider: #687C83;
+	--color-border-title-underline: #687C83;
+	--color-border-nav-section: #687C83;
+	--color-border-nav-hover: #687C83;
+	--color-border-nav-item: #687C83;
+	--color-border-search-input: #687C83;
+	--color-border-status-neutral: #687C83;
+	--color-border-card-level: #687C83;
 
 	--color-surface-glass: rgba(255, 255, 255, 0.2);
 	--color-surface-glass-hover: rgba(255, 255, 255, 0.25);
