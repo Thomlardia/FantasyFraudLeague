@@ -14,6 +14,7 @@
 	--color-auth-backdrop: #222C30;
 	--color-matrix-base: #d3d3d3;
 	--color-matrix-base-rgb: 211, 211, 211;
+	--color-matrix-dot: rgba(52, 64, 74, 0.35);
 	--matrix-trail-opacity: 0.05;
 	--page-pattern-size: 18px;
 	--page-pattern-dot-size: 1px;
@@ -30,6 +31,7 @@
 	--color-auth-backdrop: #222C30;
 	--color-matrix-base: #d3d3d3;
 	--color-matrix-base-rgb: 211, 211, 211;
+	--color-matrix-dot: rgba(52, 64, 74, 0.35);
 	--matrix-trail-opacity: 0.05;
 
 	--color-text-primary: #2E3538;
@@ -108,6 +110,7 @@
 	--color-auth-backdrop: #e7ecf7;
 	--color-matrix-base: #d3d3d3;
 	--color-matrix-base-rgb: 211, 211, 211;
+	--color-matrix-dot: rgba(71, 85, 105, 0.3);
 	--matrix-trail-opacity: 0.05;
 
 	--color-text-primary: #111827;

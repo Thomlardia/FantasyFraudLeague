@@ -13,6 +13,8 @@ export default function MatrixBackground() {
     // Get matrix background color from CSS
     const rootStyles = getComputedStyle(document.documentElement);
     const matrixBgColor = rootStyles.getPropertyValue("--color-matrix-base").trim() || "#0e1822";
+    const matrixDotColor = rootStyles.getPropertyValue("--color-matrix-dot").trim() || "rgba(52, 64, 74, 0.35)";
+    const matrixGlyphColor = rootStyles.getPropertyValue("--color-accent-matrix").trim() || "#70A253";
 
     // Convert hex to RGB for fade overlay
     const hexToRgb = (hex) => {
@@ -26,7 +28,7 @@ export default function MatrixBackground() {
     const state = {
       fps: 30,              // Frames per second
       bgOpacity: 0.1,      // Background fade opacity - higher prevents accumulation
-      color: "#70A253",     // Text color
+      color: matrixGlyphColor,     // Text color
       charset: "01ABCDEFGHIJKLMNPQRSTUVWXYZアカサタナハマヤラワ0123456789",  // Characters to display
       size: 20              // Font size in pixels
     };
@@ -36,6 +38,8 @@ export default function MatrixBackground() {
     let width = 0;
     let height = 0;
     let columnYPositions = [];
+    let dotColumns = [];
+    let dotRows = [];
     let intervalId = null;
 
     // Resize canvas to fit window and reinitialize column positions
@@ -51,6 +55,16 @@ export default function MatrixBackground() {
       // Each column starts at y = 0 (top of screen)
       const numColumns = Math.ceil(width / state.size);
       columnYPositions = Array(numColumns).fill(0);
+
+      const betweenColumns = Math.max(numColumns - 1, 0);
+      const offset = state.size * 0.3;
+      dotColumns = Array.from({ length: betweenColumns }, (_, i) => {
+        const base = i * state.size + state.size / 2;
+        return base + offset;
+      });
+
+      const numRows = Math.ceil(height / state.size);
+      dotRows = Array.from({ length: Math.max(numRows - 1, 0) }, (_, i) => i * state.size + state.size / 2);
     };
 
     // Helper function to pick random item from array
@@ -63,6 +77,21 @@ export default function MatrixBackground() {
       // Uses actual background color from CSS to match page
       ctx.fillStyle = `rgba(${matrixBgRgb},${state.bgOpacity})`;
       ctx.fillRect(0, 0, width, height);
+
+      // Render dot grid between columns for subtle background pattern
+      if (dotColumns.length && dotRows.length) {
+        const dotSize = Math.max(1, Math.floor(state.size * 0.12));
+        const dotOffset = dotSize / 2;
+        ctx.fillStyle = matrixDotColor;
+
+        for (let i = 0; i < dotColumns.length; i++) {
+          const x = dotColumns[i];
+          for (let j = 0; j < dotRows.length; j++) {
+            const y = dotRows[j];
+            ctx.fillRect(x - dotOffset, y - dotOffset, dotSize, dotSize);
+          }
+        }
+      }
 
       // Set text style
       ctx.font = state.size + "px monospace";
