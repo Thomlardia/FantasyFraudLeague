@@ -6,8 +6,11 @@
 	align-items: stretch;
 }
 
-.auth-form .splash-button:not(.auth-google-button) {
-	margin-top: calc(var(--space-control-gap) * 1.3);
+.auth-form-actions {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-control-gap);
+	margin-top: calc(var(--space-control-gap) * 1.4);
 }
 
 
@@ -354,7 +357,8 @@
 		gap: var(--space-control-gap);
 	}
 
-	.auth-form .splash-button:not(.auth-google-button) {
-		margin-top: calc(var(--space-control-gap) * 1.1);
+	.auth-form-actions {
+		gap: calc(var(--space-control-gap) * 0.9);
+		margin-top: calc(var(--space-control-gap) * 1.2);
 	}
 }
