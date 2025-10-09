@@ -38,7 +38,7 @@ function PageHeader({
         {leftContent ? (
           leftContent
         ) : (
-          <Link to={backPath} className="back-button" title="Back">
+          <Link to={backPath} className="icon-button back-button" title="Back">
             <span className="material-symbols-outlined">arrow_back</span>
           </Link>
         )}

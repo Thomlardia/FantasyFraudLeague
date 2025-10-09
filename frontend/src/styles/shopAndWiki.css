@@ -71,7 +71,7 @@
 .page-header-title-inline {
   color: rgba(255, 255, 255, 0.85);
   font-family: 'Audiowide', cursive;
-  font-size: 20px;
+  font-size: 28px;
   font-weight: 500;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
   margin: 0;
@@ -148,13 +148,11 @@
     font-size: 16px;
   }
 
-  .back-button,
   .refresh-button {
     width: 36px;
     height: 36px;
   }
 
-  .back-button .material-symbols-outlined,
   .refresh-button .material-symbols-outlined {
     font-size: 20px;
   }
@@ -240,34 +238,7 @@
   transform: scale(1.1);
 }
 
-.back-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border: none;
-  border-radius: 8px;
-  text-decoration: none;
-  color: rgba(255, 255, 255, 0.8);
-  font-weight: 700;
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  transition: all 120ms ease;
-  flex-shrink: 0;
-  backdrop-filter: blur(10px);
-}
 
-.back-button:hover {
-  transform: translateY(-1px);
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  color: rgba(255, 255, 255, 0.95);
-}
-
-.back-button .material-symbols-outlined {
-  font-size: 22px;
-}
 
 .refresh-button {
   display: inline-flex;
@@ -554,6 +525,14 @@
   }
 }
 
+/* Hide inline header title on tablet and phone for detail pages */
+@media (max-width: 1024px) {
+  .fraud-container .page-header-title-inline,
+  .shop-container .page-header-title-inline {
+    display: none;
+  }
+}
+
 @media (max-width: 768px) {
   .shop-wiki-container {
     padding: 8px;
@@ -610,12 +589,29 @@
 /* Detail Pages (Fraud and Defense) */
 .fraud-container, .shop-container {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-header-gap);
   background-color: var(--color-page-surface);
   background-image: radial-gradient(circle, var(--color-page-pattern-dot) calc(var(--page-pattern-dot-size) / 2), transparent calc(var(--page-pattern-dot-size) / 2 + 1px));
   background-size: var(--page-pattern-size) var(--page-pattern-size);
   background-repeat: repeat;
+  padding: 12px;
   color: white;
-  padding: 24px 16px 64px 16px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+  .fraud-container, .shop-container {
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fraud-container, .shop-container {
+    padding: 4px;
+  }
 }
 
 .fraud-container .header, .shop-container .header {
@@ -638,18 +634,19 @@
 .shop-container .header h1 { grid-column: 2; }
 .shop-container .header > :last-child { grid-column: 3; }
 
-.fraud-container h1, .shop-container h1 {
-  font-family: 'Audiowide', cursive;
-  font-size: clamp(24px, 4.5vw, 40px);
-  font-weight: 800;
-  letter-spacing: 1px;
-  margin: 0;
-  text-align: center;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
+.fraud-container .detail-title,
+.shop-container .detail-title {
+	font-family: 'Audiowide', cursive;
+	font-size: clamp(24px, 4.5vw, 40px);
+	font-weight: 800;
+	letter-spacing: 1px;
+	margin: 0;
+	text-align: center;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
+	flex-wrap: wrap;
 }
 
 .content-container {
@@ -658,6 +655,193 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  width: min(100%, 960px);
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 24px;
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.detail-title {
+  grid-column: 1 / -1;
+  font-family: 'Audiowide', cursive;
+  font-size: clamp(28px, 5vw, 44px);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: 1px;
+  text-align: center;
+  color: var(--color-text-primary);
+  margin: 0 0 16px 0;
+}
+
+.description-card {
+  background: var(--color-surface-pill);
+  color: var(--color-text-secondary);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    var(--shadow-md),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  padding: 24px 20px;
+  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+}
+
+.description-card:hover {
+  transform: translateY(-1px);
+  background: var(--color-surface-pill-hover);
+  border-color: var(--color-border-hover);
+  box-shadow:
+    var(--shadow-lg),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.description-card h3 {
+  margin: 0 0 12px 0;
+  font-family: 'Audiowide', cursive;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--color-text-emphasis);
+}
+
+.description-card p,
+.description-card li {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.description-card ul {
+  padding-left: 18px;
+  margin: 0;
+}
+
+.description-card a {
+  color: var(--color-text-primary);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+
+.description-card a:hover {
+  border-bottom-color: var(--color-text-primary);
+}
+
+.info-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info-content {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.status-banner {
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  text-align: center;
+  border: 1px solid transparent;
+}
+
+.status-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border-color: #f5c6cb;
+}
+
+.status-success {
+  background-color: #d4edda;
+  color: #155724;
+  border-color: #c3e6cb;
+}
+
+.status-neutral {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--color-text-secondary);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.management-card {
+  margin-top: 0;
+}
+
+.management-title {
+  margin: 0;
+  text-align: center;
+  font-family: 'Audiowide', cursive;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--color-text-emphasis);
+}
+
+.management-placeholder {
+  margin: 0;
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+.placeholder-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  text-align: center;
+  min-height: 200px;
+  justify-content: center;
+}
+
+@media (min-width: 900px) and (max-width: 1239px) {
+  .detail-grid {
+    width: min(100%, 840px);
+  }
+}
+
+@media (min-width: 600px) and (max-width: 899px) {
+  .detail-grid {
+    width: min(100%, 640px);
+    padding: 20px;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 599px) {
+  .detail-grid {
+    width: min(100%, 400px);
+    padding: 18px;
+    gap: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .detail-grid {
+    padding: 16px;
+    gap: 16px;
+  }
 }
 
 /* Fallback for legacy defense pages without a header wrapper */
@@ -669,53 +853,6 @@
 .fraud-container { position: relative; }
 .fraud-container > h1 { text-align: center; }
 .fraud-container > .icon-button { position: absolute; left: 16px; top: 16px; }
-
-.description-card {
-  background: rgba(255, 255, 255, 0.98);
-  color: #1a1a2e;
-  border-radius: 14px;
-  border: 2px solid transparent;
-  box-shadow: 0 6px 24px rgba(0,0,0,0.15);
-  padding: 18px 16px;
-  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
-}
-
-.description-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
-.description-card h3 {
-  margin: 0 0 10px 0;
-  font-family: 'Audiowide', cursive;
-  font-size: 18px;
-  font-weight: 800;
-  color: #111827;
-}
-
-.description-card p, .description-card li {
-  font-family: 'Audiowide', cursive;
-  font-size: 15px;
-  line-height: 1.6;
-  color: #1f2937;
-}
-
-.description-card ul {
-  padding-left: 18px;
-}
-
-/* Link styling within detail cards */
-.description-card a {
-  color: #1a1a2e;
-  font-weight: 700;
-  text-decoration: none;
-  border-bottom: 2px solid transparent;
-}
-
-.description-card a:hover {
-  border-bottom-color: #1a1a2e;
-}
 
 /* Room to grow for defense meta (level/upgrade) */
 .defense-meta {
@@ -755,20 +892,29 @@
 
 /* Upgrade Section Styles for Defense Pages */
 .upgrade-section {
-  background: rgba(255, 255, 255, 0.98);
-  color: #1a1a2e;
-  border-radius: 14px;
-  border: 2px solid transparent;
-  box-shadow: 0 6px 24px rgba(0,0,0,0.15);
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   margin-top: 16px;
+  background: var(--color-surface-pill);
+  color: var(--color-text-secondary);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    var(--shadow-md),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  padding: 24px 20px;
   transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
 }
 
 .upgrade-section:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
-  border-color: rgba(5, 150, 105, 0.3);
+  transform: translateY(-1px);
+  background: var(--color-surface-pill-hover);
+  border-color: var(--color-border-hover);
+  box-shadow:
+    var(--shadow-lg),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 .upgrade-header {
@@ -776,19 +922,19 @@
   margin-bottom: 20px;
 }
 
-.upgrade-header h3 {
+ .upgrade-header h3 {
   margin: 0 0 8px 0;
   font-family: 'Audiowide', cursive;
   font-size: 20px;
   font-weight: 800;
-  color: #111827;
+  color: var(--color-text-emphasis);
 }
 
 .upgrade-header p {
   margin: 0;
   font-family: 'Audiowide', cursive;
   font-size: 14px;
-  color: #6b7280;
+  color: var(--color-text-secondary);
   line-height: 1.4;
 }
 
@@ -862,10 +1008,10 @@
 
 /* Responsive design for upgrade section */
 @media (max-width: 768px) {
-  .upgrade-section {
-    padding: 16px;
+  .detail-grid .upgrade-section {
+    padding: 20px;
   }
-  
+
   .upgrade-header h3 {
     font-size: 18px;
   }
