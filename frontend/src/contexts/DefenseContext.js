@@ -190,26 +190,26 @@ export function DefenseProvider({ children }) {
    */
   const getDefensesByAttackChartData = useCallback((attackId) => {
     const defenseNames = {
-      mfa: 'Multi-Factor Auth',
-      userEducation: 'User Education',
-      emailFiltering: 'Email Filtering',
-      networkMonitoring: 'Network Monitoring',
-      inputValidation: 'Input Validation',
-      httpsEncryption: 'HTTPS Encryption',
-      vpnUsage: 'VPN Usage',
-      ddosProtection: 'DDoS Protection',
-      trafficFiltering: 'Traffic Filtering',
-      keepSoftwareUpdated: 'Keep Software Updated',
-      automatedBackups: 'Automated Backups',
-      applicationSandboxing: 'Application Sandboxing',
-      regularAudits: 'Regular Audits',
-      segregationOfDuties: 'Segregation of Duties',
-      principleOfLeastPrivilege: 'Principle of Least Privilege',
-      passwordPolicies: 'Password Policies',
-      backgroundChecks: 'Background Checks',
-      atmInspection: 'ATM Inspection',
-      deepfakeDetection: 'Deepfake Detection',
-      verificationProtocols: 'Verification Protocols'
+      mfa: 'MFA',
+      userEducation: 'User Training',
+      emailFiltering: 'Email Filter',
+      networkMonitoring: 'Net Monitor',
+      inputValidation: 'Input Valid.',
+      httpsEncryption: 'HTTPS',
+      vpnUsage: 'VPN',
+      ddosProtection: 'DDoS Shield',
+      trafficFiltering: 'Traffic Filter',
+      keepSoftwareUpdated: 'Updates',
+      automatedBackups: 'Auto Backup',
+      applicationSandboxing: 'Sandboxing',
+      regularAudits: 'Audits',
+      segregationOfDuties: 'Seg. Duties',
+      principleOfLeastPrivilege: 'Least Privilege',
+      passwordPolicies: 'Pass. Policy',
+      backgroundChecks: 'Bg Checks',
+      atmInspection: 'ATM Inspect.',
+      deepfakeDetection: 'Deepfake Det.',
+      verificationProtocols: 'Verification'
     };
 
     // Find all defenses that protect against this attack
@@ -220,13 +220,19 @@ export function DefenseProvider({ children }) {
         const currentLevel = defense.level || 0;
         const effectiveness = currentLevel > 0 ? percentages[currentLevel - 1] : percentages[0];
 
+        // Calculate next buy effectiveness (next level if owned, first level if not owned)
+        const nextLevel = currentLevel > 0 ? currentLevel : 0; // If owned, next level index, if not owned, level 0
+        const nextBuyEffectiveness = currentLevel < percentages.length ? percentages[nextLevel] : percentages[percentages.length - 1];
+
         return {
           defenseId: defense.defenseId,
           defenseName: defenseNames[defense.defenseId] || defense.defenseId,
           level: currentLevel,
           effectiveness: effectiveness || 0,
+          nextBuyEffectiveness: nextBuyEffectiveness || 0,
           isOwned: defense.isOwned || false,
-          maxEffectiveness: Math.max(...percentages)
+          maxEffectiveness: Math.max(...percentages),
+          canUpgrade: currentLevel < percentages.length
         };
       });
 
