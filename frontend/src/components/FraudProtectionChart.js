@@ -86,11 +86,14 @@ function FraudProtectionChart({ attackId, variant = 'bar' }) {
           </span>
         </div>
            <div className="chart-wrapper">
-          <ResponsiveContainer width="100%" height={Math.max(450, defenseData.length * 55)}>
+          <ResponsiveContainer width="100%" height={defenseData.length * 80 + 200}>
             <BarChart
               data={defenseData}
               layout="vertical"
-              margin={{ top: 5, right: 10, left: 5, bottom: 5 }}
+              margin={{ top: 20, right: 10, left: 5, bottom: 20 }}
+              barSize={30}
+              maxBarSize={160}
+              barCategoryGap="20%"
             >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis type="number" domain={[0, 100]} />
@@ -98,7 +101,7 @@ function FraudProtectionChart({ attackId, variant = 'bar' }) {
                 dataKey="defenseName"
                 type="category"
                 width={70}
-                tick={{ fontSize: 10.5, width: 70 }}
+                tick={{ fontSize: 10.5, width: 60 }}
                 interval={0}
               />
               <Tooltip content={<CustomTooltip />} />
@@ -114,20 +117,20 @@ function FraudProtectionChart({ attackId, variant = 'bar' }) {
               </Bar>
             </BarChart>
           </ResponsiveContainer>
-        </div>
 
-        <div className="chart-legend-custom">
-          <div className="legend-item">
-            <span className="legend-box" style={{ backgroundColor: '#3b82f6' }}></span>
-            <span>Current</span>
-          </div>
-          <div className="legend-item">
-            <span className="legend-box" style={{ backgroundColor: '#94a3b8', opacity: 0.6 }}></span>
-            <span>Next Buy</span>
-          </div>
-          <div className="legend-item">
-            <span className="legend-box" style={{ backgroundColor: '#8b5cf6', opacity: 0.25 }}></span>
-            <span>Max Potential</span>
+          <div className="chart-legend-custom">
+            <div className="legend-item">
+              <span className="legend-box" style={{ backgroundColor: '#3b82f6' }}></span>
+              <span>Current</span>
+            </div>
+            <div className="legend-item">
+              <span className="legend-box" style={{ backgroundColor: '#94a3b8', opacity: 0.6 }}></span>
+              <span>Next Buy</span>
+            </div>
+            <div className="legend-item">
+              <span className="legend-box" style={{ backgroundColor: '#8b5cf6', opacity: 0.25 }}></span>
+              <span>Max Potential</span>
+            </div>
           </div>
         </div>
       </div>
