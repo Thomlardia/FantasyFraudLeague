@@ -76,6 +76,171 @@ export function DefenseProvider({ children }) {
     return defense?.defendsAgainst || {};
   }, [defenses]);
 
+  /**
+   * Calculates the total protection percentage against a specific attack
+   * based on all owned defenses and their current levels.
+   * Protection stacks multiplicatively: finalDamage = baseDamage * (1 - p1/100) * (1 - p2/100) ...
+   * Total protection = (1 - finalDamage/baseDamage) * 100
+   *
+   * @param {string} attackId - The ID of the attack
+   * @returns {number} Total protection percentage (0-100)
+   */
+  const getTotalProtectionAgainstAttack = useCallback((attackId) => {
+    const ownedDefenses = defenses.filter(d => d.isOwned && d.level > 0);
+
+    if (ownedDefenses.length === 0) {
+      return 0;
+    }
+
+    // Start with 100% damage (no reduction)
+    let damageMultiplier = 1.0;
+
+    // Apply each defense's reduction multiplicatively
+    ownedDefenses.forEach(defense => {
+      if (defense.defendsAgainst && defense.defendsAgainst[attackId]) {
+        const percentages = defense.defendsAgainst[attackId];
+        const effectiveness = percentages[defense.level - 1] || 0;
+        // Reduce damage by this defense's effectiveness
+        damageMultiplier *= (1 - effectiveness / 100);
+      }
+    });
+
+    // Convert back to protection percentage
+    const totalProtection = (1 - damageMultiplier) * 100;
+    return Math.round(totalProtection * 100) / 100; // Round to 2 decimal places
+  }, [defenses]);
+
+  /**
+   * Gets Recharts-ready data for protection against all attack types
+   * Returns array of objects suitable for bar charts showing current protection levels
+   *
+   * @returns {Array<Object>} Array of { attackId, attackName, protection } objects
+   *
+   * Example output:
+   * [
+   *   { attackId: 'phishing', attackName: 'Phishing', protection: 95.5 },
+   *   { attackId: 'ransomware', attackName: 'Ransomware', protection: 60.0 },
+   *   ...
+   * ]
+   */
+  const getProtectionChartData = useCallback(() => {
+    // Map of all possible attacks with user-friendly names
+    const attackNames = {
+      phishing: 'Phishing',
+      ransomware: 'Ransomware',
+      accountTakeover: 'Account Takeover',
+      bruteForce: 'Brute Force',
+      ddos: 'DDoS',
+      mitm: 'Man-in-the-Middle',
+      sqlInjection: 'SQL Injection',
+      xss: 'Cross-Site Scripting',
+      bec: 'Business Email Compromise',
+      insiderFraud: 'Insider Fraud',
+      deepfakeFraud: 'Deepfake Fraud',
+      vishing: 'Vishing',
+      simSwap: 'SIM Swap',
+      cryptojacking: 'Cryptojacking',
+      accountingFraud: 'Accounting Fraud',
+      invoiceFraud: 'Invoice Fraud',
+      authorizedPushPayments: 'Authorized Push Payments',
+      investmentScams: 'Investment Scams',
+      skimming: 'ATM Skimming',
+      tampering: 'Tampering',
+      syntheticIdentity: 'Synthetic Identity Theft',
+      zeroDay: 'Zero-Day Exploit',
+      accAndInvFraud: 'Account & Investment Fraud'
+    };
+
+    // Collect all unique attack IDs from all defenses
+    const allAttackIds = new Set();
+    defenses.forEach(defense => {
+      if (defense.defendsAgainst) {
+        Object.keys(defense.defendsAgainst).forEach(attackId => {
+          allAttackIds.add(attackId);
+        });
+      }
+    });
+
+    // Calculate protection for each attack
+    const chartData = Array.from(allAttackIds).map(attackId => ({
+      attackId,
+      attackName: attackNames[attackId] || attackId,
+      protection: getTotalProtectionAgainstAttack(attackId)
+    }));
+
+    // Sort by protection level (highest first)
+    chartData.sort((a, b) => b.protection - a.protection);
+
+    return chartData;
+  }, [defenses, getTotalProtectionAgainstAttack]);
+
+  /**
+   * Gets Recharts-ready data for a specific attack showing which defenses protect against it
+   * Returns array showing each defense's contribution to protection
+   *
+   * @param {string} attackId - The ID of the attack
+   * @returns {Array<Object>} Array of { defenseName, level, effectiveness } objects
+   *
+   * Example output for 'phishing':
+   * [
+   *   { defenseName: 'Multi-Factor Auth', level: 2, effectiveness: 95, isOwned: true },
+   *   { defenseName: 'Email Filtering', level: 1, effectiveness: 80, isOwned: true },
+   *   { defenseName: 'User Education', level: 0, effectiveness: 50, isOwned: false }
+   * ]
+   */
+  const getDefensesByAttackChartData = useCallback((attackId) => {
+    const defenseNames = {
+      mfa: 'Multi-Factor Auth',
+      userEducation: 'User Education',
+      emailFiltering: 'Email Filtering',
+      networkMonitoring: 'Network Monitoring',
+      inputValidation: 'Input Validation',
+      httpsEncryption: 'HTTPS Encryption',
+      vpnUsage: 'VPN Usage',
+      ddosProtection: 'DDoS Protection',
+      trafficFiltering: 'Traffic Filtering',
+      keepSoftwareUpdated: 'Keep Software Updated',
+      automatedBackups: 'Automated Backups',
+      applicationSandboxing: 'Application Sandboxing',
+      regularAudits: 'Regular Audits',
+      segregationOfDuties: 'Segregation of Duties',
+      principleOfLeastPrivilege: 'Principle of Least Privilege',
+      passwordPolicies: 'Password Policies',
+      backgroundChecks: 'Background Checks',
+      atmInspection: 'ATM Inspection',
+      deepfakeDetection: 'Deepfake Detection',
+      verificationProtocols: 'Verification Protocols'
+    };
+
+    // Find all defenses that protect against this attack
+    const relevantDefenses = defenses
+      .filter(d => d.defendsAgainst && d.defendsAgainst[attackId])
+      .map(defense => {
+        const percentages = defense.defendsAgainst[attackId];
+        const currentLevel = defense.level || 0;
+        const effectiveness = currentLevel > 0 ? percentages[currentLevel - 1] : percentages[0];
+
+        return {
+          defenseId: defense.defenseId,
+          defenseName: defenseNames[defense.defenseId] || defense.defenseId,
+          level: currentLevel,
+          effectiveness: effectiveness || 0,
+          isOwned: defense.isOwned || false,
+          maxEffectiveness: Math.max(...percentages)
+        };
+      });
+
+    // Sort by effectiveness (owned defenses first, then by effectiveness)
+    relevantDefenses.sort((a, b) => {
+      if (a.isOwned !== b.isOwned) {
+        return b.isOwned ? 1 : -1;
+      }
+      return b.effectiveness - a.effectiveness;
+    });
+
+    return relevantDefenses;
+  }, [defenses]);
+
   // Auto-fetch defenses when user auth state changes
   useEffect(() => {
     fetchDefenses();
@@ -89,6 +254,9 @@ export function DefenseProvider({ children }) {
     findDefense,
     getDefenseEffectiveness,
     getDefenseProtections,
+    getTotalProtectionAgainstAttack,
+    getProtectionChartData,
+    getDefensesByAttackChartData,
   };
 
   return <DefenseContext.Provider value={value}>{children}</DefenseContext.Provider>;
@@ -96,7 +264,17 @@ export function DefenseProvider({ children }) {
 
 /**
  * Hook to access defense context
- * @returns {Object} { defenses, loading, error, fetchDefenses, findDefense, getDefenseEffectiveness, getDefenseProtections }
+ * @returns {Object} Context object with defense data and utility functions
+ * @property {Array} defenses - Array of all defenses with user's ownership status
+ * @property {boolean} loading - Whether defenses are being loaded
+ * @property {string|null} error - Error message if any
+ * @property {Function} fetchDefenses - Fetch/refresh defenses from backend
+ * @property {Function} findDefense - Find a defense by ID
+ * @property {Function} getDefenseEffectiveness - Get effectiveness of a defense against an attack at a level
+ * @property {Function} getDefenseProtections - Get all protections for a defense
+ * @property {Function} getTotalProtectionAgainstAttack - Calculate total protection against an attack
+ * @property {Function} getProtectionChartData - Get Recharts data for all attacks
+ * @property {Function} getDefensesByAttackChartData - Get Recharts data for defenses against a specific attack
  */
 export const useDefense = () => {
   const context = useContext(DefenseContext);
