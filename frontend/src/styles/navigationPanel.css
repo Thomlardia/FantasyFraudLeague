@@ -9,15 +9,15 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    height: fit-content;
-    max-height: calc(100vh - 120px);
+    height: calc(100% + 24px);
+    margin-bottom: -24px;
     overflow-y: auto;
     overflow-x: hidden;
 
     /* Glassmorphism card effect */
     background: var(--color-surface-pill);
     backdrop-filter: blur(8px);
-    border-radius: 16px;
+    border-radius: 16px 16px 0 0;
     border: 1px solid var(--color-border-card);
     box-shadow:
       var(--shadow-md),
@@ -25,26 +25,13 @@
 
     padding: 16px;
 
-    /* Smooth scrollbar */
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+    /* Hide scrollbar but keep scroll functionality */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
   }
 
   .navigation-panel::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  .navigation-panel::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .navigation-panel::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 3px;
-  }
-
-  .navigation-panel::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.3);
+    display: none; /* Chrome, Safari, Opera */
   }
 }
 
@@ -150,7 +137,8 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  padding-left: 8px;
+  padding-left: 20px;
+  padding-right: 10px;
   overflow: hidden;
   transition: max-height 200ms ease, opacity 200ms ease;
 }
@@ -173,13 +161,15 @@
 /* Navigation Link */
 .nav-link {
   display: block;
-  padding: 10px 12px;
-  color: var(--color-text-secondary);
+  padding: 5px 6px;
+  color: #687C83;
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
   border-radius: 8px;
-  border-left: 3px solid transparent;
+  border-left: 3px solid #687C83;
+  border: 1px solid #687C83;
+  border-left-width: 3px;
   transition: all 120ms ease;
   background: transparent;
 }
@@ -187,7 +177,8 @@
 .nav-link:hover {
   background: rgba(255, 255, 255, 0.05);
   color: var(--color-text-emphasis);
-  border-left-color: var(--color-border-nav-item);
+  border-color: var(--color-text-emphasis);
+  border-left-color: var(--color-text-emphasis);
   transform: translateX(2px);
 }
 
@@ -196,6 +187,8 @@
   background: rgba(5, 150, 105, 0.15);
   color: #10b981;
   font-weight: 700;
+  border: 1px solid #10b981;
+  border-left-width: 3px;
   border-left-color: #10b981;
   box-shadow: 0 2px 8px rgba(5, 150, 105, 0.2);
 }
@@ -203,6 +196,7 @@
 .nav-link.active:hover {
   background: rgba(5, 150, 105, 0.2);
   color: #059669;
+  border-color: #059669;
   border-left-color: #059669;
 }
 

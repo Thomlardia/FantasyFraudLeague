@@ -647,7 +647,7 @@
     width: 100%;
     max-width: none;
     /* Use remaining height after header */
-    height: calc(100vh - var(--space-header-gap) - 100px);
+    height: calc(100vh - var(--space-header-gap) - 24px);
     overflow: hidden;
   }
 }
@@ -697,30 +697,20 @@
   .description-card {
     overflow-y: auto;
     max-height: 100%;
+    /* Hide scrollbar but keep scroll functionality */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
   }
 
   .description-card::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  .description-card::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .description-card::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 3px;
-  }
-
-  .description-card::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.3);
+    display: none; /* Chrome, Safari, Opera */
   }
 }
 
 .description-card:hover {
   transform: translateY(-1px);
   background: var(--color-surface-pill-hover);
-  border-color: var(--color-border-hover);
+  border: 1px solid #687C83;
   box-shadow:
     var(--shadow-lg),
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
@@ -919,30 +909,20 @@
   .upgrade-section {
     overflow-y: auto;
     max-height: 100%;
+    /* Hide scrollbar but keep scroll functionality */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
   }
 
   .upgrade-section::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  .upgrade-section::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .upgrade-section::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 3px;
-  }
-
-  .upgrade-section::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.3);
+    display: none; /* Chrome, Safari, Opera */
   }
 }
 
 .upgrade-section:hover {
   transform: translateY(-1px);
   background: var(--color-surface-pill-hover);
-  border-color: var(--color-border-hover);
+  border: 1px solid #687C83;
   box-shadow:
     var(--shadow-lg),
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
