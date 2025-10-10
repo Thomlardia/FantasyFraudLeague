@@ -1,28 +1,65 @@
-import { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import '../styles/navigationPanel.css';
 
 function NavigationPanel() {
     const location = useLocation();
+    const navigate = useNavigate();
     const navPanelRef = useRef(null);
     const [expanded, setExpanded] = useState({
         defenses: true,
         frauds: true
     });
+    const [searchQuery, setSearchQuery] = useState('');
+    const savedScrollPositionRef = useRef(0);
 
-    // Restore scroll position on mount and when navigating
+    // Auto-scroll to active item and expand its section when pathname changes
     useEffect(() => {
-        const savedScrollPosition = localStorage.getItem('navPanelScrollPosition');
-        if (savedScrollPosition && navPanelRef.current) {
-            navPanelRef.current.scrollTop = parseInt(savedScrollPosition, 10);
+        // If navigation was from a click, restore scroll position instantly (no animation)
+        if (location.state?.fromNavClick && location.state?.scrollPosition !== undefined) {
+            if (navPanelRef.current) {
+                navPanelRef.current.scrollTop = location.state.scrollPosition;
+            }
+            return;
         }
-    }, [location.pathname]);
 
-    // Save scroll position when scrolling
-    const handleScroll = () => {
-        if (navPanelRef.current) {
-            localStorage.setItem('navPanelScrollPosition', navPanelRef.current.scrollTop.toString());
+        // Determine which section contains the current path
+        const isDefense = location.pathname.startsWith('/defenses/');
+        const isFraud = location.pathname.startsWith('/frauds/');
+
+        // Expand the appropriate section if it's collapsed
+        if (isDefense && !expanded.defenses) {
+            setExpanded(prev => ({ ...prev, defenses: true }));
+        } else if (isFraud && !expanded.frauds) {
+            setExpanded(prev => ({ ...prev, frauds: true }));
         }
+
+        // Wait for DOM to update after expansion, then scroll to active link with animation
+        setTimeout(() => {
+            const activeLink = navPanelRef.current?.querySelector('.nav-link.active');
+            if (activeLink) {
+                activeLink.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+            }
+        }, 150); // Delay to ensure section expansion animation completes
+    }, [location.pathname, location.state]);
+
+    // Handle link clicks - save scroll position and navigate with state
+    const handleLinkClick = (e, path) => {
+        e.preventDefault();
+
+        // Save current scroll position
+        const scrollPosition = navPanelRef.current?.scrollTop || 0;
+
+        // Navigate with state to indicate this was a click
+        navigate(path, {
+            state: {
+                fromNavClick: true,
+                scrollPosition: scrollPosition
+            }
+        });
     };
 
     const toggleSection = (section) => {
@@ -30,6 +67,47 @@ function NavigationPanel() {
             ...prev,
             [section]: !prev[section]
         }));
+    };
+
+    const handleSearchChange = (e) => {
+        const query = e.target.value;
+        setSearchQuery(query);
+
+        // Auto-expand both sections when user starts typing
+        if (query.trim()) {
+            setExpanded({
+                defenses: true,
+                frauds: true
+            });
+        }
+    };
+
+    // Filter items based on search query
+    const filterItems = (items) => {
+        if (!searchQuery.trim()) return items;
+        return items.filter(item =>
+            item.label.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+    };
+
+    // Handle Enter key to navigate to first result
+    const handleSearchKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            // Get first result from defenses, if none then from frauds
+            const filteredDefenses = filterItems(defenses);
+            const filteredFrauds = filterItems(frauds);
+
+            const firstResult = filteredDefenses.length > 0
+                ? filteredDefenses[0]
+                : filteredFrauds.length > 0
+                    ? filteredFrauds[0]
+                    : null;
+
+            if (firstResult) {
+                // Navigate to the first result without page reload
+                navigate(firstResult.path);
+            }
+        }
     };
 
     const defenses = [
@@ -82,23 +160,28 @@ function NavigationPanel() {
         <nav
             className="navigation-panel"
             aria-label="Main navigation"
-            ref={navPanelRef}
-            onScroll={handleScroll}
         >
-            {/* Search Box Placeholder */}
+            {/* Search Box - Fixed */}
             <div className="nav-search-container">
                 <span className="material-symbols-outlined nav-search-icon">search</span>
                 <input
                     type="text"
                     className="nav-search-input"
                     placeholder="Search defenses/frauds..."
-                    disabled
-                    aria-label="Search navigation (coming soon)"
+                    value={searchQuery}
+                    onChange={handleSearchChange}
+                    onKeyDown={handleSearchKeyDown}
+                    aria-label="Search navigation"
                 />
             </div>
 
-            {/* Defenses Section */}
-            <div className="nav-section">
+            {/* Scrollable Content */}
+            <div
+                className="nav-scrollable-content"
+                ref={navPanelRef}
+            >
+                {/* Defenses Section */}
+                <div className="nav-section">
                 <button
                     className="nav-section-header"
                     onClick={() => toggleSection('defenses')}
@@ -116,11 +199,12 @@ function NavigationPanel() {
                     className={`nav-list ${expanded.defenses ? 'expanded' : 'collapsed'}`}
                     role="list"
                 >
-                    {defenses.map((defense) => (
+                    {filterItems(defenses).map((defense) => (
                         <li key={defense.path} className="nav-item">
                             <Link
                                 to={defense.path}
                                 className={`nav-link ${location.pathname === defense.path ? 'active' : ''}`}
+                                onClick={(e) => handleLinkClick(e, defense.path)}
                             >
                                 {defense.label}
                             </Link>
@@ -148,17 +232,19 @@ function NavigationPanel() {
                     className={`nav-list ${expanded.frauds ? 'expanded' : 'collapsed'}`}
                     role="list"
                 >
-                    {frauds.map((fraud) => (
+                    {filterItems(frauds).map((fraud) => (
                         <li key={fraud.path} className="nav-item">
                             <Link
                                 to={fraud.path}
                                 className={`nav-link ${location.pathname === fraud.path ? 'active' : ''}`}
+                                onClick={(e) => handleLinkClick(e, fraud.path)}
                             >
                                 {fraud.label}
                             </Link>
                         </li>
                     ))}
                 </ul>
+            </div>
             </div>
         </nav>
     );
