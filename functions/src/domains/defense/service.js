@@ -67,15 +67,15 @@ export async function getUserDefenses(userId) {
   
   return allTemplates.map(template => {
     const userLevel = ownedMap.get(template.defenseId);
-    
+
     // More consistent level handling:
     // - If not owned: level = 0, displayLevel = 0
     // - If owned at level 1: level = 1, displayLevel = 1
     // - If owned at level 2: level = 2, displayLevel = 2, etc.
-    
+
     const actualLevel = userLevel || 0;
     const isOwned = actualLevel > 0;
-    
+
     return {
       ...template,
       level: actualLevel,
@@ -84,7 +84,8 @@ export async function getUserDefenses(userId) {
       // Add cost for next action (buy if not owned, upgrade if owned)
       nextActionCost: isOwned ? template.cost[actualLevel] || 0 : template.cost[0] || 0,
       canUpgrade: isOwned && actualLevel < template.cost.length,
-      isMaxLevel: isOwned && actualLevel >= template.cost.length
+      isMaxLevel: isOwned && actualLevel >= template.cost.length,
+      defendsAgainst: template.defendsAgainst
     };
   });
 }
