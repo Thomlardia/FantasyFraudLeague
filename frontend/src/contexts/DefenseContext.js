@@ -140,8 +140,6 @@ export function DefenseProvider({ children }) {
       vishing: 'Vishing',
       simSwap: 'SIM Swap',
       cryptojacking: 'Cryptojacking',
-      accountingFraud: 'Accounting Fraud',
-      invoiceFraud: 'Invoice Fraud',
       authorizedPushPayments: 'Authorized Push Payments',
       investmentScams: 'Investment Scams',
       skimming: 'ATM Skimming',

@@ -8,12 +8,12 @@
 	--shadow-focus: 0 4px 12px rgba(255, 255, 255, 0.1);
 
 	--color-app-background: #222C30;
-	--color-page-surface: #D5D7D7;
+	--color-page-surface: #D7D5D5;
 	--color-page-surface-contrast: #0f1f32;
 	--color-page-pattern-dot: #182125;
 	--color-auth-backdrop: #222C30;
-	--color-matrix-base: #d3d3d3;
-	--color-matrix-base-rgb: 211, 211, 211;
+	--color-matrix-base: #D7D5D5;
+	--color-matrix-base-rgb: 215, 213, 213;
 	--color-matrix-dot: rgba(52, 64, 74, 0.35);
 	--matrix-trail-opacity: 0.05;
 	--page-pattern-size: 18px;
@@ -25,12 +25,12 @@
 	--color-app-background: #222C30;
 	--color-app-foreground: #f8fafc;
 
-	--color-page-surface: #D5D7D7;
+	--color-page-surface: #D7D5D5;
 	--color-page-surface-contrast: #0f1f32;
 	--color-page-pattern-dot: #182125;
 	--color-auth-backdrop: #222C30;
-	--color-matrix-base: #d3d3d3;
-	--color-matrix-base-rgb: 211, 211, 211;
+	--color-matrix-base: #D7D5D5;
+	--color-matrix-base-rgb: 215, 213, 213;
 	--color-matrix-dot: rgba(52, 64, 74, 0.35);
 	--matrix-trail-opacity: 0.05;
 

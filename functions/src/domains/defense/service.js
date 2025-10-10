@@ -75,6 +75,8 @@ export async function getUserDefenses(userId) {
 
     const actualLevel = userLevel || 0;
     const isOwned = actualLevel > 0;
+    const nextCost = template.cost[actualLevel];
+    const hasNextUpgrade = nextCost && nextCost > 0;
 
     return {
       ...template,
@@ -82,9 +84,9 @@ export async function getUserDefenses(userId) {
       isOwned: isOwned,
       displayLevel: actualLevel,
       // Add cost for next action (buy if not owned, upgrade if owned)
-      nextActionCost: isOwned ? template.cost[actualLevel] || 0 : template.cost[0] || 0,
-      canUpgrade: isOwned && actualLevel < template.cost.length,
-      isMaxLevel: isOwned && actualLevel >= template.cost.length,
+      nextActionCost: isOwned ? (nextCost || 0) : (template.cost[0] || 0),
+      canUpgrade: isOwned && hasNextUpgrade,
+      isMaxLevel: isOwned && !hasNextUpgrade,
       defendsAgainst: template.defendsAgainst
     };
   });

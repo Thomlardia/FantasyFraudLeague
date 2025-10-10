@@ -26,7 +26,9 @@ function FraudProtectionChart({ attackId, variant = 'bar' }) {
   if (loading) {
     return (
       <div className="chart-container">
-        <h1 className="management-title">Defense Coverage</h1>
+        <div className="chart-header">
+          <h2 className="management-title">Defense Coverage</h2>
+        </div>
         <p className="chart-loading">Loading protection data...</p>
       </div>
     );
@@ -38,7 +40,9 @@ function FraudProtectionChart({ attackId, variant = 'bar' }) {
   if (!defenseData || defenseData.length === 0) {
     return (
       <div className="chart-container">
-        <h1 className="management-title">Defense Coverage</h1>
+        <div className="chart-header">
+          <h2 className="management-title">Defense Coverage</h2>
+        </div>
         <p className="chart-empty">No defenses available for this attack type.</p>
       </div>
     );
@@ -74,10 +78,7 @@ function FraudProtectionChart({ attackId, variant = 'bar' }) {
     return (
       <div className="chart-container">
         <div className="chart-header">
-          <h2 className="chart-title">
-            <span className="chart-title-defense">Defense </span>
-            <span className="chart-title-coverage">Coverage</span>
-          </h2>
+          <h2 className="management-title">Defense Coverage</h2>
           <span
             className="chart-protection-badge"
             style={{ backgroundColor: getProtectionColor(totalProtection) }}

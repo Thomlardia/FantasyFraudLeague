@@ -98,8 +98,7 @@ export const defenses = {
     cost: [60000, 35000, 55000],
     defendsAgainst: {
       insiderFraud: [65, 65, 65],
-      accountingFraud: [0, 90, 90],
-      invoiceFraud: [0, 90, 90],
+      accAndInvFraud: [0, 90, 90],
       accountTakeover: [0, 0, 99],
     },
   },
@@ -108,7 +107,7 @@ export const defenses = {
     level: 1,
     cost: [60000, 35000, 50000],
     defendsAgainst: {
-      accountingFraud: [60, 60, 60],
+      accAndInvFraud: [60, 60, 60],
       insiderFraud: [0, 85, 85],
       bec: [0, 0, 95],
     },
@@ -138,8 +137,7 @@ export const defenses = {
     cost: [75000, 40000, 65000],
     defendsAgainst: {
       insiderFraud: [90, 90, 90],
-      accountingFraud: [0, 95, 95],
-      invoiceFraud: [0, 95, 95],
+      accAndInvFraud: [0, 95, 95],
       bec: [0, 0, 99],
     },
   },
