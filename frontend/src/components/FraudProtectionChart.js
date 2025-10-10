@@ -74,7 +74,10 @@ function FraudProtectionChart({ attackId, variant = 'bar' }) {
     return (
       <div className="chart-container">
         <div className="chart-header">
-          <h2 className="chart-title">Defense Coverage</h2>
+          <h2 className="chart-title">
+            <span className="chart-title-defense">Defense </span>
+            <span className="chart-title-coverage">Coverage</span>
+          </h2>
           <span
             className="chart-protection-badge"
             style={{ backgroundColor: getProtectionColor(totalProtection) }}
@@ -87,15 +90,16 @@ function FraudProtectionChart({ attackId, variant = 'bar' }) {
             <BarChart
               data={defenseData}
               layout="vertical"
-              margin={{ top: 5, right: 20, left: 0, bottom: 5 }}
+              margin={{ top: 5, right: 10, left: 5, bottom: 5 }}
             >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis type="number" domain={[0, 100]} />
               <YAxis
                 dataKey="defenseName"
                 type="category"
-                width={95}
-                tick={{ fontSize: 11 }}
+                width={70}
+                tick={{ fontSize: 10.5, width: 70 }}
+                interval={0}
               />
               <Tooltip content={<CustomTooltip />} />
               <Bar dataKey="maxEffectiveness" name="Max Potential" fill="#8b5cf6" opacity={0.25} radius={[0, 4, 4, 0]} />

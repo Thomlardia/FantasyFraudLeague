@@ -191,25 +191,25 @@ export function DefenseProvider({ children }) {
   const getDefensesByAttackChartData = useCallback((attackId) => {
     const defenseNames = {
       mfa: 'MFA',
-      userEducation: 'User Training',
-      emailFiltering: 'Email Filter',
-      networkMonitoring: 'Net Monitor',
-      inputValidation: 'Input Valid.',
+      userEducation: 'User\nTraining',
+      emailFiltering: 'Email\nFilter',
+      networkMonitoring: 'Net\nMonitor',
+      inputValidation: 'Input\nValid.',
       httpsEncryption: 'HTTPS',
       vpnUsage: 'VPN',
-      ddosProtection: 'DDoS Shield',
-      trafficFiltering: 'Traffic Filter',
+      ddosProtection: 'DDoS\nShield',
+      trafficFiltering: 'Traffic\nFilter',
       keepSoftwareUpdated: 'Updates',
-      automatedBackups: 'Auto Backup',
-      applicationSandboxing: 'Sandboxing',
+      automatedBackups: 'Auto\nBackup',
+      applicationSandboxing: 'Sand-\nboxing',
       regularAudits: 'Audits',
-      segregationOfDuties: 'Seg. Duties',
-      principleOfLeastPrivilege: 'Least Privilege',
-      passwordPolicies: 'Pass. Policy',
-      backgroundChecks: 'Bg Checks',
-      atmInspection: 'ATM Inspect.',
-      deepfakeDetection: 'Deepfake Det.',
-      verificationProtocols: 'Verification'
+      segregationOfDuties: 'Seg.\nDuties',
+      principleOfLeastPrivilege: 'Least\nPrivilege',
+      passwordPolicies: 'Pass.\nPolicy',
+      backgroundChecks: 'Bg\nChecks',
+      atmInspection: 'ATM\nInspect.',
+      deepfakeDetection: 'Deep-\nfake Det.',
+      verificationProtocols: 'Verifi-\ncation'
     };
 
     // Find all defenses that protect against this attack

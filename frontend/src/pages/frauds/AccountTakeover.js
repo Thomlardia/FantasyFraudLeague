@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom';
 import FraudDetailPage from '../../components/FraudDetailPage';
+import FraudProtectionChart from '../../components/FraudProtectionChart';
+import '../../styles/charts.css';
 
 function AccountTakeover() {
     return (
         <FraudDetailPage
             title="Account Takeover"
+            secondaryCardContent={<FraudProtectionChart attackId="accountTakeover" variant="horizontal" />}
             infoContent={
                 <>
                     <p className="info-paragraph">

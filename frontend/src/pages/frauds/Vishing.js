@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom';
 import FraudDetailPage from '../../components/FraudDetailPage';
+import FraudProtectionChart from '../../components/FraudProtectionChart';
+import '../../styles/charts.css';
 
 function Vishing() {
     return (
         <FraudDetailPage
             title="Vishing"
+            secondaryCardContent={<FraudProtectionChart attackId="vishing" variant="horizontal" />}
             infoContent={
                 <>
                     <p className="info-paragraph">

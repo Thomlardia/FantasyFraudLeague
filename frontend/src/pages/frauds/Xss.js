@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom';
 import FraudDetailPage from '../../components/FraudDetailPage';
+import FraudProtectionChart from '../../components/FraudProtectionChart';
+import '../../styles/charts.css';
 
 function Xss() {
     return (
         <FraudDetailPage
             title="XSS"
+            secondaryCardContent={<FraudProtectionChart attackId="xss" variant="horizontal" />}
             infoContent={
                 <>
                     <p className="info-paragraph">

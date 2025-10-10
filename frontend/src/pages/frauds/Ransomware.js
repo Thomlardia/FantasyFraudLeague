@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom';
 import FraudDetailPage from '../../components/FraudDetailPage';
+import FraudProtectionChart from '../../components/FraudProtectionChart';
+import '../../styles/charts.css';
 
 function Ransomware() {
     return (
         <FraudDetailPage
             title="Ransomware"
+            secondaryCardContent={<FraudProtectionChart attackId="ransomware" variant="horizontal" />}
             infoContent={
                 <>
                     <p className="info-paragraph">

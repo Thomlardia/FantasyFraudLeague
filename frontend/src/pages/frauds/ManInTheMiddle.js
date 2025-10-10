@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom';
 import FraudDetailPage from '../../components/FraudDetailPage';
+import FraudProtectionChart from '../../components/FraudProtectionChart';
+import '../../styles/charts.css';
 
 function ManInTheMiddle() {
     return (
         <FraudDetailPage
             title="Man In The Middle"
+            secondaryCardContent={<FraudProtectionChart attackId="mitm" variant="horizontal" />}
             infoContent={
                 <>
                     <p className="info-paragraph">

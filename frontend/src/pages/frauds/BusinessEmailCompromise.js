@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom';
 import FraudDetailPage from '../../components/FraudDetailPage';
+import FraudProtectionChart from '../../components/FraudProtectionChart';
+import '../../styles/charts.css';
 
 function BusinessEmailCompromise() {
     return (
         <FraudDetailPage
             title="Business Email Compromise"
+            secondaryCardContent={<FraudProtectionChart attackId="bec" variant="horizontal" />}
             infoContent={
                 <>
                     <p className="info-paragraph">

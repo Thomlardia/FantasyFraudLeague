@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom';
 import FraudDetailPage from '../../components/FraudDetailPage';
+import FraudProtectionChart from '../../components/FraudProtectionChart';
+import '../../styles/charts.css';
 
 function Deepfake() {
     return (
         <FraudDetailPage
             title="Deepfake"
+            secondaryCardContent={<FraudProtectionChart attackId="deepfakeFraud" variant="horizontal" />}
             infoContent={
                 <>
                     <p className="info-paragraph">

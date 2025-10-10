@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom';
 import FraudDetailPage from '../../components/FraudDetailPage';
+import FraudProtectionChart from '../../components/FraudProtectionChart';
+import '../../styles/charts.css';
 
 function AtmSkimming() {
     return (
         <FraudDetailPage
             title="ATM Skimming"
+            secondaryCardContent={<FraudProtectionChart attackId="skimming" variant="horizontal" />}
             infoContent={
                 <>
                     <p className="info-paragraph">
