@@ -45,11 +45,12 @@
   border-radius: 6px;
   font-size: 14px;
   font-weight: 700;
-  color: #ffffff;
   white-space: nowrap;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   min-width: 55px;
-  background-color: var(--protection-color, #22c55e);
+  color: var(--protection-text-color, var(--color-green-dark));
+  background-color: var(--protection-bg-color, var(--color-green-light));
+  border: 1px solid var(--protection-border-color, var(--color-green-dark));
 }
 
 .chart-wrapper {
@@ -87,21 +88,21 @@
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   min-width: 180px;
-  background-color: var(--protection-color, #22c55e);
+  background-color: var(--protection-bg-color, var(--color-green-light));
+  border: 2px solid var(--protection-border-color, var(--color-green-dark));
 }
 
 .protection-value {
   font-size: 3rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--protection-text-color, var(--color-green-dark));
   line-height: 1;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .protection-label {
   font-size: 0.875rem;
   font-weight: 500;
-  color: #ffffff;
+  color: var(--protection-text-color, var(--color-green-dark));
   opacity: 0.9;
   margin-top: 0.5rem;
   text-transform: uppercase;
@@ -136,28 +137,28 @@
 }
 
 .legend-box--blue {
-  --legend-color: #3b82f6;
+  --legend-color: var(--color-chart-blue-dark);
   --legend-opacity: 1;
 }
 
 .legend-box--slate-strong {
-  --legend-color: #94a3b8;
-  --legend-opacity: 0.6;
+  --legend-color: var(--color-chart-blue-light);
+  --legend-opacity: 1;
 }
 
 .legend-box--slate-soft {
-  --legend-color: #94a3b8;
-  --legend-opacity: 0.4;
+  --legend-color: var(--color-chart-blue-light);
+  --legend-opacity: 0.7;
 }
 
 .legend-box--violet-soft {
-  --legend-color: #8b5cf6;
-  --legend-opacity: 0.25;
+  --legend-color: var(--color-chart-purple-light);
+  --legend-opacity: 1;
 }
 
 .legend-box--violet-medium {
-  --legend-color: #8b5cf6;
-  --legend-opacity: 0.3;
+  --legend-color: var(--color-chart-purple-dark);
+  --legend-opacity: 1;
 }
 
 /* Custom Tooltip Styles */
@@ -230,11 +231,11 @@
 
 .defense-level {
   font-size: 0.85rem;
-  color: var(--color-text-secondary);
-  background: rgba(59, 130, 246, 0.12);
+  color: var(--color-chart-blue-dark);
+  background: var(--color-chart-blue-light);
   padding: 0.3rem 0.8rem;
   border-radius: 12px;
-  border: 1px solid rgba(59, 130, 246, 0.2);
+  border: 1px solid var(--color-chart-blue-dark);
   font-weight: 600;
 }
 
@@ -255,7 +256,7 @@
   height: 100%;
   transition: width 0.4s ease;
   border-radius: 4px;
-  background: var(--defense-bar-current-color, #3b82f6);
+  background: var(--defense-bar-current-color, var(--color-chart-blue-dark));
 }
 
 .defense-bar-max {
@@ -265,7 +266,7 @@
   height: 100%;
   border-radius: 4px;
   z-index: 0;
-  background: var(--defense-bar-max-color, rgba(139, 92, 246, 0.2));
+  background: var(--defense-bar-max-color, var(--color-chart-purple-light));
 }
 
 .defense-stats {
@@ -275,13 +276,13 @@
 }
 
 .stat-current {
-  color: #3b82f6;
+  color: var(--color-chart-blue-dark);
   font-weight: 600;
 }
 
 .stat-max {
-  color: #8b5cf6;
-  opacity: 0.7;
+  color: var(--color-chart-purple-dark);
+  font-weight: 600;
 }
 
 /* Recharts Override Styles */

@@ -44,7 +44,7 @@
 }
 
 .page-header-title {
-  color: #1a2226;
+  color: #23395B;
   font-family: 'Audiowide', cursive;
   font-size: 28px;
   font-weight: 500;
@@ -57,7 +57,7 @@
 }
 
 .page-header-title-inline {
-  color: #2d3538;
+  color: #23395B;
   font-family: 'Audiowide', cursive;
   font-size: 28px;
   font-weight: 500;
@@ -739,15 +739,15 @@
 }
 
 .status-error {
-  background-color: #f8d7da;
-  color: #721c24;
-  border-color: #f5c6cb;
+  background: var(--color-red-light);
+  color: var(--color-red-dark);
+  border-color: var(--color-red-dark);
 }
 
 .status-success {
-  background-color: #d4edda;
-  color: #155724;
-  border-color: #c3e6cb;
+  background: var(--color-green-light);
+  color: var(--color-green-dark);
+  border-color: var(--color-green-dark);
 }
 
 .status-neutral {
@@ -794,9 +794,9 @@
 }
 
 .defense-status-badge.not-owned {
-  background: #f8d7da;
-  color: #721c24;
-  border: 1px solid #f5c6cb;
+  background: var(--color-red-light);
+  color: var(--color-red-dark);
+  border: 1px solid var(--color-red-dark);
 }
 
 /* Defense Info Grid - Professional Layout */
@@ -1046,7 +1046,7 @@
   font-family: 'Audiowide', cursive;
   font-size: 16px;
   font-weight: 700;
-  color: #059669;
+  color: var(--color-green-dark);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -1061,9 +1061,9 @@
 }
 
 .upgrade-button {
-  background: linear-gradient(135deg, #059669 0%, #047857 100%);
-  color: #ffffff;
-  border: 1px solid rgba(14, 94, 67, 0.6);
+  background: var(--color-green-light);
+  color: var(--color-green-dark);
+  border: 1px solid var(--color-green-dark);
   border-radius: 12px;
   padding: 0 24px;
   height: var(--control-button-height);
@@ -1073,29 +1073,30 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   cursor: pointer;
-  transition: all 200ms ease;
-  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease, border-color 160ms ease;
+  box-shadow: 4px 4px 0 rgba(20, 28, 30, 0.28);
   min-width: 200px;
 }
 
 .upgrade-button:hover:not(:disabled) {
-  background: linear-gradient(135deg, #047857 0%, #065f46 100%);
-  transform: translate(-2px, -2px);
-  box-shadow: 8px 8px 0 rgba(10, 73, 52, 0.28);
-  border-color: rgba(10, 73, 52, 0.8);
+  background: var(--color-green-hover);
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0 rgba(16, 24, 26, 0.34);
+  border-color: var(--color-green-dark);
 }
 
 .upgrade-button:disabled {
   background: #9ca3af;
   cursor: not-allowed;
-  box-shadow: 4px 4px 0 rgba(87, 100, 107, 0.24);
+  box-shadow: 3px 3px 0 rgba(20, 28, 30, 0.22);
   transform: none;
-  border-color: rgba(120, 130, 135, 0.6);
+  opacity: 0.7;
 }
 
 .upgrade-button:active:not(:disabled) {
   transform: translate(0, 0);
-  box-shadow: 6px 6px 0 rgba(10, 73, 52, 0.24);
+  box-shadow: 4px 4px 0 rgba(18, 26, 28, 0.3);
+  background: var(--color-green-light);
 }
 
 /* Responsive design for defense info grid */
@@ -1214,7 +1215,7 @@
 }
 
 .leaderboard-status--error {
-  color: #c0392b;
+  color: var(--color-red-dark);
 }
 
 .leaderboard-card:hover {
@@ -1331,11 +1332,11 @@
   font-family: 'Audiowide', cursive;
   font-size: 16px;
   font-weight: 700;
-  color: #059669;
-  background: rgba(5, 150, 105, 0.1);
+  color: var(--color-green-dark);
+  background: var(--color-green-light);
   padding: 4px 12px;
   border-radius: 12px;
-  border: 1px solid rgba(5, 150, 105, 0.2);
+  border: 1px solid var(--color-green-dark);
 }
 
 /* Mobile Responsive Design */
@@ -1452,18 +1453,18 @@
 }
 
 .current-user-row {
-  background: linear-gradient(135deg, rgba(5, 150, 105, 0.1) 0%, rgba(5, 150, 105, 0.05) 100%) !important;
-  border: 2px solid rgba(5, 150, 105, 0.3) !important;
-  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.2) !important;
+  background: var(--color-green-light) !important;
+  border: 2px solid var(--color-green-dark) !important;
+  box-shadow: 0 2px 8px rgba(74, 122, 99, 0.2) !important;
 }
 
 .current-user-row:hover {
-  background: linear-gradient(135deg, rgba(5, 150, 105, 0.15) 0%, rgba(5, 150, 105, 0.08) 100%) !important;
-  border-color: rgba(5, 150, 105, 0.4) !important;
+  background: var(--color-green-hover) !important;
+  border-color: var(--color-green-dark) !important;
 }
 
 .current-user-row .player-name {
   font-weight: 800;
-  color: #059669;
+  color: var(--color-green-dark);
 }
 /* Leaderboard Divider and Current User Styles */

@@ -79,6 +79,18 @@
 	--color-green-light: #c1d3ce;
 	--color-green-hover: #b1c3be;
 
+	/* Red accent colors for not-owned/error states */
+	--color-red-dark: #AC382C;
+	--color-red-light: #E2B4BD;
+
+	/* Chart and data visualization colors */
+	--color-chart-blue-dark: #2B5278;
+	--color-chart-blue-light: #B5CBE0;
+	--color-chart-purple-dark: #6B5B8C;
+	--color-chart-purple-light: #C9BFE0;
+	--color-chart-orange-dark: #B87A3E;
+	--color-chart-orange-light: #F2D9B8;
+
 	--color-surface-glass: #D7D5D5;
 	--color-surface-glass-hover: #D7D5D5;
 	--color-surface-pill: #D7D5D5;

@@ -48,13 +48,30 @@ function FraudProtectionChart({ attackId, variant = 'bar' }) {
     );
   }
 
-  // Color coding based on protection level
-  const getProtectionColor = (protection) => {
-    if (protection >= 90) return '#22c55e'; // Green - Excellent
-    if (protection >= 70) return '#84cc16'; // Lime - Good
-    if (protection >= 50) return '#eab308'; // Yellow - Moderate
-    if (protection >= 30) return '#f97316'; // Orange - Low
-    return '#ef4444'; // Red - Poor
+  // Color coding based on protection level - returns CSS variable object
+  const getProtectionColors = (protection) => {
+    if (protection >= 70) {
+      // Green - Good to Excellent
+      return {
+        text: 'var(--color-green-dark)',
+        bg: 'var(--color-green-light)',
+        border: 'var(--color-green-dark)'
+      };
+    }
+    if (protection >= 40) {
+      // Orange - Moderate
+      return {
+        text: 'var(--color-chart-orange-dark)',
+        bg: 'var(--color-chart-orange-light)',
+        border: 'var(--color-chart-orange-dark)'
+      };
+    }
+    // Red - Poor to Low
+    return {
+      text: 'var(--color-red-dark)',
+      bg: 'var(--color-red-light)',
+      border: 'var(--color-red-dark)'
+    };
   };
 
   // Custom tooltip
@@ -75,13 +92,18 @@ function FraudProtectionChart({ attackId, variant = 'bar' }) {
 
   // Variant: Horizontal bar chart (recommended for fraud pages)
   if (variant === 'horizontal') {
+    const protectionColors = getProtectionColors(totalProtection);
     return (
       <div className="chart-container">
         <div className="chart-header">
           <h2 className="management-title">Defense Coverage</h2>
           <span
             className="chart-protection-badge"
-            style={{ '--protection-color': getProtectionColor(totalProtection) }}
+            style={{
+              '--protection-text-color': protectionColors.text,
+              '--protection-bg-color': protectionColors.bg,
+              '--protection-border-color': protectionColors.border
+            }}
           >
             {totalProtection.toFixed(1)}%
           </span>
@@ -106,13 +128,13 @@ function FraudProtectionChart({ attackId, variant = 'bar' }) {
                 interval={0}
               />
               <Tooltip content={<CustomTooltip />} />
-              <Bar dataKey="maxEffectiveness" name="Max Potential" fill="#8b5cf6" opacity={0.25} radius={[0, 4, 4, 0]} />
-              <Bar dataKey="nextBuyEffectiveness" name="Next Buy" fill="#94a3b8" opacity={0.6} radius={[0, 4, 4, 0]} />
+              <Bar dataKey="maxEffectiveness" name="Max Potential" fill="var(--color-chart-purple-light)" radius={[0, 4, 4, 0]} />
+              <Bar dataKey="nextBuyEffectiveness" name="Next Buy" fill="var(--color-chart-blue-light)" radius={[0, 4, 4, 0]} />
               <Bar dataKey="effectiveness" name="Current" radius={[0, 4, 4, 0]}>
                 {defenseData.map((entry, index) => (
                   <Cell
                     key={`cell-${index}`}
-                    fill={entry.isOwned ? '#3b82f6' : 'transparent'}
+                    fill={entry.isOwned ? 'var(--color-chart-blue-dark)' : 'transparent'}
                   />
                 ))}
               </Bar>
@@ -140,11 +162,19 @@ function FraudProtectionChart({ attackId, variant = 'bar' }) {
 
   // Variant: Simple list view with visual bars
   if (variant === 'simple') {
+    const protectionColors = getProtectionColors(totalProtection);
     return (
       <div className="chart-container">
         <h2 className="management-title">Defense Coverage</h2>
         <div className="protection-summary">
-          <div className="protection-badge" style={{ '--protection-color': getProtectionColor(totalProtection) }}>
+          <div
+            className="protection-badge"
+            style={{
+              '--protection-text-color': protectionColors.text,
+              '--protection-bg-color': protectionColors.bg,
+              '--protection-border-color': protectionColors.border
+            }}
+          >
             <span className="protection-value">{totalProtection.toFixed(1)}%</span>
             <span className="protection-label">Total Protection</span>
           </div>
@@ -162,14 +192,13 @@ function FraudProtectionChart({ attackId, variant = 'bar' }) {
                   className="defense-bar-current"
                   style={{
                     width: `${defense.effectiveness}%`,
-                    '--defense-bar-current-color': defense.isOwned ? '#3b82f6' : '#94a3b8'
+                    '--defense-bar-current-color': defense.isOwned ? 'var(--color-chart-blue-dark)' : 'var(--color-chart-blue-light)'
                   }}
                 ></div>
                 <div
                   className="defense-bar-max"
                   style={{
-                    width: `${defense.maxEffectiveness}%`,
-                    '--defense-bar-max-color': 'rgba(139, 92, 246, 0.25)'
+                    width: `${defense.maxEffectiveness}%`
                   }}
                 ></div>
               </div>
@@ -185,11 +214,19 @@ function FraudProtectionChart({ attackId, variant = 'bar' }) {
   }
 
   // Variant: Standard vertical bar chart (default)
+  const protectionColors = getProtectionColors(totalProtection);
   return (
     <div className="chart-container">
       <h2 className="management-title">Defense Coverage</h2>
       <div className="protection-summary">
-        <div className="protection-badge" style={{ '--protection-color': getProtectionColor(totalProtection) }}>
+        <div
+          className="protection-badge"
+          style={{
+            '--protection-text-color': protectionColors.text,
+            '--protection-bg-color': protectionColors.bg,
+            '--protection-border-color': protectionColors.border
+          }}
+        >
           <span className="protection-value">{totalProtection.toFixed(1)}%</span>
           <span className="protection-label">Total Protection</span>
         </div>
@@ -211,18 +248,18 @@ function FraudProtectionChart({ attackId, variant = 'bar' }) {
           <YAxis domain={[0, 100]} label={{ value: 'Protection %', angle: -90, position: 'insideLeft' }} />
           <Tooltip content={<CustomTooltip />} />
           <Legend />
-          <ReferenceLine y={90} stroke="#22c55e" strokeDasharray="3 3" label="Excellent" />
-          <ReferenceLine y={50} stroke="#eab308" strokeDasharray="3 3" label="Moderate" />
+          <ReferenceLine y={70} stroke="var(--color-green-dark)" strokeDasharray="3 3" label="Good" />
+          <ReferenceLine y={40} stroke="var(--color-chart-orange-dark)" strokeDasharray="3 3" label="Moderate" />
           <Bar dataKey="effectiveness" name="Current Protection %">
             {defenseData.map((entry, index) => (
               <Cell
                 key={`cell-${index}`}
-                fill={entry.isOwned ? '#3b82f6' : '#94a3b8'}
-                opacity={entry.isOwned ? 1 : 0.4}
+                fill={entry.isOwned ? 'var(--color-chart-blue-dark)' : 'var(--color-chart-blue-light)'}
+                opacity={entry.isOwned ? 1 : 0.7}
               />
             ))}
           </Bar>
-          <Bar dataKey="maxEffectiveness" name="Max Potential %" fill="#8b5cf6" opacity={0.3} />
+          <Bar dataKey="maxEffectiveness" name="Max Potential %" fill="var(--color-chart-purple-light)" />
         </BarChart>
       </ResponsiveContainer>
 
