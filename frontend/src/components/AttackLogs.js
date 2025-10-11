@@ -41,7 +41,7 @@ function AttackLogs() {
   }
 
   if (attackLogs.length === 0) {
-    return <div>No attack logs found. This might be your first time playing!</div>;
+    return <div>No attack logs found.</div>;
   }
 
   return (
