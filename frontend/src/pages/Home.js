@@ -38,7 +38,7 @@ function Home() {
                 </Link>
                 {hasRole("admin") && (
                     <Link to="/admin" className="icon-button" title="Admin">
-                        <span style={{ color: 'white', fontSize: 12 }}>Admin</span>
+                        <span className="icon-button-label">Admin</span>
                     </Link>
                 )}
             </PageHeader>

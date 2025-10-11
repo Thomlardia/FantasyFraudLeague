@@ -72,7 +72,7 @@ const BruteForce                = lazy(() => import("../pages/frauds/BruteForce"
 const SyntIdentityTheft         = lazy(() => import("../pages/frauds/SyntIdentityTheft"));
 const AccAndInvFraud            = lazy(() => import("../pages/frauds/AccAndInvFraud"));
 
-const NotFound = () => <div style={{ padding: 24 }}>404 — Not Found</div>;
+const NotFound = () => <div className="simple-page simple-page--centered">404 — Not Found</div>;
 
 export default function AppRoutes() {
   return (

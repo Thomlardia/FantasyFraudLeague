@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
+import '../styles/ui.css';
 
 export default function VerifyEmail() {
   const [sending, setSending] = useState(false);
@@ -39,10 +40,10 @@ export default function VerifyEmail() {
   };
 
   return (
-    <div style={{ padding: 24 }}>
+    <div className="simple-page verify-page">
       <h1>Verify your email</h1>
       <p>We sent a verification link to <b>{auth.currentUser?.email}</b>.</p>
-      <div style={{ display: "flex", gap: 8 }}>
+      <div className="simple-action-row simple-page__actions">
         <button onClick={resend} disabled={sending}>
           {sending ? "Sending…" : "Resend email"}
         </button>
@@ -53,4 +54,3 @@ export default function VerifyEmail() {
     </div>
   );
 }
-

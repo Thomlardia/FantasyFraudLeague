@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { httpsCallable } from "firebase/functions";
 import { functions } from "../firebase";
 import { useAuth } from "../auth/useAuth";
+import '../styles/ui.css';
 
 export default function AdminDashboard() {
   const { user, roles, refreshClaims } = useAuth();
@@ -33,14 +34,14 @@ export default function AdminDashboard() {
   }, []);
 
   return (
-    <div style={{ padding: 24 }}>
+    <div className="simple-page admin-dashboard">
       <h1>Admin Dashboard</h1>
       <p>
         Signed in as <strong>{user?.email || user?.uid}</strong>
       </p>
       <p>Roles: {roles.length ? roles.join(", ") : "(none)"}</p>
 
-      <div style={{ marginTop: 16, display: "flex", gap: 8 }}>
+      <div className="simple-action-row simple-page__actions">
         <button onClick={refreshClaims} disabled={loading}>
           Refresh Roles
         </button>
@@ -54,12 +55,12 @@ export default function AdminDashboard() {
         </button>
       </div>
 
-      {err && <p style={{ color: "#c00", marginTop: 12 }}>{err}</p>}
+      {err && <p className="simple-error">{err}</p>}
 
       {Array.isArray(users) && (
-        <div style={{ marginTop: 16 }}>
+        <div className="admin-users">
           <h3>Users</h3>
-          <pre style={{ background: "#111", color: "#eee", padding: 12, overflowX: "auto" }}>
+          <pre className="admin-users__code">
             {JSON.stringify(users, null, 2)}
           </pre>
         </div>

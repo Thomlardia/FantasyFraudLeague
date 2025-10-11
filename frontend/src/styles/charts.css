@@ -1,17 +1,17 @@
-/* Chart Container Styles - Indented/Inset Effect */
+/* Chart Container Styles - Indented/Inset Effect (Inverted Neo-Brutalism) */
 .chart-container {
   padding: 1rem;
   /* Match parent background to create seamless look */
   background: var(--color-page-surface);
   border-radius: 12px;
 
-  /* Inset shadow effect - looks like it's carved into the parent */
+  /* Inverted neo-brutalist shadow - top-left instead of bottom-right */
   box-shadow:
-    inset 0 2px 6px rgba(0, 0, 0, 0.08),
-    inset 0 4px 12px rgba(0, 0, 0, 0.04);
+    inset 3px 3px 0 rgba(12, 18, 20, 0.38),
+    inset 0 0 8px rgba(0, 0, 0, 0.06);
 
-  /* Dark border matching other elements */
-  border: 1px solid var(--color-border-card);
+  /* Dark border matching other neo-brutalist elements */
+  border: 1px solid var(--neo-border);
 
   display: flex;
   flex-direction: column;
@@ -57,6 +57,7 @@
   white-space: nowrap;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   min-width: 55px;
+  background-color: var(--protection-color, #22c55e);
 }
 
 .chart-wrapper {
@@ -94,6 +95,7 @@
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   min-width: 180px;
+  background-color: var(--protection-color, #22c55e);
 }
 
 .protection-value {
@@ -137,16 +139,42 @@
   height: 16px;
   border-radius: 2px;
   display: inline-block;
+  background: var(--legend-color, #3b82f6);
+  opacity: var(--legend-opacity, 1);
+}
+
+.legend-box--blue {
+  --legend-color: #3b82f6;
+  --legend-opacity: 1;
+}
+
+.legend-box--slate-strong {
+  --legend-color: #94a3b8;
+  --legend-opacity: 0.6;
+}
+
+.legend-box--slate-soft {
+  --legend-color: #94a3b8;
+  --legend-opacity: 0.4;
+}
+
+.legend-box--violet-soft {
+  --legend-color: #8b5cf6;
+  --legend-opacity: 0.25;
+}
+
+.legend-box--violet-medium {
+  --legend-color: #8b5cf6;
+  --legend-opacity: 0.3;
 }
 
 /* Custom Tooltip Styles */
 .recharts-custom-tooltip {
-  background: rgba(255, 255, 255, 0.98);
+  background: #D7D5D5;
   border: 1px solid var(--color-border-card);
   border-radius: 8px;
   padding: 0.75rem;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-  backdrop-filter: blur(8px);
 }
 
 .tooltip-label {
@@ -235,6 +263,7 @@
   height: 100%;
   transition: width 0.4s ease;
   border-radius: 4px;
+  background: var(--defense-bar-current-color, #3b82f6);
 }
 
 .defense-bar-max {
@@ -244,6 +273,7 @@
   height: 100%;
   border-radius: 4px;
   z-index: 0;
+  background: var(--defense-bar-max-color, rgba(139, 92, 246, 0.2));
 }
 
 .defense-stats {

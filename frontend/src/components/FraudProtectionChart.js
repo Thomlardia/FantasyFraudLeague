@@ -81,7 +81,7 @@ function FraudProtectionChart({ attackId, variant = 'bar' }) {
           <h2 className="management-title">Defense Coverage</h2>
           <span
             className="chart-protection-badge"
-            style={{ backgroundColor: getProtectionColor(totalProtection) }}
+            style={{ '--protection-color': getProtectionColor(totalProtection) }}
           >
             {totalProtection.toFixed(1)}%
           </span>
@@ -121,15 +121,15 @@ function FraudProtectionChart({ attackId, variant = 'bar' }) {
 
           <div className="chart-legend-custom">
             <div className="legend-item">
-              <span className="legend-box" style={{ backgroundColor: '#3b82f6' }}></span>
+              <span className="legend-box legend-box--blue"></span>
               <span>Current</span>
             </div>
             <div className="legend-item">
-              <span className="legend-box" style={{ backgroundColor: '#94a3b8', opacity: 0.6 }}></span>
+              <span className="legend-box legend-box--slate-strong"></span>
               <span>Next Buy</span>
             </div>
             <div className="legend-item">
-              <span className="legend-box" style={{ backgroundColor: '#8b5cf6', opacity: 0.25 }}></span>
+              <span className="legend-box legend-box--violet-soft"></span>
               <span>Max Potential</span>
             </div>
           </div>
@@ -144,7 +144,7 @@ function FraudProtectionChart({ attackId, variant = 'bar' }) {
       <div className="chart-container">
         <h2 className="management-title">Defense Coverage</h2>
         <div className="protection-summary">
-          <div className="protection-badge" style={{ backgroundColor: getProtectionColor(totalProtection) }}>
+          <div className="protection-badge" style={{ '--protection-color': getProtectionColor(totalProtection) }}>
             <span className="protection-value">{totalProtection.toFixed(1)}%</span>
             <span className="protection-label">Total Protection</span>
           </div>
@@ -162,15 +162,14 @@ function FraudProtectionChart({ attackId, variant = 'bar' }) {
                   className="defense-bar-current"
                   style={{
                     width: `${defense.effectiveness}%`,
-                    backgroundColor: defense.isOwned ? '#3b82f6' : '#94a3b8'
+                    '--defense-bar-current-color': defense.isOwned ? '#3b82f6' : '#94a3b8'
                   }}
                 ></div>
                 <div
                   className="defense-bar-max"
                   style={{
                     width: `${defense.maxEffectiveness}%`,
-                    backgroundColor: '#8b5cf6',
-                    opacity: 0.2
+                    '--defense-bar-max-color': 'rgba(139, 92, 246, 0.25)'
                   }}
                 ></div>
               </div>
@@ -190,7 +189,7 @@ function FraudProtectionChart({ attackId, variant = 'bar' }) {
     <div className="chart-container">
       <h2 className="management-title">Defense Coverage</h2>
       <div className="protection-summary">
-        <div className="protection-badge" style={{ backgroundColor: getProtectionColor(totalProtection) }}>
+        <div className="protection-badge" style={{ '--protection-color': getProtectionColor(totalProtection) }}>
           <span className="protection-value">{totalProtection.toFixed(1)}%</span>
           <span className="protection-label">Total Protection</span>
         </div>
@@ -229,15 +228,15 @@ function FraudProtectionChart({ attackId, variant = 'bar' }) {
 
       <div className="chart-legend-custom">
         <div className="legend-item">
-          <span className="legend-box" style={{ backgroundColor: '#3b82f6' }}></span>
+          <span className="legend-box legend-box--blue"></span>
           <span>Owned Defense</span>
         </div>
         <div className="legend-item">
-          <span className="legend-box" style={{ backgroundColor: '#94a3b8', opacity: 0.4 }}></span>
+          <span className="legend-box legend-box--slate-soft"></span>
           <span>Not Owned</span>
         </div>
         <div className="legend-item">
-          <span className="legend-box" style={{ backgroundColor: '#8b5cf6', opacity: 0.3 }}></span>
+          <span className="legend-box legend-box--violet-medium"></span>
           <span>Max Potential</span>
         </div>
       </div>

@@ -1,7 +1,14 @@
 import { useEffect, useRef } from "react";
 
-export default function MatrixBackground() {
+export default function MatrixBackground({ visible = true }) {
   const canvasRef = useRef(null);
+  const visibleRef = useRef(visible);
+  const intervalIdRef = useRef(null);
+
+  // Update visibility ref when prop changes
+  useEffect(() => {
+    visibleRef.current = visible;
+  }, [visible]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -12,9 +19,9 @@ export default function MatrixBackground() {
 
     // Get matrix background color from CSS
     const rootStyles = getComputedStyle(document.documentElement);
-    const matrixBgColor = rootStyles.getPropertyValue("--color-matrix-base").trim() || "#0e1822";
-    const matrixDotColor = rootStyles.getPropertyValue("--color-matrix-dot").trim() || "rgba(52, 64, 74, 0.35)";
-    const matrixGlyphColor = rootStyles.getPropertyValue("--color-accent-matrix").trim() || "#70A253";
+    const matrixBgColor = rootStyles.getPropertyValue("--color-matrix-base").trim();
+    const matrixDotColor = rootStyles.getPropertyValue("--color-matrix-dot").trim();
+    const matrixGlyphColor = rootStyles.getPropertyValue("--color-accent-matrix").trim();
 
     // Convert hex to RGB for fade overlay
     const hexToRgb = (hex) => {
@@ -38,33 +45,16 @@ export default function MatrixBackground() {
     let width = 0;
     let height = 0;
     let columnYPositions = [];
-    let dotColumns = [];
-    let dotRows = [];
-    let intervalId = null;
 
     // Resize canvas to fit window and reinitialize column positions
     const resize = () => {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
 
-      // Fill canvas with matrix background color initially
-      ctx.fillStyle = matrixBgColor;
-      ctx.fillRect(0, 0, width, height);
-
       // Create array to track y-position of each column
       // Each column starts at y = 0 (top of screen)
       const numColumns = Math.ceil(width / state.size);
       columnYPositions = Array(numColumns).fill(0);
-
-      const betweenColumns = Math.max(numColumns - 1, 0);
-      const offset = state.size * 0.3;
-      dotColumns = Array.from({ length: betweenColumns }, (_, i) => {
-        const base = i * state.size + state.size / 2;
-        return base + offset;
-      });
-
-      const numRows = Math.ceil(height / state.size);
-      dotRows = Array.from({ length: Math.max(numRows - 1, 0) }, (_, i) => i * state.size + state.size / 2);
     };
 
     // Helper function to pick random item from array
@@ -73,25 +63,13 @@ export default function MatrixBackground() {
 
     // Draw one frame of the Matrix effect
     const draw = () => {
+      // Only draw if visible (optimization to prevent background computation)
+      if (!visibleRef.current) return;
+
       // Draw semi-transparent background rectangle to create fading trail effect
       // Uses actual background color from CSS to match page
       ctx.fillStyle = `rgba(${matrixBgRgb},${state.bgOpacity})`;
       ctx.fillRect(0, 0, width, height);
-
-      // Render dot grid between columns for subtle background pattern
-      if (dotColumns.length && dotRows.length) {
-        const dotSize = Math.max(1, Math.floor(state.size * 0.12));
-        const dotOffset = dotSize / 2;
-        ctx.fillStyle = matrixDotColor;
-
-        for (let i = 0; i < dotColumns.length; i++) {
-          const x = dotColumns[i];
-          for (let j = 0; j < dotRows.length; j++) {
-            const y = dotRows[j];
-            ctx.fillRect(x - dotOffset, y - dotOffset, dotSize, dotSize);
-          }
-        }
-      }
 
       // Set text style
       ctx.font = state.size + "px monospace";
@@ -126,12 +104,13 @@ export default function MatrixBackground() {
     window.addEventListener("resize", resize);
 
     // Animation loop with FPS control
-    intervalId = setInterval(draw, 1000 / state.fps);
+    intervalIdRef.current = setInterval(draw, 1000 / state.fps);
 
     return () => {
       window.removeEventListener("resize", resize);
-      if (intervalId) {
-        clearInterval(intervalId);
+      if (intervalIdRef.current) {
+        clearInterval(intervalIdRef.current);
+        intervalIdRef.current = null;
       }
     };
   }, []);

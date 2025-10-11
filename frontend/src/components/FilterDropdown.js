@@ -45,10 +45,10 @@ function FilterDropdown({ options = [], selected = null, onChange, isOpen, onClo
         onMouseDown={onClose}
       >
         <div
-          className="filter-dropdown"
+          className="filter-dropdown filter-dropdown-popover"
           ref={panelRef}
           onMouseDown={(e) => e.stopPropagation()}
-          style={{ position: 'fixed', top: style.top, left: style.left, minWidth: style.minWidth, right: 'auto', zIndex: 3001 }}
+          style={{ top: style.top, left: style.left, minWidth: style.minWidth }}
         >
           <div className="filter-dropdown-content">
             {options.map((option) => (

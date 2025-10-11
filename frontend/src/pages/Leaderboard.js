@@ -15,7 +15,7 @@ function Leaderboard() {
         return (
             <div className="shop-wiki-container">
                 <PageHeader title="Leaderboard" backPath="/home" />
-                <p style={{ textAlign: 'center', marginTop: '2rem' }}>Loading leaderboard...</p>
+                <p className="leaderboard-status">Loading leaderboard...</p>
             </div>
         );
     }
@@ -24,7 +24,7 @@ function Leaderboard() {
         return (
             <div className="shop-wiki-container">
                 <PageHeader title="Leaderboard" backPath="/home" />
-                <p style={{ textAlign: 'center', marginTop: '2rem', color: 'red' }}>Error: {error}</p>
+                <p className="leaderboard-status leaderboard-status--error">Error: {error}</p>
             </div>
         );
     }

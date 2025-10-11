@@ -98,53 +98,53 @@ function DefenseDetailPage({ defenseKey, title, infoContent }) {
                 centerContent={<MoneyBar />}
             >
             </PageHeader>
-            <div className="detail-grid">
-                <NavigationPanel />
-                <div className="description-card info-card">
-                    <h1 className="detail-title">{title}</h1>
-                    {statusMessage}
-                    <div className="info-content">{infoContent}</div>
-                </div>
+                <div className="detail-grid">
+                    <NavigationPanel />
+                    <div className="description-card info-card">
+                        <h1 className="detail-title">{title}</h1>
+                        {statusMessage}
+                        <div className="info-content">{infoContent}</div>
+                    </div>
 
-                <div className="description-card management-card">
-                    <div className="chart-container">
-                        <div className="chart-header">
-                            <h2 className="management-title">Defense Management</h2>
-                        </div>
-                        <div className="upgrade-header">
-                            <h3>Defense Level: {currentLevel}</h3>
-                            <p>Status: {isOwned ? 'Owned' : 'Not Owned'}</p>
-                        </div>
-
-                        <div className="upgrade-info">
-                            <div className="upgrade-details">
-                                <span className="upgrade-cost">Cost: ${upgradeCost.toLocaleString()}</span>
-                                <span className="upgrade-level">
-                                    {isOwned
-                                        ? isMaxLevel
-                                            ? 'Max Level Achieved'
-                                            : `Next: Level ${currentLevel + 1}`
-                                        : 'Purchase to Own'}
-                                </span>
+                    <div className="description-card management-card">
+                        <div className="chart-container">
+                            <div className="chart-header">
+                                <h2 className="management-title">Defense Management</h2>
+                            </div>
+                            <div className="upgrade-header">
+                                <h3>Defense Level: {currentLevel}</h3>
+                                <p>Status: {isOwned ? 'Owned' : 'Not Owned'}</p>
                             </div>
 
-                            <button
-                                className="upgrade-button"
-                                onClick={handleUpgradeAction}
-                                disabled={actionLoading || isMaxLevel}
-                            >
-                                {actionLoading
-                                    ? (isOwned ? 'Upgrading...' : 'Purchasing...')
-                                    : isMaxLevel
-                                        ? 'Max Level Reached'
-                                        : (isOwned ? 'Upgrade Defense' : 'Purchase Defense')}
-                            </button>
+                            <div className="upgrade-info">
+                                <div className="upgrade-details">
+                                    <span className="upgrade-cost">Cost: ${upgradeCost.toLocaleString()}</span>
+                                    <span className="upgrade-level">
+                                        {isOwned
+                                            ? isMaxLevel
+                                                ? 'Max Level Achieved'
+                                                : `Next: Level ${currentLevel + 1}`
+                                            : 'Purchase to Own'}
+                                    </span>
+                                </div>
+
+                                <button
+                                    className="upgrade-button"
+                                    onClick={handleUpgradeAction}
+                                    disabled={actionLoading || isMaxLevel}
+                                >
+                                    {actionLoading
+                                        ? (isOwned ? 'Upgrading...' : 'Purchasing...')
+                                        : isMaxLevel
+                                            ? 'Max Level Reached'
+                                            : (isOwned ? 'Upgrade Defense' : 'Purchase Defense')}
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    );
-}
+        );
+    }
 
 export default DefenseDetailPage;

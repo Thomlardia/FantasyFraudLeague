@@ -9,7 +9,7 @@ export default function MatrixBackgroundLayer() {
 
   return (
     <div className={`matrix-layer${visible ? " is-visible" : ""}`}>
-      <MatrixBackground />
+      <MatrixBackground visible={visible} />
     </div>
   );
 }

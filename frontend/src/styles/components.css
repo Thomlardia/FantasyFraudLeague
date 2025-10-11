@@ -16,7 +16,7 @@
 
 .auth-form input {
 	padding: 0 18px;
-	border: 1px solid rgba(255, 255, 255, 0.25);
+border: 1px solid rgba(24, 32, 36, 0.34);
 	border-radius: 12px;
 	background:
 		radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 60%),
@@ -29,7 +29,6 @@
 	box-shadow:
 		inset 0 1px 0 rgba(255, 255, 255, 0.22),
 		0 8px 24px rgba(0, 0, 0, 0.25);
-	backdrop-filter: blur(12px);
 	transition:
 		transform 160ms ease,
 		box-shadow 160ms ease,
@@ -124,29 +123,52 @@
 	justify-content: center;
 	width: 40px;
 	height: 40px;
-	border: none;
-	border-radius: 8px;
+border: 1px solid rgba(24, 32, 36, 0.34);
+	border-radius: 10px;
 	text-decoration: none;
 	color: var(--color-text-secondary);
 	font-weight: 700;
-	background: var(--color-surface-glass);
-	box-shadow: var(--shadow-md);
-	transition: all 120ms ease;
+	background:
+		linear-gradient(160deg, rgba(255, 255, 255, 0.16) 0%, rgba(210, 216, 220, 0.05) 100%),
+		#d7d5d5;
+box-shadow: 3px 3px 0 rgba(20, 28, 30, 0.28);
+	transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease, border-color 160ms ease, color 160ms ease;
 	flex-shrink: 0;
-	backdrop-filter: blur(10px);
 }
 .icon-button:hover, .back-button:hover {
-	transform: translateY(-1px);
-	background: var(--color-surface-glass-hover);
-	box-shadow: var(--shadow-lg);
+	transform: translate(-1px, -1px);
+	background:
+		linear-gradient(160deg, rgba(255, 255, 255, 0.21) 0%, rgba(210, 216, 220, 0.1) 100%),
+		#d7d5d5;
+box-shadow: 5px 5px 0 rgba(16, 24, 26, 0.34);
 	color: var(--color-text-emphasis);
+border-color: rgba(22, 30, 32, 0.52);
 }
 .icon-button:disabled, .back-button:disabled {
 	opacity: 0.5;
 	cursor: not-allowed;
 	pointer-events: none;
 	transform: none;
-	box-shadow: var(--shadow-md);
+box-shadow: 2px 2px 0 rgba(20, 28, 30, 0.22);
+}
+.icon-button:active, .back-button:active {
+	transform: translate(0, 0);
+	box-shadow: 2px 2px 0 rgba(16, 24, 26, 0.28);
+	background:
+		linear-gradient(160deg, rgba(255, 255, 255, 0.14) 0%, rgba(200, 206, 210, 0.06) 100%),
+		#d7d5d5;
+}
+
+.icon-button-label {
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0.6px;
+	text-transform: uppercase;
+	color: rgba(15, 21, 23, 0.85);
+}
+
+.icon-button:hover .icon-button-label {
+	color: var(--color-text-emphasis);
 }
 .back-button .material-symbols-outlined,
 .icon-button .material-symbols-outlined {
@@ -227,29 +249,27 @@
 	text-transform: none;
 	text-decoration: none;
 	cursor: pointer;
-	border: 1px solid var(--color-border-soft);
+border: 1px solid rgba(24, 32, 36, 0.34);
 	color: var(--color-text-secondary);
-	background: var(--color-surface-glass);
-	box-shadow:
-		var(--shadow-md),
-		inset 0 1px 0 rgba(255, 255, 255, 0.12);
-	backdrop-filter: blur(14px);
-	-webkit-backdrop-filter: blur(14px);
+	background:
+		linear-gradient(170deg, rgba(255, 255, 255, 0.18) 0%, rgba(210, 216, 220, 0.05) 100%),
+		#d7d5d5;
+box-shadow: 4px 4px 0 rgba(20, 28, 30, 0.28);
 	transition:
-		transform 120ms ease,
-		box-shadow 150ms ease,
-		background 150ms ease,
-		border-color 150ms ease,
-		color 150ms ease;
+		transform 160ms ease,
+		box-shadow 160ms ease,
+		background 160ms ease,
+		border-color 160ms ease,
+		color 160ms ease;
 }
 
 .splash-button:hover {
-	transform: translateY(-2px);
-	background: var(--color-surface-glass-hover);
-	border-color: var(--color-border-hover);
-	box-shadow:
-		var(--shadow-lg),
-		inset 0 1px 0 rgba(255, 255, 255, 0.16);
+	transform: translate(-1.5px, -1.5px);
+	background:
+		linear-gradient(170deg, rgba(255, 255, 255, 0.22) 0%, rgba(210, 216, 220, 0.1) 100%),
+		#d7d5d5;
+border-color: rgba(22, 30, 32, 0.52);
+box-shadow: 6px 6px 0 rgba(16, 24, 26, 0.34);
 	color: var(--color-text-emphasis);
 }
 
@@ -257,7 +277,7 @@
 	opacity: 0.65;
 	cursor: not-allowed;
 	transform: none;
-	box-shadow: var(--shadow-sm);
+box-shadow: 3px 3px 0 rgba(20, 28, 30, 0.22);
 	background: var(--button-disabled-background);
 	border-color: var(--button-disabled-border);
 	color: var(--color-text-muted);
@@ -266,6 +286,13 @@
 .splash-button:focus-visible {
 	outline: 2px solid var(--color-border-hover);
 	outline-offset: 3px;
+}
+.splash-button:active:not(:disabled) {
+	transform: translate(0, 0);
+box-shadow: 4px 4px 0 rgba(18, 26, 28, 0.3);
+	background:
+		linear-gradient(170deg, rgba(255, 255, 255, 0.16) 0%, rgba(210, 216, 220, 0.06) 100%),
+		#d7d5d5;
 }
 
 .auth-stack {
@@ -287,22 +314,23 @@
 	font-size: 19px;
 	color: var(--color-text-secondary);
 	height: 40px;
-	background: var(--color-surface-pill);
-	backdrop-filter: blur(8px);
-	border-radius: 20px;
+	background:
+		linear-gradient(160deg, rgba(255, 255, 255, 0.18) 0%, rgba(210, 216, 220, 0.06) 100%),
+		#d7d5d5;
+	border: 1px solid rgba(24, 32, 36, 0.34);
+	border-radius: 24px;
 	padding: 6px 10px 6px 6px;
-	box-shadow:
-		var(--shadow-md),
-		inset 0 1px 0 rgba(255, 255, 255, 0.1);
-	transition: all 120ms ease;
+	box-shadow: 4px 4px 0 rgba(20, 28, 30, 0.28);
+	transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease, border-color 160ms ease;
 }
 
 .money-display:hover {
-	background: var(--color-surface-pill-hover);
-	box-shadow:
-		var(--shadow-lg),
-		inset 0 1px 0 rgba(255, 255, 255, 0.15);
-	transform: translateY(-1px);
+	background:
+		linear-gradient(160deg, rgba(255, 255, 255, 0.22) 0%, rgba(210, 216, 220, 0.1) 100%),
+		#d7d5d5;
+	box-shadow: 5px 5px 0 rgba(16, 24, 26, 0.34);
+	transform: translate(-1px, -1px);
+	border-color: rgba(22, 30, 32, 0.5);
 }
 
 .money-display > span:last-child {
@@ -315,11 +343,11 @@
 	justify-content: center;
 	width: 32px;
 	height: 32px;
-	border: none;
+	border: 1px solid var(--color-border-card);
 	border-radius: 50%;
 	font-size: 15px;
 	background: var(--color-surface-icon);
-	box-shadow: var(--shadow-sm);
+	box-shadow: 4px 4px 0 rgba(20, 28, 30, 0.2);
 }
 
 .money-icon .icon-img--small {

@@ -11,7 +11,63 @@ function NavigationPanel() {
         frauds: true
     });
     const [searchQuery, setSearchQuery] = useState('');
+    const [isAtBottom, setIsAtBottom] = useState(false);
     const savedScrollPositionRef = useRef(0);
+
+    // Detect if scrolled to bottom
+    useEffect(() => {
+        const scrollContainer = navPanelRef.current;
+        if (!scrollContainer) return;
+
+        const handleScroll = () => {
+            const { scrollTop, scrollHeight, clientHeight } = scrollContainer;
+            const atBottom = scrollHeight - scrollTop - clientHeight < 10; // 10px threshold
+            setIsAtBottom(atBottom);
+        };
+
+        scrollContainer.addEventListener('scroll', handleScroll);
+        // Check initial state
+        handleScroll();
+
+        return () => scrollContainer.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    // Handle scroll indicator click
+    const handleScrollIndicatorClick = () => {
+        if (!navPanelRef.current) return;
+
+        // Check if any folder is minimized
+        const anyMinimized = !expanded.defenses || !expanded.frauds;
+
+        if (anyMinimized) {
+            // Open all folders first
+            setExpanded({
+                defenses: true,
+                frauds: true
+            });
+            // Wait for DOM to update, then scroll to bottom
+            setTimeout(() => {
+                if (navPanelRef.current) {
+                    navPanelRef.current.scrollTo({
+                        top: navPanelRef.current.scrollHeight,
+                        behavior: 'smooth'
+                    });
+                }
+            }, 200);
+        } else if (isAtBottom) {
+            // Scroll to top
+            navPanelRef.current.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        } else {
+            // Scroll to bottom
+            navPanelRef.current.scrollTo({
+                top: navPanelRef.current.scrollHeight,
+                behavior: 'smooth'
+            });
+        }
+    };
 
     // Auto-scroll to active item and expand its section when pathname changes
     useEffect(() => {
@@ -245,6 +301,19 @@ function NavigationPanel() {
                     ))}
                 </ul>
             </div>
+            </div>
+
+            {/* Bottom Scroll Indicator - Fixed */}
+            <div className="nav-bottom-indicator">
+                <button
+                    className={`nav-scroll-hint ${(!expanded.defenses || !expanded.frauds) ? 'down' : (isAtBottom ? 'up' : 'down')}`}
+                    onClick={handleScrollIndicatorClick}
+                    aria-label={(!expanded.defenses || !expanded.frauds) ? "Expand all and scroll to bottom" : (isAtBottom ? "Scroll to top" : "Scroll to bottom")}
+                >
+                    <span className="material-symbols-outlined">
+                        {(!expanded.defenses || !expanded.frauds) ? 'expand_more' : (isAtBottom ? 'expand_less' : 'expand_more')}
+                    </span>
+                </button>
             </div>
         </nav>
     );
