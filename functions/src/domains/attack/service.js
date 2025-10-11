@@ -1,7 +1,8 @@
 // This file contains the logic for all attack related operations.
-import { getAllAttacks } from "./repo.js";
+import { getAllAttacks, saveAttackLogToDatabase } from "./repo.js";
 import { getUserBalance, updateUserBalance} from "../wallet/service.js";
 import { getUserOwnedDefensesComplete, getAllUsers } from "../defense/repo.js";
+
 
 /**
  * Finds and returns the attack object for a given attack id
@@ -67,11 +68,12 @@ export function getHardWave() {
   return shuffledAttacks.slice(0, 5);
 }
 
+
 /**
  * Deducts money from the user's wallet after an attack wave, considering owned defenses.
+ * Attack log is automatically saved to the database.
  * @param {string} userId - The user's ID
  * @param {Array<object>} wave - Array of attack objects 
- * @returns {object} Attack log containing old balance, attack details, defense effectiveness, and new balance
  */
 export async function attackDeduction(userId, wave) {
   // Get user's owned defenses with details
@@ -121,7 +123,6 @@ export async function attackDeduction(userId, wave) {
     
     // Add attack details to log
     attackLog.attacks.push({
-      attackId: attack.attackId || attack.type,
       attackName: attack.name || attack.attackId || attack.type,
       originalDamage: originalDamage,
       finalDamage: Math.round(reducedDamage),
@@ -139,39 +140,31 @@ export async function attackDeduction(userId, wave) {
   attackLog.totalDamage = Math.round(totalDamage);
   attackLog.newBalance = newBalance;
   
+  // Update user balance
   await updateUserBalance(userId, newBalance);
-  return attackLog;
+  
+  // Save attack log to database
+  await saveAttackLogToDatabase(userId, attackLog);
 }
 
 /**
  * Executes attacks against all users in the system, using the attackDeduction function.
+ * Attack logs are automatically saved to the database for each user.
  * @param {Array<object>} wave - Array of attack objects 
- * @returns {Array<object>} Array of attack logs for each user
  */
 export async function massAttackDeduction(wave) {
   // Get all users
   const allUsers = await getAllUsers();
-  const userAttackResults = [];
 
   // Process each user using the existing attackDeduction function
   for (const user of allUsers) {
     try {
       // Use the existing attackDeduction function to process the attack for this user
-      const userAttackResult = await attackDeduction(user.id, wave);
-      userAttackResults.push(userAttackResult);
+      await attackDeduction(user.id, wave);
       
     } catch (error) {
       // Log error for this user but continue with others
-      userAttackResults.push({
-        userId: user.id,
-        error: `Failed to process attack: ${error.message}`,
-        oldBalance: 0,
-        attacks: [],
-        totalDamage: 0,
-        newBalance: 0
-      });
+      console.error(`Failed to process attack for user ${user.id}:`, error.message);
     }
   }
-
-  return userAttackResults;
 }
