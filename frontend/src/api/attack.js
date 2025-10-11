@@ -1,7 +1,5 @@
-import { getFunctions, httpsCallable } from "firebase/functions";
-import { app } from "../firebase";
-
-const functions = getFunctions(app, "africa-south1");
+import { httpsCallable } from "firebase/functions";
+import { functions } from "../firebase";
 
 export async function getEasyWave() {
   const fn = httpsCallable(functions, "user_getEasyWave");

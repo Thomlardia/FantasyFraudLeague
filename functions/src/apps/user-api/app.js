@@ -60,7 +60,7 @@ export const user_getAttackLogs = onCall({ region: "africa-south1", enforceAppCh
   const { limit } = request.data || {};
   
   // Validate limit parameter if provided
-  if (limit !== undefined && (typeof limit !== "number" || limit < 1)) {
+  if (limit !== undefined && limit !== null && (typeof limit !== "number" || limit < 1)) {
     throw new HttpsError("invalid-argument", "limit must be a positive number");
   }
   

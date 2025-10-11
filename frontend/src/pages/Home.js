@@ -6,6 +6,8 @@ import iconLeaderboard from '../images/icons/leaderboard.png';
 import iconHelp from '../images/icons/help.png';
 import iconSettings from '../images/icons/settings.png';
 import MoneyBar from '../components/MoneyBar';
+import AttackLogs from '../components/AttackLogs';
+
 
 function Home() {
     const { hasRole, logout } = useAuth();
@@ -42,8 +44,10 @@ function Home() {
             </div>
 
             <main className="home-main">
-                <div className="headline">NEXT ATTACK IN...</div>
-                <div className="digital-timer" aria-live="polite">42 SECS</div>
+                {/* <div className="headline">NEXT ATTACK IN...</div>
+                <div className="digital-timer" aria-live="polite">42 SECS</div> */}
+
+                <AttackLogs />
 
                 <div className="cta-row">
                     <Link className="cta-button" to="/defenseshop">Cyber Defense Shop</Link>
