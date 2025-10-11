@@ -56,6 +56,10 @@ function Home() {
                         Fraud Wiki
                         <span className="material-symbols-outlined">chevron_right</span>
                     </Link>
+                    <Link className="cta-button" to="/admin-dev">
+                        Admin Page
+                        <span className="material-symbols-outlined">chevron_right</span>
+                    </Link>
                 </div>
             </main>
         </div>
