@@ -1,5 +1,6 @@
 // This file exposes the attack operations to the api layer.
 import { getAttackInfo, getEasyWave, getHardWave, getMediumWave, getRandomWave, attackDeduction, massAttackDeduction} from "./service.js";
+import { getUserAttackLogs } from "./repo.js";
 
 /**
  * API: Get attack info.
@@ -59,5 +60,15 @@ export function apiAttackDeduction(userId, wave) {
  */
 export function apiMassAttackDeduction(wave) {
 	return massAttackDeduction(wave);
+}
+
+/**
+ * API: Get user attack logs from database
+ * @param {string} userId - The user's ID
+ * @param {number} limit - Optional limit for number of logs to retrieve (default: all)
+ * @returns {Promise<Array<object>>} Array of attack log objects, sorted by timestamp (newest first)
+ */
+export function apiGetUserAttackLogs(userId, limit = null) {
+	return getUserAttackLogs(userId, limit);
 }
 

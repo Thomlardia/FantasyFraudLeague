@@ -3,6 +3,7 @@ import { requireAuth, requireVerified, requireAppCheck } from "../common/authzn.
 import { apiGetUserBalance } from "../../domains/wallet/api.js";
 import { apiGetUserDefenses, apiBuyDefense, apiUpgradeDefense } from "../../domains/defense/api.js";
 import { apiGetLeaderboard, apiGetLeaderboardWithUser, apiGetUserRank } from "../../domains/leaderboard/api.js";
+import { apiGetUserAttackLogs } from "../../domains/attack/api.js";
 
 // Using your proper (request) signature with AppCheck enforcement
 export const user_getBalance = onCall({ region: "africa-south1", enforceAppCheck: true }, async (request) => {
@@ -51,5 +52,18 @@ export const user_getUserRank = onCall({ region: "africa-south1", enforceAppChec
   requireAppCheck(request);
   requireVerified(request);
   return apiGetUserRank(request.auth.uid);
+});
+
+export const user_getAttackLogs = onCall({ region: "africa-south1", enforceAppCheck: true }, async (request) => {
+  requireAppCheck(request);
+  requireVerified(request);
+  const { limit } = request.data || {};
+  
+  // Validate limit parameter if provided
+  if (limit !== undefined && (typeof limit !== "number" || limit < 1)) {
+    throw new HttpsError("invalid-argument", "limit must be a positive number");
+  }
+  
+  return apiGetUserAttackLogs(request.auth.uid, limit);
 });
 
