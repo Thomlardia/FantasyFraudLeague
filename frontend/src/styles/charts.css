@@ -1,17 +1,9 @@
-/* Chart Container Styles - Indented/Inset Effect (Inverted Neo-Brutalism) */
+/* Chart Container Styles */
 .chart-container {
   padding: 1rem;
-  /* Match parent background to create seamless look */
   background: var(--color-page-surface);
   border-radius: 12px;
-
-  /* Inverted neo-brutalist shadow - top-left instead of bottom-right */
-  box-shadow:
-    inset 3px 3px 0 rgba(12, 18, 20, 0.38),
-    inset 0 0 8px rgba(0, 0, 0, 0.06);
-
-  /* Dark border matching other neo-brutalist elements */
-  border: 1px solid var(--neo-border);
+  border: 1px solid var(--neo-sub-border);
 
   display: flex;
   flex-direction: column;
@@ -32,7 +24,7 @@
   margin: 0;
   font-family: 'Audiowide', cursive;
   font-size: 20px;
-  font-weight: 800;
+  font-weight: 600;
   color: var(--color-text-emphasis);
   flex-shrink: 0;
 }

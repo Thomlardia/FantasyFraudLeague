@@ -1,6 +1,5 @@
 import React from 'react';
 import { useWallet } from '../contexts/WalletContext';
-import iconMoneyDollar from '../images/icons/money_dollar.png';
 
 /**
  * Formats a number as currency with commas
@@ -22,7 +21,7 @@ function MoneyBar() {
   return (
     <div className="money-display" title="Bank">
       <span className="money-icon">
-        <img src={iconMoneyDollar} alt="Bank" className="icon-img--small" />
+        <span className="material-symbols-outlined">attach_money</span>
       </span>
       <span>{balance == null || loading ? '—' : formatMoney(balance)}</span>
     </div>

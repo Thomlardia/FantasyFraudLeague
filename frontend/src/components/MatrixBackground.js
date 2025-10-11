@@ -19,17 +19,11 @@ export default function MatrixBackground({ visible = true }) {
 
     // Get matrix background color from CSS
     const rootStyles = getComputedStyle(document.documentElement);
-    const matrixBgColor = rootStyles.getPropertyValue("--color-matrix-base").trim();
     const matrixDotColor = rootStyles.getPropertyValue("--color-matrix-dot").trim();
     const matrixGlyphColor = rootStyles.getPropertyValue("--color-accent-matrix").trim();
 
-    // Convert hex to RGB for fade overlay
-    const hexToRgb = (hex) => {
-      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-      return result ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}` : "14, 24, 34";
-    };
-
-    const matrixBgRgb = hexToRgb(matrixBgColor);
+    // Use #d3d3d3 for matrix pages background and fade
+    const matrixBgRgb = "211, 211, 211"; // RGB for #d3d3d3
 
     // Matrix configuration - matching original demo
     const state = {

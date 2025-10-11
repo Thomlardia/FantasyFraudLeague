@@ -1,10 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from "../auth/useAuth";
 import '../styles/ui.css';
-import iconClose from '../images/icons/close.png';
-import iconLeaderboard from '../images/icons/leaderboard.png';
-import iconHelp from '../images/icons/help.png';
-import iconSettings from '../images/icons/settings.png';
 import MoneyBar from '../components/MoneyBar';
 import PageHeader from '../components/PageHeader';
 
@@ -21,20 +17,20 @@ function Home() {
                             title="Log out"
                             onClick={logout}
                         >
-                            <img src={iconClose} alt="Log out" className="icon-img" />
+                            <span className="material-symbols-outlined">logout</span>
                         </button>
                         <Link to="/leaderboard" className="icon-button" title="Leaderboard">
-                            <img src={iconLeaderboard} alt="Leaderboard" className="icon-img" />
+                            <span className="material-symbols-outlined">leaderboard</span>
                         </Link>
                     </>
                 }
                 centerContent={<MoneyBar />}
             >
                 <Link to="/help" className="icon-button" title="Help">
-                    <img src={iconHelp} alt="Help" className="icon-img" />
+                    <span className="material-symbols-outlined">help</span>
                 </Link>
                 <Link to="/settings" className="icon-button" title="Settings">
-                    <img src={iconSettings} alt="Settings" className="icon-img" />
+                    <span className="material-symbols-outlined">settings</span>
                 </Link>
                 {hasRole("admin") && (
                     <Link to="/admin" className="icon-button" title="Admin">

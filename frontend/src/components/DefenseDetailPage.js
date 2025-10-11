@@ -110,36 +110,35 @@ function DefenseDetailPage({ defenseKey, title, infoContent }) {
                         <div className="chart-container">
                             <div className="chart-header">
                                 <h2 className="management-title">Defense Management</h2>
-                            </div>
-                            <div className="upgrade-header">
-                                <h3>Defense Level: {currentLevel}</h3>
-                                <p>Status: {isOwned ? 'Owned' : 'Not Owned'}</p>
+                                <span className={`defense-status-badge ${isOwned ? 'owned' : 'not-owned'}`}>
+                                    {isOwned ? (isMaxLevel ? 'Max Level' : 'Owned') : 'Not Owned'}
+                                </span>
                             </div>
 
-                            <div className="upgrade-info">
-                                <div className="upgrade-details">
-                                    <span className="upgrade-cost">Cost: ${upgradeCost.toLocaleString()}</span>
-                                    <span className="upgrade-level">
-                                        {isOwned
-                                            ? isMaxLevel
-                                                ? 'Max Level Achieved'
-                                                : `Next: Level ${currentLevel + 1}`
-                                            : 'Purchase to Own'}
-                                    </span>
+                            <div className="defense-info-grid">
+                                <div className="defense-info-row">
+                                    <span className="defense-info-label">Level</span>
+                                    <span className="defense-info-value">{currentLevel}</span>
                                 </div>
-
-                                <button
-                                    className="upgrade-button"
-                                    onClick={handleUpgradeAction}
-                                    disabled={actionLoading || isMaxLevel}
-                                >
-                                    {actionLoading
-                                        ? (isOwned ? 'Upgrading...' : 'Purchasing...')
-                                        : isMaxLevel
-                                            ? 'Max Level Reached'
-                                            : (isOwned ? 'Upgrade Defense' : 'Purchase Defense')}
-                                </button>
+                                {!isMaxLevel && (
+                                    <div className="defense-info-row">
+                                        <span className="defense-info-label">{isOwned ? 'Upgrade Cost' : 'Purchase Price'}</span>
+                                        <span className="defense-info-price">${upgradeCost.toLocaleString()}</span>
+                                    </div>
+                                )}
                             </div>
+
+                            <button
+                                className="defense-action-btn"
+                                onClick={handleUpgradeAction}
+                                disabled={actionLoading || isMaxLevel}
+                            >
+                                {actionLoading
+                                    ? (isOwned ? 'Upgrading...' : 'Purchasing...')
+                                    : isMaxLevel
+                                        ? 'Max Level Reached'
+                                        : (isOwned ? `Upgrade to Level ${currentLevel + 1}` : 'Buy Defense')}
+                            </button>
                         </div>
                     </div>
                 </div>

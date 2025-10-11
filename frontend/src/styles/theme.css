@@ -10,12 +10,10 @@
 	--color-app-background: #D7D5D5;
 	--color-page-surface: #D7D5D5;
 	--color-page-surface-contrast: #0f1f32;
-	--color-page-pattern-dot: rgba(24, 32, 36, 0.18);
+	--color-page-pattern-dot: #9EB1BC;
 	--color-auth-backdrop: #222C30;
 	--color-matrix-base: #D7D5D5;
 	--color-matrix-base-rgb: 215, 213, 213;
-	--color-matrix-dot: rgba(24, 32, 36, 0.05);
-	--matrix-trail-opacity: 0.05;
 	--page-pattern-size: 18px;
 	--page-pattern-dot-size: 1px;
 }
@@ -27,23 +25,21 @@
 
 	--color-page-surface: #D7D5D5;
 	--color-page-surface-contrast: #0f1f32;
-	--color-page-pattern-dot: rgba(24, 32, 36, 0.18);
+	--color-page-pattern-dot: #9EB1BC;
 	--color-auth-backdrop: #222C30;
 	--color-matrix-base: #D7D5D5;
 	--color-matrix-base-rgb: 215, 213, 213;
-	--color-matrix-dot: rgba(24, 32, 36, 0.05);
-	--matrix-trail-opacity: 0.05;
 
-	--color-text-primary: #1a2226;
-	--color-text-secondary: #2d3538;
-	--color-text-muted: #303633;
-	--color-text-emphasis: #0f1517;
+	--color-text-primary: #23395B;
+	--color-text-secondary: #4a6180;
+	--color-text-muted: #6d8399;
+	--color-text-emphasis: #23395B;
 	--color-text-inverse: #14203b;
 
 	/* Extended text palette pulled from component usage */
-	--color-text-surface: #1a1a2e;
-	--color-text-heading-surface: #1f2937;
-	--color-text-label: #6b7280;
+	--color-text-surface: #23395B;
+	--color-text-heading-surface: #23395B;
+	--color-text-label: #4a6180;
 	--color-text-success: #059669;
 	--color-text-error-strong: #721c24;
 	--color-text-success-strong: #155724;
@@ -74,7 +70,14 @@
 
 	/* Neo-brutalist 3D effect variables */
 	--neo-border: rgba(16, 22, 24, 0.45);
+	--neo-sub-border: #46617e;
+	--neo-sub-border-light: #7a8689;
 	--neo-shadow-3d: 3px 3px 0 rgba(12, 18, 20, 0.38);
+
+	/* Green accent colors for active/success states - from money bar */
+	--color-green-dark: #4a7a63;
+	--color-green-light: #c1d3ce;
+	--color-green-hover: #b1c3be;
 
 	--color-surface-glass: #D7D5D5;
 	--color-surface-glass-hover: #D7D5D5;
@@ -121,12 +124,10 @@
 
 	--color-page-surface: #f4f6fb;
 	--color-page-surface-contrast: #dbe3f4;
-	--color-page-pattern-dot: rgba(71, 85, 105, 0.18);
+	--color-page-pattern-dot: #9EB1BC;
 	--color-auth-backdrop: #e7ecf7;
 	--color-matrix-base: #d3d3d3;
 	--color-matrix-base-rgb: 211, 211, 211;
-	--color-matrix-dot: rgba(71, 85, 105, 0.3);
-	--matrix-trail-opacity: 0.05;
 
 	--color-text-primary: #111827;
 	--color-text-secondary: rgba(17, 24, 39, 0.85);

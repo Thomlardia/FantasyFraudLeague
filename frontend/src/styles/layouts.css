@@ -362,6 +362,7 @@
 
 .matrix-layer.is-visible {
 	opacity: 1;
+	background: #d3d3d3;
 }
 
 .matrix-layer .matrix-canvas {
@@ -373,14 +374,18 @@
 	background: var(--color-matrix-base);
 }
 
+.matrix-layer.is-visible .matrix-canvas {
+	background: #d3d3d3;
+}
+
 .auth-shell {
 	width: min(640px, 100%);
-	background: #D7D5D5;
 	border-radius: 16px;
-	border: 1px solid var(--color-border-card);
-	box-shadow:
-		0 2px 4px rgba(0, 0, 0, 0.1),
-		0 8px 16px rgba(0, 0, 0, 0.15);
+	border: 1px solid var(--neo-border);
+	background:
+		linear-gradient(175deg, rgba(255, 255, 255, 0.18) 0%, rgba(210, 216, 220, 0.08) 100%),
+		#d7d5d5;
+	box-shadow: var(--neo-shadow-3d);
 	overflow: hidden;
 	position: relative;
 	z-index: 1;
