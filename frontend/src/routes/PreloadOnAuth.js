@@ -10,7 +10,6 @@ const PRELOAD_TARGETS = [
   () => import("../pages/Settings"),
   () => import("../pages/Leaderboard"),
   () => import("../pages/FraudWiki"),
-  () => import("../pages/Admin"), // TODO: remove
 ];
 
 export default function PreloadOnAuth() {

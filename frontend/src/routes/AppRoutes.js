@@ -23,7 +23,6 @@ const AdminDashboard = lazy(() => import("../pages/AdminDashboard"));
 const DefenseShop   = lazy(() => import("../pages/DefenseShop"));
 const Help          = lazy(() => import("../pages/Help"));
 const Settings      = lazy(() => import("../pages/Settings"));
-const Admin         = lazy(() => import("../pages/Admin"));   // TODO: remove
 
 // shared pages
 const Leaderboard   = lazy(() => import("../pages/Leaderboard"));
@@ -98,9 +97,7 @@ export default function AppRoutes() {
                 {/* Normal app routes (no auto-redirect for admins) */}
                 <Route path="/home" element={<Home />} />
                 <Route path="/defenseshop" element={<DefenseShop />} />
-                <Route path="/fraudwiki" element={<FraudWiki />} />
-                {/* TODO: remove admin from here */}
-                <Route path="/admin-dev" element={<Admin />} />                                                       
+                <Route path="/fraudwiki" element={<FraudWiki />} />                                                     
                 <Route path="/help" element={<Help />} />
                 <Route path="/leaderboard" element={<Leaderboard />} />
                 <Route path="/settings" element={<Settings />} />
