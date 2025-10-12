@@ -97,7 +97,7 @@ export default function AppRoutes() {
                 {/* Normal app routes (no auto-redirect for admins) */}
                 <Route path="/home" element={<Home />} />
                 <Route path="/defenseshop" element={<DefenseShop />} />
-                <Route path="/fraudwiki" element={<FraudWiki />} />
+                <Route path="/fraudwiki" element={<FraudWiki />} />                                                     
                 <Route path="/help" element={<Help />} />
                 <Route path="/leaderboard" element={<Leaderboard />} />
                 <Route path="/settings" element={<Settings />} />
