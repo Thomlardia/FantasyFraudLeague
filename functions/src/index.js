@@ -7,7 +7,9 @@ export {
   user_getDefenses,
   user_buyDefense,
   user_upgradeDefense,
+  user_sellDefense,
   user_getLeaderboardWithUser,
+  user_getUserRank,
 } from "./apps/user-api/app.js";
 
 // Callable function exports (admin)

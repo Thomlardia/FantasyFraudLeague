@@ -128,9 +128,9 @@ function FraudProtectionChart({ attackId, variant = 'bar' }) {
                 interval={0}
               />
               <Tooltip content={<CustomTooltip />} />
-              <Bar dataKey="maxEffectiveness" name="Max Potential" fill="var(--color-chart-purple-light)" radius={[0, 4, 4, 0]} />
-              <Bar dataKey="nextBuyEffectiveness" name="Next Buy" fill="var(--color-chart-blue-light)" radius={[0, 4, 4, 0]} />
-              <Bar dataKey="effectiveness" name="Current" radius={[0, 4, 4, 0]}>
+              <Bar dataKey="maxEffectiveness" name="Max Potential" fill="var(--color-chart-purple-light)" opacity={0.5} radius={[0, 4, 4, 0]} />
+              <Bar dataKey="nextBuyEffectiveness" name="Next Buy" fill="var(--color-chart-blue-light)" opacity={0.5} radius={[0, 4, 4, 0]} />
+              <Bar dataKey="effectiveness" name="Current" opacity={0.5} radius={[0, 4, 4, 0]}>
                 {defenseData.map((entry, index) => (
                   <Cell
                     key={`cell-${index}`}

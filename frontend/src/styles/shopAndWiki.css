@@ -298,9 +298,7 @@
   text-align: center;
   transition: all 120ms ease;
   border: 1px solid var(--neo-sub-border);
-  box-shadow:
-    var(--shadow-md),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow: 3px 3px 0 rgba(20, 28, 30, 0.28);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -366,11 +364,9 @@
 }
 
 .shop-card:hover, .wiki-card:hover {
-  transform: translateY(-1px);
+  transform: translate(-1px, -1px);
   background: #D7D5D5;
-  box-shadow:
-    var(--shadow-lg),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  box-shadow: 5px 5px 0 rgba(16, 24, 26, 0.34);
 }
 
 .shop-card:hover::before, .wiki-card:hover::before {
@@ -475,6 +471,7 @@
 @media (max-width: 768px) {
   .shop-wiki-container {
     padding: 8px;
+    gap: calc(var(--space-header-gap) + 3px);
   }
 }
 
@@ -495,8 +492,9 @@
 @media (max-width: 480px) {
   .shop-wiki-container {
     padding: 4px;
+    gap: calc(var(--space-header-gap) + 3px);
   }
-  
+
   .shop-wiki-grid {
     gap: 16px;
     padding: 16px;
@@ -552,12 +550,14 @@
 @media (max-width: 768px) {
   .fraud-container, .shop-container {
     padding: 8px;
+    gap: calc(var(--space-header-gap) + 3px);
   }
 }
 
 @media (max-width: 480px) {
   .fraud-container, .shop-container {
     padding: 4px;
+    gap: calc(var(--space-header-gap) + 3px);
   }
 }
 
@@ -841,6 +841,25 @@
   letter-spacing: -0.5px;
 }
 
+/* Info Icon Tooltip */
+.info-icon-tooltip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  transition: color 60ms ease, transform 60ms ease;
+}
+
+.info-icon-tooltip:hover {
+  color: var(--color-text-emphasis);
+  transform: scale(1.15);
+}
+
+.info-icon-tooltip:active {
+  transform: scale(0.95);
+}
+
 /* Action Button - 3D Neo-Brutalist Style */
 .defense-action-btn {
   width: 100%;
@@ -875,10 +894,34 @@
 }
 
 .defense-action-btn:disabled {
-  background: #9ca3af;
+  background: #a8b0b5;
+  color: #4a5256;
+  border-color: #6b7479;
   cursor: not-allowed;
   box-shadow: 3px 3px 0 rgba(20, 28, 30, 0.22);
-  opacity: 0.7;
+  opacity: 1;
+}
+
+/* Sell Button - Red Variant */
+.defense-sell-btn {
+  background: var(--color-red-light);
+  color: var(--color-red-dark);
+  border-color: var(--color-red-dark);
+  margin-top: 0.75rem;
+}
+
+.defense-sell-btn:hover:not(:disabled) {
+  background: var(--color-red-light);
+  border-color: var(--color-red-dark);
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0 rgba(16, 24, 26, 0.34);
+  filter: brightness(0.95);
+}
+
+.defense-sell-btn:active:not(:disabled) {
+  transform: translate(0, 0);
+  box-shadow: 4px 4px 0 rgba(18, 26, 28, 0.3);
+  background: var(--color-red-light);
 }
 
 .placeholder-card {

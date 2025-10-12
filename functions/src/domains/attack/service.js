@@ -2,6 +2,7 @@
 import { getAllAttacks } from "./repo.js";
 import { getUserBalance, updateUserBalance} from "../wallet/service.js";
 import { getUserOwnedDefensesComplete } from "../defense/repo.js";
+import { db } from "../../infra/db/index.js";
 
 /**
  * Finds and returns the attack object for a given attack id
@@ -96,8 +97,29 @@ export async function attackDeduction(userId, wave) {
     totalDamage += reducedDamage;
   }
 
-  const currentBalance = await getUserBalance(userId);
-  const newBalance = Math.max(0, currentBalance - Math.round(totalDamage)); // Deduct, round to nearest int
-  await updateUserBalance(userId, newBalance);
-  return newBalance;
+  // Use transaction to update both balance and netWorth atomically
+  const damage = Math.round(totalDamage);
+
+  return await db.runTransaction(async (transaction) => {
+    const userDocRef = db.collection("users").doc(userId);
+    const userDoc = await transaction.get(userDocRef);
+
+    if (!userDoc.exists) {
+      throw new Error("User not found");
+    }
+
+    const userData = userDoc.data();
+    const currentBalance = userData.balance || 0;
+    const currentNetWorth = userData.netWorth || 0;
+
+    const newBalance = Math.max(0, currentBalance - damage);
+    const newNetWorth = currentNetWorth - damage; // NetWorth decreases by damage amount
+
+    transaction.update(userDocRef, {
+      balance: newBalance,
+      netWorth: newNetWorth,
+    });
+
+    return newBalance;
+  });
 }

@@ -16,12 +16,26 @@ function DefenseDetailPage({ defenseKey, title, infoContent }) {
         successMessage,
         handleBuy,
         handleUpgrade,
+        handleSell,
     } = useDefenseOperations(defenseKey);
 
     const currentLevel = defense?.displayLevel || 0;
     const upgradeCost = defense?.nextActionCost || 0;
     const isOwned = defense?.isOwned || false;
     const isMaxLevel = defense?.isMaxLevel || false;
+
+    // Calculate sell price (50% of total spent)
+    const calculateSellPrice = () => {
+        if (!defense || !isOwned) return 0;
+        let totalCost = 0;
+        for (let i = 0; i < currentLevel; i++) {
+            totalCost += defense.cost?.[i] || 0;
+        }
+        return Math.floor(totalCost * 0.5);
+    };
+
+    const sellPrice = calculateSellPrice();
+    const loss = isOwned ? (defense.cost?.slice(0, currentLevel).reduce((sum, c) => sum + (c || 0), 0) - sellPrice) : 0;
 
     function handleUpgradeAction() {
         if (!defense) return;
@@ -139,6 +153,39 @@ function DefenseDetailPage({ defenseKey, title, infoContent }) {
                                         ? 'Max Level Reached'
                                         : (isOwned ? `Upgrade to Level ${currentLevel + 1}` : 'Buy Defense')}
                             </button>
+
+                            {isOwned && (
+                                <>
+                                    <div className="defense-info-grid" style={{ marginTop: '1rem', borderTop: '1px solid var(--color-border)', paddingTop: '1rem' }}>
+                                        <div className="defense-info-row">
+                                            <span className="defense-info-label" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                                Sell Price
+                                                <span
+                                                    className="info-icon-tooltip"
+                                                    onClick={() => alert('Sell price is 50% of all money paid to reach this level, including purchase cost.')}
+                                                >
+                                                    <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>info</span>
+                                                </span>
+                                            </span>
+                                            <span className="defense-info-price" style={{ color: 'var(--color-red-dark)' }}>
+                                                ${sellPrice.toLocaleString()}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <button
+                                        className="defense-action-btn defense-sell-btn"
+                                        onClick={() => {
+                                            if (window.confirm(`Are you sure you want to sell this defense for $${sellPrice.toLocaleString()}? You will lose $${loss.toLocaleString()}.`)) {
+                                                handleSell();
+                                            }
+                                        }}
+                                        disabled={actionLoading}
+                                    >
+                                        {actionLoading ? 'Selling...' : `Sell Defense`}
+                                    </button>
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>

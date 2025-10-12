@@ -36,6 +36,7 @@ export function useDefenseOperations(defenseId) {
   // Firebase callable functions
   const buyDefenseFunction = httpsCallable(functions, 'user_buyDefense');
   const upgradeDefenseFunction = httpsCallable(functions, 'user_upgradeDefense');
+  const sellDefenseFunction = httpsCallable(functions, 'user_sellDefense');
 
   /**
    * Handles the buy action for the defense with the given ID.
@@ -95,6 +96,38 @@ export function useDefenseOperations(defenseId) {
     }
   };
 
+  /**
+   * Handles the sell action for the defense with the given ID.
+   * If the user is not signed in, sets an error message.
+   * If the sell action is successful, sets a success message and refreshes defense data from context.
+   * If the sell action fails, sets an error message.
+   */
+  const handleSell = async () => {
+    if (!user) return setError('Please sign in to sell defenses');
+
+    try {
+      setActionLoading(true);
+      setError(null);
+      setSuccessMessage(null);
+
+      await user.getIdToken(true); // refresh token
+      const result = await sellDefenseFunction({ defenseId });
+      console.log('Sell result:', result);
+
+      const sellInfo = result.data;
+      setSuccessMessage(
+        `Successfully sold defense for $${sellInfo.sellPrice.toLocaleString()}! (Loss: $${sellInfo.loss.toLocaleString()})`
+      );
+      await fetchDefenses(); // Refresh defenses from context
+      await refreshBalance(); // Refresh balance after sell
+    } catch (err) {
+      console.error('Error selling defense:', err);
+      setError(err.message || 'Failed to sell defense');
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
   return {
     defense,
     loading,
@@ -103,6 +136,7 @@ export function useDefenseOperations(defenseId) {
     successMessage,
     handleBuy,
     handleUpgrade,
+    handleSell,
     refetch: fetchDefenses,
     isAuthenticated: !!user
   };

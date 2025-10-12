@@ -1,10 +1,10 @@
 .filter-dropdown {
   background:
-    linear-gradient(165deg, rgba(255, 255, 255, 0.18) 0%, rgba(210, 216, 220, 0.08) 100%),
-    #d7d5d5;
+    linear-gradient(175deg, rgba(255, 255, 255, 0.18) 0%, rgba(210, 216, 220, 0.08) 100%),
+    #9EB1BC;
   border-radius: 16px;
-  border: 1px solid rgba(24, 32, 36, 0.32);
-  box-shadow: 3px 3px 0 rgba(20, 28, 30, 0.26);
+  border: 1px solid #23395B;
+  box-shadow: var(--neo-shadow-3d);
   padding: 16px;
   animation: filterSlideIn 180ms ease-out;
 }
@@ -40,10 +40,8 @@
   padding: 0 18px;
   min-height: var(--control-button-height);
   border-radius: 14px;
-  border: 1px solid rgba(24, 32, 36, 0.22);
-  background:
-    linear-gradient(160deg, rgba(255, 255, 255, 0.18) 0%, rgba(210, 216, 220, 0.06) 100%),
-    #d7d5d5;
+  border: 1px solid var(--neo-sub-border);
+  background: #D7D5D5;
   color: var(--color-text-surface);
   font-family: 'Audiowide', -apple-system, Segoe UI, Roboto, sans-serif;
   font-size: 14px;
@@ -55,17 +53,23 @@
 }
 
 .filter-option:hover {
-  transform: translateY(-2px);
-  background:
-    linear-gradient(160deg, rgba(255, 255, 255, 0.22) 0%, rgba(210, 216, 220, 0.12) 100%),
-    #d7d5d5;
-  box-shadow: 4px 4px 0 rgba(16, 24, 26, 0.28);
-  border-color: rgba(22, 30, 32, 0.45);
+  transform: translate(-1px, -1px);
+  background: #D7D5D5;
+  box-shadow: 3px 3px 0 rgba(16, 24, 26, 0.28);
+  border-color: var(--neo-sub-border);
 }
 
 .filter-option.selected {
-  border-color: var(--color-text-success);
-  box-shadow: 4px 4px 0 rgba(16, 24, 26, 0.28);
+  background: var(--color-green-light);
+  border-color: var(--color-green-dark);
+  color: var(--color-green-dark);
+  box-shadow: 3px 3px 0 rgba(16, 24, 26, 0.28);
+}
+
+.filter-option.selected:hover {
+  background: var(--color-green-hover);
+  box-shadow: 4px 4px 0 rgba(16, 24, 26, 0.34);
+  transform: translate(-1px, -1px);
 }
 
 .filter-option-label {
@@ -75,7 +79,7 @@
 
 .filter-check {
   font-size: 18px;
-  color: var(--color-text-success);
+  color: var(--color-green-dark);
   margin-left: 12px;
 }
 
