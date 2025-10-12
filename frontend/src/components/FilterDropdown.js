@@ -4,17 +4,34 @@ import usePopoverPosition from '../hooks/usePopoverPosition';
 import '../styles/filterDropdown.css';
 
 /**
- * FilterDropdown component - Glassmorphic dropdown for filtering content
+ * FilterDropdown component - Glassmorphic dropdown for filtering and sorting
  *
  * @param {Object} props
- * @param {Array} props.options - Array of filter option objects: { id, label, type: 'radio'|'checkbox' }
- * @param {string|Array} props.selected - Currently selected option(s)
- * @param {Function} props.onChange - Callback when selection changes
+ * @param {Array} props.showOptions - Radio button options for "Show" section
+ * @param {string} props.selectedShow - Currently selected show option
+ * @param {Function} props.onShowChange - Callback when show selection changes
+ * @param {Array} props.sortOptions - Sort field options
+ * @param {string} props.selectedSort - Currently selected sort field
+ * @param {string} props.sortDirection - Current sort direction ('asc' or 'desc')
+ * @param {Function} props.onSortChange - Callback when sort field changes
+ * @param {Function} props.onDirectionToggle - Callback to toggle sort direction
  * @param {boolean} props.isOpen - Whether dropdown is open
  * @param {Function} props.onClose - Callback to close dropdown
- * @param {React.RefObject} props.buttonRef - Ref to the filter button (to exclude from outside clicks)
+ * @param {React.RefObject} props.buttonRef - Ref to the filter button
  */
-function FilterDropdown({ options = [], selected = null, onChange, isOpen, onClose, buttonRef }) {
+function FilterDropdown({
+  showOptions = [],
+  selectedShow = null,
+  onShowChange,
+  sortOptions = [],
+  selectedSort = null,
+  sortDirection = 'desc',
+  onSortChange,
+  onDirectionToggle,
+  isOpen,
+  onClose,
+  buttonRef
+}) {
   const { panelRef, style } = usePopoverPosition({
     anchorRef: buttonRef,
     open: isOpen,
@@ -34,10 +51,6 @@ function FilterDropdown({ options = [], selected = null, onChange, isOpen, onClo
 
   if (!isOpen) return null;
 
-  const handleOptionClick = (optionId) => {
-    onChange(optionId);
-  };
-
   return (
     <Portal>
       <div
@@ -51,15 +64,46 @@ function FilterDropdown({ options = [], selected = null, onChange, isOpen, onClo
           style={{ top: style.top, left: style.left, minWidth: style.minWidth }}
         >
           <div className="filter-dropdown-content">
-            {options.map((option) => (
+            {/* Show Section */}
+            <div className="filter-group-header">Show</div>
+            {showOptions.map((option) => (
               <button
                 key={option.id}
-                className={`filter-option ${selected === option.id ? 'selected' : ''}`}
-                onClick={() => handleOptionClick(option.id)}
+                className={`filter-option ${selectedShow === option.id ? 'selected' : ''}`}
+                onClick={() => onShowChange(option.id)}
               >
                 <span className="filter-option-label">{option.label}</span>
-                {selected === option.id && (
+                {selectedShow === option.id && (
                   <span className="material-symbols-outlined filter-check">check</span>
+                )}
+              </button>
+            ))}
+
+            {/* Divider */}
+            <div className="filter-divider" />
+
+            {/* Sort Section */}
+            <div className="filter-group-header">Sort By</div>
+            {sortOptions.map((option) => (
+              <button
+                key={option.id}
+                className={`filter-option filter-sort-option ${selectedSort === option.id ? 'selected' : ''}`}
+                onClick={() => onSortChange(option.id)}
+              >
+                <span className="filter-option-label">{option.label}</span>
+                {selectedSort === option.id && (
+                  <button
+                    className="filter-direction-toggle"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onDirectionToggle();
+                    }}
+                    title={sortDirection === 'desc' ? 'Descending - click to reverse' : 'Ascending - click to reverse'}
+                  >
+                    <span className="material-symbols-outlined">
+                      {sortDirection === 'desc' ? 'arrow_downward' : 'arrow_upward'}
+                    </span>
+                  </button>
                 )}
               </button>
             ))}

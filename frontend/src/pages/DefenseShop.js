@@ -9,7 +9,9 @@ import { useDefense } from '../contexts/DefenseContext';
 function DefenseShop() {
     const { defenses, loading } = useDefense();
     const [filterOpen, setFilterOpen] = useState(false);
-    const [selectedFilter, setSelectedFilter] = useState('all');
+    const [showFilter, setShowFilter] = useState('all'); // all, owned, notOwned
+    const [sortBy, setSortBy] = useState('effectiveness'); // effectiveness, level, name
+    const [sortDirection, setSortDirection] = useState('desc'); // desc (↓), asc (↑)
     const filterButtonRef = useRef(null);
 
     const defenseItems = [
@@ -35,33 +37,124 @@ function DefenseShop() {
         { title: "Application Sandboxing", icon: "grid_view", path: "/defenses/ApplicationSandboxing", id: "applicationSandboxing" },
     ];
 
-    const filterOptions = [
+    const showOptions = [
         { id: 'all', label: 'All Defenses' },
-        { id: 'owned', label: 'Owned Only' },
+        { id: 'owned', label: 'Owned' },
         { id: 'notOwned', label: 'Not Owned' },
-        { id: 'sortLevelAsc', label: 'Level: Low to High' },
-        { id: 'sortLevelDesc', label: 'Level: High to Low' },
     ];
+
+    const sortOptions = [
+        { id: 'effectiveness', label: 'Impact' },
+        { id: 'level', label: 'Level' },
+        { id: 'name', label: 'Name' },
+    ];
+
+    // Calculate total portfolio effectiveness increase from buying/upgrading this defense
+    // Uses multiplicative stacking: considers current protection from all defenses
+    // and calculates increase in protection for each attack type this defense affects
+    const calculateEffectivenessIncrease = (defense) => {
+        if (!defense || !defense.defendsAgainst) return 0;
+
+        const currentLevel = defense.level || 0;
+        const defendsAgainst = defense.defendsAgainst;
+
+        // Determine what this defense will provide at next level
+        const nextLevel = currentLevel === 0 ? 0 : currentLevel;
+        if (nextLevel >= (defense.cost?.length || 0)) return 0; // Max level reached
+
+        let totalPortfolioIncrease = 0;
+
+        // For each attack type this defense protects against
+        Object.entries(defendsAgainst).forEach(([attackId, percentages]) => {
+            if (!percentages || percentages.length === 0) return;
+
+            const nextDefenseEffectiveness = percentages[nextLevel] || 0;
+            if (nextDefenseEffectiveness === 0) return; // No benefit at next level
+
+            // Calculate CURRENT total protection (includes this defense at current level if owned)
+            const currentTotalProtection = getTotalProtectionAgainstAttack(attackId, defense.defenseId, currentLevel);
+
+            // Calculate NEW total protection (with this defense at next level)
+            const newTotalProtection = getTotalProtectionAgainstAttack(attackId, defense.defenseId, nextLevel + 1);
+
+            // Calculate increase for this attack type
+            const increase = newTotalProtection - currentTotalProtection;
+            totalPortfolioIncrease += increase;
+        });
+
+        return Math.round(totalPortfolioIncrease);
+    };
+
+    // Helper: Get total protection against an attack with a specific defense at a specific level
+    // simulatedLevel: 0 = not owned, 1+ = owned at that level
+    const getTotalProtectionAgainstAttack = (attackId, simulatedDefenseId, simulatedLevel) => {
+        let damageMultiplier = 1.0;
+
+        defenses.forEach(defense => {
+            let effectiveLevel = defense.level;
+
+            // Override level for the defense being simulated
+            if (defense.defenseId === simulatedDefenseId) {
+                effectiveLevel = simulatedLevel;
+            }
+
+            // Only include defenses that are owned (level > 0)
+            if (effectiveLevel > 0 && defense.defendsAgainst && defense.defendsAgainst[attackId]) {
+                const percentages = defense.defendsAgainst[attackId];
+                const effectiveness = percentages[effectiveLevel - 1] || 0;
+                damageMultiplier *= (1 - effectiveness / 100);
+            }
+        });
+
+        const totalProtection = (1 - damageMultiplier) * 100;
+        return totalProtection;
+    };
 
     // Apply filter logic
     const getFilteredDefenses = () => {
         let filtered = defenseItems.map((item) => {
             const myDefense = defenses.find(d => d.defenseId === item.id);
-            return { ...item, level: myDefense?.level || 0 };
+            const effectivenessIncrease = calculateEffectivenessIncrease(myDefense);
+            return {
+                ...item,
+                level: myDefense?.level || 0,
+                effectivenessIncrease: effectivenessIncrease,
+                isMaxLevel: myDefense?.isMaxLevel || false,
+            };
         });
 
-        // Filter by ownership
-        if (selectedFilter === 'owned') {
+        // Apply show filter
+        if (showFilter === 'owned') {
             filtered = filtered.filter(item => item.level > 0);
-        } else if (selectedFilter === 'notOwned') {
+        } else if (showFilter === 'notOwned') {
             filtered = filtered.filter(item => item.level === 0);
         }
 
-        // Sort by level
-        if (selectedFilter === 'sortLevelAsc') {
-            filtered.sort((a, b) => a.level - b.level);
-        } else if (selectedFilter === 'sortLevelDesc') {
-            filtered.sort((a, b) => b.level - a.level);
+        // Apply sort
+        if (sortBy === 'effectiveness') {
+            if (sortDirection === 'desc') {
+                // High to Low (descending)
+                filtered.sort((a, b) => b.effectivenessIncrease - a.effectivenessIncrease);
+            } else {
+                // Low to High (ascending)
+                filtered.sort((a, b) => a.effectivenessIncrease - b.effectivenessIncrease);
+            }
+        } else if (sortBy === 'level') {
+            if (sortDirection === 'desc') {
+                // High to Low (descending)
+                filtered.sort((a, b) => b.level - a.level);
+            } else {
+                // Low to High (ascending)
+                filtered.sort((a, b) => a.level - b.level);
+            }
+        } else if (sortBy === 'name') {
+            if (sortDirection === 'desc') {
+                // Z to A (descending)
+                filtered.sort((a, b) => b.title.localeCompare(a.title));
+            } else {
+                // A to Z (ascending)
+                filtered.sort((a, b) => a.title.localeCompare(b.title));
+            }
         }
 
         return filtered;
@@ -98,12 +191,14 @@ function DefenseShop() {
                         <span className="material-symbols-outlined">filter_list</span>
                     </button>
                     <FilterDropdown
-                        options={filterOptions}
-                        selected={selectedFilter}
-                        onChange={(filterId) => {
-                            setSelectedFilter(filterId);
-                            setFilterOpen(false);
-                        }}
+                        showOptions={showOptions}
+                        selectedShow={showFilter}
+                        onShowChange={(value) => setShowFilter(value)}
+                        sortOptions={sortOptions}
+                        selectedSort={sortBy}
+                        sortDirection={sortDirection}
+                        onSortChange={(value) => setSortBy(value)}
+                        onDirectionToggle={() => setSortDirection(prev => prev === 'desc' ? 'asc' : 'desc')}
                         isOpen={filterOpen}
                         onClose={() => setFilterOpen(false)}
                         buttonRef={filterButtonRef}
@@ -115,9 +210,16 @@ function DefenseShop() {
                 <div className="shop-wiki-grid">
                     {filteredDefenses.map((item, index) => (
                         <Link key={index} to={item.path} className="shop-card">
-                            <span className="card-icon">{item.icon}</span>
-                            <h3 className="card-title">{item.title}</h3>
-                            <p className="card-level">Level {item.level}</p>
+                            <div className="card-content">
+                                <span className="card-icon">{item.icon}</span>
+                                <h3 className="card-title">{item.title}</h3>
+                            </div>
+                            <div className="card-info-row">
+                                <p className="card-level">Level {item.level}</p>
+                                {!item.isMaxLevel && item.effectivenessIncrease > 0 && (
+                                    <p className="card-effectiveness">+{item.effectivenessIncrease}%</p>
+                                )}
+                            </div>
                         </Link>
                     ))}
                 </div>

@@ -94,11 +94,38 @@ list-users:
 clear-test-users:
 	$(EMULATOR_ENV) node functions/scripts/seed.js clear users
 
+# Grant admin role to a user (for local emulator)
+# Usage: make grant-admin EMAIL=test@example.com
+grant-admin:
+	@if [ -z "$(EMAIL)" ]; then \
+		echo "Error: EMAIL parameter is required"; \
+		echo "Usage: make grant-admin EMAIL=test@example.com"; \
+		exit 1; \
+	fi
+	$(EMULATOR_ENV) node functions/scripts/grant-admin.js $(EMAIL)
+
 seed-prod:
 	node functions/scripts/seed.js seed --production --force
 
 seed-prod-global-defenses:
 	node functions/scripts/seed.js seed global-defenses --production --force
+
+# Grant admin role to a user (for PRODUCTION - use with caution)
+# Usage: make grant-admin-prod EMAIL=user@example.com
+grant-admin-prod:
+	@if [ -z "$(EMAIL)" ]; then \
+		echo "Error: EMAIL parameter is required"; \
+		echo "Usage: make grant-admin-prod EMAIL=user@example.com"; \
+		exit 1; \
+	fi
+	@echo "WARNING: This will grant admin role in PRODUCTION"
+	@read -p "Are you sure? [y/N] " -n 1 -r; \
+	echo; \
+	if [[ $$REPLY =~ ^[Yy]$$ ]]; then \
+		node functions/scripts/grant-admin.js $(EMAIL); \
+	else \
+		echo "Cancelled."; \
+	fi
 
 # ------------- LINTER --------------
 

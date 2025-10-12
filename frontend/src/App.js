@@ -3,6 +3,7 @@ import { AuthProvider } from "./auth/AuthProvider";
 import { WalletProvider } from "./contexts/WalletContext";
 import { DefenseProvider } from "./contexts/DefenseContext";
 import { LeaderboardProvider } from "./contexts/LeaderboardContext";
+import { AttackProvider } from "./contexts/AttackContext";
 import AppRoutes from "./routes/AppRoutes";
 import Prefetcher from "./routes/Prefetcher";
 import MatrixBackgroundLayer from "./components/MatrixBackgroundLayer";
@@ -17,11 +18,13 @@ export default function App() {
       <WalletProvider>
         <DefenseProvider>
           <LeaderboardProvider>
-            <BrowserRouter>
-              <MatrixBackgroundLayer />
-              <Prefetcher />
-              <AppRoutes />
-            </BrowserRouter>
+            <AttackProvider>
+              <BrowserRouter>
+                <MatrixBackgroundLayer />
+                <Prefetcher />
+                <AppRoutes />
+              </BrowserRouter>
+            </AttackProvider>
           </LeaderboardProvider>
         </DefenseProvider>
       </WalletProvider>

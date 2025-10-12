@@ -81,8 +81,8 @@ function FraudProtectionChart({ attackId, variant = 'bar' }) {
       return (
         <div className="recharts-custom-tooltip">
           <p className="tooltip-label"><strong>{data.defenseName}</strong></p>
-          <p className="tooltip-item">Level: {data.level}{!data.isOwned && ' (Not Owned)'}</p>
-          <p className="tooltip-item">Current: {data.effectiveness}%</p>
+          <p className="tooltip-item">Current: {data.isOwned ? data.effectiveness : 0}%</p>
+          <p className="tooltip-item">Next: {data.nextBuyEffectiveness}%</p>
           <p className="tooltip-item">Max Potential: {data.maxEffectiveness}%</p>
         </div>
       );

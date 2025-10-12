@@ -304,7 +304,7 @@
   align-items: center;
   gap: 16px;
   min-height: 200px;
-  justify-content: center;
+  justify-content: space-between;
   position: relative;
   overflow: hidden;
 }
@@ -403,21 +403,58 @@
   z-index: 1;
 }
 
+/* Card Content - Center the icon and title */
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+  justify-content: center;
+}
+
+/* Card Info Row - Bottom aligned labels */
+.card-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 8px;
+  margin-top: auto;
+}
+
 /* Level Indicator (Shop Only) */
 .card-level {
   font-family: 'Audiowide', cursive;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--color-text-muted);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   position: relative;
   z-index: 1;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 4px 12px;
-  border-radius: 12px;
-  border: 1px solid var(--color-border-card-level);
+  background: rgba(255, 255, 255, 0.3);
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--neo-sub-border);
+}
+
+/* Effectiveness Increase Indicator */
+.card-effectiveness {
+  font-family: 'Audiowide', cursive;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-green-dark);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  z-index: 1;
+  background: var(--color-green-light);
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--color-green-dark);
 }
 
 /* Responsive Design */
@@ -499,25 +536,31 @@
     gap: 16px;
     padding: 16px;
   }
-  
+
   .shop-card, .wiki-card {
     padding: 18px 14px;
     min-height: 160px;
   }
-  
+
   .card-icon {
     font-size: 48px;
   }
-  
+
   .card-title {
     font-size: 13px;
   }
-  
+
+  .card-level,
+  .card-effectiveness {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+
   .title-icon {
     width: 45px;
     height: 45px;
   }
-  
+
   .title-icon.material-symbols-outlined {
     font-size: 45px;
   }
