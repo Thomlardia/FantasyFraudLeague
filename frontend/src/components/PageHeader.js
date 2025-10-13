@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../auth/useAuth';
 
 /**
  * PageHeader component - A flexible layout wrapper for page headers
@@ -32,8 +31,6 @@ function PageHeader({
   centerContent,
   children
 }) {
-  const { hasRole } = useAuth();
-
   return (
     <div className="page-header">
       {/* Left section: custom content OR back button */}
@@ -56,17 +53,8 @@ function PageHeader({
         )}
       </div>
 
-      {/* Right section: custom content + admin button if applicable */}
-      {(children || hasRole("admin")) && (
-        <div className="page-header-right">
-          {children}
-          {hasRole("admin") && (
-            <Link to="/admin" className="icon-button" title="Admin Dashboard">
-              <span className="material-symbols-outlined">admin_panel_settings</span>
-            </Link>
-          )}
-        </div>
-      )}
+      {/* Right section: always custom via children */}
+      {children && <div className="page-header-right">{children}</div>}
     </div>
   );
 }

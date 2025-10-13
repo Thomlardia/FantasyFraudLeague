@@ -64,49 +64,57 @@ function FilterDropdown({
           style={{ top: style.top, left: style.left, minWidth: style.minWidth }}
         >
           <div className="filter-dropdown-content">
-            {/* Show Section */}
-            <div className="filter-group-header">Show</div>
-            {showOptions.map((option) => (
-              <button
-                key={option.id}
-                className={`filter-option ${selectedShow === option.id ? 'selected' : ''}`}
-                onClick={() => onShowChange(option.id)}
-              >
-                <span className="filter-option-label">{option.label}</span>
-                {selectedShow === option.id && (
-                  <span className="material-symbols-outlined filter-check">check</span>
-                )}
-              </button>
-            ))}
+            {/* Show Section - only if showOptions provided */}
+            {showOptions.length > 0 && (
+              <>
+                <div className="filter-group-header">Show</div>
+                {showOptions.map((option) => (
+                  <button
+                    key={option.id}
+                    className={`filter-option ${selectedShow === option.id ? 'selected' : ''}`}
+                    onClick={() => onShowChange(option.id)}
+                  >
+                    <span className="filter-option-label">{option.label}</span>
+                    {selectedShow === option.id && (
+                      <span className="material-symbols-outlined filter-check">check</span>
+                    )}
+                  </button>
+                ))}
 
-            {/* Divider */}
-            <div className="filter-divider" />
+                {/* Divider - only if both sections present */}
+                {sortOptions.length > 0 && <div className="filter-divider" />}
+              </>
+            )}
 
             {/* Sort Section */}
-            <div className="filter-group-header">Sort By</div>
-            {sortOptions.map((option) => (
-              <button
-                key={option.id}
-                className={`filter-option filter-sort-option ${selectedSort === option.id ? 'selected' : ''}`}
-                onClick={() => onSortChange(option.id)}
-              >
-                <span className="filter-option-label">{option.label}</span>
-                {selectedSort === option.id && (
+            {sortOptions.length > 0 && (
+              <>
+                <div className="filter-group-header">Sort By</div>
+                {sortOptions.map((option) => (
                   <button
-                    className="filter-direction-toggle"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onDirectionToggle();
-                    }}
-                    title={sortDirection === 'desc' ? 'Descending - click to reverse' : 'Ascending - click to reverse'}
+                    key={option.id}
+                    className={`filter-option filter-sort-option ${selectedSort === option.id ? 'selected' : ''}`}
+                    onClick={() => onSortChange(option.id)}
                   >
-                    <span className="material-symbols-outlined">
-                      {sortDirection === 'desc' ? 'arrow_downward' : 'arrow_upward'}
-                    </span>
+                    <span className="filter-option-label">{option.label}</span>
+                    {selectedSort === option.id && (
+                      <button
+                        className="filter-direction-toggle"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onDirectionToggle();
+                        }}
+                        title={sortDirection === 'desc' ? 'Descending - click to reverse' : 'Ascending - click to reverse'}
+                      >
+                        <span className="material-symbols-outlined">
+                          {sortDirection === 'desc' ? 'arrow_downward' : 'arrow_upward'}
+                        </span>
+                      </button>
+                    )}
                   </button>
-                )}
-              </button>
-            ))}
+                ))}
+              </>
+            )}
           </div>
         </div>
       </div>

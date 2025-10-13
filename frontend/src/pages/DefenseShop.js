@@ -10,8 +10,8 @@ function DefenseShop() {
     const { defenses, loading } = useDefense();
     const [filterOpen, setFilterOpen] = useState(false);
     const [showFilter, setShowFilter] = useState('all'); // all, owned, notOwned
-    const [sortBy, setSortBy] = useState('effectiveness'); // effectiveness, level, name
-    const [sortDirection, setSortDirection] = useState('desc'); // desc (↓), asc (↑)
+    const [sortBy, setSortBy] = useState('name'); // effectiveness, level, name
+    const [sortDirection, setSortDirection] = useState('asc'); // desc (↓), asc (↑)
     const filterButtonRef = useRef(null);
 
     const defenseItems = [
