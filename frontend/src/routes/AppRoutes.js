@@ -18,6 +18,7 @@ const VerifyEmail = lazy(() => import("../pages/VerifyEmail"));
 // only load if relevant
 const Home = lazy(() => import("../pages/Home"));
 const AdminDashboard = lazy(() => import("../pages/AdminDashboard"));
+const UserManagement = lazy(() => import("../pages/UserManagement"));
 
 // player related main pages
 const DefenseShop   = lazy(() => import("../pages/DefenseShop"));
@@ -89,9 +90,10 @@ export default function AppRoutes() {
             <Route path="/verify-email" element={<VerifyEmail />} />
               <Route element={<RequireVerified />}>
 
-                {/* ADMIN-only route */}
+                {/* ADMIN-only routes */}
                 <Route element={<RequireRole role="admin" />}>
                   <Route path="/admin" element={<AdminDashboard />} />
+                  <Route path="/admin/users" element={<UserManagement />} />
                 </Route>
 
                 {/* Normal app routes (no auto-redirect for admins) */}

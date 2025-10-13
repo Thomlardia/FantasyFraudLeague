@@ -1,211 +1,483 @@
-.admin-option {
-  background: #9EB1BC;
-  border: 1px solid var(--neo-border);
-  opacity: var(--legend-opacity, 1);
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin: 1.5rem 0;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+/* Admin Page Specific Styles */
+
+/* Admin Content Wrapper */
+.admin-content {
+  width: min(100%, 1400px);
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 24px;
+  position: relative;
+  z-index: 2;
 }
 
-/* Wave Button Colors - Scope to admin page only */
-.admin-option button,
-.wave-buttons button,
-.send-button {
-  font-family: inherit;
-  color: #9EB1BC;
-  border: var(--neo-border);
-  border-radius: 6px;
-  padding: 0.6rem 1.2rem;
-  margin: 0.3rem;
+/* Admin Section Title */
+.admin-section-title {
+  font-family: 'Audiowide', cursive;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--color-text-emphasis);
+  margin: 0 0 24px 0;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+/* Attack Management Container - Blue Background */
+.admin-attacks-container {
+  background:
+    linear-gradient(175deg, rgba(255, 255, 255, 0.18) 0%, rgba(210, 216, 220, 0.08) 100%),
+    #9EB1BC;
+  border-radius: 18px;
+  border: 1px solid #23395B;
+  box-shadow: var(--neo-shadow-3d);
+  padding: 32px 24px;
+}
+
+/* Grid for Attack Cards - Always stacked vertically */
+.admin-attacks-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Individual Attack Cards - White Background */
+.admin-attack-card {
+  background: #D7D5D5;
+  border-radius: 16px;
+  border: 1px solid var(--neo-sub-border);
+  box-shadow: 3px 3px 0 rgba(20, 28, 30, 0.28);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.admin-card-title {
+  font-family: 'Audiowide', cursive;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--color-text-secondary);
+  margin: 0;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+/* Wave Buttons */
+.wave-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .wave-buttons {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.wave-buttons button {
+  font-family: 'Audiowide', cursive;
+  color: #23395B;
+  background: #D7D5D5;
+  border: 1px solid var(--neo-sub-border);
+  border-radius: 10px;
+  padding: 12px 16px;
   cursor: pointer;
-  font-size: 1rem;
-  transition: background 0.2s;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+  box-shadow: 3px 3px 0 rgba(20, 28, 30, 0.28);
 }
 
-.admin-option button:hover,
 .wave-buttons button:hover {
-  color: var(--color-text-secondary);
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0 rgba(16, 24, 26, 0.34);
 }
 
-.admin-option button:disabled,
-.wave-buttons button:disabled {
-  opacity: 0.5;
-  color: var(--color-text-secondary);
-  cursor: not-allowed;
+.wave-buttons button:active {
+  transform: translate(0, 0);
+  box-shadow: 2px 2px 0 rgba(16, 24, 26, 0.28);
 }
 
+/* Wave Button Color Overrides */
 #random {
-  background-color: #3498db; /* blue */
-  color: black;
+  background: var(--color-chart-blue-light);
+  color: var(--color-chart-blue-dark);
+  border-color: var(--color-chart-blue-dark);
 }
 
 #easy {
-  background-color: #2ecc71; /* green */
-  color: black;
+  background: var(--color-green-light);
+  color: var(--color-green-dark);
+  border-color: var(--color-green-dark);
 }
 
 #medium {
-  background-color: #f1c40f; /* yellow */
-  color: black;
+  background: var(--color-chart-orange-light);
+  color: var(--color-chart-orange-dark);
+  border-color: var(--color-chart-orange-dark);
 }
 
 #hard {
-  background-color: #e74c3c; /* red */
-  color: black;
+  background: var(--color-red-light);
+  color: var(--color-red-dark);
+  border-color: var(--color-red-dark);
 }
 
-#random:hover {
-  background-color: #2980b9;
-}
-
-#easy:hover {
-  background-color: #27ae60;
-}
-
-#medium:hover {
-  background-color: #d4ac0d;
-}
-
+#random:hover,
+#easy:hover,
+#medium:hover,
 #hard:hover {
-  background-color: #c0392b;
+  filter: brightness(0.95);
 }
 
-.wave-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 3 rem;
-  justify-content: center;
-  margin-top: 0.5rem;;
-}
-
-/* Checkbox Grid Section */
+/* Attack Grid for Checkboxes */
 .attack-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(5, auto);
-  gap: 1rem;
-  margin-top: 1rem;
-  background-color: #e2e0e0;
-  border-radius: 10px;
-  padding: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 4px;
+  scroll-behavior: smooth;
+
+  /* Hide scrollbar but keep scroll functionality - like navigation panel */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
 }
 
-/* Individual Attack Card */
-.attack-card {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background-color: #f5f5f5;
+.attack-grid::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+@media (min-width: 768px) {
+  .attack-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .attack-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Checkbox Items */
+.attack-checkbox-item {
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid var(--neo-sub-border);
   border-radius: 8px;
-  padding: 0.5rem;
-  transition: transform 0.2s ease;
+  padding: 10px 12px;
+  transition: all 120ms ease;
 }
 
-.attack-card:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+.attack-checkbox-item:hover {
+  background: rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+  box-shadow: 2px 2px 0 rgba(20, 28, 30, 0.22);
 }
 
-/* Checkbox and Label */
-.attack-card input[type="checkbox"] {
-  transform: scale(1.2);
-  cursor: pointer;
+.attack-checkbox-item:has(input[type="checkbox"]:checked) {
+  background: rgba(193, 211, 206, 0.2);
+  border-color: var(--color-green-dark);
 }
 
-.attack-card label {
+.attack-checkbox-item label {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 8px;
   cursor: pointer;
-  font-weight: 500;
-}
-
-/* Attack Icon (if added later) */
-.attack-icon {
-  width: 30px;
-  height: 30px;
-  object-fit: contain;
-}
-
-/* Send Custom Attack Button */
-.send-button {
-  background-color: #bbb; /* muted grey when inactive */
-  color: white;
+  font-size: 13px;
   font-weight: 600;
-  padding: 0.8rem 1.5rem;
-  border-radius: 8px;
-  border: none;
-  cursor: not-allowed;
-  transition: all 0.2s ease;
-  box-shadow: none;
+  color: var(--color-text-secondary);
+  margin: 0;
 }
 
-/* Active / enabled state */
-.send-button.active {
-  background-color: #c4e9b5;
+.attack-checkbox-item input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 20px;
+  height: 20px;
   cursor: pointer;
-  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+  flex-shrink: 0;
+  background: #D7D5D5;
+  border: 2px solid var(--neo-sub-border);
+  border-radius: 4px;
+  position: relative;
+  transition: all 160ms ease;
+  box-shadow: 2px 2px 0 rgba(20, 28, 30, 0.2);
+}
+
+.attack-checkbox-item input[type="checkbox"]:hover {
+  background: #e0dede;
+  border-color: var(--color-text-emphasis);
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 rgba(20, 28, 30, 0.25);
+}
+
+.attack-checkbox-item input[type="checkbox"]:checked {
+  background: var(--color-green-light);
+  border-color: var(--color-green-dark);
+  box-shadow: 2px 2px 0 rgba(20, 28, 30, 0.28);
+}
+
+.attack-checkbox-item input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 6px;
+  height: 10px;
+  border: solid var(--color-green-dark);
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+.attack-checkbox-item input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--color-green-dark);
+  outline-offset: 2px;
+}
+
+.attack-checkbox-item span {
+  line-height: 1.3;
+}
+
+/* Custom Attack Footer */
+.custom-attack-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding-top: 8px;
+  border-top: 1px solid var(--neo-sub-border);
+}
+
+.selected-count {
+  font-family: 'Audiowide', cursive;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+/* Send Button */
+.send-button {
+  background: #a8b0b5;
+  color: #4a5256;
+  font-weight: 700;
+  padding: 14px 28px;
+  border-radius: 12px;
+  border: 1px solid #6b7479;
+  cursor: not-allowed;
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+  box-shadow: 3px 3px 0 rgba(20, 28, 30, 0.22);
+  font-family: 'Audiowide', cursive;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  min-width: 200px;
+}
+
+.send-button.active {
+  background: var(--color-green-light);
+  color: var(--color-green-dark);
+  border: 1px solid var(--color-green-dark);
+  cursor: pointer;
+  box-shadow: 4px 4px 0 rgba(20, 28, 30, 0.28);
 }
 
 .send-button.active:hover {
-  background-color: #bfd3e9;
-  box-shadow: 0 0 15px rgba(0, 123, 255, 0.6);
+  transform: translate(-1px, -1px);
+  background: var(--color-green-hover);
+  box-shadow: 5px 5px 0 rgba(16, 24, 26, 0.34);
 }
 
-@media (max-width: 1024px) {
-  .attack-grid {
-    grid-template-columns: repeat(3, 1fr); /* 3 columns */
-  }
-
-  .admin-option button,
-  .wave-buttons button,
-  .send-button {
-    font-size: 0.95rem;
-    padding: 0.5rem 1rem;
-  }
+.send-button.active:active {
+  transform: translate(0, 0);
+  box-shadow: 4px 4px 0 rgba(18, 26, 28, 0.3);
 }
 
+/* User Management Styles */
+.admin-users-container {
+  background:
+    linear-gradient(175deg, rgba(255, 255, 255, 0.18) 0%, rgba(210, 216, 220, 0.08) 100%),
+    #9EB1BC;
+  border-radius: 18px;
+  border: 1px solid #23395B;
+  box-shadow: var(--neo-shadow-3d);
+  padding: 32px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.admin-user-info {
+  background: #D7D5D5;
+  border-radius: 12px;
+  border: 1px solid var(--neo-sub-border);
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: 3px 3px 0 rgba(20, 28, 30, 0.28);
+}
+
+.admin-info-text {
+  font-size: 15px;
+  color: var(--color-text-secondary);
+  margin: 8px 0;
+}
+
+.admin-info-text strong {
+  color: var(--color-text-emphasis);
+  font-weight: 700;
+}
+
+.admin-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.admin-action-btn {
+  font-family: 'Audiowide', cursive;
+  color: #23395B;
+  background: #D7D5D5;
+  border: 1px solid var(--neo-sub-border);
+  border-radius: 10px;
+  padding: 12px 24px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+  box-shadow: 3px 3px 0 rgba(20, 28, 30, 0.28);
+  min-width: 160px;
+}
+
+.admin-action-btn:hover:not(:disabled) {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0 rgba(16, 24, 26, 0.34);
+}
+
+.admin-action-btn:active:not(:disabled) {
+  transform: translate(0, 0);
+  box-shadow: 2px 2px 0 rgba(16, 24, 26, 0.28);
+}
+
+.admin-action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.admin-error {
+  background: var(--color-red-light);
+  color: var(--color-red-dark);
+  border: 1px solid var(--color-red-dark);
+  border-radius: 12px;
+  padding: 16px;
+  margin: 20px 0;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.admin-users-list {
+  background: #D7D5D5;
+  border-radius: 12px;
+  border: 1px solid var(--neo-sub-border);
+  padding: 24px;
+  box-shadow: 3px 3px 0 rgba(20, 28, 30, 0.28);
+}
+
+.admin-users-list .admin-section-title {
+  text-align: left;
+  margin-bottom: 16px;
+  font-size: 24px;
+  color: var(--color-text-secondary);
+}
+
+.admin-users-code {
+  background: rgba(255, 255, 255, 0.75);
+  color: var(--color-text-secondary);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--neo-sub-border);
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.6;
+  max-height: 600px;
+  overflow-y: auto;
+  margin: 0;
+  scroll-behavior: smooth;
+  font-family: monospace;
+
+  /* Hide scrollbar but keep scroll functionality */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.admin-users-code::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* Mobile Responsive */
 @media (max-width: 768px) {
+  .admin-content {
+    padding: 20px;
+  }
+
+  .admin-attacks-container,
+  .admin-users-container {
+    padding: 24px 16px;
+  }
+
+  .admin-section-title {
+    font-size: 26px;
+  }
+
   .attack-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 columns */
-    gap: 0.8rem;
+    grid-template-columns: 1fr;
+    max-height: 350px;
   }
 
-  .attack-card {
-    padding: 0.4rem;
+  .wave-buttons {
+    grid-template-columns: 1fr;
   }
 
-  .attack-card label {
-    font-size: 0.95rem;
+  .admin-actions {
+    flex-direction: column;
   }
 
-  .attack-icon {
-    width: 25px;
-    height: 25px;
+  .admin-action-btn {
+    width: 100%;
+  }
+
+  .send-button {
+    width: 100%;
   }
 }
 
 @media (max-width: 480px) {
-  .attack-grid {
-    grid-template-columns: 1fr; /* single column */
-    gap: 0.7rem;
+  .admin-content {
+    padding: 16px;
   }
 
-  .attack-card {
-    justify-content: flex-start;
-    padding: 0.5rem;
+  .admin-attacks-container,
+  .admin-users-container {
+    padding: 20px 12px;
   }
 
-  .attack-card label {
-    font-size: 0.9rem;
+  .admin-section-title {
+    font-size: 24px;
   }
 
-  .admin-option button,
-  .wave-buttons button,
-  .send-button {
-    width: 95%;
-    font-size: 1rem;
-    margin-top: 0.5rem;
+  .admin-card-title {
+    font-size: 18px;
+  }
+
+  .attack-checkbox-item label {
+    font-size: 12px;
   }
 }

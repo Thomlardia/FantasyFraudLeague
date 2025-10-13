@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { httpsCallable } from "firebase/functions";
 import { functions } from "../firebase";
 import { useAuth } from "../auth/useAuth";
@@ -125,79 +125,64 @@ export default function AdminDashboard() {
     };
 
   return (
-    <div className="simple-page admin-dashboard">
-      <PageHeader title="Admin" backPath="/home" />
-      <p>
-        Signed in as <strong>{user?.email || user?.uid}</strong>
-      </p>
-      <p>Roles: {roles.length ? roles.join(", ") : "(none)"}</p>
+    <div className="page admin-page">
+      <PageHeader title="Admin Dashboard" backPath="/home">
+        <Link to="/admin/users" className="icon-button" title="User Management">
+          <span className="material-symbols-outlined">manage_accounts</span>
+        </Link>
+        <Link to="/home" className="icon-button" title="My Account">
+          <span className="material-symbols-outlined">account_circle</span>
+        </Link>
+      </PageHeader>
 
-      <div className="simple-action-row simple-page__actions">
-        <button onClick={refreshClaims} disabled={loading}>
-          Refresh Roles
-        </button>
-        <button onClick={listUsers} disabled={loading}>
-          {loading ? "Loading…" : "List Users"}
-        </button>
-        <button
-          onClick={() => navigate(location.state?.from?.pathname || "/home", { replace: true })}
-        >
-          Continue to App
-        </button>
-      </div>
+      <div className="admin-content">
+        <div className="admin-attacks-container">
+          <h2 className="admin-section-title">Attack Management</h2>
 
-      {err && <p className="simple-error">{err}</p>}
-
-      {Array.isArray(users) && (
-        <div className="admin-users">
-          <h3>Users</h3>
-          <pre className="admin-users__code">
-            {JSON.stringify(users, null, 2)}
-          </pre>
-        </div>
-      )}
-  
-      <div className="admin-option">
-          <h2>Option 1: Random Attack Waves</h2>
-          <div className="wave-buttons">
-              <button onClick={() => handleRandomWave('random')} id="random">Random Wave</button>
-              <button onClick={() => handleRandomWave('easy')} id="easy">Easy Wave</button>
-              <button onClick={() => handleRandomWave('medium')} id="medium">Medium Wave</button>
-              <button onClick={() => handleRandomWave('hard')} id="hard">Hard Wave</button>
-          </div>
-      </div>
-
-      <div className="admin-option">
-        <h2>Option 2: Custom Attack Selection</h2>
-        <div className="attack-grid">
-
-          {fraudAttacks.map(attack => (
-            <div key={attack.id} className="attack-card">
-                <label>
-                <input
-                    type="checkbox"
-                    checked={selectedAttacks.includes(attack.id)}
-                    onChange={() => handleCheckboxChange(attack.id)}
-                />
-                    {attack.name}
-                </label>
+          <div className="admin-attacks-grid">
+            {/* Random Wave Section */}
+            <div className="admin-attack-card">
+              <h3 className="admin-card-title">Random Attack Waves</h3>
+              <div className="wave-buttons">
+                <button onClick={() => handleRandomWave('random')} id="random">Random Wave</button>
+                <button onClick={() => handleRandomWave('easy')} id="easy">Easy Wave</button>
+                <button onClick={() => handleRandomWave('medium')} id="medium">Medium Wave</button>
+                <button onClick={() => handleRandomWave('hard')} id="hard">Hard Wave</button>
+              </div>
             </div>
-          ))}
 
-        </div>
+            {/* Custom Attack Section */}
+            <div className="admin-attack-card">
+              <h3 className="admin-card-title">Custom Attack Selection</h3>
+              <div className="attack-grid">
+                {fraudAttacks.map(attack => (
+                  <div key={attack.id} className="attack-checkbox-item">
+                    <label>
+                      <input
+                        type="checkbox"
+                        checked={selectedAttacks.includes(attack.id)}
+                        onChange={() => handleCheckboxChange(attack.id)}
+                      />
+                      <span>{attack.name}</span>
+                    </label>
+                  </div>
+                ))}
+              </div>
 
-        <div style={{ marginTop: '1rem' }}>
-          <p>Selected: {selectedAttacks.length} attack(s)</p>
-          <button
-          className={`send-button ${selectedAttacks.length > 0 ? 'active' : ''}`}
-          disabled={selectedAttacks.length === 0}
-          >
-              Send Custom Attack
-          </button>
-
+              <div className="custom-attack-footer">
+                <p className="selected-count">Selected: {selectedAttacks.length} attack(s)</p>
+                <button
+                  className={`send-button ${selectedAttacks.length > 0 ? 'active' : ''}`}
+                  disabled={selectedAttacks.length === 0}
+                  onClick={handleCustomAttack}
+                >
+                  Send Custom Attack
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-  
     </div>
   );
 }
