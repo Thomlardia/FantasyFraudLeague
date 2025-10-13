@@ -4,14 +4,16 @@ import '../styles/shopAndWiki.css';
 import PageHeader from '../components/PageHeader';
 import FilterDropdown from '../components/FilterDropdown';
 import { useDefense } from '../contexts/DefenseContext';
+import { useFilters } from '../contexts/FilterContext';
 
 function FraudWiki() {
     const { getTotalProtectionAgainstAttack, loading } = useDefense();
+    const { fraudWikiFilters, updateFraudWikiFilters } = useFilters();
     const [filterOpen, setFilterOpen] = useState(false);
-    const [showFilter, setShowFilter] = useState('all'); // all, highProtection, lowProtection
-    const [sortBy, setSortBy] = useState('name');
-    const [sortDirection, setSortDirection] = useState('asc'); // asc = A-Z, desc = Z-A
     const filterButtonRef = useRef(null);
+
+    // Destructure filters from context
+    const { showFilter, sortBy, sortDirection } = fraudWikiFilters;
 
     const fraudItems = [
         { title: "Phishing", icon: "phishing", path: "/frauds/Phishing", attackId: "phishing" },
@@ -109,12 +111,12 @@ function FraudWiki() {
                     <FilterDropdown
                         showOptions={showOptions}
                         selectedShow={showFilter}
-                        onShowChange={(value) => setShowFilter(value)}
+                        onShowChange={(value) => updateFraudWikiFilters({ showFilter: value })}
                         sortOptions={sortOptions}
                         selectedSort={sortBy}
                         sortDirection={sortDirection}
-                        onSortChange={(value) => setSortBy(value)}
-                        onDirectionToggle={() => setSortDirection(prev => prev === 'desc' ? 'asc' : 'desc')}
+                        onSortChange={(value) => updateFraudWikiFilters({ sortBy: value })}
+                        onDirectionToggle={() => updateFraudWikiFilters({ sortDirection: sortDirection === 'desc' ? 'asc' : 'desc' })}
                         isOpen={filterOpen}
                         onClose={() => setFilterOpen(false)}
                         buttonRef={filterButtonRef}

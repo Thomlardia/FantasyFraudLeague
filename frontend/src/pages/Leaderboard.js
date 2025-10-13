@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/shopAndWiki.css';
 import PageHeader from '../components/PageHeader';
 import { useLeaderboard } from '../contexts/LeaderboardContext';
 import { useAuth } from '../auth/useAuth';
+import { useFilters } from '../contexts/FilterContext';
 
 function Leaderboard() {
     const { topTen, currentUser, loading, error, refreshLeaderboard } = useLeaderboard();
     const { user } = useAuth();
-    const [activeTab, setActiveTab] = useState('alltime');
+    const { leaderboardTab, setLeaderboardTab } = useFilters();
 
     // Fetch leaderboard data on first view
     useEffect(() => {
@@ -65,14 +66,14 @@ function Leaderboard() {
                 centerContent={
                     <div className="tab-selector-bar">
                         <button
-                            className={`tab-bar-button ${activeTab === 'alltime' ? 'active' : ''}`}
-                            onClick={() => setActiveTab('alltime')}
+                            className={`tab-bar-button ${leaderboardTab === 'alltime' ? 'active' : ''}`}
+                            onClick={() => setLeaderboardTab('alltime')}
                         >
                             All Time
                         </button>
                         <button
-                            className={`tab-bar-button ${activeTab === 'lastattack' ? 'active' : ''}`}
-                            onClick={() => setActiveTab('lastattack')}
+                            className={`tab-bar-button ${leaderboardTab === 'lastattack' ? 'active' : ''}`}
+                            onClick={() => setLeaderboardTab('lastattack')}
                         >
                             Last Attack
                         </button>

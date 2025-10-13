@@ -5,14 +5,16 @@ import PageHeader from '../components/PageHeader';
 import MoneyBar from '../components/MoneyBar';
 import FilterDropdown from '../components/FilterDropdown';
 import { useDefense } from '../contexts/DefenseContext';
+import { useFilters } from '../contexts/FilterContext';
 
 function DefenseShop() {
     const { defenses, loading } = useDefense();
+    const { defenseShopFilters, updateDefenseShopFilters } = useFilters();
     const [filterOpen, setFilterOpen] = useState(false);
-    const [showFilter, setShowFilter] = useState('all'); // all, owned, notOwned
-    const [sortBy, setSortBy] = useState('name'); // effectiveness, level, name
-    const [sortDirection, setSortDirection] = useState('asc'); // desc (↓), asc (↑)
     const filterButtonRef = useRef(null);
+
+    // Destructure filters from context
+    const { showFilter, sortBy, sortDirection } = defenseShopFilters;
 
     const defenseItems = [
         { title: "Multi-Factor Authentication (MFA)", icon: "security", path: "/defenses/MultiFactorAuth", id: "mfa" },
@@ -193,12 +195,12 @@ function DefenseShop() {
                     <FilterDropdown
                         showOptions={showOptions}
                         selectedShow={showFilter}
-                        onShowChange={(value) => setShowFilter(value)}
+                        onShowChange={(value) => updateDefenseShopFilters({ showFilter: value })}
                         sortOptions={sortOptions}
                         selectedSort={sortBy}
                         sortDirection={sortDirection}
-                        onSortChange={(value) => setSortBy(value)}
-                        onDirectionToggle={() => setSortDirection(prev => prev === 'desc' ? 'asc' : 'desc')}
+                        onSortChange={(value) => updateDefenseShopFilters({ sortBy: value })}
+                        onDirectionToggle={() => updateDefenseShopFilters({ sortDirection: sortDirection === 'desc' ? 'asc' : 'desc' })}
                         isOpen={filterOpen}
                         onClose={() => setFilterOpen(false)}
                         buttonRef={filterButtonRef}

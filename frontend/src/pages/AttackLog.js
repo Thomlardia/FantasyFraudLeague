@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import '../styles/shopAndWiki.css';
 import PageHeader from '../components/PageHeader';
 import { useAttack } from '../contexts/AttackContext';
+import { useFilters } from '../contexts/FilterContext';
 
 function AttackLog() {
     const { attackLogs, logsLoading, logsError, refreshAttackLogs } = useAttack();
-    const [activeTab, setActiveTab] = useState('alltime');
+    const { attackLogTab, setAttackLogTab } = useFilters();
     const [expandedLogIndex, setExpandedLogIndex] = useState(null);
 
     // Fetch logs on mount
@@ -19,7 +20,7 @@ function AttackLog() {
     };
 
     // Filter logs based on active tab
-    const displayedLogs = activeTab === 'lastattack' && attackLogs.length > 0
+    const displayedLogs = attackLogTab === 'lastattack' && attackLogs.length > 0
         ? [attackLogs[0]] // Show only most recent
         : attackLogs; // Show all
 
@@ -56,14 +57,14 @@ function AttackLog() {
                 centerContent={
                     <div className="tab-selector-bar">
                         <button
-                            className={`tab-bar-button ${activeTab === 'alltime' ? 'active' : ''}`}
-                            onClick={() => setActiveTab('alltime')}
+                            className={`tab-bar-button ${attackLogTab === 'alltime' ? 'active' : ''}`}
+                            onClick={() => setAttackLogTab('alltime')}
                         >
                             All Time
                         </button>
                         <button
-                            className={`tab-bar-button ${activeTab === 'lastattack' ? 'active' : ''}`}
-                            onClick={() => setActiveTab('lastattack')}
+                            className={`tab-bar-button ${attackLogTab === 'lastattack' ? 'active' : ''}`}
+                            onClick={() => setAttackLogTab('lastattack')}
                         >
                             Last Attack
                         </button>
