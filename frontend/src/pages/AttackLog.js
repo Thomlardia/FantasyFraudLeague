@@ -1,14 +1,45 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/shopAndWiki.css';
 import PageHeader from '../components/PageHeader';
+import { useAttack } from '../contexts/AttackContext';
 
 function AttackLog() {
+    const { attackLogs, logsLoading, logsError, refreshAttackLogs } = useAttack();
     const [activeTab, setActiveTab] = useState('alltime');
+    const [expandedLogIndex, setExpandedLogIndex] = useState(null);
+
+    // Fetch logs on mount
+    useEffect(() => {
+        refreshAttackLogs();
+    }, [refreshAttackLogs]);
 
     const handleRefresh = () => {
-        // TODO: Implement refresh logic when backend is ready
-        console.log('Refreshing attack log...');
+        refreshAttackLogs();
+    };
+
+    // Filter logs based on active tab
+    const displayedLogs = activeTab === 'lastattack' && attackLogs.length > 0
+        ? [attackLogs[0]] // Show only most recent
+        : attackLogs; // Show all
+
+    const toggleLogExpansion = (index) => {
+        setExpandedLogIndex(expandedLogIndex === index ? null : index);
+    };
+
+    // Format timestamp helper
+    const formatTimestamp = (timestamp) => {
+        let date;
+        if (timestamp?.toDate && typeof timestamp.toDate === 'function') {
+            date = timestamp.toDate();
+        } else if (timestamp?.seconds) {
+            date = new Date(timestamp.seconds * 1000);
+        } else if (timestamp instanceof Date) {
+            date = timestamp;
+        } else {
+            date = new Date();
+        }
+        return date.toLocaleString();
     };
 
     return (
@@ -43,6 +74,7 @@ function AttackLog() {
                     onClick={handleRefresh}
                     className="icon-button"
                     title="Refresh Attack Log"
+                    disabled={logsLoading}
                 >
                     <span className="material-symbols-outlined">refresh</span>
                 </button>
@@ -50,25 +82,116 @@ function AttackLog() {
 
             <div className="leaderboard-content">
                 <div className="leaderboard-card">
-                    <div className="leaderboard-header">
-                        <h2 className="leaderboard-subtitle">Attack History</h2>
-                    </div>
+                    {logsLoading ? (
+                        <div className="attack-log-status">
+                            <span className="material-symbols-outlined">hourglass_empty</span>
+                            <p>Loading attack logs...</p>
+                        </div>
+                    ) : logsError ? (
+                        <div className="attack-log-status attack-log-status--error">
+                            <span className="material-symbols-outlined">error</span>
+                            <p>Error: {logsError}</p>
+                        </div>
+                    ) : displayedLogs.length === 0 ? (
+                        <div className="attack-log-status">
+                            <span className="material-symbols-outlined">shield</span>
+                            <p>No attacks received yet</p>
+                            <p className="attack-log-status-subtitle">You're safe... for now!</p>
+                        </div>
+                    ) : (
+                        <div className="attack-log-list">
+                            {displayedLogs.map((log, logIndex) => {
+                                const isExpanded = expandedLogIndex === logIndex;
+                                const totalDamage = log.totalDamage || 0;
+                                const attackCount = log.attacks?.length || 0;
+                                const totalPrevented = log.attacks?.reduce((sum, attack) => sum + (attack.damageReduced || 0), 0) || 0;
 
-                    <div style={{
-                        padding: '40px 20px',
-                        textAlign: 'center',
-                        color: 'var(--color-text-secondary)'
-                    }}>
-                        <span className="material-symbols-outlined" style={{ fontSize: '64px', marginBottom: '16px' }}>
-                            list_alt
-                        </span>
-                        <p style={{ fontSize: '16px', fontWeight: '600', marginBottom: '8px' }}>
-                            Attack Log Coming Soon
-                        </p>
-                        <p style={{ fontSize: '14px', opacity: '0.8' }}>
-                            View detailed logs of all attacks you've received and how your defenses performed.
-                        </p>
-                    </div>
+                                return (
+                                    <div key={log.id || logIndex} className="attack-log-item">
+                                        <div
+                                            className="attack-log-summary"
+                                            onClick={() => toggleLogExpansion(logIndex)}
+                                        >
+                                            <div className="attack-log-summary-info">
+                                                <span className="attack-log-date">{formatTimestamp(log.timestamp)}</span>
+                                                <span className="attack-log-attacks">{attackCount} attack{attackCount !== 1 ? 's' : ''}</span>
+                                            </div>
+                                            <div className="attack-log-summary-stats">
+                                                <span className="attack-log-damage">-${totalDamage.toLocaleString()}</span>
+                                                <span className="material-symbols-outlined attack-log-expand-icon">
+                                                    {isExpanded ? 'expand_less' : 'expand_more'}
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        {isExpanded && (
+                                            <div className="attack-log-details">
+                                                <div className="attack-log-summary-section">
+                                                    <div className="attack-log-stat-row">
+                                                        <span className="attack-log-stat-label">Old Balance:</span>
+                                                        <span className="attack-log-stat-value">${(log.oldBalance || 0).toLocaleString()}</span>
+                                                    </div>
+                                                    <div className="attack-log-stat-row">
+                                                        <span className="attack-log-stat-label">Damage Taken:</span>
+                                                        <span className="attack-log-stat-value attack-log-stat-value--negative">-${totalDamage.toLocaleString()}</span>
+                                                    </div>
+                                                    <div className="attack-log-stat-row">
+                                                        <span className="attack-log-stat-label">Damage Prevented:</span>
+                                                        <span className="attack-log-stat-value attack-log-stat-value--positive">+${totalPrevented.toLocaleString()}</span>
+                                                    </div>
+                                                    <div className="attack-log-stat-row attack-log-stat-row--highlight">
+                                                        <span className="attack-log-stat-label">New Balance:</span>
+                                                        <span className="attack-log-stat-value">${(log.newBalance || 0).toLocaleString()}</span>
+                                                    </div>
+                                                </div>
+
+                                                {log.attacks && log.attacks.length > 0 && (
+                                                    <div className="attack-log-attacks-section">
+                                                        <h4 className="attack-log-section-title">Attack Details</h4>
+                                                        {log.attacks.map((attack, attackIndex) => (
+                                                            <div key={attackIndex} className="attack-detail-card">
+                                                                <div className="attack-detail-header">
+                                                                    <span className="attack-detail-name">{attack.attackName || 'Unknown Attack'}</span>
+                                                                    <span className="attack-detail-reduction">{attack.reductionPercent || 0}% blocked</span>
+                                                                </div>
+                                                                <div className="attack-detail-stats">
+                                                                    <div className="attack-detail-stat">
+                                                                        <span className="attack-detail-stat-label">Original:</span>
+                                                                        <span>${(attack.originalDamage || 0).toLocaleString()}</span>
+                                                                    </div>
+                                                                    <div className="attack-detail-stat">
+                                                                        <span className="attack-detail-stat-label">Final:</span>
+                                                                        <span className="attack-detail-stat-value--negative">${(attack.finalDamage || 0).toLocaleString()}</span>
+                                                                    </div>
+                                                                    <div className="attack-detail-stat">
+                                                                        <span className="attack-detail-stat-label">Blocked:</span>
+                                                                        <span className="attack-detail-stat-value--positive">${(attack.damageReduced || 0).toLocaleString()}</span>
+                                                                    </div>
+                                                                </div>
+
+                                                                {attack.defensesApplied && attack.defensesApplied.length > 0 && (
+                                                                    <div className="attack-defenses-applied">
+                                                                        <span className="attack-defenses-label">Defenses Used:</span>
+                                                                        <div className="attack-defenses-list">
+                                                                            {attack.defensesApplied.map((defense, defIndex) => (
+                                                                                <div key={defIndex} className="attack-defense-badge">
+                                                                                    {defense.defenseName} L{defense.level} ({defense.reductionPercent}%)
+                                                                                </div>
+                                                                            ))}
+                                                                        </div>
+                                                                    </div>
+                                                                )}
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

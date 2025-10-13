@@ -1,17 +1,23 @@
 import { createContext, useContext, useEffect, useState, useCallback, useRef } from 'react';
+import { getUserAttackLogs } from '../api/attack';
 
 const AttackContext = createContext(null);
 
 /**
  * AttackProvider - Manages attack-related state globally
- * Currently manages the countdown timer for next attack
- * Future: Will manage attack logs, attack history, etc.
+ * Manages countdown timer for next attack and attack log history
  */
 export function AttackProvider({ children }) {
+  // Timer state
   const [timeRemaining, setTimeRemaining] = useState(5 * 3600 + 45 * 60 + 38); // 05:45:38 in seconds
   const [isRunning, setIsRunning] = useState(false);
   const [onTimerComplete, setOnTimerComplete] = useState(null); // Callback when timer reaches 0
   const intervalRef = useRef(null);
+
+  // Attack logs state
+  const [attackLogs, setAttackLogs] = useState([]);
+  const [logsLoading, setLogsLoading] = useState(false);
+  const [logsError, setLogsError] = useState(null);
 
   /**
    * Start the countdown timer
@@ -114,7 +120,42 @@ export function AttackProvider({ children }) {
     setOnTimerComplete(() => callback);
   }, []);
 
+  /**
+   * Fetch attack logs from backend
+   * @param {number|null} limit - Optional limit for number of logs
+   */
+  const fetchAttackLogs = useCallback(async (limit = null) => {
+    try {
+      setLogsLoading(true);
+      setLogsError(null);
+      const logs = await getUserAttackLogs(limit);
+      setAttackLogs(logs || []);
+    } catch (err) {
+      console.error('Error fetching attack logs:', err);
+      setLogsError(err.message || 'Failed to load attack logs');
+      setAttackLogs([]);
+    } finally {
+      setLogsLoading(false);
+    }
+  }, []);
+
+  /**
+   * Refresh attack logs (convenience wrapper)
+   */
+  const refreshAttackLogs = useCallback(() => {
+    return fetchAttackLogs();
+  }, [fetchAttackLogs]);
+
+  /**
+   * Get the most recent attack log
+   * @returns {object|null} Most recent attack log or null
+   */
+  const getLatestAttackLog = useCallback(() => {
+    return attackLogs.length > 0 ? attackLogs[0] : null;
+  }, [attackLogs]);
+
   const value = {
+    // Timer
     timeRemaining,
     isRunning,
     startTimer,
@@ -124,6 +165,13 @@ export function AttackProvider({ children }) {
     formatTime,
     getTimerCardClass,
     setTimerCompleteCallback,
+    // Attack logs
+    attackLogs,
+    logsLoading,
+    logsError,
+    fetchAttackLogs,
+    refreshAttackLogs,
+    getLatestAttackLog,
   };
 
   return <AttackContext.Provider value={value}>{children}</AttackContext.Provider>;
@@ -131,7 +179,9 @@ export function AttackProvider({ children }) {
 
 /**
  * Hook to access attack context
- * @returns {Object} Context object with timer state and control functions
+ * @returns {Object} Context object with timer state, attack logs, and control functions
+ *
+ * Timer properties:
  * @property {number} timeRemaining - Seconds until next attack
  * @property {boolean} isRunning - Whether timer is running
  * @property {Function} startTimer - Start the countdown
@@ -141,6 +191,14 @@ export function AttackProvider({ children }) {
  * @property {Function} formatTime - Format seconds as HH:MM:SS
  * @property {Function} getTimerCardClass - Get CSS class based on time
  * @property {Function} setTimerCompleteCallback - Set callback to execute when timer reaches 0
+ *
+ * Attack log properties:
+ * @property {Array} attackLogs - Array of attack log objects (sorted newest first)
+ * @property {boolean} logsLoading - Whether logs are currently being fetched
+ * @property {string|null} logsError - Error message if log fetching failed
+ * @property {Function} fetchAttackLogs - Fetch attack logs with optional limit
+ * @property {Function} refreshAttackLogs - Refresh all attack logs
+ * @property {Function} getLatestAttackLog - Get most recent attack log
  */
 export const useAttack = () => {
   const context = useContext(AttackContext);

@@ -1702,3 +1702,389 @@
     letter-spacing: 6px;
   }
 }
+
+/* Attack Log Styles */
+.attack-log-status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+
+.attack-log-status .material-symbols-outlined {
+  font-size: 64px;
+  color: var(--color-text-secondary);
+  opacity: 0.6;
+}
+
+.attack-log-status p {
+  font-family: 'Audiowide', cursive;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.attack-log-status-subtitle {
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  opacity: 0.8;
+}
+
+.attack-log-status--error {
+  color: var(--color-red-dark);
+}
+
+.attack-log-status--error .material-symbols-outlined {
+  color: var(--color-red-dark);
+}
+
+.attack-log-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.attack-log-item {
+  background: #D7D5D5;
+  border-radius: 12px;
+  border: 1px solid var(--neo-sub-border);
+  box-shadow: 3px 3px 0 rgba(20, 28, 30, 0.28);
+  overflow: hidden;
+  transition: all 120ms ease;
+}
+
+.attack-log-item:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 rgba(16, 24, 26, 0.34);
+}
+
+.attack-log-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  cursor: pointer;
+  gap: 16px;
+  transition: background 100ms ease;
+}
+
+.attack-log-summary:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.attack-log-summary-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.attack-log-date {
+  font-family: 'Audiowide', cursive;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-emphasis);
+}
+
+.attack-log-attacks {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  opacity: 0.8;
+}
+
+.attack-log-summary-stats {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.attack-log-damage {
+  font-family: 'Audiowide', cursive;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--color-red-dark);
+  background: var(--color-red-light);
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--color-red-dark);
+}
+
+.attack-log-expand-icon {
+  font-size: 24px;
+  color: var(--color-text-secondary);
+  transition: transform 100ms ease;
+}
+
+.attack-log-details {
+  padding: 18px;
+  border-top: 1px solid rgba(35, 57, 91, 0.15);
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.attack-log-summary-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.attack-log-stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+  border: 1px solid var(--neo-sub-border);
+}
+
+.attack-log-stat-row--highlight {
+  background: rgba(74, 122, 99, 0.2);
+  border-color: var(--color-green-dark);
+}
+
+.attack-log-stat-label {
+  font-family: 'Audiowide', cursive;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.attack-log-stat-value {
+  font-family: 'Audiowide', cursive;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text-emphasis);
+}
+
+.attack-log-stat-value--negative {
+  color: var(--color-red-dark);
+}
+
+.attack-log-stat-value--positive {
+  color: var(--color-green-dark);
+}
+
+.attack-log-attacks-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.attack-log-section-title {
+  font-family: 'Audiowide', cursive;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--color-text-emphasis);
+  margin: 0 0 8px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.attack-detail-card {
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid var(--neo-sub-border);
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.attack-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.attack-detail-name {
+  font-family: 'Audiowide', cursive;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-emphasis);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.attack-detail-reduction {
+  font-family: 'Audiowide', cursive;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-chart-blue-dark);
+  background: var(--color-chart-blue-light);
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--color-chart-blue-dark);
+}
+
+.attack-detail-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.attack-detail-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  border: 1px solid rgba(35, 57, 91, 0.1);
+}
+
+.attack-detail-stat-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.attack-detail-stat span:last-child {
+  font-family: 'Audiowide', cursive;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-emphasis);
+}
+
+.attack-detail-stat-value--negative {
+  color: var(--color-red-dark) !important;
+}
+
+.attack-detail-stat-value--positive {
+  color: var(--color-green-dark) !important;
+}
+
+.attack-defenses-applied {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.attack-defenses-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.attack-defenses-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.attack-defense-badge {
+  font-family: 'Audiowide', cursive;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-green-dark);
+  background: var(--color-green-light);
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--color-green-dark);
+  white-space: nowrap;
+}
+
+/* Responsive Attack Log */
+@media (max-width: 768px) {
+  .attack-log-summary {
+    padding: 12px 16px;
+    gap: 12px;
+  }
+
+  .attack-log-date {
+    font-size: 13px;
+  }
+
+  .attack-log-attacks {
+    font-size: 11px;
+  }
+
+  .attack-log-damage {
+    font-size: 15px;
+    padding: 5px 10px;
+  }
+
+  .attack-detail-stats {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .attack-detail-stat {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .attack-log-summary {
+    padding: 10px 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .attack-log-summary-stats {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .attack-log-date {
+    font-size: 12px;
+  }
+
+  .attack-log-damage {
+    font-size: 14px;
+    padding: 4px 8px;
+  }
+
+  .attack-log-details {
+    padding: 14px;
+    gap: 16px;
+  }
+
+  .attack-log-stat-row {
+    padding: 8px 12px;
+  }
+
+  .attack-log-stat-label {
+    font-size: 11px;
+  }
+
+  .attack-log-stat-value {
+    font-size: 13px;
+  }
+
+  .attack-detail-card {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .attack-detail-name {
+    font-size: 13px;
+  }
+
+  .attack-detail-reduction {
+    font-size: 12px;
+    padding: 3px 8px;
+  }
+
+  .attack-defense-badge {
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+}

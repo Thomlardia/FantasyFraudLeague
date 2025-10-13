@@ -87,6 +87,14 @@ lazy:
 	$(MAKE) seed-test-users
 	$(MAKE) seed-global-defenses
 
+# Seed auth users (directly into Firebase Authentication)
+seed-auth-users:
+	$(EMULATOR_ENV) node functions/scripts/seed.js seed auth-users
+
+# Clear test auth users
+clear-auth-users:
+	$(EMULATOR_ENV) node functions/scripts/seed.js clear auth-users
+
 # list all users
 list-users:
 	$(EMULATOR_ENV) node functions/scripts/seed.js list users

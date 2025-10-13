@@ -481,3 +481,65 @@
     font-size: 12px;
   }
 }
+/* Attack Status Messages */
+.admin-status-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px 24px;
+  border-radius: 12px;
+  border: 1px solid;
+  margin-bottom: 20px;
+  font-size: 15px;
+  font-weight: 600;
+  box-shadow: 3px 3px 0 rgba(20, 28, 30, 0.22);
+  animation: slideIn 300ms ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.admin-status-message .material-symbols-outlined {
+  font-size: 24px;
+}
+
+.admin-status-message p {
+  margin: 0;
+  font-family: 'Audiowide', cursive;
+  letter-spacing: 0.3px;
+}
+
+.admin-status-loading {
+  background: var(--color-chart-blue-light);
+  color: var(--color-chart-blue-dark);
+  border-color: var(--color-chart-blue-dark);
+}
+
+.admin-status-success {
+  background: var(--color-green-light);
+  color: var(--color-green-dark);
+  border-color: var(--color-green-dark);
+}
+
+.admin-status-error {
+  background: var(--color-red-light);
+  color: var(--color-red-dark);
+  border-color: var(--color-red-dark);
+}
+
+/* Disabled button states */
+.wave-buttons button:disabled,
+.send-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
