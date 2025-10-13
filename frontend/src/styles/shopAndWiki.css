@@ -457,6 +457,23 @@
   border: 1px solid var(--color-green-dark);
 }
 
+/* Coverage Indicator (Fraud Wiki) */
+.card-coverage {
+  font-family: 'Audiowide', cursive;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-chart-blue-dark);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  z-index: 1;
+  background: var(--color-chart-blue-light);
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--color-chart-blue-dark);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .shop-wiki-header {

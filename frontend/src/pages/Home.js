@@ -20,28 +20,28 @@ function Home() {
         <div className="page">
             <PageHeader
                 leftContent={
-                    <>
-                        <button
-                            type="button"
-                            className="icon-button"
-                            title="Log out"
-                            onClick={logout}
-                        >
-                            <span className="material-symbols-outlined">logout</span>
-                        </button>
-                        <Link to="/leaderboard" className="icon-button" title="Leaderboard">
-                            <span className="material-symbols-outlined">leaderboard</span>
-                        </Link>
-                    </>
+                    <button
+                        type="button"
+                        className="icon-button"
+                        title="Log out"
+                        onClick={logout}
+                    >
+                        <span className="material-symbols-outlined">logout</span>
+                    </button>
                 }
                 centerContent={<MoneyBar />}
             >
                 <Link to="/help" className="icon-button" title="Help">
                     <span className="material-symbols-outlined">help</span>
                 </Link>
-                <Link to="/settings" className="icon-button" title="Settings">
-                    <span className="material-symbols-outlined">settings</span>
+                <Link to="/leaderboard" className="icon-button" title="Leaderboard">
+                    <span className="material-symbols-outlined">leaderboard</span>
                 </Link>
+                {hasRole("admin") && (
+                    <Link to="/admin" className="icon-button" title="Admin Dashboard">
+                        <span className="material-symbols-outlined">admin_panel_settings</span>
+                    </Link>
+                )}
             </PageHeader>
 
             <div className="home-content-wrapper">
