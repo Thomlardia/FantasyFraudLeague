@@ -79,6 +79,14 @@ function Home() {
                             <span className="material-symbols-outlined">menu_book</span>
                             <span className="home-nav-label">Fraud Wiki</span>
                         </Link>
+                        <Link className="home-nav-button" to="/analysis">
+                            <span className="material-symbols-outlined">analytics</span>
+                            <span className="home-nav-label">Analysis</span>
+                        </Link>
+                        <Link className="home-nav-button" to="/attacklog">
+                            <span className="material-symbols-outlined">list_alt</span>
+                            <span className="home-nav-label">Attack Log</span>
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -28,6 +28,8 @@ const Settings      = lazy(() => import("../pages/Settings"));
 // shared pages
 const Leaderboard   = lazy(() => import("../pages/Leaderboard"));
 const FraudWiki     = lazy(() => import("../pages/FraudWiki"));
+const Analysis      = lazy(() => import("../pages/Analysis"));
+const AttackLog     = lazy(() => import("../pages/AttackLog"));
 
 // DEFENSES (lazy)
 const MultiFactorAuth           = lazy(() => import("../pages/defenses/MultiFactorAuth"));
@@ -99,9 +101,11 @@ export default function AppRoutes() {
                 {/* Normal app routes (no auto-redirect for admins) */}
                 <Route path="/home" element={<Home />} />
                 <Route path="/defenseshop" element={<DefenseShop />} />
-                <Route path="/fraudwiki" element={<FraudWiki />} />                                                     
+                <Route path="/fraudwiki" element={<FraudWiki />} />
                 <Route path="/help" element={<Help />} />
                 <Route path="/leaderboard" element={<Leaderboard />} />
+                <Route path="/analysis" element={<Analysis />} />
+                <Route path="/attacklog" element={<AttackLog />} />
                 <Route path="/settings" element={<Settings />} />
 
                 {/* DEFENSES */}

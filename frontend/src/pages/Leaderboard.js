@@ -1,10 +1,14 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/shopAndWiki.css';
 import PageHeader from '../components/PageHeader';
 import { useLeaderboard } from '../contexts/LeaderboardContext';
+import { useAuth } from '../auth/useAuth';
 
 function Leaderboard() {
     const { topTen, currentUser, loading, error, refreshLeaderboard } = useLeaderboard();
+    const { user } = useAuth();
+    const [activeTab, setActiveTab] = useState('alltime');
 
     // Fetch leaderboard data on first view
     useEffect(() => {
@@ -14,7 +18,16 @@ function Leaderboard() {
     if (loading) {
         return (
             <div className="shop-wiki-container">
-                <PageHeader title="Leaderboard" backPath="/home" />
+                <PageHeader
+                    leftContent={
+                        <>
+                            <Link to="/home" className="back-button" title="Back">
+                                <span className="material-symbols-outlined">arrow_back</span>
+                            </Link>
+                            <h1 className="page-header-title-inline">Leaderboard</h1>
+                        </>
+                    }
+                />
                 <p className="leaderboard-status">Loading leaderboard...</p>
             </div>
         );
@@ -23,7 +36,16 @@ function Leaderboard() {
     if (error) {
         return (
             <div className="shop-wiki-container">
-                <PageHeader title="Leaderboard" backPath="/home" />
+                <PageHeader
+                    leftContent={
+                        <>
+                            <Link to="/home" className="back-button" title="Back">
+                                <span className="material-symbols-outlined">arrow_back</span>
+                            </Link>
+                            <h1 className="page-header-title-inline">Leaderboard</h1>
+                        </>
+                    }
+                />
                 <p className="leaderboard-status leaderboard-status--error">Error: {error}</p>
             </div>
         );
@@ -31,7 +53,32 @@ function Leaderboard() {
 
     return (
         <div className="shop-wiki-container">
-            <PageHeader title="Leaderboard" backPath="/home">
+            <PageHeader
+                leftContent={
+                    <>
+                        <Link to="/home" className="back-button" title="Back">
+                            <span className="material-symbols-outlined">arrow_back</span>
+                        </Link>
+                        <h1 className="page-header-title-inline">Leaderboard</h1>
+                    </>
+                }
+                centerContent={
+                    <div className="tab-selector-bar">
+                        <button
+                            className={`tab-bar-button ${activeTab === 'alltime' ? 'active' : ''}`}
+                            onClick={() => setActiveTab('alltime')}
+                        >
+                            All Time
+                        </button>
+                        <button
+                            className={`tab-bar-button ${activeTab === 'lastattack' ? 'active' : ''}`}
+                            onClick={() => setActiveTab('lastattack')}
+                        >
+                            Last Attack
+                        </button>
+                    </div>
+                }
+            >
                 <button
                     onClick={refreshLeaderboard}
                     className="icon-button"
@@ -49,19 +96,27 @@ function Leaderboard() {
                     </div>
 
                     <div className="leaderboard-list">
-                        {topTen.map((player) => (
-                            <div key={player.rank} className="leaderboard-row">
-                                <div className="rank-column">
-                                    <span className="rank-number">{player.rank}</span>
+                        {topTen.map((player) => {
+                            const isCurrentUser = user && player.id === user.uid;
+                            return (
+                                <div
+                                    key={player.rank}
+                                    className={`leaderboard-row ${isCurrentUser ? 'current-user-row' : ''}`}
+                                >
+                                    <div className="rank-column">
+                                        <span className="rank-number">{player.rank}</span>
+                                    </div>
+                                    <div className="player-column">
+                                        <span className="player-name">
+                                            {player.name}{isCurrentUser ? ' (You)' : ''}
+                                        </span>
+                                    </div>
+                                    <div className="score-column">
+                                        <span className="player-score">{player.netWorth.toLocaleString()}</span>
+                                    </div>
                                 </div>
-                                <div className="player-column">
-                                    <span className="player-name">{player.name}</span>
-                                </div>
-                                <div className="score-column">
-                                    <span className="player-score">{player.netWorth.toLocaleString()}</span>
-                                </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
 
                     {/* Show current user's rank if they're not in top 10 */}

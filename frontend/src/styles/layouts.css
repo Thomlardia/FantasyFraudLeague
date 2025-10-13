@@ -189,12 +189,10 @@
 }
 
 .home-cta-row {
-	display: flex;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
 	gap: 24px;
-	align-items: center;
-	justify-content: center;
 	width: 100%;
-	flex-wrap: nowrap;
 }
 
 .home-nav-button {
@@ -211,7 +209,6 @@
 	background: #D7D5D5;
 	box-shadow: 3px 3px 0 rgba(20, 28, 30, 0.28);
 	transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease, border-color 160ms ease;
-	flex: 1;
 	min-width: 0;
 }
 
@@ -470,7 +467,7 @@
 
 	.home-content-card {
 		padding: clamp(24px, 5vw, 32px) clamp(18px, 6vw, 28px);
-		gap: calc(var(--space-stack-gap) * 1.2);
+		gap: calc(var(--space-stack-gap) * 2);
 	}
 
 	.home-timer-card {
@@ -478,7 +475,7 @@
 	}
 
 	.home-cta-row {
-		flex-direction: column;
+		grid-template-columns: 1fr;
 		gap: 16px;
 		width: 100%;
 	}
