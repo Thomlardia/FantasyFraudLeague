@@ -8,8 +8,10 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
-/* Wave Button Colors */
-button {
+/* Wave Button Colors - Scope to admin page only */
+.admin-option button,
+.wave-buttons button,
+.send-button {
   font-family: inherit;
   color: #9EB1BC;
   border: var(--neo-border);
@@ -21,11 +23,13 @@ button {
   transition: background 0.2s;
 }
 
-button:hover {
+.admin-option button:hover,
+.wave-buttons button:hover {
   color: var(--color-text-secondary);
 }
 
-button:disabled {
+.admin-option button:disabled,
+.wave-buttons button:disabled {
   opacity: 0.5;
   color: var(--color-text-secondary);
   cursor: not-allowed;
@@ -154,7 +158,9 @@ button:disabled {
     grid-template-columns: repeat(3, 1fr); /* 3 columns */
   }
 
-  button {
+  .admin-option button,
+  .wave-buttons button,
+  .send-button {
     font-size: 0.95rem;
     padding: 0.5rem 1rem;
   }
@@ -195,7 +201,9 @@ button:disabled {
     font-size: 0.9rem;
   }
 
-  button {
+  .admin-option button,
+  .wave-buttons button,
+  .send-button {
     width: 95%;
     font-size: 1rem;
     margin-top: 0.5rem;
