@@ -149,7 +149,7 @@ export async function attackDeduction(userId, wave) {
     const currentBalance = userData.balance || 0;
     const currentNetWorth = userData.netWorth || 0;
 
-    const newBalance = Math.max(0, currentBalance - damage);
+    const newBalance = currentBalance - damage;
     const newNetWorth = currentNetWorth - damage; // NetWorth decreases by damage amount
 
     transaction.update(userDocRef, {
