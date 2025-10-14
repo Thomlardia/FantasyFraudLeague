@@ -14,7 +14,7 @@ import { seedTestUsers, clearTestUsers } from '../src/infra/db/seeds/testUsers.j
 
 // Emulator or Production
 import { environment } from '../src/infra/db/index.js';
-import { seedAuthUsers, clearAuthTestUsers } from '../src/infra/db/seeds/testAuthUsers.js';
+import { seedAuthUsers, clearAuthTestUsers, clearAllAuthUsers } from '../src/infra/db/seeds/testAuthUsers.js';
 
 const args = process.argv.slice(2); // retrieves the arguments after functions/scripts/seed.js
 const command = args[0];            // Main command (seed, clear, list)
@@ -87,6 +87,8 @@ const main = async () => {
           await clearTestUsers();
         } else if (subCommand === 'auth-users') {
           await clearAuthTestUsers();
+        } else if (subCommand === 'all-auth-users') {
+          await clearAllAuthUsers({ force: flags.force });
         }
         break;
   

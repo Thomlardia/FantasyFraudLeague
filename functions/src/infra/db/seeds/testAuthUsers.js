@@ -67,3 +67,59 @@ export const clearAuthTestUsers = async () => {
   console.log(`\n Deleted ${deleted} test users\n`);
   return deleted;
 };
+
+// Clear ALL users from Firebase Authentication (DANGEROUS - use with caution!)
+export const clearAllAuthUsers = async (options = {}) => {
+  const { force = false } = options;
+
+  console.log('\n WARNING: Deleting ALL users from Firebase Authentication...');
+  console.log('Environment:', process.env.FIRESTORE_EMULATOR_HOST ? 'Emulator' : 'Production');
+
+  if (!force) {
+    console.error('\n ERROR: This operation requires --force flag for safety');
+    console.error('Usage: make clear-all-auth-users-force\n');
+    return 0;
+  }
+
+  let totalDeleted = 0;
+  let totalFailed = 0;
+  let nextPageToken;
+
+  do {
+    try {
+      const listUsersResult = await auth.listUsers(1000, nextPageToken);
+      const users = listUsersResult.users;
+
+      if (users.length === 0) {
+        break;
+      }
+
+      // Batch delete using deleteUsers (up to 1000 at a time)
+      const uids = users.map(u => u.uid);
+      console.log(`\nDeleting batch of ${uids.length} users...`);
+
+      const deleteResult = await auth.deleteUsers(uids);
+      totalDeleted += deleteResult.successCount;
+      totalFailed += deleteResult.failureCount;
+
+      console.log(`  Success: ${deleteResult.successCount}, Failed: ${deleteResult.failureCount}`);
+
+      if (deleteResult.errors && deleteResult.errors.length > 0) {
+        console.error('  Errors:', deleteResult.errors.slice(0, 5)); // Show first 5 errors
+      }
+
+      nextPageToken = listUsersResult.pageToken;
+    } catch (error) {
+      console.error('Error during batch deletion:', error.message);
+      break;
+    }
+  } while (nextPageToken);
+
+  console.log(`\n Deleted ${totalDeleted} users`);
+  if (totalFailed > 0) {
+    console.log(` Failed to delete ${totalFailed} users`);
+  }
+  console.log();
+
+  return { deleted: totalDeleted, failed: totalFailed };
+};

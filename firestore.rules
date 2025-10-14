@@ -2,6 +2,15 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
+    // SECURITY: Complete lockdown - all client access is blocked
+    //
+    // All user operations go through authenticated Cloud Functions with AppCheck
+    // All admin operations use Firebase Admin SDK which bypasses these rules
+    //
+    // This prevents:
+    // - Direct database access from web clients
+    // - Unauthorized data reading/writing
+    // - Bypassing business logic in Cloud Functions
     match /{document=**} {
       allow read, write: if false;
     }

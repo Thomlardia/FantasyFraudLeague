@@ -56,14 +56,51 @@ vrun-front:
 	npm --prefix frontend run dev
 
 # ----------DATABASE SEEDING --------
-# Seed commands for development (requries emulator to be running)
+# Seed commands for development (requires emulator to be running)
 
 EMULATOR_ENV = FIRESTORE_EMULATOR_HOST=localhost:8080 FIREBASE_AUTH_EMULATOR_HOST=localhost:9099
 
+# Show info about reseeding commands
+reseed-info:
+	@echo "═══════════════════════════════════════════════════════════════"
+	@echo "                    DATABASE RESEEDING GUIDE"
+	@echo "═══════════════════════════════════════════════════════════════"
+	@echo ""
+	@echo "EMULATOR (Defense Management):"
+	@echo "  make reseed-defenses              - Reseed defense templates"
+	@echo "  make seed-complete                - Seed users + defenses"
+	@echo "  make update-summaries             - Update user defense summaries (testing only)"
+	@echo ""
+	@echo "PRODUCTION (Defense Management):"
+	@echo "  make reseed-defenses-prod         - Reseed defense templates"
+	@echo ""
+	@echo "USER MANAGEMENT:"
+	@echo "  make list-users                   - List all users (emulator)"
+	@echo "  make list-users-prod              - List all users (production)"
+	@echo "  make clear-all-auth-users-force   - Delete ALL users (emulator)"
+	@echo "  make clear-all-auth-users-prod    - Delete ALL users (production)"
+	@echo ""
+	@echo "FIRESTORE INFRASTRUCTURE:"
+	@echo "  make deploy-firestore-indexes     - Deploy Firestore indexes to production"
+	@echo "  make deploy-firestore-rules       - Deploy Firestore security rules"
+	@echo ""
+	@echo "═══════════════════════════════════════════════════════════════"
+	@echo ""
+	@echo "SECURITY: All production commands require developer credentials."
+	@echo ""
+	@echo "═══════════════════════════════════════════════════════════════"
+	@echo ""
+
+# -------- DEFENSE SEEDING (Emulator) --------
 # seed defenses for all users (global)
 seed-global-defenses:
-	$(EMULATOR_ENV) node functions/scripts/seed.js seed global-defense
+	$(EMULATOR_ENV) node functions/scripts/seed.js seed global-defenses
 
+# Force reseed defenses in emulator (overwrites existing)
+reseed-defenses:
+	$(EMULATOR_ENV) node functions/scripts/seed.js seed global-defenses --force
+
+# -------- USER SEEDING (Emulator) --------
 # seed all users
 seed-users-from-auth:
 	$(EMULATOR_ENV) node functions/scripts/seed.js seed users-from-auth
@@ -76,11 +113,8 @@ seed-complete:
 	$(EMULATOR_ENV) node functions/scripts/seed.js seed users-from-auth
 	$(EMULATOR_ENV) node functions/scripts/seed.js seed global-defenses
 
-
-# Complete seed and update process (seed users, defenses, then update summaries)
-seed-complete-with-summaries:
-	$(EMULATOR_ENV) node functions/scripts/seed.js seed users-from-auth
-	$(EMULATOR_ENV) node functions/scripts/seed.js seed global-defenses
+# Update user defense summaries (emulator only - for testing)
+update-summaries:
 	$(EMULATOR_ENV) node functions/scripts/seed.js update all-users-defense-summaries
 
 lazy:
@@ -95,9 +129,28 @@ seed-auth-users:
 clear-auth-users:
 	$(EMULATOR_ENV) node functions/scripts/seed.js clear auth-users
 
-# list all users
+# Clear ALL auth users from EMULATOR (requires --force flag for safety)
+clear-all-auth-users-force:
+	$(EMULATOR_ENV) node functions/scripts/seed.js clear all-auth-users --force
+
+# Clear ALL auth users from PRODUCTION (VERY DANGEROUS!)
+clear-all-auth-users-prod:
+	@echo "WARNING: This will delete ALL users from PRODUCTION"
+	@echo "Project: wario-fantasy-fraud-league"
+	@read -p "Type 'DELETE ALL USERS' to confirm: " confirm; \
+	if [ "$$confirm" = "DELETE ALL USERS" ]; then \
+		node functions/scripts/seed.js clear all-auth-users --force --production; \
+	else \
+		echo "Cancelled."; \
+	fi
+
+# list all users (emulator)
 list-users:
 	$(EMULATOR_ENV) node functions/scripts/seed.js list users
+
+# list all users (production)
+list-users-prod:
+	node functions/scripts/seed.js list users --production
 
 clear-test-users:
 	$(EMULATOR_ENV) node functions/scripts/seed.js clear users
@@ -115,8 +168,21 @@ grant-admin:
 seed-prod:
 	node functions/scripts/seed.js seed --production --force
 
+# -------- DEFENSE SEEDING (Production) --------
 seed-prod-global-defenses:
 	node functions/scripts/seed.js seed global-defenses --production --force
+
+# Reseed defenses in PRODUCTION with confirmation (safer with prompt)
+reseed-defenses-prod:
+	@echo "WARNING: This will reseed ALL defenses in PRODUCTION"
+	@echo "Project: wario-fantasy-fraud-league"
+	@echo "This will overwrite/merge existing defense documents"
+	@read -p "Type 'RESEED DEFENSES' to confirm: " confirm; \
+	if [ "$$confirm" = "RESEED DEFENSES" ]; then \
+		node functions/scripts/seed.js seed global-defenses --production --force; \
+	else \
+		echo "Cancelled."; \
+	fi
 
 # Grant admin role to a user (for PRODUCTION - use with caution)
 # Usage: make grant-admin-prod EMAIL=user@example.com
@@ -127,9 +193,9 @@ grant-admin-prod:
 		exit 1; \
 	fi
 	@echo "WARNING: This will grant admin role in PRODUCTION"
-	@read -p "Are you sure? [y/N] " -n 1 -r; \
-	echo; \
-	if [[ $$REPLY =~ ^[Yy]$$ ]]; then \
+	@echo "Email: $(EMAIL)"
+	@read -p "Type 'GRANT ADMIN' to confirm: " confirm; \
+	if [ "$$confirm" = "GRANT ADMIN" ]; then \
 		node functions/scripts/grant-admin.js $(EMAIL); \
 	else \
 		echo "Cancelled."; \
@@ -149,6 +215,12 @@ deploy-hosting:
 
 deploy-functions:
 	npx firebase-tools deploy --only functions
+
+deploy-firestore-indexes:
+	npx firebase-tools deploy --only firestore:indexes
+
+deploy-firestore-rules:
+	npx firebase-tools deploy --only firestore:rules
 
 deploy-hosting-functions:
 	npx firebase-tools deploy --only hosting,functions
