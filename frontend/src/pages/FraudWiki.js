@@ -1,16 +1,31 @@
 import { Link } from 'react-router-dom';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import '../styles/shopAndWiki.css';
 import PageHeader from '../components/PageHeader';
 import FilterDropdown from '../components/FilterDropdown';
 import { useDefense } from '../contexts/DefenseContext';
 import { useFilters } from '../contexts/FilterContext';
+import { useAttack } from '../contexts/AttackContext';
 
 function FraudWiki() {
     const { getTotalProtectionAgainstAttack, loading } = useDefense();
     const { fraudWikiFilters, updateFraudWikiFilters } = useFilters();
+    const { getAverageProtectionFromLogs, attackLogs, attackStats, fetchAttackLogs } = useAttack();
     const [filterOpen, setFilterOpen] = useState(false);
     const filterButtonRef = useRef(null);
+
+    // Always fetch attack logs on mount to ensure fresh data
+    useEffect(() => {
+        console.log('[FraudWiki] Fetching attack logs on mount');
+        fetchAttackLogs();
+    }, [fetchAttackLogs]);
+
+    // Debug: Log attack stats when they change
+    useEffect(() => {
+        console.log('[FraudWiki] Attack logs count:', attackLogs.length);
+        console.log('[FraudWiki] Attack stats:', attackStats);
+        console.log('[FraudWiki] Stats count:', Object.keys(attackStats).length);
+    }, [attackLogs, attackStats]);
 
     // Destructure filters from context
     const { showFilter, sortBy, sortDirection } = fraudWikiFilters;
@@ -19,22 +34,22 @@ function FraudWiki() {
         { title: "Phishing", icon: "phishing", path: "/frauds/Phishing", attackId: "phishing" },
         { title: "Ransomware", icon: "lock_person", path: "/frauds/Ransomware", attackId: "ransomware" },
         { title: "Distributed Denial of Service (DDoS)", icon: "cloud_off", path: "/frauds/Ddos", attackId: "ddos" },
-        { title: "Deepfake Fraud", icon: "theater_comedy", path: "/frauds/Deepfake", attackId: "deepfakeFraud" },
-        { title: "ATM Skimming", icon: "card_membership", path: "/frauds/AtmSkimming", attackId: "skimming" },
+        { title: "Deepfake Fraud", icon: "theater_comedy", path: "/frauds/Deepfake", attackId: "deepfake" },
+        { title: "ATM Skimming", icon: "card_membership", path: "/frauds/AtmSkimming", attackId: "atmSkimming" },
         { title: "Insider Fraud", icon: "person_alert", path: "/frauds/InsiderFraud", attackId: "insiderFraud" },
-        { title: "Man-In-The-Middle", icon: "hub", path: "/frauds/ManInTheMiddle", attackId: "mitm" },
+        { title: "Man-In-The-Middle", icon: "hub", path: "/frauds/ManInTheMiddle", attackId: "manInTheMiddle" },
         { title: "SQL Injection", icon: "code", path: "/frauds/SqlInjection", attackId: "sqlInjection" },
-        { title: "Business Email Compromise", icon: "email", path: "/frauds/BusinessEmailCompromise", attackId: "bec" },
-        { title: "Zero-Day Exploit", icon: "bug_report", path: "/frauds/ZeroDayExploit", attackId: "zeroDay" },
+        { title: "Business Email Compromise", icon: "email", path: "/frauds/BusinessEmailCompromise", attackId: "businessEmailCompromise" },
+        { title: "Zero-Day Exploit", icon: "bug_report", path: "/frauds/ZeroDayExploit", attackId: "zeroDayExploit" },
         { title: "Vishing", icon: "phone_in_talk", path: "/frauds/Vishing", attackId: "vishing" },
         { title: "XSS (Cross-Site Scripting)", icon: "web_asset_off", path: "/frauds/Xss", attackId: "xss" },
         { title: "Account Takeover", icon: "no_accounts", path: "/frauds/AccountTakeover", attackId: "accountTakeover" },
-        { title: "Investment Scams", icon: "trending_up", path: "/frauds/InvestmentScam", attackId: "investmentScams" },
+        { title: "Investment Scams", icon: "trending_up", path: "/frauds/InvestmentScam", attackId: "investmentScam" },
         { title: "SIM Swap Fraud", icon: "sim_card_alert", path: "/frauds/SimSwap", attackId: "simSwap" },
-        { title: "Authorized Push Payments", icon: "payment", path: "/frauds/AuthPushPayments", attackId: "authorizedPushPayments" },
-        { title: "Cryptojacking", icon: "memory", path: "/frauds/CryptoJacking", attackId: "cryptojacking" },
+        { title: "Authorized Push Payments", icon: "payment", path: "/frauds/AuthPushPayments", attackId: "authPushPayments" },
+        { title: "Cryptojacking", icon: "memory", path: "/frauds/CryptoJacking", attackId: "cryptoJacking" },
         { title: "Brute Force – Credential Stuffing", icon: "lock_open", path: "/frauds/BruteForce", attackId: "bruteForce" },
-        { title: "Synthetic Identity Theft", icon: "person_add_disabled", path: "/frauds/SyntIdentityTheft", attackId: "syntheticIdentity" },
+        { title: "Synthetic Identity Theft", icon: "person_add_disabled", path: "/frauds/SyntIdentityTheft", attackId: "syntIdentityTheft" },
         { title: "Accounting and Invoice Fraud", icon: "receipt_long", path: "/frauds/AccAndInvFraud", attackId: "accAndInvFraud" }
     ];
 
@@ -126,17 +141,41 @@ function FraudWiki() {
 
             {hasResults ? (
                 <div className="shop-wiki-grid">
-                    {filteredFrauds.map((item, index) => (
-                        <Link key={index} to={item.path} className="wiki-card">
-                            <div className="card-content">
-                                <span className="card-icon">{item.icon}</span>
-                                <h3 className="card-title">{item.title}</h3>
-                            </div>
-                            <div className="card-info-row">
-                                <p className="card-coverage">{item.protection}%</p>
-                            </div>
-                        </Link>
-                    ))}
+                    {filteredFrauds.map((item, index) => {
+                        // Get average protection from historical attack logs
+                        const avgProtection = getAverageProtectionFromLogs(item.attackId);
+
+                        // Debug first few items
+                        if (index < 3) {
+                            console.log(`[FraudWiki] ${item.title}: attackId="${item.attackId}", avgProtection=${avgProtection}`);
+                        }
+
+                        // Distinguish between "no data" (null) and "0% protection" (number 0)
+                        const hasHistoricalData = avgProtection !== null;
+                        const badgeClass = hasHistoricalData
+                            ? (avgProtection >= 50 ? 'attack-history-badge badge-green' : 'attack-history-badge badge-red')
+                            : 'attack-history-badge badge-gray';
+
+                        const badgeText = hasHistoricalData ? `${avgProtection}%` : 'N/A';
+                        const badgeTitle = hasHistoricalData
+                            ? `Average protection from past attacks: ${avgProtection}%`
+                            : 'No attack history available yet';
+
+                        return (
+                            <Link key={index} to={item.path} className="wiki-card">
+                                <div className="card-content">
+                                    <span className="card-icon">{item.icon}</span>
+                                    <h3 className="card-title">{item.title}</h3>
+                                </div>
+                                <div className="card-info-row">
+                                    <p className="card-coverage">{item.protection}%</p>
+                                    <span className={badgeClass} title={badgeTitle}>
+                                        {badgeText}
+                                    </span>
+                                </div>
+                            </Link>
+                        );
+                    })}
                 </div>
             ) : (
                 <div className="shop-wiki-empty" role="status">

@@ -123,7 +123,7 @@ export async function attackDeduction(userId, wave) {
     
     // Add attack details to log
     attackLog.attacks.push({
-      attackName: attack.name || attack.attackId || attack.type,
+      attackName: attack.attackId || attack.type || attack.name,
       originalDamage: originalDamage,
       finalDamage: Math.round(reducedDamage),
       damageReduced: Math.round(originalDamage - reducedDamage),

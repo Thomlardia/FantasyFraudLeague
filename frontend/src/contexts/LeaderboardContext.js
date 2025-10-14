@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import { httpsCallable } from 'firebase/functions';
 import { functions } from '../firebase';
 import { useAuth } from '../auth/AuthProvider';
@@ -8,7 +8,7 @@ const LeaderboardContext = createContext(null);
 /**
  * LeaderboardProvider - Manages leaderboard state globally
  * Provides leaderboard data and refresh method to all components
- * Does NOT auto-fetch on mount - requires manual refresh
+ * Auto-fetches when user auth state changes
  */
 export function LeaderboardProvider({ children }) {
   const [topTen, setTopTen] = useState([]);
@@ -48,6 +48,11 @@ export function LeaderboardProvider({ children }) {
       setLoading(false);
     }
   }, [user]);
+
+  // Auto-fetch leaderboard when user auth state changes
+  useEffect(() => {
+    refreshLeaderboard();
+  }, [refreshLeaderboard]);
 
   const value = {
     topTen,

@@ -6,6 +6,7 @@ const AttackContext = createContext(null);
 /**
  * AttackProvider - Manages attack-related state globally
  * Manages countdown timer for next attack and attack log history
+ * Auto-fetches attack logs when provider mounts
  */
 export function AttackProvider({ children }) {
   // Timer state
@@ -18,6 +19,9 @@ export function AttackProvider({ children }) {
   const [attackLogs, setAttackLogs] = useState([]);
   const [logsLoading, setLogsLoading] = useState(false);
   const [logsError, setLogsError] = useState(null);
+
+  // Attack statistics (average protection by attack type)
+  const [attackStats, setAttackStats] = useState({});
 
   /**
    * Start the countdown timer
@@ -121,6 +125,54 @@ export function AttackProvider({ children }) {
   }, []);
 
   /**
+   * Calculate attack statistics from logs
+   * Returns average protection percentage by attack type
+   * ONLY includes attacks that have actually occurred (not assumptions)
+   * @param {Array} logs - Array of attack log objects
+   * @returns {Object} Map of attackId -> average protection % (only for attacks that happened)
+   */
+  const calculateAttackStats = useCallback((logs) => {
+    const stats = {};
+
+    // Aggregate data ONLY for attacks that actually occurred
+    logs.forEach(log => {
+      if (!log.attacks || !Array.isArray(log.attacks)) return;
+
+      log.attacks.forEach(attack => {
+        const attackId = attack.attackName; // This is actually the attackId from backend
+        if (!attackId) return;
+
+        // Initialize if first time seeing this attack TYPE
+        if (!stats[attackId]) {
+          stats[attackId] = {
+            totalReductionPercent: 0,
+            count: 0,
+          };
+        }
+
+        // Add to running totals (including if reductionPercent is 0!)
+        const reductionPercent = attack.reductionPercent || 0;
+        stats[attackId].totalReductionPercent += reductionPercent;
+        stats[attackId].count += 1;
+      });
+    });
+
+    // Calculate averages ONLY for attacks that happened
+    // Do NOT add entries for attacks that never occurred
+    const averages = {};
+    Object.keys(stats).forEach(attackId => {
+      const data = stats[attackId];
+      if (data.count > 0) {
+        // Calculate average, which could be 0% if all attacks had 0% reduction
+        averages[attackId] = Math.round(data.totalReductionPercent / data.count);
+      }
+      // If count is 0 (shouldn't happen), don't add to averages at all
+    });
+
+    return averages;
+  }, []);
+
+  /**
    * Fetch attack logs from backend
    * @param {number|null} limit - Optional limit for number of logs
    */
@@ -130,14 +182,19 @@ export function AttackProvider({ children }) {
       setLogsError(null);
       const logs = await getUserAttackLogs(limit);
       setAttackLogs(logs || []);
+
+      // Calculate and store statistics from logs
+      const stats = calculateAttackStats(logs || []);
+      setAttackStats(stats);
     } catch (err) {
       console.error('Error fetching attack logs:', err);
       setLogsError(err.message || 'Failed to load attack logs');
       setAttackLogs([]);
+      setAttackStats({});
     } finally {
       setLogsLoading(false);
     }
-  }, []);
+  }, [calculateAttackStats]);
 
   /**
    * Refresh attack logs (convenience wrapper)
@@ -153,6 +210,31 @@ export function AttackProvider({ children }) {
   const getLatestAttackLog = useCallback(() => {
     return attackLogs.length > 0 ? attackLogs[0] : null;
   }, [attackLogs]);
+
+  /**
+   * Get average protection percentage from historical attack logs for a specific attack type
+   * @param {string} attackId - The attackId (e.g., "phishing", "ransomware")
+   * @returns {number|null} Average protection percentage (0-100), or null if never attacked
+   */
+  const getAverageProtectionFromLogs = useCallback((attackId) => {
+    if (!attackId) {
+      return null;
+    }
+
+    // Check if this attack type exists in our stats (meaning it has been experienced)
+    if (attackStats.hasOwnProperty(attackId)) {
+      // Return the percentage, even if it's 0%
+      return attackStats[attackId];
+    }
+
+    // Attack type not found = never been attacked with this type
+    return null;
+  }, [attackStats]);
+
+  // Auto-fetch attack logs on mount (when user context is available)
+  useEffect(() => {
+    fetchAttackLogs();
+  }, [fetchAttackLogs]);
 
   const value = {
     // Timer
@@ -172,6 +254,9 @@ export function AttackProvider({ children }) {
     fetchAttackLogs,
     refreshAttackLogs,
     getLatestAttackLog,
+    // Attack statistics
+    attackStats,
+    getAverageProtectionFromLogs,
   };
 
   return <AttackContext.Provider value={value}>{children}</AttackContext.Provider>;
@@ -199,6 +284,10 @@ export function AttackProvider({ children }) {
  * @property {Function} fetchAttackLogs - Fetch attack logs with optional limit
  * @property {Function} refreshAttackLogs - Refresh all attack logs
  * @property {Function} getLatestAttackLog - Get most recent attack log
+ *
+ * Attack statistics properties:
+ * @property {Object} attackStats - Map of attack names to average protection percentages
+ * @property {Function} getAverageProtectionFromLogs - Get average protection % for an attack type
  */
 export const useAttack = () => {
   const context = useContext(AttackContext);

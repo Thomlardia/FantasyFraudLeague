@@ -10,6 +10,8 @@ import {
   adminMassAttackHard,
   adminMassAttackCustom
 } from "../api/attack";
+import { useAttack } from "../contexts/AttackContext";
+import { useWallet } from "../contexts/WalletContext";
 import '../styles/ui.css';
 import '../styles/admin.css';
 import PageHeader from '../components/PageHeader';
@@ -26,6 +28,10 @@ export default function AdminDashboard() {
   const [attackLoading, setAttackLoading] = useState(false);
   const [attackSuccess, setAttackSuccess] = useState("");
   const [attackError, setAttackError] = useState("");
+
+  // Get context refresh functions
+  const { refreshAttackLogs } = useAttack();
+  const { refreshBalance } = useWallet();
 
   // Attack data matching backend model.js
   const fraudAttacks = [
@@ -116,6 +122,10 @@ export default function AdminDashboard() {
       }
 
       setAttackSuccess(`${waveType} sent successfully to all users!`);
+
+      // Refresh attack logs and balance after successful attack
+      await refreshAttackLogs();
+      await refreshBalance();
     } catch (error) {
       console.error('Error sending wave:', error);
       setAttackError(error?.message || 'Failed to send attack wave');
@@ -155,6 +165,10 @@ export default function AdminDashboard() {
 
       setAttackSuccess(`Custom attack with ${selectedAttacks.length} attack(s) sent successfully to all users!`);
       setSelectedAttacks([]); // Clear selection after success
+
+      // Refresh attack logs and balance after successful attack
+      await refreshAttackLogs();
+      await refreshBalance();
     } catch (error) {
       console.error('Error sending custom attack:', error);
       setAttackError(error?.message || 'Failed to send custom attack');

@@ -11,7 +11,7 @@ function Leaderboard() {
     const { user } = useAuth();
     const { leaderboardTab, setLeaderboardTab } = useFilters();
 
-    // Fetch leaderboard data on first view
+    // Fetch leaderboard data on mount
     useEffect(() => {
         refreshLeaderboard();
     }, [refreshLeaderboard]);
