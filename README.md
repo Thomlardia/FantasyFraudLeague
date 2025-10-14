@@ -1,11 +1,11 @@
 # Fantasy Fraud League  
 
 ## Authors 
-Abraham De Villiers (26936844@sun.ac.za)
-Corbin Nathan (27475808@sun.ac.za)
-Priyal Bhana (27040607@sun.ac.za)
-Raymond Van Rooijen (26590565@sun.ac.za)
-Thomas Rekvelt (29941601@sun.ac.za)
+- Abraham De Villiers (26936844@sun.ac.za)
+- Corbin Nathan (27475808@sun.ac.za)
+- Priyal Bhana (27040607@sun.ac.za)
+- Raymond Van Rooijen (26590565@sun.ac.za)
+- Thomas Rekvelt (29941601@sun.ac.za)
 
 ## About the Project
 **Fantasy Fraud League (FFL)** is a security-based fantasy game where players act as bank managers defending against financial fraud.
