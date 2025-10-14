@@ -105,15 +105,13 @@ When an attack occurs, players’ defenses are evaluated, and their virtual bala
 │   └── __tests__
 │       ├── test-runner-demo.js
 │       └── test-runner.js
-├── git-stats
-│   └── stats.html
 ├── Makefile
 ├── package.json
 ├── package-lock.json
 ├── README.md
 └── storage.rules
 
-23 directories, 66 files
+22 directories, 65 files
 
 ```
 ## Installation and Running Instructions
