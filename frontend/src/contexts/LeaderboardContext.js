@@ -2,6 +2,7 @@ import { createContext, useContext, useState, useCallback, useEffect } from 'rea
 import { httpsCallable } from 'firebase/functions';
 import { functions } from '../firebase';
 import { useAuth } from '../auth/AuthProvider';
+import { measureAsync } from '../analytics/PerformanceMonitoring';
 
 const LeaderboardContext = createContext(null);
 
@@ -32,12 +33,16 @@ export function LeaderboardProvider({ children }) {
     try {
       setLoading(true);
       setError(null);
-      const getLeaderboardFunction = httpsCallable(functions, 'user_getLeaderboardWithUser');
-      const result = await getLeaderboardFunction();
+
+      const result = await measureAsync("leaderboard_fetch", async () => {
+        const getLeaderboardFunction = httpsCallable(functions, 'user_getLeaderboardWithUser');
+        return await getLeaderboardFunction();
+      }, {});
 
       // Backend returns { success: true, data: { topTen: [...], currentUser: {...} or null } }
       const data = result.data?.data || {};
-      setTopTen(data.topTen || []);
+      const topTenData = data.topTen || [];
+      setTopTen(topTenData);
       setCurrentUser(data.currentUser);
     } catch (err) {
       console.error('Error fetching leaderboard:', err);

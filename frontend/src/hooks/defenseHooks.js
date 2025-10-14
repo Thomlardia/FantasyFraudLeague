@@ -4,6 +4,7 @@ import { functions } from '../firebase';
 import { useWallet } from '../contexts/WalletContext';
 import { useDefense } from '../contexts/DefenseContext';
 import { useAuth } from '../auth/AuthProvider';
+import { measureAsync } from '../analytics/PerformanceMonitoring';
 
 /**
  * Hook to manage defense operations (Buy and Upgrade).
@@ -52,13 +53,15 @@ export function useDefenseOperations(defenseId) {
       setError(null);
       setSuccessMessage(null);
 
-      await user.getIdToken(true); // refresh token
-      const result = await buyDefenseFunction({ defenseId });
-      console.log('Buy result:', result);
+      await measureAsync("defense_buy", async () => {
+        await user.getIdToken(true); // refresh token
+        const result = await buyDefenseFunction({ defenseId });
+        console.log('Buy result:', result);
 
-      setSuccessMessage('Successfully purchased defense!');
-      await fetchDefenses(); // Refresh defenses from context
-      await refreshBalance(); // Refresh balance after purchase
+        setSuccessMessage('Successfully purchased defense!');
+        await fetchDefenses(); // Refresh defenses from context
+        await refreshBalance(); // Refresh balance after purchase
+      }, { defense_id: defenseId });
     } catch (err) {
       console.error('Error buying defense:', err);
       setError(err.message || 'Failed to purchase defense');
@@ -81,13 +84,15 @@ export function useDefenseOperations(defenseId) {
       setError(null);
       setSuccessMessage(null);
 
-      await user.getIdToken(true); // refresh token
-      const result = await upgradeDefenseFunction({ defenseId });
-      console.log('Upgrade result:', result);
+      await measureAsync("defense_upgrade", async () => {
+        await user.getIdToken(true); // refresh token
+        const result = await upgradeDefenseFunction({ defenseId });
+        console.log('Upgrade result:', result);
 
-      setSuccessMessage('Successfully upgraded defense!');
-      await fetchDefenses(); // Refresh defenses from context
-      await refreshBalance(); // Refresh balance after upgrade
+        setSuccessMessage('Successfully upgraded defense!');
+        await fetchDefenses(); // Refresh defenses from context
+        await refreshBalance(); // Refresh balance after upgrade
+      }, { defense_id: defenseId, current_level: defense?.level?.toString() || '0' });
     } catch (err) {
       console.error('Error upgrading defense:', err);
       setError(err.message || 'Failed to upgrade defense');
@@ -110,16 +115,18 @@ export function useDefenseOperations(defenseId) {
       setError(null);
       setSuccessMessage(null);
 
-      await user.getIdToken(true); // refresh token
-      const result = await sellDefenseFunction({ defenseId });
-      console.log('Sell result:', result);
+      await measureAsync("defense_sell", async () => {
+        await user.getIdToken(true); // refresh token
+        const result = await sellDefenseFunction({ defenseId });
+        console.log('Sell result:', result);
 
-      const sellInfo = result.data;
-      setSuccessMessage(
-        `Successfully sold defense for $${sellInfo.sellPrice.toLocaleString()}! (Loss: $${sellInfo.loss.toLocaleString()})`
-      );
-      await fetchDefenses(); // Refresh defenses from context
-      await refreshBalance(); // Refresh balance after sell
+        const sellInfo = result.data;
+        setSuccessMessage(
+          `Successfully sold defense for $${sellInfo.sellPrice.toLocaleString()}! (Loss: $${sellInfo.loss.toLocaleString()})`
+        );
+        await fetchDefenses(); // Refresh defenses from context
+        await refreshBalance(); // Refresh balance after sell
+      }, { defense_id: defenseId, current_level: defense?.level?.toString() || '0' });
     } catch (err) {
       console.error('Error selling defense:', err);
       setError(err.message || 'Failed to sell defense');

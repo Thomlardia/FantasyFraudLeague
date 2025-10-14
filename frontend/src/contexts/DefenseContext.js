@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState, useCallback } from 'rea
 import { httpsCallable } from 'firebase/functions';
 import { functions } from '../firebase';
 import { useAuth } from '../auth/AuthProvider';
+import { startCustomTrace } from '../analytics/PerformanceMonitoring';
 
 const DefenseContext = createContext(null);
 
@@ -86,9 +87,16 @@ export function DefenseProvider({ children }) {
    * @returns {number} Total protection percentage (0-100)
    */
   const getTotalProtectionAgainstAttack = useCallback((attackId) => {
+    const trace = startCustomTrace("calc_total_protection", {
+      attack_id: attackId
+    });
+
     const ownedDefenses = defenses.filter(d => d.isOwned && d.level > 0);
+    trace.putMetric("num_owned_defenses", ownedDefenses.length);
 
     if (ownedDefenses.length === 0) {
+      trace.putMetric("total_protection_pct", 0);
+      trace.stop();
       return 0;
     }
 
@@ -107,7 +115,12 @@ export function DefenseProvider({ children }) {
 
     // Convert back to protection percentage
     const totalProtection = (1 - damageMultiplier) * 100;
-    return Math.round(totalProtection * 100) / 100; // Round to 2 decimal places
+    const roundedProtection = Math.round(totalProtection * 100) / 100;
+
+    trace.putMetric("total_protection_pct", Math.round(roundedProtection));
+    trace.stop();
+
+    return roundedProtection; // Round to 2 decimal places
   }, [defenses]);
 
   /**
@@ -124,6 +137,10 @@ export function DefenseProvider({ children }) {
    * ]
    */
   const getProtectionChartData = useCallback(() => {
+    const trace = startCustomTrace("calc_protection_chart_data", {
+      num_defenses: defenses.length.toString()
+    });
+
     // Map of all possible attacks with user-friendly names
     const attackNames = {
       phishing: 'Phishing',
@@ -169,6 +186,10 @@ export function DefenseProvider({ children }) {
     // Sort by protection level (highest first)
     chartData.sort((a, b) => b.protection - a.protection);
 
+    trace.putMetric("num_attack_types", allAttackIds.size);
+    trace.putMetric("chart_data_points", chartData.length);
+    trace.stop();
+
     return chartData;
   }, [defenses, getTotalProtectionAgainstAttack]);
 
@@ -187,6 +208,11 @@ export function DefenseProvider({ children }) {
    * ]
    */
   const getDefensesByAttackChartData = useCallback((attackId) => {
+    const trace = startCustomTrace("calc_defenses_by_attack_chart", {
+      attack_id: attackId,
+      num_defenses: defenses.length.toString()
+    });
+
     const defenseNames = {
       mfa: 'MFA',
       userEducation: 'User\nTraining',
@@ -241,6 +267,10 @@ export function DefenseProvider({ children }) {
       }
       return b.effectiveness - a.effectiveness;
     });
+
+    trace.putMetric("num_relevant_defenses", relevantDefenses.length);
+    trace.putMetric("num_owned", relevantDefenses.filter(d => d.isOwned).length);
+    trace.stop();
 
     return relevantDefenses;
   }, [defenses]);

@@ -10,6 +10,7 @@ import AppRoutes from "./routes/AppRoutes";
 import Prefetcher from "./routes/Prefetcher";
 import MatrixBackgroundLayer from "./components/MatrixBackgroundLayer";
 import { initGA, usePageTracking } from "./analytics/GoogleAnalytics";
+import { reportWebVitals } from "./analytics/PerformanceMonitoring";
 import "./App.css";
 import "./styles/ui.css";
 import "./styles/shopAndWiki.css";
@@ -29,7 +30,11 @@ function AnalyticsWrapper() {
 
 export default function App() {
   useEffect(() => {
+    // Initialize Google Analytics
     initGA();
+
+    // Initialize Firebase Performance Monitoring with Web Vitals
+    reportWebVitals();
   }, []);
 
   return (

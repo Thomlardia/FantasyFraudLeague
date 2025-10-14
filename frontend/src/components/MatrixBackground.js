@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { startCustomTrace } from "../analytics/PerformanceMonitoring";
 
 export default function MatrixBackground({ visible = true }) {
   const canvasRef = useRef(null);
@@ -16,6 +17,12 @@ export default function MatrixBackground({ visible = true }) {
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+
+    // Start trace for matrix initialization
+    const initTrace = startCustomTrace("matrix_init", {
+      canvas_width: window.innerWidth.toString(),
+      canvas_height: window.innerHeight.toString()
+    });
 
     // Get matrix background color from CSS
     const rootStyles = getComputedStyle(document.documentElement);
@@ -55,10 +62,17 @@ export default function MatrixBackground({ visible = true }) {
     const random = (items) => items[Math.floor(Math.random() * items.length)];
     const randomRange = (start, end) => start + end * Math.random();
 
+    // Performance monitoring: track frame render time
+    let frameCount = 0;
+    let frameTraceStartTime = Date.now();
+    const FRAME_SAMPLE_INTERVAL = 100; // Sample every 100 frames
+
     // Draw one frame of the Matrix effect
     const draw = () => {
       // Only draw if visible (optimization to prevent background computation)
       if (!visibleRef.current) return;
+
+      const frameStartTime = performance.now();
 
       // Draw semi-transparent background rectangle to create fading trail effect
       // Uses actual background color from CSS to match page
@@ -92,10 +106,32 @@ export default function MatrixBackground({ visible = true }) {
           columnYPositions[i] = yPos + state.size; // Move down
         }
       }
+
+      // Track frame performance every N frames
+      frameCount++;
+      const frameEndTime = performance.now();
+      const frameDuration = frameEndTime - frameStartTime;
+
+      // Sample performance periodically (every 100 frames)
+      if (frameCount % FRAME_SAMPLE_INTERVAL === 0) {
+        const trace = startCustomTrace("matrix_render_sample", {
+          frame_count: frameCount.toString(),
+          num_columns: columnYPositions.length.toString(),
+          canvas_width: width.toString(),
+          canvas_height: height.toString()
+        });
+        trace.putMetric("frame_duration_ms", Math.round(frameDuration * 100) / 100);
+        trace.putMetric("fps", Math.round(1000 / frameDuration));
+        trace.stop();
+      }
     };
 
     resize();
     window.addEventListener("resize", resize);
+
+    // Complete initialization trace
+    initTrace.putMetric("num_columns", Math.ceil(width / state.size));
+    initTrace.stop();
 
     // Animation loop with FPS control
     intervalIdRef.current = setInterval(draw, 1000 / state.fps);

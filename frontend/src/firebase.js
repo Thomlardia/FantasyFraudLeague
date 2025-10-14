@@ -14,6 +14,9 @@ import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
 // Adding SDK for the function in database service
 import { getFunctions, connectFunctionsEmulator } from "firebase/functions";
 
+// Adding SDK for Performance Monitoring
+import { getPerformance } from "firebase/performance";
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBOtM0OkuE-PPueNeidkfBHh0a-pYR255k",
@@ -55,6 +58,10 @@ export const db = getFirestore(app);
 
 // Initialize Functions and get a reference to the service
 export const functions = getFunctions(app, "africa-south1");
+
+// Initialize Performance Monitoring
+// Note: Performance data is not collected in local development (emulator mode)
+export const perf = getPerformance(app);
 
 // Connect to Firebase Emulators in local development
 if (shouldUseEmulators) {
