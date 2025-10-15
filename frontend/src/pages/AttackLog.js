@@ -106,6 +106,25 @@ function AttackLog() {
                                 const totalDamage = log.totalDamage || 0;
                                 const attackCount = log.attacks?.length || 0;
                                 const totalPrevented = log.attacks?.reduce((sum, attack) => sum + (attack.damageReduced || 0), 0) || 0;
+                                
+                                // Calculate defense effectiveness and star rating
+                                const totalOriginalDamage = log.attacks?.reduce((sum, attack) => sum + (attack.originalDamage || 0), 0) || 0;
+                                const defenseEffectiveness = totalOriginalDamage > 0 ? (totalPrevented / totalOriginalDamage) * 100 : 0;
+                                
+                                let starRating = "";
+                                if (defenseEffectiveness >= 50) {
+                                    starRating = "⭐⭐⭐⭐⭐";
+                                } else if (defenseEffectiveness >= 30) {
+                                    starRating = "⭐⭐⭐⭐";
+                                } else if (defenseEffectiveness >= 20) {
+                                    starRating = "⭐⭐⭐";
+                                } else if (defenseEffectiveness >= 10) {
+                                    starRating = "⭐⭐";
+                                } else if (defenseEffectiveness >= 5) {
+                                    starRating = "⭐";
+                                } else {
+                                    starRating = "";
+                                }
 
                                 return (
                                     <div key={log.id || logIndex} className="attack-log-item">
@@ -116,6 +135,7 @@ function AttackLog() {
                                             <div className="attack-log-summary-info">
                                                 <span className="attack-log-date">{formatTimestamp(log.timestamp)}</span>
                                                 <span className="attack-log-attacks">{attackCount} attack{attackCount !== 1 ? 's' : ''}</span>
+                                                {starRating && <span className="attack-log-stars">{starRating}</span>}
                                             </div>
                                             <div className="attack-log-summary-stats">
                                                 <span className="attack-log-damage">-${totalDamage.toLocaleString()}</span>
@@ -140,6 +160,18 @@ function AttackLog() {
                                                         <span className="attack-log-stat-label">Damage Prevented:</span>
                                                         <span className="attack-log-stat-value attack-log-stat-value--positive">+${totalPrevented.toLocaleString()}</span>
                                                     </div>
+                                                    {(log.interestEarned || 0) > 0 && (
+                                                        <div className="attack-log-stat-row">
+                                                            <span className="attack-log-stat-label">Interest Earned:</span>
+                                                            <span className="attack-log-stat-value attack-log-stat-value--positive">+${(log.interestEarned || 0).toLocaleString()}</span>
+                                                        </div>
+                                                    )}
+                                                    {(log.bonusIncome || 0) > 0 && (
+                                                        <div className="attack-log-stat-row">
+                                                            <span className="attack-log-stat-label">Defense Bonus:</span>
+                                                            <span className="attack-log-stat-value attack-log-stat-value--positive">+${(log.bonusIncome || 0).toLocaleString()}</span>
+                                                        </div>
+                                                    )}
                                                     <div className="attack-log-stat-row attack-log-stat-row--highlight">
                                                         <span className="attack-log-stat-label">New Balance:</span>
                                                         <span className="attack-log-stat-value">${(log.newBalance || 0).toLocaleString()}</span>
