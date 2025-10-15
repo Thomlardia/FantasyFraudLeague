@@ -5,12 +5,14 @@ function RegularPasswordChanges() {
     return (
         <DefenseDetailPage
             defenseKey="passwordPolicies"
-            title="Regular Password Changes"
+            title="Password Policies"
             infoContent={
                 <>
                     <p className="info-paragraph">
-                        Regular password changes enforce policies that require users to refresh credentials on a predictable
-                        schedule, limiting the window of opportunity for attackers to abuse stolen passwords.
+                        Password policies enforce policies that require users to refresh credentials on a predictable
+                        schedule, limiting the window of opportunity for attackers to abuse stolen passwords. It can
+                        include ensuring passwords are of a certain length, contain specific characters and even includes
+                        the use of biometrics to gain access to accounts.
                     </p>
                     <div className="info-section">
                         <h3 className="info-section-heading">
@@ -31,6 +33,12 @@ function RegularPasswordChanges() {
                         <ul className="info-list">
                             <li>
                                 <Link to="/frauds/AccountTakeover" className="info-link">Account Takeover</Link>
+                            </li>
+                            <li>
+                                <Link to="/frauds/BruteForce" className="info-link">Brute Force</Link>
+                            </li>
+                            <li>
+                                <Link to="/frauds/SynIdentityTheft" className="info-link">Synthentic Identity Theft</Link>
                             </li>
                         </ul>
                     </div>

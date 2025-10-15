@@ -35,6 +35,9 @@ function RegularAudits() {
                             <li>
                                 <Link to="/frauds/InsiderFraud" className="info-link">Insider Fraud</Link>
                             </li>
+                            <li>
+                                <Link to="/frauds/BusinessEmailCompromise" className="info-link">Business Email Compromise</Link>
+                            </li>
                         </ul>
                     </div>
                     <div className="info-section">

@@ -50,7 +50,7 @@ function Ransomware() {
                                 <Link to="/defenses/KeepUpdated" className="info-link">Keep Updated</Link>
                             </li>
                             <li>
-                                <Link to="/defenses/UserEducation" className="info-link">User Education</Link>
+                                <Link to="/defenses/ApplicationSandboxing" className="info-link">Application Sandboxing</Link>
                             </li>
                         </ul>
                     </div>

@@ -50,6 +50,9 @@ function AccAndInvFraud() {
                             <li>
                                 <Link to="/defenses/SegregationOfDuties" className="info-link">Segregation Of Duties</Link>
                             </li>
+                            <li>
+                                <Link to="/defenses/PrincipleOfLeastPrivilege" className="info-link">Principle of Least Privilege</Link>
+                            </li>
                         </ul>
                     </div>
                     <div className="info-section">

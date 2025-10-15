@@ -46,6 +46,9 @@ function SimSwap() {
                             <li>
                                 <Link to="/defenses/MultiFactorAuth" className="info-link">Multi Factor Authentication</Link>
                             </li>
+                            <li>
+                                <Link to="/defenses/VerificationProtocols" className="info-link">Verification Protocols</Link>
+                            </li>
                         </ul>
                     </div>
                     <div className="info-section">

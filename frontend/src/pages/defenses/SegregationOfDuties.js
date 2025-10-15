@@ -35,6 +35,9 @@ function SegregationOfDuties() {
                             <li>
                                 <Link to="/frauds/AccAndInvFraud" className="info-link">Account and Invoice Fraud</Link>
                             </li>
+                            <li>
+                                <Link to="/frauds/BusinessEmailCompromise" className="info-link">Business Email Compromise</Link>
+                            </li>
                         </ul>
                     </div>
                     <div className="info-section">

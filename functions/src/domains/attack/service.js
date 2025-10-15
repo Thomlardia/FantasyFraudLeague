@@ -151,10 +151,15 @@ export async function attackDeduction(userId, wave) {
 
     const newBalance = currentBalance - damage;
     const newNetWorth = currentNetWorth - damage; // NetWorth decreases by damage amount
+    let income = 0;
+    if (newNetWorth > 0) {
+      income = newNetWorth * 0.1;
+    }
+    const netWorthAfterIncome = newNetWorth + income
 
     transaction.update(userDocRef, {
       balance: newBalance,
-      netWorth: newNetWorth,
+      netWorth: netWorthAfterIncome,
     });
 
     return newBalance;

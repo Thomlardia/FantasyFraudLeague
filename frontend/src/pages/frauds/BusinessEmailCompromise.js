@@ -50,6 +50,9 @@ function BusinessEmailCompromise() {
                             <li>
                                 <Link to="/defenses/SegregationOfDuties" className="info-link">Segregation Of Duties</Link>
                             </li>
+                            <li>
+                                <Link to="/defenses/EmailFiltering" className="info-link">Email Filtering</Link>
+                            </li>
                         </ul>
                     </div>
                     <div className="info-section">

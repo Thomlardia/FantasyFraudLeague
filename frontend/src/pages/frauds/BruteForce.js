@@ -46,6 +46,15 @@ function BruteForce() {
                             <li>
                                 <Link to="/defenses/MultiFactorAuth" className="info-link">Multi Factor Authentication</Link>
                             </li>
+                            <li>
+                                <Link to="/defenses/NetworkMonitoring" className="info-link">Network Monitoring</Link>
+                            </li>
+                            <li>
+                                <Link to="/defenses/RegularPasswordChanges" className="info-link">Password Policies</Link>
+                            </li>
+                            <li>
+                                <Link to="/defenses/TrafficFiltering" className="info-link">Traffic Filtering</Link>
+                            </li>
                         </ul>
                     </div>
                     <div className="info-section">

@@ -47,6 +47,12 @@ function Vishing() {
                             <li>
                                 <Link to="/defenses/UserEducation" className="info-link">User Education</Link>
                             </li>
+                            <li>
+                                <Link to="/defenses/DeepfakeDetection" className="info-link">Deepfake Detection</Link>
+                            </li>
+                            <li>
+                                <Link to="/defenses/VerificationProtocols" className="info-link">Verification Protocols</Link>
+                            </li>
                         </ul>
                     </div>
                     <div className="info-section">
