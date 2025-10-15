@@ -35,6 +35,12 @@ function PrincipleOfLeastPrivilege() {
                             <li>
                                 <Link to="/frauds/SqlInjection" className="info-link">SQL Injection</Link>
                             </li>
+                            <li>
+                                <Link to="/frauds/AccountTakeover" className="info-link">Account Takeover</Link>
+                            </li>
+                            <li>
+                                <Link to="/frauds/AccAndInvFraud" className="info-link">Account and Invoice Fraud</Link>
+                            </li>
                         </ul>
                     </div>
                     <div className="info-section">

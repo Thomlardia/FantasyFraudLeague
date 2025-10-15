@@ -32,6 +32,9 @@ function TrafficFiltering() {
                             <li>
                                 <Link to="/frauds/Ddos" className="info-link">DDoS</Link>
                             </li>
+                            <li>
+                                <Link to="/frauds/BruteForce" className="info-link">Brute Force</Link>
+                            </li>
                         </ul>
                     </div>
                     <div className="info-section">
