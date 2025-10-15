@@ -81,9 +81,12 @@ export function FilterProvider({ children }) {
   return <FilterContext.Provider value={value}>{children}</FilterContext.Provider>;
 }
 
+
 /**
  * Hook to access filter context
- * @returns {Object} Context object with filter state and update functions
+ * @returns {Object} { defenseShopFilters, updateDefenseShopFilters, fraudWikiFilters, updateFraudWikiFilters, leaderboardTab, setLeaderboardTab, attackLogTab, setAttackLogTab, resetAllFilters }
+ *
+ * Filter state and utility functions for Defense Shop, Fraud Wiki, Leaderboard, and Attack Log pages
  */
 export const useFilters = () => {
   const context = useContext(FilterContext);
