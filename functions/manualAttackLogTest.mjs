@@ -27,6 +27,8 @@ async function testAttackLogs() {
         console.log(`Old Balance: $${log.oldBalance || 0}`);
         console.log(`New Balance: $${log.newBalance || 0}`);
         console.log(`Total Damage Taken: $${log.totalDamage || 0}`);
+        console.log(`Interest Earned: $${log.interestEarned || 0}`);
+        console.log(`Defense Bonus Income: $${log.bonusIncome || 0}`);
         
         if (log.attacks && log.attacks.length > 0) {
           const totalDamagePrevented = log.attacks.reduce((sum, attack) => sum + (attack.damageReduced || 0), 0);
@@ -70,7 +72,28 @@ async function testAttackLogs() {
           const logDate = log.timestamp?.toDate?.() || log.timestamp || new Date();
           const totalDamage = log.totalDamage || 0;
           const attackCount = log.attacks?.length || 0;
-          console.log(`Log ${index + 1}: ${logDate.toLocaleString()} - $${totalDamage} damage from ${attackCount} attacks`);
+          
+          // Calculate defense effectiveness and star rating
+          const totalDamagePrevented = log.attacks ? log.attacks.reduce((sum, attack) => sum + (attack.damageReduced || 0), 0) : 0;
+          const totalOriginalDamage = log.attacks ? log.attacks.reduce((sum, attack) => sum + (attack.originalDamage || 0), 0) : 0;
+          const defenseEffectiveness = totalOriginalDamage > 0 ? (totalDamagePrevented / totalOriginalDamage) * 100 : 0;
+          
+          let defenseRating = "";
+          if (defenseEffectiveness >= 50) {
+            defenseRating = "5 Stars";
+          } else if (defenseEffectiveness >= 30) {
+            defenseRating = "4 Stars";
+          } else if (defenseEffectiveness >= 20) {
+            defenseRating = "3 Stars";
+          } else if (defenseEffectiveness >= 10) {
+            defenseRating = "2 Stars";
+          } else if (defenseEffectiveness >= 5) {
+            defenseRating = "1 Star";
+          } else {
+            defenseRating = "0 Stars";
+          }
+          
+          console.log(`Log ${index + 1}: ${logDate.toLocaleString()} - ${defenseRating} Defense - $${totalDamage} damage from ${attackCount} attacks`);
         });
       }
       

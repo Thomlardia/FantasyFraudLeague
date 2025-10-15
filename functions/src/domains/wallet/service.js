@@ -2,7 +2,7 @@
  * This file contains the logic for all wallet-related operations.
  */
 
-import { getBalance, setBalance } from "./repo.js"; /* functions for firestore acces*/
+import { getBalance, setBalance, setNetWorth } from "./repo.js"; /* functions for firestore acces*/
 
 /**
  * Calls the repository function to fetch the balance for the given user ID.
@@ -26,4 +26,19 @@ export async function updateUserBalance(userId, newBalance) {
   }
   /* Call the repo function*/
   await setBalance(userId, newBalance);
+}
+
+/**
+ * Updates the user's netWorth to a specific value.
+ * @param {string} userId
+ * @param {number} newNetWorth
+ * Returns nothing, calls the repository function to update the netWorth.
+ */
+export async function updateUserNetWorth(userId, newNetWorth) {
+    /* Validate that the new netWorth is a valid number, throw an error if not.*/
+  if (typeof newNetWorth !== "number" || isNaN(newNetWorth)) {
+    throw new Error("Invalid netWorth value");
+  }
+  /* Call the repo function*/
+  await setNetWorth(userId, newNetWorth);
 }
