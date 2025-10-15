@@ -1,8 +1,8 @@
-import { buyDefense, upgradeDefense, getUserDefenses, clearDefenseCache } from "./src/domains/defense/service.js";
-import { getUserBalance, updateUserBalance } from "./src/domains/wallet/service.js";
+import { buyDefense, upgradeDefense, getUserDefenses, clearDefenseCache } from "../domains/defense/service.js";
+import { getUserBalance, updateUserBalance } from "../domains/wallet/service.js";
 
 async function testDefenses() {
-  const testUserId = "fDY8Q8kRDhFU0ttBv4pMwXeqC6Af";
+  const testUserId = "testuser1";
   
   console.log("Starting Defense Domain Tests...\n");
   

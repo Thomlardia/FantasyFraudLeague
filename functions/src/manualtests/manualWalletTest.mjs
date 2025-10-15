@@ -1,6 +1,6 @@
 
 // Simple manual test for wallet functions
-import { getUserBalance, updateUserBalance, updateUserNetWorth } from "./src/domains/wallet/service.js";
+import { getUserBalance, updateUserBalance, updateUserNetWorth } from "../domains/wallet/service.js";
 
 async function run() {
   const testUserId = "testuser1";

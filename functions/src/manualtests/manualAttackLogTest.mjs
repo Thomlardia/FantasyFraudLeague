@@ -1,6 +1,6 @@
 // Test for getUserAttackLogs function
-import { getUserAttackLogs } from "./src/domains/attack/repo.js";
-import { attackDeduction, getHardWave } from "./src/domains/attack/service.js";
+import { getUserAttackLogs } from "../domains/attack/repo.js";
+import { attackDeduction, getHardWave } from "../domains/attack/service.js";
 
 async function testAttackLogs() {
   const testUserId = "testuser1";
