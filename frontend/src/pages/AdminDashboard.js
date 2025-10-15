@@ -35,26 +35,26 @@ export default function AdminDashboard() {
 
   // Attack data matching backend model.js
   const fraudAttacks = [
-    { id: 'accAndInvFraud', name: 'Accounting & Invoice Fraud', baseDamage: 95000, dangerLevel: 4 },
-    { id: 'accountTakeover', name: 'Account Takeover', baseDamage: 90000, dangerLevel: 4 },
-    { id: 'atmSkimming', name: 'ATM Skimming', baseDamage: 55000, dangerLevel: 2 },
-    { id: 'authPushPayments', name: 'Authorized Push Payment', baseDamage: 65000, dangerLevel: 3 },
-    { id: 'bruteForce', name: 'Brute Force', baseDamage: 40000, dangerLevel: 1 },
-    { id: 'businessEmailCompromise', name: 'Business Email Compromise', baseDamage: 100000, dangerLevel: 4 },
-    { id: 'cryptoJacking', name: 'Crypto Jacking', baseDamage: 25000, dangerLevel: 1 },
-    { id: 'ddos', name: 'DDoS', baseDamage: 70000, dangerLevel: 3 },
-    { id: 'deepfake', name: 'Deepfake Fraud', baseDamage: 60000, dangerLevel: 2 },
-    { id: 'insiderFraud', name: 'Insider Fraud', baseDamage: 90000, dangerLevel: 4 },
-    { id: 'investmentScam', name: 'Investment Scam', baseDamage: 70000, dangerLevel: 3 },
-    { id: 'manInTheMiddle', name: 'Man in the Middle', baseDamage: 55000, dangerLevel: 2 },
-    { id: 'phishing', name: 'Phishing', baseDamage: 55000, dangerLevel: 3 },
-    { id: 'ransomware', name: 'Ransomware', baseDamage: 110000, dangerLevel: 4 },
-    { id: 'simSwap', name: 'SIM Swap', baseDamage: 60000, dangerLevel: 2 },
-    { id: 'sqlInjection', name: 'SQL Injection', baseDamage: 80000, dangerLevel: 3 },
-    { id: 'syntIdentityTheft', name: 'Synthetic Identity Theft', baseDamage: 60000, dangerLevel: 2 },
-    { id: 'vishing', name: 'Vishing', baseDamage: 40000, dangerLevel: 1 },
-    { id: 'xss', name: 'Cross-Site Scripting (XSS)', baseDamage: 30000, dangerLevel: 1 },
-    { id: 'zeroDayExploit', name: 'Zero Day Exploit', baseDamage: 120000, dangerLevel: 4 }
+    { id: 'accAndInvFraud', name: 'Accounting & Invoice Fraud', baseDamage:50000, dangerLevel: 4 },
+    { id: 'accountTakeover', name: 'Account Takeover', baseDamage: 35000, dangerLevel: 4 },
+    { id: 'skimming', name: 'ATM Skimming', baseDamage: 27500, dangerLevel: 2 },
+    { id: 'authorizedPushPayments', name: 'Authorized Push Payment', baseDamage: 32500, dangerLevel: 3 },
+    { id: 'bruteForce', name: 'Brute Force', baseDamage: 20000, dangerLevel: 1 },
+    { id: 'bec', name: 'Business Email Compromise', baseDamage: 50000, dangerLevel: 4 },
+    { id: 'cryptojacking', name: 'Crypto Jacking', baseDamage: 12500, dangerLevel: 1 },
+    { id: 'ddos', name: 'DDoS', baseDamage: 35000, dangerLevel: 3 },
+    { id: 'deepfakeFraud', name: 'Deepfake Fraud', baseDamage: 30000, dangerLevel: 2 },
+    { id: 'insiderFraud', name: 'Insider Fraud', baseDamage: 45000, dangerLevel: 4 },
+    { id: 'investmentScams', name: 'Investment Scam', baseDamage: 35000, dangerLevel: 3 },
+    { id: 'mitm', name: 'Man in the Middle', baseDamage: 25000, dangerLevel: 2 },
+    { id: 'phishing', name: 'Phishing', baseDamage: 27500, dangerLevel: 3 },
+    { id: 'ransomware', name: 'Ransomware', baseDamage: 55000, dangerLevel: 4 },
+    { id: 'simSwap', name: 'SIM Swap', baseDamage: 30000, dangerLevel: 2 },
+    { id: 'sqlInjection', name: 'SQL Injection', baseDamage: 40000, dangerLevel: 3 },
+    { id: 'syntheticIdentity', name: 'Synthetic Identity Theft', baseDamage: 30000, dangerLevel: 2 },
+    { id: 'vishing', name: 'Vishing', baseDamage: 20000, dangerLevel: 1 },
+    { id: 'xss', name: 'Cross-Site Scripting (XSS)', baseDamage: 15000, dangerLevel: 1 },
+    { id: 'zeroDay', name: 'Zero Day Exploit', baseDamage: 60000, dangerLevel: 4 }
   ];
 
   const listUsers = async () => {
