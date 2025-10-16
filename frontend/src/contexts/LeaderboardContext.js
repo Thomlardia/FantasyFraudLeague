@@ -38,7 +38,7 @@ export function LeaderboardProvider({ children }) {
 
       const result = await measureAsync("leaderboard_fetch", async () => {
         const getLeaderboardFunction = httpsCallable(functions, 'user_getLeaderboardWithUser');
-        return await getLeaderboardFunction();
+        return await getLeaderboardFunction({ userId: user.id });
       }, {});
 
       // Backend returns { success: true, data: { topTen: [...], currentUser: {...} or null } }
