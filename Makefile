@@ -22,6 +22,14 @@ vbuild:
 	mkdir -p frontend/build
 	cp -a frontend/dist/. frontend/build/
 
+# ---------- BUILD FRONTEND (Vite - Windows) -----------
+
+vbuild-win:
+	npm --prefix frontend run build:vite
+	powershell -Command "if (Test-Path 'frontend/build') { Remove-Item -Recurse -Force 'frontend/build' }"
+	powershell -Command "New-Item -ItemType Directory -Path 'frontend/build' -Force"
+	powershell -Command "Copy-Item -Path 'frontend/dist/*' -Destination 'frontend/build' -Recurse -Force"
+
 # ------------- RUNNING --------------
 run: build
 	npx firebase-tools emulators:start
@@ -44,6 +52,17 @@ vrun-hosting: vbuild
 	npx firebase-tools emulators:start --only hosting
 
 vrun-hosting-functions: vbuild
+	npx firebase-tools emulators:start --only hosting,functions
+
+# ------------- RUNNING (Vite - Windows) --------------
+
+vrun-win: vbuild-win
+	npx firebase-tools emulators:start
+
+vrun-hosting-win: vbuild-win
+	npx firebase-tools emulators:start --only hosting
+
+vrun-hosting-functions-win: vbuild-win
 	npx firebase-tools emulators:start --only hosting,functions
 
 run-front:
@@ -155,7 +174,7 @@ list-users-prod:
 clear-test-users:
 	$(EMULATOR_ENV) node functions/scripts/seed.js clear users
 
-# Grant admin role to a user (for local emulator)
+# Grant admin role to a user (for local emulator) - Linux/Mac
 # Usage: make grant-admin EMAIL=test@example.com
 grant-admin:
 	@if [ -z "$(EMAIL)" ]; then \
@@ -164,6 +183,12 @@ grant-admin:
 		exit 1; \
 	fi
 	$(EMULATOR_ENV) node functions/scripts/grant-admin.js $(EMAIL)
+
+# Grant admin role to a user (for local emulator) - Windows
+# Usage: make grant-admin-win EMAIL=test@example.com
+grant-admin-win:
+	@powershell -Command "if ('$(EMAIL)' -eq '') { Write-Host 'Error: EMAIL parameter is required'; Write-Host 'Usage: make grant-admin-win EMAIL=test@example.com'; exit 1 }"
+	powershell -Command "$$env:FIRESTORE_EMULATOR_HOST='localhost:8080'; $$env:FIREBASE_AUTH_EMULATOR_HOST='localhost:9099'; node functions/scripts/grant-admin.js $(EMAIL)"
 
 seed-prod:
 	node functions/scripts/seed.js seed --production --force
@@ -237,6 +262,17 @@ vdeploy-hosting-functions: vbuild
 	npx firebase-tools deploy --only hosting,functions
 
 vdeploy: vbuild
+	npx firebase-tools deploy
+
+# ------------- DEPLOY (Vite - Windows) --------------
+
+vdeploy-hosting-win: vbuild-win
+	npx firebase-tools deploy --only hosting
+
+vdeploy-hosting-functions-win: vbuild-win
+	npx firebase-tools deploy --only hosting,functions
+
+vdeploy-win: vbuild-win
 	npx firebase-tools deploy
 
 # ------------- CLEAN --------------
