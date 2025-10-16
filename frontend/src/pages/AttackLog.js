@@ -138,7 +138,7 @@ function AttackLog() {
                                                 {starRating && <span className="attack-log-stars">{starRating}</span>}
                                             </div>
                                             <div className="attack-log-summary-stats">
-                                                <span className="attack-log-damage">-${totalDamage.toLocaleString()}</span>
+                                                <span className="attack-log-damage">${log.newBalance-log.oldBalance}</span>
                                                 <span className="material-symbols-outlined attack-log-expand-icon">
                                                     {isExpanded ? 'expand_less' : 'expand_more'}
                                                 </span>

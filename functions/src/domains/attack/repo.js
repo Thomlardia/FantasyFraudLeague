@@ -21,10 +21,10 @@ export async function saveAttackLogToDatabase(userId, attackLog) {
   try {
     const userDocRef = db.collection("users").doc(userId);
     
-    // Add timestamp to the attack log
+    // Add timestamp and ID to the attack log (preserve existing timestamp if provided)
     const logWithTimestamp = {
       ...attackLog,
-      timestamp: new Date(),
+      timestamp: attackLog.timestamp || new Date(), // Use provided timestamp or current time as fallback
       id: Date.now() + Math.random() // Simple unique ID for the log entry
     };
     

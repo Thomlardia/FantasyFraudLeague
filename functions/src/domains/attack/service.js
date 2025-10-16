@@ -80,8 +80,9 @@ export async function attackDeduction(userId, wave) {
   const ownedDefenses = await getUserOwnedDefensesComplete(userId);
   const currentBalance = await getUserBalance(userId);
 
-  // Initialize attack log
+  // Initialize attack log with attack timestamp
   const attackLog = {
+    timestamp: new Date(), // Set timestamp to when attack occurs
     oldBalance: currentBalance,
     attacks: [],
     totalDamage: 0,
@@ -151,15 +152,15 @@ export async function attackDeduction(userId, wave) {
   // Calculate bonus income based, star based syste,
   let bonusIncome = 0;
   if (defenseEffectiveness >= 90) {
-    bonusIncome = 200000; // 5 star: 90%+ damage prevented
+    bonusIncome = 150000; // 5 star: 90%+ damage prevented
   } else if (defenseEffectiveness >= 75) {
-    bonusIncome = 150000;  // 4 star: 75-89% damage prevented
+    bonusIncome = 100000;  // 4 star: 75-89% damage prevented
   } else if (defenseEffectiveness >= 50) {
-    bonusIncome = 100000;  // 3 start: 50-74% damage prevented
+    bonusIncome = 50000;  // 3 start: 50-74% damage prevented
   } else if (defenseEffectiveness >= 30) {
-    bonusIncome = 50000;  // 2 star : 30-49% damage prevented
+    bonusIncome = 25000;  // 2 star : 30-49% damage prevented
   } else if (defenseEffectiveness >= 10) {
-    bonusIncome = 25000;  // 1 star: 10-29% damage prevented
+    bonusIncome = 10000;  // 1 star: 10-29% damage prevented
   }
   // Level 0: No bonus for less than 10% defense effectiveness
 
