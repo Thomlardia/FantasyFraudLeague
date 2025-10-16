@@ -1,3 +1,4 @@
+import { HttpsError } from "firebase-functions/https";
 import { getLeaderboardWithUser, getUserRank, getLeaderboard } from "./service.js";
 
 /**
@@ -18,6 +19,7 @@ export async function apiGetLeaderboard() {
  * @returns {Promise<Object>} Formatted response with success flag and data containing users rank
  */
 export async function apiGetLeaderboardWithUser(userId) {
+    if (!userId) throw new HttpsError('invalid-argument', 'The function must be called with userId in the argument');
     const result  = await getLeaderboardWithUser(userId);
     return {
         success: true,
@@ -31,6 +33,7 @@ export async function apiGetLeaderboardWithUser(userId) {
  * @returns {Promise<Object>} Formatted response with user's rank
  */
 export async function apiGetUserRank(userId) {
+    if (!userId) throw new HttpsError('invalid-argument', 'The function must be called with userId in the argument');
     const userRank = await getUserRank(userId);
     return {
         success: true,
