@@ -33,7 +33,9 @@ function AttackLog() {
         let date;
         if (timestamp?.toDate && typeof timestamp.toDate === 'function') {
             date = timestamp.toDate();
-        } else if (timestamp?.seconds) {
+        } else if (typeof timestamp?._seconds === 'number') {
+            date = new Date(timestamp._seconds * 1000);
+        } else if (typeof timestamp?.seconds === 'number') {
             date = new Date(timestamp.seconds * 1000);
         } else if (timestamp instanceof Date) {
             date = timestamp;
