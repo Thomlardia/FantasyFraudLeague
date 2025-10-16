@@ -16,15 +16,17 @@ export function LeaderboardProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const { user } = useAuth();
+  const { user, initializing } = useAuth();
 
   /**
    * Fetches leaderboard data from the backend
    * Gets top 10 players + current user's rank (if not in top 10)
    * Uses memoized callback to prevent unnecessary re-renders
+   * Waits for authentication to complete before fetching
    */
   const refreshLeaderboard = useCallback(async () => {
-    if (!user) {
+    // Wait for auth initialization to complete
+    if (initializing || !user) {
       setTopTen([]);
       setCurrentUser(null);
       return;
@@ -52,7 +54,7 @@ export function LeaderboardProvider({ children }) {
     } finally {
       setLoading(false);
     }
-  }, [user]);
+  }, [user, initializing]);
 
   // Auto-fetch leaderboard when user auth state changes
   useEffect(() => {

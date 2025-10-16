@@ -1,14 +1,16 @@
 import { createContext, useContext, useEffect, useState, useCallback, useRef } from 'react';
 import { getUserAttackLogs } from '../api/attack';
+import { useAuth } from '../auth/AuthProvider';
 
 const AttackContext = createContext(null);
 
 /**
  * AttackProvider - Manages attack-related state globally
  * Manages countdown timer for next attack and attack log history
- * Auto-fetches attack logs when provider mounts
+ * Auto-fetches attack logs when user authentication completes
  */
 export function AttackProvider({ children }) {
+  const { user } = useAuth();
   // Timer state
   const [timeRemaining, setTimeRemaining] = useState(5 * 3600 + 45 * 60 + 38); // 05:45:38 in seconds
   const [isRunning, setIsRunning] = useState(false);
@@ -174,9 +176,17 @@ export function AttackProvider({ children }) {
 
   /**
    * Fetch attack logs from backend
+   * Only fetches if user is authenticated
    * @param {number|null} limit - Optional limit for number of logs
    */
   const fetchAttackLogs = useCallback(async (limit = null) => {
+    // Don't fetch if user is not authenticated
+    if (!user) {
+      setAttackLogs([]);
+      setAttackStats({});
+      return;
+    }
+
     try {
       setLogsLoading(true);
       setLogsError(null);
@@ -194,7 +204,7 @@ export function AttackProvider({ children }) {
     } finally {
       setLogsLoading(false);
     }
-  }, [calculateAttackStats]);
+  }, [user, calculateAttackStats]);
 
   /**
    * Refresh attack logs (convenience wrapper)
@@ -231,7 +241,7 @@ export function AttackProvider({ children }) {
     return null;
   }, [attackStats]);
 
-  // Auto-fetch attack logs on mount (when user context is available)
+  // Auto-fetch attack logs when user auth state changes
   useEffect(() => {
     fetchAttackLogs();
   }, [fetchAttackLogs]);

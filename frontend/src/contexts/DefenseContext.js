@@ -15,14 +15,16 @@ export function DefenseProvider({ children }) {
   const [defenses, setDefenses] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const { user } = useAuth();
+  const { user, initializing } = useAuth();
 
   /**
    * Fetches all defenses for the current user from the backend
    * Uses memoized callback to prevent unnecessary re-renders
+   * Waits for authentication to complete before fetching
    */
   const fetchDefenses = useCallback(async () => {
-    if (!user) {
+    // Wait for auth initialization to complete
+    if (initializing || !user) {
       setDefenses([]);
       return;
     }
@@ -40,7 +42,7 @@ export function DefenseProvider({ children }) {
     } finally {
       setLoading(false);
     }
-  }, [user]);
+  }, [user, initializing]);
 
   /**
    * Finds a specific defense by ID from the loaded defenses

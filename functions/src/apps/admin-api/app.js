@@ -10,7 +10,11 @@ export const admin_listUsers = onCall({ region: "africa-south1", enforceAppCheck
 	return getAllUsers();
 });
 
-export const admin_grantAdmin = onCall({ region: "africa-south1", enforceAppCheck: true }, async (request) => {
+export const admin_grantAdmin = onCall({
+	region: "africa-south1",
+	enforceAppCheck: true,
+	consumeAppCheckToken: true  // CRITICAL: Prevent replay attacks on privilege escalation
+}, async (request) => {
 	requireAppCheck(request);
 	requireRole(request, "admin");
 	const { uid } = request.data || {};
@@ -28,7 +32,11 @@ export const admin_grantAdmin = onCall({ region: "africa-south1", enforceAppChec
 });
 
 // Mass attack functions
-export const admin_massAttackCustom = onCall({ region: "africa-south1", enforceAppCheck: true }, async (request) => {
+export const admin_massAttackCustom = onCall({
+	region: "africa-south1",
+	enforceAppCheck: true,
+	consumeAppCheckToken: true  // Prevent replay attacks on mass operations
+}, async (request) => {
 	requireAppCheck(request);
 	requireRole(request, "admin");
 	const { wave } = request.data || {};
@@ -50,28 +58,44 @@ export const admin_massAttackCustom = onCall({ region: "africa-south1", enforceA
 	return apiMassAttackDeduction(wave);
 });
 
-export const admin_massAttackEasy = onCall({ region: "africa-south1", enforceAppCheck: true }, async (request) => {
+export const admin_massAttackEasy = onCall({
+	region: "africa-south1",
+	enforceAppCheck: true,
+	consumeAppCheckToken: true  // Prevent replay attacks on mass operations
+}, async (request) => {
 	requireAppCheck(request);
 	requireRole(request, "admin");
 	const wave = apiGetEasyWave();
 	return apiMassAttackDeduction(wave);
 });
 
-export const admin_massAttackMedium = onCall({ region: "africa-south1", enforceAppCheck: true }, async (request) => {
+export const admin_massAttackMedium = onCall({
+	region: "africa-south1",
+	enforceAppCheck: true,
+	consumeAppCheckToken: true  // Prevent replay attacks on mass operations
+}, async (request) => {
 	requireAppCheck(request);
 	requireRole(request, "admin");
 	const wave = apiGetMediumWave();
 	return apiMassAttackDeduction(wave);
 });
 
-export const admin_massAttackHard = onCall({ region: "africa-south1", enforceAppCheck: true }, async (request) => {
+export const admin_massAttackHard = onCall({
+	region: "africa-south1",
+	enforceAppCheck: true,
+	consumeAppCheckToken: true  // Prevent replay attacks on mass operations
+}, async (request) => {
 	requireAppCheck(request);
 	requireRole(request, "admin");
 	const wave = apiGetHardWave();
 	return apiMassAttackDeduction(wave);
 });
 
-export const admin_massAttackRandom = onCall({ region: "africa-south1", enforceAppCheck: true }, async (request) => {
+export const admin_massAttackRandom = onCall({
+	region: "africa-south1",
+	enforceAppCheck: true,
+	consumeAppCheckToken: true  // Prevent replay attacks on mass operations
+}, async (request) => {
 	requireAppCheck(request);
 	requireRole(request, "admin");
 	const wave = apiGetRandomWave();

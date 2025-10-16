@@ -34,10 +34,16 @@ export function useDefenseOperations(defenseId) {
   // Get the specific defense from context
   const defense = findDefense(defenseId);
 
-  // Firebase callable functions
-  const buyDefenseFunction = httpsCallable(functions, 'user_buyDefense');
-  const upgradeDefenseFunction = httpsCallable(functions, 'user_upgradeDefense');
-  const sellDefenseFunction = httpsCallable(functions, 'user_sellDefense');
+  // Firebase callable functions with limited-use App Check tokens (prevents replay attacks)
+  const buyDefenseFunction = httpsCallable(functions, 'user_buyDefense', {
+    limitedUseAppCheckTokens: true
+  });
+  const upgradeDefenseFunction = httpsCallable(functions, 'user_upgradeDefense', {
+    limitedUseAppCheckTokens: true
+  });
+  const sellDefenseFunction = httpsCallable(functions, 'user_sellDefense', {
+    limitedUseAppCheckTokens: true
+  });
 
   /**
    * Handles the buy action for the defense with the given ID.

@@ -22,7 +22,11 @@ export const user_getDefenses = onCall({ region: "africa-south1", enforceAppChec
   return apiGetUserDefenses(request.auth.uid);
 });
 
-export const user_buyDefense = onCall({ region: "africa-south1", enforceAppCheck: true }, async (request) => {
+export const user_buyDefense = onCall({
+  region: "africa-south1",
+  enforceAppCheck: true,
+  consumeAppCheckToken: true  // Prevent replay attacks - single-use token
+}, async (request) => {
   requireAppCheck(request);
   requireVerified(request);
   const { defenseId } = request.data || {};
@@ -32,7 +36,11 @@ export const user_buyDefense = onCall({ region: "africa-south1", enforceAppCheck
   return apiBuyDefense(request.auth.uid, defenseId);
 });
 
-export const user_upgradeDefense = onCall({ region: "africa-south1", enforceAppCheck: true }, async (request) => {
+export const user_upgradeDefense = onCall({
+  region: "africa-south1",
+  enforceAppCheck: true,
+  consumeAppCheckToken: true  // Prevent replay attacks - single-use token
+}, async (request) => {
   requireAppCheck(request);
   requireVerified(request);
   const { defenseId } = request.data || {};
@@ -42,7 +50,11 @@ export const user_upgradeDefense = onCall({ region: "africa-south1", enforceAppC
   return apiUpgradeDefense(request.auth.uid, defenseId);
 });
 
-export const user_sellDefense = onCall({ region: "africa-south1", enforceAppCheck: true }, async (request) => {
+export const user_sellDefense = onCall({
+  region: "africa-south1",
+  enforceAppCheck: true,
+  consumeAppCheckToken: true  // Prevent replay attacks - single-use token
+}, async (request) => {
   requireAppCheck(request);
   requireVerified(request);
   const { defenseId } = request.data || {};

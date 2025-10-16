@@ -13,10 +13,12 @@ export {
   user_getAttackLogs,
 } from "./apps/user-api/app.js";
 
+// Callable function exports (auth)
+export { auth_registerWithEmail } from "./apps/auth-api/app.js";
+
 // Callable function exports (admin)
 export {
   admin_listUsers,
-  admin_grantAdmin,
   admin_massAttackCustom,
   admin_massAttackEasy,
   admin_massAttackMedium,
@@ -26,3 +28,4 @@ export {
 
 // Background triggers
 export { userDocOnCreate } from "./apps/triggers/identity.onUserCreated.js";
+export { beforeUserCreated } from "./apps/triggers/auth.beforeCreate.js";

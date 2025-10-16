@@ -20,7 +20,7 @@ import { getPerformance } from "firebase/performance";
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBOtM0OkuE-PPueNeidkfBHh0a-pYR255k",
-  authDomain: "wario-fantasy-fraud-league.firebaseapp.com",
+  authDomain: "fantasyfraud.org",  // Custom domain for better user experience
   projectId: "wario-fantasy-fraud-league",
   storageBucket: "wario-fantasy-fraud-league.firebasestorage.app",
   messagingSenderId: "916165333209",
