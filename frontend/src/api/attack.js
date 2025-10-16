@@ -17,7 +17,9 @@ export async function getUserAttackLogs(limit = null) {
  * @returns {Promise<void>}
  */
 export async function adminMassAttackRandom() {
-  const fn = httpsCallable(functions, "admin_massAttackRandom");
+  const fn = httpsCallable(functions, "admin_massAttackRandom", {
+    limitedUseAppCheckTokens: true  // Prevent replay attacks
+  });
   const result = await fn();
   return result.data;
 }
@@ -27,7 +29,9 @@ export async function adminMassAttackRandom() {
  * @returns {Promise<void>}
  */
 export async function adminMassAttackEasy() {
-  const fn = httpsCallable(functions, "admin_massAttackEasy");
+  const fn = httpsCallable(functions, "admin_massAttackEasy", {
+    limitedUseAppCheckTokens: true  // Prevent replay attacks
+  });
   const result = await fn();
   return result.data;
 }
@@ -37,7 +41,9 @@ export async function adminMassAttackEasy() {
  * @returns {Promise<void>}
  */
 export async function adminMassAttackMedium() {
-  const fn = httpsCallable(functions, "admin_massAttackMedium");
+  const fn = httpsCallable(functions, "admin_massAttackMedium", {
+    limitedUseAppCheckTokens: true  // Prevent replay attacks
+  });
   const result = await fn();
   return result.data;
 }
@@ -47,7 +53,9 @@ export async function adminMassAttackMedium() {
  * @returns {Promise<void>}
  */
 export async function adminMassAttackHard() {
-  const fn = httpsCallable(functions, "admin_massAttackHard");
+  const fn = httpsCallable(functions, "admin_massAttackHard", {
+    limitedUseAppCheckTokens: true  // Prevent replay attacks
+  });
   const result = await fn();
   return result.data;
 }
@@ -58,7 +66,9 @@ export async function adminMassAttackHard() {
  * @returns {Promise<void>}
  */
 export async function adminMassAttackCustom(wave) {
-  const fn = httpsCallable(functions, "admin_massAttackCustom");
+  const fn = httpsCallable(functions, "admin_massAttackCustom", {
+    limitedUseAppCheckTokens: true  // Prevent replay attacks
+  });
   const result = await fn({ wave });
   return result.data;
 }

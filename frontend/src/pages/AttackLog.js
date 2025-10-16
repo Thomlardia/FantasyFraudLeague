@@ -112,15 +112,15 @@ function AttackLog() {
                                 const defenseEffectiveness = totalOriginalDamage > 0 ? (totalPrevented / totalOriginalDamage) * 100 : 0;
                                 
                                 let starRating = "";
-                                if (defenseEffectiveness >= 50) {
+                                if (defenseEffectiveness >= 90) {
                                     starRating = "⭐⭐⭐⭐⭐";
-                                } else if (defenseEffectiveness >= 30) {
+                                } else if (defenseEffectiveness >= 75) {
                                     starRating = "⭐⭐⭐⭐";
-                                } else if (defenseEffectiveness >= 20) {
+                                } else if (defenseEffectiveness >= 50) {
                                     starRating = "⭐⭐⭐";
-                                } else if (defenseEffectiveness >= 10) {
+                                } else if (defenseEffectiveness >= 30) {
                                     starRating = "⭐⭐";
-                                } else if (defenseEffectiveness >= 5) {
+                                } else if (defenseEffectiveness >= 10) {
                                     starRating = "⭐";
                                 } else {
                                     starRating = "";

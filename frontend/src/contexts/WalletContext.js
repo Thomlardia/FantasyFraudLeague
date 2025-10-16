@@ -13,14 +13,16 @@ const WalletContext = createContext(null);
 export function WalletProvider({ children }) {
   const [balance, setBalance] = useState(null);
   const [loading, setLoading] = useState(false);
-  const { user } = useAuth();
+  const { user, initializing } = useAuth();
 
   /**
    * Fetches the current user's balance from the backend
    * Uses memoized callback to prevent unnecessary re-renders
+   * Waits for authentication to complete before fetching
    */
   const refreshBalance = useCallback(async () => {
-    if (!user) {
+    // Wait for auth initialization to complete
+    if (initializing || !user) {
       setBalance(null);
       return;
     }
@@ -37,7 +39,7 @@ export function WalletProvider({ children }) {
     } finally {
       setLoading(false);
     }
-  }, [user]);
+  }, [user, initializing]);
 
   // Auto-refresh balance when user auth state changes
   useEffect(() => {

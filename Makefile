@@ -235,7 +235,7 @@ lint:
 # Building should be done automatically as specified in firebase.json,
 # but I haven't confirmed yet.
 
-deploy-hosting:
+deploy-hosting: vbuild
 	npx firebase-tools deploy --only hosting
 
 deploy-functions:
@@ -250,7 +250,7 @@ deploy-firestore-rules:
 deploy-hosting-functions:
 	npx firebase-tools deploy --only hosting,functions
 
-deploy:
+deploy: vbuild
 	npx firebase-tools deploy
 
 # ------------- DEPLOY (Vite) --------------

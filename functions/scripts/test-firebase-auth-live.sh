@@ -12,9 +12,9 @@ set -euo pipefail
 #   - If you provide APP_CHECK_TOKEN, retry WITH the header and report results.
 
 API_KEY="${API_KEY:-AIzaSyBOtM0OkuE-PPueNeidkfBHh0a-pYR255k}"
-EMAIL="${EMAIL:-testing15687683@gmail.com}"
+EMAIL="${EMAIL:-testig13helo@gmail.com}"
 PASSWORD="${PASSWORD:-TESTING}"
-APP_CHECK_TOKEN="${APP_CHECK_TOKEN:-}"   # paste appcheck token here
+APP_CHECK_TOKEN="${APP_CHECK_TOKEN:-eyJraWQiOiJVTjJhMmciLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxOjkxNjE2NTMzMzIwOTp3ZWI6MmEwNGE1OTBjM2JlZDkxY2MzMmVjOCIsImF1ZCI6WyJwcm9qZWN0cy85MTYxNjUzMzMyMDkiLCJwcm9qZWN0cy93YXJpby1mYW50YXN5LWZyYXVkLWxlYWd1ZSJdLCJwcm92aWRlciI6InJlY2FwdGNoYV9lbnRlcnByaXNlIiwiaXNzIjoiaHR0cHM6Ly9maXJlYmFzZWFwcGNoZWNrLmdvb2dsZWFwaXMuY29tLzkxNjE2NTMzMzIwOSIsImV4cCI6MTc2MDU3ODY2MywiaWF0IjoxNzYwNTc1MDYzLCJqdGkiOiJWbENqajYtU1lfSC1hWTVyOWtteVlPbWRKdm9UbUtWU09Ia0M2MDRUYUpjIn0.D5SRYfgPY1FXQCoZl8TW36Zw5n0ALODMawb-EeHhsZcgay-2TIO7aIbaby73JPTVSoWv1tsJSox_iAmDHEl96WpNqB1hGUxIak2DOvooN23VZZxad1yfBKJvjey2R1a58PXetzOnsitgHRg0I8RFZd5SPgWalxclhM2LkK_b9oLXi1w3BOKB4lkUB8818Aqm6b6GNQWEELfT4L6xCM_VFbsZPSpwNgrrvunxryYiESTgXTiCaRSAz8g0Tgtlh1WNnzHJIs73BHJreeEaWXp7L7Gn_pCPW4DgqY6uXCummer8V-FV7j-vZ-CEGYsV6Z5l0oxoWRnqeJrXhICRETEBTDS1IohP7WnZ1gSpT1Eyzx8PncUB0V1JRFIB56yjtj5IeaAcPS23zRm7l_W60rn3x88yqJ7gnRS57knhQIx-yYxdSNDg29A1GQpwv9wZPGc5P1WniLUb8KdYpjoA5bx2OrLGIRmcf-ugWFpLnxXodEmy-JMabl6yB7ONa2NJPZ2R}"   # paste appcheck token here
 TIMEOUT=15
 
 # helper: pretty print result & cleanup
@@ -72,11 +72,9 @@ if [[ "$HTTP" == "401" ]]; then
 elif [[ "$HTTP" == "200" || "$HTTP" == "201" ]]; then
   echo
   echo "RESULT: SIGN-UP SUCCEEDED WITHOUT APP CHECK."
-  echo "Interpretation: App Check is NOT blocking public sign-up in this project (attacker could create accounts with just the API key)."
 else
   echo
   echo "RESULT: HTTP $HTTP (not 200/201/401)."
-  echo "Interpretation: Could be rate-limiting, API key invalid, project settings, or other issue. Inspect response above."
 fi
 
 # Clean up

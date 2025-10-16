@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import '../styles/ui.css';
-import fflLogo from '../images/ffl_logo_ghost.png';
 
 function Hello() {
   return (
@@ -8,7 +7,13 @@ function Hello() {
       <div className="auth-shell">
         <div className="splash-scrollable landing-scrollable">
           <div className="splash-header">
-            <img src={fflLogo} alt="FFL Shield Logo" className="splash-logo" />
+            <img
+              src="/ffl_logo_ghost.png"
+              alt="FFL Shield Logo"
+              className="splash-logo"
+              fetchpriority="high"
+              loading="eager"
+            />
           </div>
 
           <div className="landing-stack">

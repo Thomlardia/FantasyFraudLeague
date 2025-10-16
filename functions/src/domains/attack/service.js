@@ -150,22 +150,22 @@ export async function attackDeduction(userId, wave) {
   
   // Calculate bonus income based, star based syste,
   let bonusIncome = 0;
-  if (defenseEffectiveness >= 50) {
-    bonusIncome = 50000; // 5 star: 50%+ damage prevented
+  if (defenseEffectiveness >= 90) {
+    bonusIncome = 200000; // 5 star: 90%+ damage prevented
+  } else if (defenseEffectiveness >= 75) {
+    bonusIncome = 150000;  // 4 star: 75-89% damage prevented
+  } else if (defenseEffectiveness >= 50) {
+    bonusIncome = 100000;  // 3 start: 50-74% damage prevented
   } else if (defenseEffectiveness >= 30) {
-    bonusIncome = 30000;  // 4 star: 20-30% damage prevented
-  } else if (defenseEffectiveness >= 20) {
-    bonusIncome = 20000;  // 3 start: 10-20% damage prevented
+    bonusIncome = 50000;  // 2 star : 30-49% damage prevented
   } else if (defenseEffectiveness >= 10) {
-    bonusIncome = 10000;  // 2 star : 5-10% damage prevented
-  } else if (defenseEffectiveness >= 5) {
-    bonusIncome = 5000;  // 1 star: 0-5% damage prevented
+    bonusIncome = 25000;  // 1 star: 10-29% damage prevented
   }
-  // Level 0: No bonus for less than 5% defense effectiveness
+  // Level 0: No bonus for less than 10% defense effectiveness
 
   // Use transaction to update both balance and netWorth atomically
   const damage = Math.round(totalDamage);
-  const interestRate = 0.02; // 2% interest
+  const interestRate = 0.1; // 10% interest
 
   const newBalance = await db.runTransaction(async (transaction) => {
     const userDocRef = db.collection("users").doc(userId);
