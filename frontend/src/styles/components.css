@@ -308,6 +308,19 @@
 	border-color: #4a7a63;
 }
 
+.money-display--negative {
+	background: var(--color-red-light);
+	color: var(--color-red-dark);
+	border-color: var(--color-red-dark);
+}
+
+.money-display--negative:hover {
+	background: #e9c4cb;
+	border-color: var(--color-red-dark);
+	box-shadow: 5px 5px 0 rgba(16, 24, 26, 0.34);
+	transform: translate(-1px, -1px);
+}
+
 .money-display > span:last-child {
 	transform: scaleY(1.1);
 }
@@ -321,6 +334,10 @@
 .money-icon .material-symbols-outlined {
 	font-size: 28px;
 	color: #4a7a63;
+}
+
+.money-display--negative .money-icon .material-symbols-outlined {
+	color: var(--color-red-dark);
 }
 
 .money-icon .icon-img--small {

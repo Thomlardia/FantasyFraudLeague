@@ -106,6 +106,15 @@ function AttackLog() {
                                 const totalDamage = log.totalDamage || 0;
                                 const attackCount = log.attacks?.length || 0;
                                 const totalPrevented = log.attacks?.reduce((sum, attack) => sum + (attack.damageReduced || 0), 0) || 0;
+                                const oldBalance = log.oldBalance || 0;
+                                const newBalance = log.newBalance || 0;
+                                const netChange = newBalance - oldBalance;
+                                const changeClassName = netChange > 0
+                                    ? 'attack-log-damage attack-log-damage--positive'
+                                    : netChange < 0
+                                        ? 'attack-log-damage attack-log-damage--negative'
+                                        : 'attack-log-damage attack-log-damage--neutral';
+                                const formattedNetChange = `${netChange > 0 ? '+' : netChange < 0 ? '-' : ''}$${Math.abs(Math.round(netChange)).toLocaleString()}`;
                                 
                                 // Calculate defense effectiveness and star rating
                                 const totalOriginalDamage = log.attacks?.reduce((sum, attack) => sum + (attack.originalDamage || 0), 0) || 0;
@@ -138,7 +147,7 @@ function AttackLog() {
                                                 {starRating && <span className="attack-log-stars">{starRating}</span>}
                                             </div>
                                             <div className="attack-log-summary-stats">
-                                                <span className="attack-log-damage">${log.newBalance-log.oldBalance}</span>
+                                                <span className={changeClassName}>{formattedNetChange}</span>
                                                 <span className="material-symbols-outlined attack-log-expand-icon">
                                                     {isExpanded ? 'expand_less' : 'expand_more'}
                                                 </span>

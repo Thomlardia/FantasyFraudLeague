@@ -1806,11 +1806,32 @@
   font-family: 'Audiowide', cursive;
   font-size: 16px;
   font-weight: 800;
-  color: var(--color-red-dark);
-  background: var(--color-red-light);
   padding: 6px 12px;
   border-radius: 8px;
-  border: 1px solid var(--color-red-dark);
+  border: 1px solid transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 70px;
+  text-align: center;
+}
+
+.attack-log-damage--negative {
+  color: var(--color-red-dark);
+  background: var(--color-red-light);
+  border-color: var(--color-red-dark);
+}
+
+.attack-log-damage--positive {
+  color: var(--color-green-dark);
+  background: var(--color-green-light);
+  border-color: var(--color-green-dark);
+}
+
+.attack-log-damage--neutral {
+  color: var(--color-text-secondary);
+  background: rgba(255, 255, 255, 0.4);
+  border-color: var(--neo-sub-border);
 }
 
 .attack-log-expand-icon {

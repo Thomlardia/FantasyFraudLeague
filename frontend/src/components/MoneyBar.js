@@ -17,9 +17,11 @@ function formatMoney(amount) {
  */
 function MoneyBar() {
   const { balance, loading } = useWallet();
+  const isNegativeBalance = !loading && typeof balance === 'number' && balance < 0;
+  const displayClass = `money-display${isNegativeBalance ? ' money-display--negative' : ''}`;
 
   return (
-    <div className="money-display" title="Bank">
+    <div className={displayClass} title="Bank">
       <span className="money-icon">
         <span className="material-symbols-outlined">attach_money</span>
       </span>
