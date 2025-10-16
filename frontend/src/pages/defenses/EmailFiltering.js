@@ -32,6 +32,9 @@ function EmailFiltering() {
                             <li>
                                 <Link to="/frauds/Phishing" className="info-link">Phishing</Link>
                             </li>
+                            <li>
+                                <Link to="/frauds/BusinessEmailCompromise" className="info-link">Business Email Compromise</Link>
+                            </li>
                         </ul>
                     </div>
                     <div className="info-section">

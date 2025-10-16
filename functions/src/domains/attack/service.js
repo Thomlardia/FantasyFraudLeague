@@ -85,6 +85,8 @@ export async function attackDeduction(userId, wave) {
     oldBalance: currentBalance,
     attacks: [],
     totalDamage: 0,
+    interestEarned: 0,
+    bonusIncome: 0,
     newBalance: 0
   };
 
@@ -134,8 +136,36 @@ export async function attackDeduction(userId, wave) {
     totalDamage += reducedDamage;
   }
 
+  // Calculate defense bonus based on damage prevented
+  let totalDamagePrevented = 0;
+  let totalOriginalDamage = 0;
+  
+  for (const attackDetail of attackLog.attacks) {
+    totalDamagePrevented += attackDetail.damageReduced;
+    totalOriginalDamage += attackDetail.originalDamage;
+  }
+  
+  // calculate defense effectiveness percentage
+  const defenseEffectiveness = totalOriginalDamage > 0 ? (totalDamagePrevented / totalOriginalDamage) * 100 : 0;
+  
+  // Calculate bonus income based, star based syste,
+  let bonusIncome = 0;
+  if (defenseEffectiveness >= 90) {
+    bonusIncome = 200000; // 5 star: 90%+ damage prevented
+  } else if (defenseEffectiveness >= 75) {
+    bonusIncome = 150000;  // 4 star: 75-89% damage prevented
+  } else if (defenseEffectiveness >= 50) {
+    bonusIncome = 100000;  // 3 start: 50-74% damage prevented
+  } else if (defenseEffectiveness >= 30) {
+    bonusIncome = 50000;  // 2 star : 30-49% damage prevented
+  } else if (defenseEffectiveness >= 10) {
+    bonusIncome = 25000;  // 1 star: 10-29% damage prevented
+  }
+  // Level 0: No bonus for less than 10% defense effectiveness
+
   // Use transaction to update both balance and netWorth atomically
   const damage = Math.round(totalDamage);
+  const interestRate = 0.1; // 10% interest
 
   const newBalance = await db.runTransaction(async (transaction) => {
     const userDocRef = db.collection("users").doc(userId);
@@ -149,25 +179,34 @@ export async function attackDeduction(userId, wave) {
     const currentBalance = userData.balance || 0;
     const currentNetWorth = userData.netWorth || 0;
 
-    const newBalance = currentBalance - damage;
-    const newNetWorth = currentNetWorth - damage; // NetWorth decreases by damage amount
+    // Apply damage first
+    const balanceAfterDamage = currentBalance - damage;
+    
+    // Add interest to the balance after damage (only if balance is positive)
+    const interestAmount = balanceAfterDamage > 0 ? balanceAfterDamage * interestRate : 0;
+    
+    // Add bonus income and interest to final balance
+    const finalBalance = balanceAfterDamage + interestAmount + bonusIncome;
+    const finalNetWorth = currentNetWorth - damage + interestAmount + bonusIncome;
 
     transaction.update(userDocRef, {
-      balance: newBalance,
-      netWorth: newNetWorth,
+      balance: finalBalance,
+      netWorth: finalNetWorth,
     });
 
-    return newBalance;
+    return { finalBalance, interestAmount, bonusIncome };
   });
 
   // Complete the attack log and save it after transaction
   attackLog.totalDamage = damage;
-  attackLog.newBalance = newBalance;
+  attackLog.interestEarned = Math.round(newBalance.interestAmount);
+  attackLog.bonusIncome = newBalance.bonusIncome;
+  attackLog.newBalance = newBalance.finalBalance;
 
   // Save attack log to database
   await saveAttackLogToDatabase(userId, attackLog);
 
-  return newBalance;
+  return newBalance.finalBalance;
 }
 
 /**

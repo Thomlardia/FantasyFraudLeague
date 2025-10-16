@@ -30,10 +30,16 @@ function NetworkMonitoring() {
                         </h3>
                         <ul className="info-list">
                             <li>
-                                <Link to="/frauds/Ddos" className="info-link">DDoS</Link>
+                                <Link to="/frauds/BruteForce" className="info-link">Brute Force</Link>
                             </li>
                             <li>
                                 <Link to="/frauds/CryptoJacking" className="info-link">Crypto Jacking</Link>
+                            </li>
+                            <li>
+                                <Link to="/frauds/Ddos" className="info-link">DDoS</Link>
+                            </li>
+                            <li>
+                                <Link to="/frauds/InsiderFraud" className="info-link">Insider Fraud</Link>
                             </li>
                         </ul>
                     </div>

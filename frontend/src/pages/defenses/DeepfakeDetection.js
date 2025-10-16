@@ -32,6 +32,9 @@ function DeepfakeDetection() {
                             <li>
                                 <Link to="/frauds/Deepfake" className="info-link">Deepfake</Link>
                             </li>
+                            <li>
+                                <Link to="/frauds/Vishing" className="info-link">Vishing</Link>
+                            </li>
                         </ul>
                     </div>
                     <div className="info-section">

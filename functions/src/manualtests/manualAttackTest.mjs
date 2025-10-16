@@ -1,7 +1,7 @@
 // simple manual tests for attack info functions.
-import { getAttackInfo, getRandomWave, getEasyWave, getMediumWave, getHardWave, attackDeduction } from "./src/domains/attack/service.js";
-import { updateUserBalance, getUserBalance } from "./src/domains/wallet/service.js";
-import { getUserOwnedDefensesComplete } from "./src/domains/defense/repo.js";
+import { getAttackInfo, getRandomWave, getEasyWave, getMediumWave, getHardWave, attackDeduction } from "../domains/attack/service.js";
+import { updateUserBalance, getUserBalance } from "../domains/wallet/service.js";
+import { getUserOwnedDefensesComplete } from "../domains/defense/repo.js";
 
 async function run() {
   // Setup test user

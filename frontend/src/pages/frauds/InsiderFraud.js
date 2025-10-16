@@ -52,6 +52,15 @@ function InsiderFraud() {
                             <li>
                                 <Link to="/defenses/SegregationOfDuties" className="info-link">Segregation Of Duties</Link>
                             </li>
+                            <li>
+                                <Link to="/defenses/RegulatedAutoBackup" className="info-link">Regulated Automated Backups</Link>
+                            </li>
+                            <li>
+                                <Link to="/defenses/NetworkMonitoring" className="info-link">Network Monitoring</Link>
+                            </li>
+                            <li>
+                                <Link to="/defenses/RegularAudits" className="info-link">Regular Audits</Link>
+                            </li>
                         </ul>
                     </div>
                     <div className="info-section">

@@ -33,13 +33,10 @@ function UserEducation() {
                                 <Link to="/frauds/Phishing" className="info-link">Phishing</Link>
                             </li>
                             <li>
-                                <Link to="/frauds/Ransomware" className="info-link">Ransomware</Link>
+                                <Link to="/frauds/InvestmentScams" className="info-link">Investment Scams</Link>
                             </li>
                             <li>
                                 <Link to="/frauds/Vishing" className="info-link">Vishing</Link>
-                            </li>
-                            <li>
-                                <Link to="/frauds/AuthPushPayments" className="info-link">Auth Push Payments</Link>
                             </li>
                         </ul>
                     </div>

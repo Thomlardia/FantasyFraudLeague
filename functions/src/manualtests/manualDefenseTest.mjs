@@ -1,20 +1,18 @@
-import { buyDefense, upgradeDefense, getUserDefenses, clearDefenseCache } from "./src/domains/defense/service.js";
-import { getUserBalance, updateUserBalance } from "./src/domains/wallet/service.js";
-import { getLeaderboard, getLeaderboardWithUser, getUserRank } from "./src/domains/leaderboard/service.js";
+import { buyDefense, upgradeDefense, getUserDefenses, clearDefenseCache } from "../domains/defense/service.js";
+import { getUserBalance, updateUserBalance } from "../domains/wallet/service.js";
 
 async function testDefenses() {
-const testUserId = "AU6dSewjoQe3CJjEzaOwZpwuESjH";
-
+  const testUserId = "testuser1";
   
-console.log("Starting Defense Domain Tests...\n");
+  console.log("Starting Defense Domain Tests...\n");
   
   try {
     // clear cache to ensure fresh data
     clearDefenseCache();
     
     // give user starting balance
-    // await updateUserBalance(testUserId, 1000000);
-    // console.log("Seeded balance to 1,000,000");
+    await updateUserBalance(testUserId, 1000000);
+    console.log("Seeded balance to 1,000,000");
     
     // test getting user defenses (should show all available defenses with user's levels)
     console.log("\n Getting user defenses...");
@@ -101,19 +99,6 @@ console.log("Starting Defense Domain Tests...\n");
     
     console.log("\nAll tests completed!");
     
-  } catch (error) {
-    console.error("Test failed:", error);
-  }
-
-  try {
-    const userRank = await getUserRank(testUserId);
-    console.log(userRank);
-
-    const leaderboardWithUser = await getLeaderboardWithUser(testUserId);
-    console.log(leaderboardWithUser);
-
-    const leaderboard = await getLeaderboard();
-    console.log(leaderboard)
   } catch (error) {
     console.error("Test failed:", error);
   }

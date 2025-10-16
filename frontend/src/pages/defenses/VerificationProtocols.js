@@ -33,6 +33,9 @@ function VerificationProtocols() {
                             <li>
                                 <Link to="/frauds/Deepfake" className="info-link">Deepfake Fraud</Link>
                             </li>
+                            <li>
+                                <Link to="/frauds/AuthPushPayments" className="info-link">Authorized Push Payments</Link>
+                            </li>
                         </ul>
                     </div>
                     <div className="info-section">

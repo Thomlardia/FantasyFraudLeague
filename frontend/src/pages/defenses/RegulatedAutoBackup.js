@@ -33,6 +33,9 @@ function RegulatedAutoBackup() {
                             <li>
                                 <Link to="/frauds/Ransomware" className="info-link">Ransomware</Link>
                             </li>
+                            <li>
+                                <Link to="/frauds/InsiderFraud" className="info-link">Insider Fraud</Link>
+                            </li>
                         </ul>
                     </div>
                     <div className="info-section">
