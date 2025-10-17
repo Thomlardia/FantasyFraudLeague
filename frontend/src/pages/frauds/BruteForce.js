@@ -50,7 +50,7 @@ function BruteForce() {
                                 <Link to="/defenses/NetworkMonitoring" className="info-link">Network Monitoring</Link>
                             </li>
                             <li>
-                                <Link to="/defenses/RegularPasswordChanges" className="info-link">Password Policies</Link>
+                                <Link to="/defenses/RegularPasswordChanges" className="info-link">Regular Password Changes</Link>
                             </li>
                             <li>
                                 <Link to="/defenses/TrafficFiltering" className="info-link">Traffic Filtering</Link>

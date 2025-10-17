@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect, useState, useCallback, useRef } from 'react';
-import { getUserAttackLogs } from '../api/attack';
+import { getScheduledAttacks, getUserAttackLogs } from '../api/attack';
 import { useAuth } from '../auth/AuthProvider';
+import { useWallet } from './WalletContext';
+import { extractScheduledMillis } from '../utils/scheduledAttack';
 
 const AttackContext = createContext(null);
 
@@ -11,6 +13,7 @@ const AttackContext = createContext(null);
  */
 export function AttackProvider({ children }) {
   const { user } = useAuth();
+  const { refreshBalance } = useWallet();
   // Timer state
   const [timeRemaining, setTimeRemaining] = useState(5 * 3600 + 45 * 60 + 38); // 05:45:38 in seconds
   const [isRunning, setIsRunning] = useState(false);
@@ -21,6 +24,11 @@ export function AttackProvider({ children }) {
   const [attackLogs, setAttackLogs] = useState([]);
   const [logsLoading, setLogsLoading] = useState(false);
   const [logsError, setLogsError] = useState(null);
+
+  // Scheduled attacks state
+  const [scheduledAttacks, setScheduledAttacks] = useState([]);
+  const [scheduledLoading, setScheduledLoading] = useState(false);
+  const [scheduledError, setScheduledError] = useState(null);
 
   // Attack statistics (average protection by attack type)
   const [attackStats, setAttackStats] = useState({});
@@ -184,6 +192,7 @@ export function AttackProvider({ children }) {
     if (!user) {
       setAttackLogs([]);
       setAttackStats({});
+      setScheduledAttacks([]);
       return;
     }
 
@@ -196,6 +205,7 @@ export function AttackProvider({ children }) {
       // Calculate and store statistics from logs
       const stats = calculateAttackStats(logs || []);
       setAttackStats(stats);
+      await refreshBalance();
     } catch (err) {
       console.error('Error fetching attack logs:', err);
       setLogsError(err.message || 'Failed to load attack logs');
@@ -204,14 +214,45 @@ export function AttackProvider({ children }) {
     } finally {
       setLogsLoading(false);
     }
-  }, [user, calculateAttackStats]);
+  }, [user, calculateAttackStats, refreshBalance]);
+
+  /**
+   * Fetch upcoming scheduled attacks from backend
+   */
+  const fetchScheduledAttacks = useCallback(async (limit = null) => {
+    if (!user) {
+      setScheduledAttacks([]);
+      return;
+    }
+
+    try {
+      setScheduledLoading(true);
+      setScheduledError(null);
+      const upcoming = await getScheduledAttacks(limit);
+      const sortedUpcoming = (upcoming || []).slice().sort((a, b) => {
+        const aMs = extractScheduledMillis(a);
+        const bMs = extractScheduledMillis(b);
+        return aMs - bMs;
+      });
+      setScheduledAttacks(sortedUpcoming);
+    } catch (err) {
+      console.error('Error fetching scheduled attacks:', err);
+      setScheduledError(err.message || 'Failed to load scheduled attacks');
+      setScheduledAttacks([]);
+    } finally {
+      setScheduledLoading(false);
+    }
+  }, [user]);
 
   /**
    * Refresh attack logs (convenience wrapper)
    */
   const refreshAttackLogs = useCallback(() => {
-    return fetchAttackLogs();
-  }, [fetchAttackLogs]);
+    return Promise.all([
+      fetchAttackLogs(),
+      fetchScheduledAttacks(),
+    ]);
+  }, [fetchAttackLogs, fetchScheduledAttacks]);
 
   /**
    * Get the most recent attack log
@@ -244,7 +285,15 @@ export function AttackProvider({ children }) {
   // Auto-fetch attack logs when user auth state changes
   useEffect(() => {
     fetchAttackLogs();
-  }, [fetchAttackLogs]);
+    fetchScheduledAttacks();
+  }, [fetchAttackLogs, fetchScheduledAttacks]);
+
+  const getNextScheduledAttack = useCallback(() => {
+    if (!scheduledAttacks || scheduledAttacks.length === 0) {
+      return null;
+    }
+    return scheduledAttacks[0];
+  }, [scheduledAttacks]);
 
   const value = {
     // Timer
@@ -261,8 +310,13 @@ export function AttackProvider({ children }) {
     attackLogs,
     logsLoading,
     logsError,
+    scheduledAttacks,
+    scheduledLoading,
+    scheduledError,
     fetchAttackLogs,
+    fetchScheduledAttacks,
     refreshAttackLogs,
+    getNextScheduledAttack,
     getLatestAttackLog,
     // Attack statistics
     attackStats,
@@ -291,8 +345,13 @@ export function AttackProvider({ children }) {
  * @property {Array} attackLogs - Array of attack log objects (sorted newest first)
  * @property {boolean} logsLoading - Whether logs are currently being fetched
  * @property {string|null} logsError - Error message if log fetching failed
+ * @property {Array} scheduledAttacks - Array of upcoming scheduled attack objects
+ * @property {boolean} scheduledLoading - Whether scheduled attacks are being fetched
+ * @property {string|null} scheduledError - Error fetching scheduled attacks
  * @property {Function} fetchAttackLogs - Fetch attack logs with optional limit
+ * @property {Function} fetchScheduledAttacks - Fetch scheduled attacks with optional limit
  * @property {Function} refreshAttackLogs - Refresh all attack logs
+ * @property {Function} getNextScheduledAttack - Get the next upcoming scheduled attack (or null)
  * @property {Function} getLatestAttackLog - Get most recent attack log
  *
  * Attack statistics properties:

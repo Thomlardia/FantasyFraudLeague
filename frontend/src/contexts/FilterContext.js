@@ -22,10 +22,10 @@ export function FilterProvider({ children }) {
   });
 
   // Leaderboard tab
-  const [leaderboardTab, setLeaderboardTab] = useState('alltime'); // alltime, lastattack
+  const [leaderboardTab, setLeaderboardTab] = useState('alltime'); // alltime (currently only tab)
 
   // Attack Log tab
-  const [attackLogTab, setAttackLogTab] = useState('alltime'); // alltime, lastattack
+  const [attackLogTab, setAttackLogTab] = useState('past'); // past, upcoming
 
   /**
    * Update Defense Shop filters
@@ -58,7 +58,7 @@ export function FilterProvider({ children }) {
       sortDirection: 'asc',
     });
     setLeaderboardTab('alltime');
-    setAttackLogTab('alltime');
+    setAttackLogTab('past');
   };
 
   const value = {

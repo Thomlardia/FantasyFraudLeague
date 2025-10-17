@@ -112,8 +112,8 @@ export const defenses = {
       insiderFraud: [0, 15, 25], // can detect suspicious patterns/ behaviours but not all
     },
   },
-  passwordPolicies: {
-    defenseId: "passwordPolicies",
+  regularPasswordChanges: {
+    defenseId: "regularPasswordChanges",
     level: 1,
     cost: [20000, 15000, 25000],
     defendsAgainst: {

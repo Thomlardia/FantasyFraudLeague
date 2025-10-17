@@ -153,6 +153,7 @@
 	gap: calc(var(--space-control-gap));
 	text-align: center;
 	transition: all 200ms ease;
+	color: var(--neo-sub-border);
 }
 
 .home-timer-card .digital-timer,
@@ -170,6 +171,11 @@
 	color: var(--color-chart-orange-dark);
 }
 
+.home-timer-card.timer-warning .timer-subtext,
+.home-timer-card.timer-warning .timer-link {
+	color: var(--color-chart-orange-dark);
+}
+
 .home-timer-card.timer-critical {
 	background: var(--color-red-light);
 	border-color: var(--color-red-dark);
@@ -178,6 +184,89 @@
 .home-timer-card.timer-critical .digital-timer,
 .home-timer-card.timer-critical .headline {
 	color: var(--color-red-dark);
+}
+
+.home-timer-card.timer-critical .timer-subtext,
+.home-timer-card.timer-critical .timer-link {
+	color: var(--color-red-dark);
+}
+
+.home-timer-card.outcome-positive {
+	background: var(--color-green-light);
+	border-color: var(--color-green-dark);
+}
+
+.home-timer-card.outcome-positive .digital-timer,
+.home-timer-card.outcome-positive .headline,
+.home-timer-card.outcome-positive .timer-subtext,
+.home-timer-card.outcome-positive .timer-link {
+	color: var(--color-green-dark);
+}
+
+.home-timer-card.outcome-negative {
+	background: var(--color-red-light);
+	border-color: var(--color-red-dark);
+}
+
+.home-timer-card.outcome-negative .digital-timer,
+.home-timer-card.outcome-negative .headline,
+.home-timer-card.outcome-negative .timer-subtext,
+.home-timer-card.outcome-negative .timer-link {
+	color: var(--color-red-dark);
+}
+
+.timer-subtext {
+	font-size: 14px;
+	font-weight: 600;
+	color: inherit;
+	margin: 4px 0 0;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 6px;
+	justify-content: center;
+}
+
+.timer-subtext .spin {
+	animation: timer-spin 1.2s linear infinite;
+}
+
+.timer-empty {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 8px;
+	color: var(--color-text-secondary);
+}
+
+.timer-empty .material-symbols-outlined {
+	font-size: 36px;
+	color: var(--color-text-secondary);
+}
+
+.timer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 1px solid transparent;
+}
+
+.timer-link:hover {
+	border-bottom-color: currentColor;
+}
+
+.timer-empty p {
+	margin: 0;
+	font-size: 14px;
+	font-weight: 600;
+	text-align: center;
 }
 
 .timer-controls {
@@ -327,6 +416,9 @@
 	}
 
 @media (max-width: 480px) {
+	.home-timer-card .digital-timer {
+		font-size: clamp(40px, 8vw, 60px);
+	}
 	.auth-shell .title-section {
 		flex-direction: column;
 	}
@@ -608,4 +700,13 @@
 	border: 1px solid rgba(24, 32, 36, 0.42);
 	box-shadow: 3px 3px 0 rgba(17, 23, 25, 0.32);
 	overflow-x: auto;
+}
+
+@keyframes timer-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
 }

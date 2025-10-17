@@ -11,6 +11,7 @@ export {
   user_getLeaderboardWithUser,
   user_getUserRank,
   user_getAttackLogs,
+  user_getScheduledAttacks,
 } from "./apps/user-api/app.js";
 
 // Callable function exports (auth)
@@ -24,8 +25,12 @@ export {
   admin_massAttackMedium,
   admin_massAttackHard,
   admin_massAttackRandom,
+  admin_scheduleAttack,
 } from "./apps/admin-api/app.js";
 
 // Background triggers
 export { userDocOnCreate } from "./apps/triggers/identity.onUserCreated.js";
 export { beforeUserCreated } from "./apps/triggers/auth.beforeCreate.js";
+
+// Scheduled jobs
+export { scheduled_executePendingAttacks } from "./apps/scheduler/execution.js";

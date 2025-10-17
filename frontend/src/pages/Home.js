@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from "../auth/useAuth";
-import { useAttack } from "../contexts/AttackContext";
+import useNextAttackCountdown from '../hooks/useNextAttackCountdown';
 import '../styles/ui.css';
 import MoneyBar from '../components/MoneyBar';
 import PageHeader from '../components/PageHeader';
@@ -8,13 +8,68 @@ import PageHeader from '../components/PageHeader';
 function Home() {
     const { hasRole, logout } = useAuth();
     const {
-        timeRemaining,
-        isRunning,
-        startTimer,
-        skipTimer,
-        formatTime,
-        getTimerCardClass
-    } = useAttack();
+        timerCardClass,
+        digitalDisplay,
+        subtextState,
+    } = useNextAttackCountdown();
+
+    const renderSubtext = () => {
+        switch (subtextState.type) {
+            case 'outcome':
+                return (
+                    <>
+                        <p className="timer-subtext">
+                            {subtextState.outcome.positive ? 'Defense bonus applied!' : 'Bank balance impacted.'}
+                        </p>
+                        <Link to="/attacklog" className="timer-link">
+                            Review latest report
+                        </Link>
+                    </>
+                );
+            case 'loading':
+                return (
+                    <div className="timer-subtext">
+                        <span className="material-symbols-outlined spin">hourglass_empty</span>
+                        Checking for upcoming attacks...
+                    </div>
+                );
+            case 'processing':
+                return (
+                    <div className="timer-subtext">
+                        <span className="material-symbols-outlined spin">hourglass_top</span>
+                        Processing attack results...
+                    </div>
+                );
+            case 'scheduled':
+                return (
+                    <>
+                        <p className="timer-subtext">
+                            Scheduled for {subtextState.scheduledDate.toLocaleString()}
+                        </p>
+                        <Link to="/attacklog" className="timer-link">
+                            View upcoming attacks
+                        </Link>
+                    </>
+                );
+            case 'timeout':
+                return (
+                    <div className="timer-subtext">
+                        <span className="material-symbols-outlined">info</span>
+                        Results delayed—check the Attack Log.
+                    </div>
+                );
+            default:
+                return (
+                    <div className="timer-empty">
+                        <span className="material-symbols-outlined">event_available</span>
+                        <p>No upcoming attacks scheduled.</p>
+                        <Link to="/attacklog" className="timer-link">
+                            Open Attack Log
+                        </Link>
+                    </div>
+                );
+        }
+    };
 
     return (
         <div className="page">
@@ -46,28 +101,10 @@ function Home() {
 
             <div className="home-content-wrapper">
                 <div className="home-content-card">
-                    <div className={getTimerCardClass()}>
-                        <div className="headline">NEXT ATTACK IN...</div>
-                        <div className="digital-timer" aria-live="polite">{formatTime(timeRemaining)}</div>
-
-                        <div className="timer-controls">
-                            <button
-                                className="icon-button timer-button"
-                                onClick={startTimer}
-                                disabled={isRunning}
-                                title="Start Timer"
-                            >
-                                <span className="material-symbols-outlined">play_arrow</span>
-                            </button>
-                            <button
-                                className="icon-button timer-button"
-                                onClick={skipTimer}
-                                disabled={!isRunning || timeRemaining <= 2 * 60}
-                                title="Skip Timer"
-                            >
-                                <span className="material-symbols-outlined">skip_next</span>
-                            </button>
-                        </div>
+                    <div className={timerCardClass}>
+                        <div className="headline">NEXT SCHEDULED ATTACK</div>
+                        <div className="digital-timer" aria-live="polite">{digitalDisplay}</div>
+                        {renderSubtext()}
                     </div>
 
                     <div className="home-cta-row">

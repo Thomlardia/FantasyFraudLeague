@@ -4,12 +4,12 @@ import DefenseDetailPage from '../../components/DefenseDetailPage';
 function RegularPasswordChanges() {
     return (
         <DefenseDetailPage
-            defenseKey="passwordPolicies"
-            title="Password Policies"
+            defenseKey="regularPasswordChanges"
+            title="Regular Password Changes"
             infoContent={
                 <>
                     <p className="info-paragraph">
-                        Password policies enforce policies that require users to refresh credentials on a predictable
+                        Regular password changes enforce schedules that require users to refresh credentials on a predictable
                         schedule, limiting the window of opportunity for attackers to abuse stolen passwords. It can
                         include ensuring passwords are of a certain length, contain specific characters and even includes
                         the use of biometrics to gain access to accounts.

@@ -162,7 +162,6 @@ export function DefenseProvider({ children }) {
       authorizedPushPayments: 'Authorized Push Payments',
       investmentScams: 'Investment Scams',
       skimming: 'ATM Skimming',
-      tampering: 'Tampering',
       syntheticIdentity: 'Synthetic Identity Theft',
       zeroDay: 'Zero-Day Exploit',
       accAndInvFraud: 'Account & Investment Fraud'
@@ -231,7 +230,7 @@ export function DefenseProvider({ children }) {
       regularAudits: 'Audits',
       segregationOfDuties: 'Seg.\nDuties',
       principleOfLeastPrivilege: 'Least\nPrivilege',
-      passwordPolicies: 'Pass.\nPolicy',
+      regularPasswordChanges: 'Pwd\nChanges',
       backgroundChecks: 'Bg\nChecks',
       atmInspection: 'ATM\nInspect.',
       deepfakeDetection: 'Deep-\nfake Det.',

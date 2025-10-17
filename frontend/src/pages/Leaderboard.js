@@ -4,12 +4,10 @@ import '../styles/shopAndWiki.css';
 import PageHeader from '../components/PageHeader';
 import { useLeaderboard } from '../contexts/LeaderboardContext';
 import { useAuth } from '../auth/useAuth';
-import { useFilters } from '../contexts/FilterContext';
 
 function Leaderboard() {
     const { topTen, currentUser, loading, error, refreshLeaderboard } = useLeaderboard();
     const { user } = useAuth();
-    const { leaderboardTab, setLeaderboardTab } = useFilters();
 
     // Fetch leaderboard data on mount
     useEffect(() => {
@@ -63,22 +61,7 @@ function Leaderboard() {
                         <h1 className="page-header-title-inline">Leaderboard</h1>
                     </>
                 }
-                centerContent={
-                    <div className="tab-selector-bar">
-                        <button
-                            className={`tab-bar-button ${leaderboardTab === 'alltime' ? 'active' : ''}`}
-                            onClick={() => setLeaderboardTab('alltime')}
-                        >
-                            All Time
-                        </button>
-                        <button
-                            className={`tab-bar-button ${leaderboardTab === 'lastattack' ? 'active' : ''}`}
-                            onClick={() => setLeaderboardTab('lastattack')}
-                        >
-                            Last Attack
-                        </button>
-                    </div>
-                }
+                centerContent={null}
             >
                 <button
                     onClick={refreshLeaderboard}

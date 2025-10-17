@@ -1796,6 +1796,19 @@
   opacity: 0.8;
 }
 
+.attack-log-status-chip {
+  font-family: 'Audiowide', cursive;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  background: rgba(158, 177, 188, 0.3);
+  border: 1px solid var(--neo-sub-border);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+
 .attack-log-summary-stats {
   display: flex;
   align-items: center;

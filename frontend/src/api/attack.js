@@ -13,6 +13,17 @@ export async function getUserAttackLogs(limit = null) {
 }
 
 /**
+ * Fetch upcoming scheduled attacks
+ * @param {number|null} limit - Optional limit for number of scheduled attacks to retrieve
+ * @returns {Promise<Array>} Array of scheduled attack objects
+ */
+export async function getScheduledAttacks(limit = null) {
+  const fn = httpsCallable(functions, "user_getScheduledAttacks");
+  const result = await fn({ limit });
+  return result.data;
+}
+
+/**
  * Admin: Trigger random mass attack wave (4 random attacks)
  * @returns {Promise<void>}
  */
@@ -70,5 +81,20 @@ export async function adminMassAttackCustom(wave) {
     limitedUseAppCheckTokens: true  // Prevent replay attacks
   });
   const result = await fn({ wave });
+  return result.data;
+}
+
+/**
+ * Admin: Schedule a mass attack for future execution
+ * @param {Array<object>} wave - Array of attack objects
+ * @param {Date|string|number} scheduledAt - Time the attack should execute
+ * @param {string} [notes] - Optional description
+ * @returns {Promise<object>} Scheduled attack metadata
+ */
+export async function adminScheduleAttack(wave, scheduledAt, notes = "") {
+  const fn = httpsCallable(functions, "admin_scheduleAttack", {
+    limitedUseAppCheckTokens: true
+  });
+  const result = await fn({ wave, scheduledAt, notes });
   return result.data;
 }

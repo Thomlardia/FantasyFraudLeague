@@ -24,7 +24,7 @@ function DefenseShop() {
         { title: "Segregation of Duties", icon: "group_work", path: "/defenses/SegregationOfDuties", id: "segregationOfDuties" },
         { title: "Input Validation and Sanitization", icon: "filter_alt", path: "/defenses/InputValidation", id: "inputValidation" },
         { title: "Principle of Least Privilege", icon: "lock", path: "/defenses/PrincipleOfLeastPrivilege", id: "principleOfLeastPrivilege" },
-        { title: "Regular Password Changes", icon: "password", path: "/defenses/RegularPasswordChanges", id: "passwordPolicies" },
+        { title: "Regular Password Changes", icon: "password", path: "/defenses/RegularPasswordChanges", id: "regularPasswordChanges" },
         { title: "Email Filtering and Anti-Phishing Tools", icon: "mark_email_unread", path: "/defenses/EmailFiltering", id: "emailFiltering" },
         { title: "Regulated Automated Backups", icon: "backup", path: "/defenses/RegulatedAutoBackup", id: "automatedBackups" },
         { title: "Keep Systems and Software Updated", icon: "update", path: "/defenses/KeepUpdated", id: "keepSoftwareUpdated" },

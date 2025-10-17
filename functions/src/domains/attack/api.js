@@ -1,6 +1,15 @@
 // This file exposes the attack operations to the api layer.
-import { getAttackInfo, getEasyWave, getHardWave, getMediumWave, getRandomWave, attackDeduction, massAttackDeduction} from "./service.js";
+import { getAttackInfo, getEasyWave, getHardWave, getMediumWave, getRandomWave, attackDeduction, massAttackDeduction } from "./service.js";
 import { getUserAttackLogs } from "./repo.js";
+import {
+	scheduleAttack,
+	listUpcomingScheduledAttacks,
+	fetchDueScheduledAttacks,
+	claimPendingScheduledAttack,
+	completeScheduledAttack,
+	failScheduledAttack,
+	cancelPendingScheduledAttack,
+} from "./scheduledService.js";
 
 /**
  * API: Get attack info.
@@ -72,3 +81,67 @@ export function apiGetUserAttackLogs(userId, limit = null) {
 	return getUserAttackLogs(userId, limit);
 }
 
+/**
+ * API: Schedule a mass attack for future execution
+ * @param {object} params
+ * @returns {Promise<object>}
+ */
+export function apiScheduleAttack(params) {
+	return scheduleAttack(params);
+}
+
+/**
+ * API: List upcoming scheduled attacks
+ * @param {object} options
+ * @returns {Promise<Array<object>>}
+ */
+export function apiGetUpcomingScheduledAttacks(options = {}) {
+	return listUpcomingScheduledAttacks(options);
+}
+
+/**
+ * API: Fetch due scheduled attacks (pending & scheduled in the past)
+ * @param {object} options
+ * @returns {Promise<Array<object>>}
+ */
+export function apiFetchDueScheduledAttacks(options = {}) {
+	return fetchDueScheduledAttacks(options);
+}
+
+/**
+ * API: Attempt to claim a pending scheduled attack for execution
+ * @param {string} attackId
+ * @returns {Promise<object|null>}
+ */
+export function apiClaimScheduledAttack(attackId) {
+	return claimPendingScheduledAttack(attackId);
+}
+
+/**
+ * API: Mark a scheduled attack as completed
+ * @param {string} attackId
+ * @param {object} result
+ * @returns {Promise<void>}
+ */
+export function apiCompleteScheduledAttack(attackId, result = {}) {
+	return completeScheduledAttack(attackId, result);
+}
+
+/**
+ * API: Mark a scheduled attack as failed
+ * @param {string} attackId
+ * @param {Error|string} error
+ * @returns {Promise<void>}
+ */
+export function apiFailScheduledAttack(attackId, error) {
+	return failScheduledAttack(attackId, error);
+}
+
+/**
+ * API: Cancel a pending scheduled attack
+ * @param {string} attackId
+ * @returns {Promise<boolean>}
+ */
+export function apiCancelScheduledAttack(attackId) {
+	return cancelPendingScheduledAttack(attackId);
+}
