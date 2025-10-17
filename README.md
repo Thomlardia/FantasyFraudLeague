@@ -142,16 +142,23 @@ Notes
 ### For Admin Access
 - `make grant-admin EMAIL=<userEmail@example.com>`
 
-## Contents  
-***Files keeping track of all the strategies and conventions to be used when developing:***  
-- [Development Strategies](docs/summary_development_conventions.md)  
-- [Development Strategies](docs/development_strategies.md)  
-- [Scrum Information](docs/scrum_info.md)  
+## Documentation
 
-***The record of all scrum processes we have completed. (Containing detailed minutes for example):***  
-- [Scrum Record](docs/scrum_record.md)  
+### Development & Processes
+- [Development Strategies](./docs/summary_development_conventions.md)
+- [Development Strategies (Detailed)](./docs/development_strategies.md)
+- [Scrum Information](./docs/scrum_info.md)
+- [Scrum Record](./docs/scrum_record.md)
 
-***Miscellaneous:***  
-- [Model View Controller and Security](docs/model_view_controller.md)  
-- [Introduction by AB](docs/ab_introduction)  
+### Technical Documentation
+- [Model View Controller and Security](./docs/model_view_controller.md)
+- [Firebase Setup Guide](./docs/firebase_setup.md)
+- [Security Report](./docs/security_report.md)
+
+### Performance & Maintenance
+- [Performance Monitoring](./docs/PERFORMANCE.md)
+- [Maintenance](./docs/MAINTENANCE.md)
+
+### Miscellaneous
+- [Introduction by AB](./docs/ab_introduction.md)
 

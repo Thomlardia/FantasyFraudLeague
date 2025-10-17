@@ -23,6 +23,10 @@
         {
           "order": "DESCENDING",
           "queryScope": "COLLECTION"
+        },
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION"
         }
       ]
     }
