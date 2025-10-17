@@ -77,9 +77,17 @@ const AccAndInvFraud            = lazy(() => import("../pages/frauds/AccAndInvFr
 
 const NotFound = () => <div className="simple-page simple-page--centered">404 — Not Found</div>;
 
+const PageLoadingSpinner = () => (
+  <div className="page-loading">
+    <div className="page-loading-spinner">
+      <span className="material-symbols-outlined">hourglass_empty</span>
+    </div>
+  </div>
+);
+
 export default function AppRoutes() {
   return (
-    <Suspense fallback={<div>Loading…</div>}>
+    <Suspense fallback={<PageLoadingSpinner />}>
       <Routes>
         {/* Public */}
         <Route path="/" element={<Hello />} />
