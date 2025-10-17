@@ -1,6 +1,1 @@
-.App {
-  text-align: center;
-  font-family: sans-serif;
-  margin-top: 50px;
-}
-
+/* Legacy styles - kept for compatibility but should be migrated to component-specific CSS */

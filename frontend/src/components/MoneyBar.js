@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { httpsCallable } from 'firebase/functions';
-import { functions } from '../firebase';
-import iconMoneyDollar from '../images/icons/money_dollar.png';
+import React from 'react';
+import { useWallet } from '../contexts/WalletContext';
 
 /**
  * Formats a number as currency with commas
@@ -14,43 +12,18 @@ function formatMoney(amount) {
 
 /**
  * MoneyBar component that displays the player's current money
- * Refreshes on mount and after updates to show the latest value
+ * Uses WalletContext for global balance state
+ * Automatically refreshes when balance changes via refreshBalance()
  */
 function MoneyBar() {
-  const [balance, setBalance] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    let active = true;
-    const load = async () => {
-      setLoading(true);
-      try {
-        const call = httpsCallable(functions, 'user_getBalance');
-        const res = await call();
-        console.log("user_getBalance response:", res);
-        if (!active) return;
-        const value = typeof res?.data === 'number' ? res.data : 0;
-        setBalance(value);
-      } catch (e) {
-        console.error("MoneyBar error:", e);
-        console.error("Error code:", e.code);
-        console.error("Error message:", e.message);
-        console.error("Error details:", e.details);
-        if (active) setBalance(0);
-      } finally {
-        if (active) setLoading(false);
-      }
-    };
-    load();
-    return () => {
-      active = false;
-    };
-  }, []);
+  const { balance, loading } = useWallet();
+  const isNegativeBalance = !loading && typeof balance === 'number' && balance < 0;
+  const displayClass = `money-display${isNegativeBalance ? ' money-display--negative' : ''}`;
 
   return (
-    <div className="money-display" title="Bank">
+    <div className={displayClass} title="Bank">
       <span className="money-icon">
-        <img src={iconMoneyDollar} alt="Bank" className="icon-img--small" />
+        <span className="material-symbols-outlined">attach_money</span>
       </span>
       <span>{balance == null || loading ? '—' : formatMoney(balance)}</span>
     </div>

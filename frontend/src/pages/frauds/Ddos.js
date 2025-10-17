@@ -1,84 +1,82 @@
 import { Link } from 'react-router-dom';
-import '../../styles/ui.css';
-import '../../styles/shopAndWiki.css';
-import MoneyBar from '../../components/MoneyBar';
+import FraudDetailPage from '../../components/FraudDetailPage';
+import FraudProtectionChart from '../../components/FraudProtectionChart';
+import '../../styles/charts.css';
 
 function Ddos() {
     return (
-        <div className="fraud-container">
-            <div className="topbar">
-            <div className="topbar-group">
-                <Link to="/fraudwiki" className="icon-button" title="Back">
-                    <span className="material-symbols-outlined">arrow_back</span>
-                </Link>
-            </div>
-            <MoneyBar />
-            <div className="topbar-group"></div>
-            </div>
-            <div className="header">
-
-                <h1>Ddos</h1>
-                <div></div>
-            </div>
-
-            <div className="content-container">
-                <div className="description-card">
-                    <p>
-                        Distributed Denial of Service (DDoS) attacks overwhelm target systems, servers, or 
-                        networks with a coordinated flood of internet traffic from multiple sources, 
-                        making services unavailable to legitimate users. These attacks often leverage 
-                        botnets - networks of compromised devices - to generate massive traffic volumes. 
-                        Modern attacks can reach hundreds of gigabits per second and may employ volumetric, 
-                        protocol, or application-layer techniques, often using amplification methods 
-                        to multiply attack traffic.
+        <FraudDetailPage
+            title="DDoS"
+            secondaryCardContent={<FraudProtectionChart attackId="ddos" variant="horizontal" />}
+            infoContent={
+                <>
+                    <p className="info-paragraph">
+                        Distributed Denial of Service (DDoS) attacks overwhelm targets with coordinated floods of traffic from
+                        multiple sources, making services unavailable. Botnets of compromised devices generate massive request
+                        volumes that exhaust bandwidth or server resources.
                     </p>
-                    <br />
-                    <p>
-                        <a href="https://www.cloudflare.com/learning/ddos/what-is-a-ddos-attack/" target="_blank" rel="noopener noreferrer">
-                            Reference: DDoS
-                        </a>.
-                    </p>
-                    <br />
-                </div>
-
-                <div className="description-card">
-                    <h3>Common Examples:</h3>
-                    <ul>
-                        <li>Volumetric attacks flooding bandwidth</li>
-                        <li>SYN flood attacks exhausting server resources</li>
-                        <li>Application-layer attacks targeting specific services</li>
-                        <li>Reflection attacks using DNS or NTP servers for amplification</li>
-                        <li>IoT botnet attacks utilizing compromised smart devices</li>
-                    </ul>
-                    <br />
-                </div>
-
-                <div className="description-card">
-                    <h3>Historical Context:</h3>
-                    <p>
-                        Early DDoS attacks in the late 1990s were primarily pranks or hacktivism. 
-                        The 2000 attacks on major websites like Yahoo and Amazon demonstrated 
-                        their disruptive potential. Today, many attacks are financially motivated 
-                        or state-sponsored.
-                    </p>
-                </div>
-
-                <div className="description-card">
-                    <h3>Primary Defenses:</h3>
-                    <ul>
-                        <li>
-                            <Link to="/defenses/DdosProtection">Ddos Protection</Link>
-                        </li>
-                        <li>
-                            <Link to="/defenses/NetworkMonitoring">Network Monitoring</Link>
-                        </li>
-                        <li>
-                            <Link to="/defenses/TrafficFiltering">Traffic Filtering</Link>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">list</span>
+                            Common Examples
+                        </h3>
+                        <ul className="info-list">
+                            <li>Volumetric attacks saturating bandwidth</li>
+                            <li>SYN floods exhausting server connection tables</li>
+                            <li>Application-layer attacks targeting specific endpoints</li>
+                            <li>Reflection attacks using DNS or NTP amplification</li>
+                            <li>IoT botnets leveraging compromised smart devices</li>
+                        </ul>
+                    </div>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">history_edu</span>
+                            Historical Context
+                        </h3>
+                        <p className="info-paragraph">
+                            Early DDoS attacks in the late 1990s were mostly pranks. By 2000, assaults on Yahoo and Amazon
+                            highlighted their disruptive power. Today, motivations range from extortion to state-backed disruption.
+                        </p>
+                    </div>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">security</span>
+                            Primary Defenses
+                        </h3>
+                        <ul className="info-list">
+                            <li>
+                                <Link to="/defenses/DdosProtection" className="info-link">DDoS Protection</Link>
+                            </li>
+                            <li>
+                                <Link to="/defenses/NetworkMonitoring" className="info-link">Network Monitoring</Link>
+                            </li>
+                            <li>
+                                <Link to="/defenses/TrafficFiltering" className="info-link">Traffic Filtering</Link>
+                            </li>
+                        </ul>
+                    </div>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">link</span>
+                            Reference
+                        </h3>
+                        <ul className="info-list">
+                            <li>
+                                <a
+                                    href="https://www.cloudflare.com/learning/ddos/what-is-a-ddos-attack/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="info-external-link"
+                                >
+                                    DDoS
+                                    <span className="material-symbols-outlined">open_in_new</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </>
+            }
+        />
     );
 }
 

@@ -1,142 +1,62 @@
 import { Link } from 'react-router-dom';
-import { useDefenseOperations } from '../../hooks/defenseHooks.js';
-import '../../styles/ui.css';
-import '../../styles/shopAndWiki.css';
-import MoneyBar from '../../components/MoneyBar';
+import DefenseDetailPage from '../../components/DefenseDetailPage';
 
 function KeepUpdated() {
-    const { defense, loading, actionLoading, error, successMessage, handleBuy, handleUpgrade } = useDefenseOperations('keepSoftwareUpdated');
-    
-    function getDefenseLevel() {
-        return defense?.displayLevel || 0;
-    }
-
-    function getUpgradeCost() {
-        return defense?.nextActionCost || 0;
-    }
-
-    function handleUpgradeAction() {
-        if (!defense) return;
-
-        if (defense.isOwned) {
-            handleUpgrade();
-        } else {
-            handleBuy();
-        }
-    }
-
-    const currentLevel = getDefenseLevel();
-    const upgradeCost = getUpgradeCost();
-    const isOwned = defense?.isOwned || false;
-    const isMaxLevel = defense?.isMaxLevel || false;
-
-    // loading state
-    if (loading) {
-        return (
-            <div className="shop-container">
-                <div className="content-container">
-                    <div className="description-card">Loading defense data...</div>
-                </div>
-            </div>
-        );
-    }
-
     return (
-        <div className="shop-container">
-            <div className="topbar">
-            <div className="topbar-group">
-                <Link to="/defenseshop" className="icon-button" title="Back">
-                    <span className="material-symbols-outlined">arrow_back</span>
-                </Link>
-            </div>
-            <MoneyBar />
-            <div className="topbar-group"></div>
-            </div>
-            
-            <div className="header">
-
-                <h1>Keep Updated</h1>
-                <div></div>
-            </div>
-
-            <div className="content-container">
-                {/* error display */}
-                {error && (
-                    <div className="description-card" style={{ backgroundColor: '#f8d7da', color: '#721c24' }}>
-                        Error: {error}
-                    </div>
-                )}
-
-                {/* success display */}
-                {successMessage && (
-                    <div className="description-card" style={{ backgroundColor: '#d4edda', color: '#155724' }}>
-                        {successMessage}
-                    </div>
-                )}
-
-                <div className="description-card">
-                    <p>
-                        Maintaining current systems and software involves promptly applying security patches, updating operating systems, and ensuring all applications run the latest stable versions. Many ransomware attacks exploit KNOWN vulnerabilities that have patches, so keeping systems up to date is effective.
+        <DefenseDetailPage
+            defenseKey="keepSoftwareUpdated"
+            title="Keep Updated"
+            infoContent={
+                <>
+                    <p className="info-paragraph">
+                        Keeping software current means promptly applying security patches, updating operating systems, and ensuring
+                        critical applications run on their latest stable versions. Ransomware routinely exploits known, patched
+                        vulnerabilities, so fast updates close easy attack paths.
                     </p>
-                    <br />
-                    <p>
-                        <a href="https://tech.rochester.edu/news-item/software-protect-your-data-by-keeping-software-updated/" target="_blank" rel="noopener noreferrer">
-                            Reference: Keeping Software Updated
-                        </a>
-                    </p>
-                </div>
-
-                <div className="description-card">
-                    <h3>Common Examples:</h3>
-                        <ul>
-                            <li>Updating payment processing software</li>
-                            <li>Applying OS security patches</li>
-                            <li>Rolling out browser updates against exploits</li>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">list</span>
+                            Common Examples
+                        </h3>
+                        <ul className="info-list">
+                            <li>Updating payment processing platforms after vendor advisories</li>
+                            <li>Applying operating system security patches on a fixed cadence</li>
+                            <li>Rolling out browser updates to block newly discovered exploits</li>
                         </ul>
-                </div>
-
-                <div className="description-card">
-                    <h3>Defends against:</h3>
-                    <ul>
-                        <li>
-                            <Link to="/frauds/Ransomware">Ransomware</Link>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div className="upgrade-section">
-                    <div className="upgrade-header">
-                        <h3>Defense Level: {currentLevel}</h3>
-                        <p>Status: {isOwned ? 'Owned' : 'Not Owned'}</p>
                     </div>
-                    
-                    <div className="upgrade-info">
-                        <div className="upgrade-details">
-                            <span className="upgrade-cost">Cost: ${upgradeCost.toLocaleString()}</span>
-                            <span className="upgrade-level">
-                                {isOwned 
-                                    ? `Next: Level ${currentLevel + 1}`
-                                    : 'Purchase to Own'
-                                }
-                            </span>
-                        </div>
-                        
-                        <button 
-                            className="upgrade-button"
-                            onClick={handleUpgradeAction}
-                            disabled={actionLoading || isMaxLevel}
-                        >
-                            {actionLoading 
-                                ? (isOwned ? 'Upgrading...' : 'Purchasing...')
-                                : isMaxLevel 
-                                    ? 'Max Level Reached' 
-                                    : (isOwned ? 'Upgrade Defense' : 'Purchase Defense')
-                            }
-                        </button>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">shield</span>
+                            Defends Against
+                        </h3>
+                        <ul className="info-list">
+                            <li>
+                                <Link to="/frauds/Ransomware" className="info-link">Ransomware</Link>
+                            </li>
+                        </ul>
                     </div>
-                </div>
-            </div>
-        </div>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">link</span>
+                            Reference
+                        </h3>
+                        <ul className="info-list">
+                            <li>
+                                <a
+                                    href="https://tech.rochester.edu/news-item/software-protect-your-data-by-keeping-software-updated/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="info-external-link"
+                                >
+                                    Keeping Software Updated
+                                    <span className="material-symbols-outlined">open_in_new</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    </>
+            }
+        />
     );
 }
 

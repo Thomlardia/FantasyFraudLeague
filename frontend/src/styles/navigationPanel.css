@@ -1,0 +1,275 @@
+/* Navigation Panel - Left Sidebar for Desktop ONLY */
+.navigation-panel {
+  /* Hidden by default on mobile/tablet - only shows on desktop */
+  display: none;
+}
+
+@media (min-width: 1280px) {
+  .navigation-panel {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    /* Same style as description-card/management-card */
+    background:
+      linear-gradient(175deg, rgba(255, 255, 255, 0.18) 0%, rgba(210, 216, 220, 0.08) 100%),
+      #d7d5d5;
+    border-radius: 18px;
+    border: 1px solid var(--neo-sub-border);
+    box-shadow: var(--neo-shadow-3d);
+    padding: 0;
+  }
+
+  /* Divider lines */
+  .nav-divider {
+    height: 1px;
+    background: var(--color-border-nav-section);
+    margin: 0;
+  }
+
+  /* Scrollable content area - now truly independent */
+  .nav-scrollable-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex: 1;
+    margin: 0;
+    padding: 21px;
+    border-top: 1px solid var(--neo-sub-border);
+    border-bottom: 1px solid var(--neo-sub-border);
+
+    /* Hide scrollbar but keep scroll functionality */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+
+  .nav-scrollable-content::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+
+  /* Bottom indicator section - fixed at bottom */
+  .nav-bottom-indicator {
+    margin-top: 0;
+  }
+
+  .nav-scroll-hint {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 0;
+    opacity: 1;
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  .nav-scroll-hint.down .material-symbols-outlined {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    font-weight: 200;
+    animation: bounceDown 2s infinite ease-in-out;
+  }
+
+  .nav-scroll-hint.up .material-symbols-outlined {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    font-weight: 200;
+    animation: bounceUp 2s infinite ease-in-out;
+  }
+
+  @keyframes bounceDown {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(2px);
+    }
+  }
+
+  @keyframes bounceUp {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-2px);
+    }
+  }
+}
+
+/* Search Box Placeholder */
+.nav-search-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: #d7d5d5;
+  border: 1px solid var(--neo-sub-border);
+  border-radius: 10px;
+  margin: 21px;
+}
+
+.nav-search-icon {
+  font-size: 22px;
+  color: var(--color-text-muted);
+}
+
+.nav-search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--color-text-secondary);
+  font-size: 15px;
+  font-family: inherit;
+}
+
+.nav-search-input::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.6;
+}
+
+.nav-search-input:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Section Container */
+.nav-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Section Header (Clickable) */
+.nav-section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 10px;
+  background: #d7d5d5;
+  border: 1px solid var(--neo-sub-border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 120ms ease;
+  color: var(--color-text-emphasis);
+  font-family: 'Audiowide', cursive;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.nav-section-header:hover {
+  background: #e0dede;
+  border-color: rgba(12, 18, 20, 0.55);
+  transform: translateX(2px);
+}
+
+.nav-section-header:active {
+  transform: scale(0.98);
+}
+
+.nav-section-icon {
+  font-size: 20px;
+  color: var(--color-text-secondary);
+}
+
+.nav-section-title {
+  flex: 1;
+  text-align: left;
+}
+
+.nav-section-arrow {
+  font-size: 20px;
+  color: var(--color-text-muted);
+  transition: transform 200ms ease;
+}
+
+.nav-section-arrow.expanded {
+  transform: rotate(180deg);
+}
+
+/* Navigation List */
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-left: 20px;
+  padding-right: 10px;
+  overflow: hidden;
+  transition: max-height 200ms ease, opacity 200ms ease;
+}
+
+.nav-list.expanded {
+  max-height: 2000px;
+  opacity: 1;
+}
+
+.nav-list.collapsed {
+  max-height: 0;
+  opacity: 0;
+}
+
+/* Navigation Item */
+.nav-item {
+  margin: 0;
+}
+
+/* Navigation Link */
+.nav-link {
+  display: block;
+  padding: 4px 6px;
+  color: #7a8689;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 8px;
+  border-left: 3px solid var(--neo-sub-border-light);
+  border: 1px solid var(--neo-sub-border-light);
+  border-left-width: 3px;
+  transition: all 120ms ease;
+  background: transparent;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-text-emphasis);
+  border-color: var(--color-text-emphasis);
+  border-left-color: var(--color-text-emphasis);
+  transform: translateX(2px);
+}
+
+/* Active Link Highlight */
+.nav-link.active {
+  background: var(--color-green-light);
+  color: var(--color-green-dark);
+  font-weight: 700;
+  border: 1px solid var(--color-green-dark);
+  border-left-width: 3px;
+  border-left-color: var(--color-green-dark);
+  box-shadow: 0 2px 8px rgba(74, 122, 99, 0.15);
+}
+
+.nav-link.active:hover {
+  background: var(--color-green-hover);
+  color: var(--color-green-dark);
+  border-color: var(--color-green-dark);
+  border-left-color: var(--color-green-dark);
+}
+
+/* Keyboard Focus Styles */
+.nav-section-header:focus-visible,
+.nav-link:focus-visible {
+  outline: 2px solid rgba(16, 185, 129, 0.6);
+  outline-offset: 2px;
+}
+
+/* Responsive - Hide on mobile/tablet (inherited from placeholder-left) */
+/* This is already handled by .placeholder-left display rules in shopAndWiki.css */

@@ -1,80 +1,79 @@
 import { Link } from 'react-router-dom';
-import iconBackArrow from '../../images/icons/back_arrow.png'
-import '../../styles/ui.css';
-import '../../styles/shopAndWiki.css';
-import MoneyBar from '../../components/MoneyBar';
+import FraudDetailPage from '../../components/FraudDetailPage';
+import FraudProtectionChart from '../../components/FraudProtectionChart';
+import '../../styles/charts.css';
 
 function ManInTheMiddle() {
     return (
-
-        <div className="fraud-container">
-            <div className="topbar">
-            <div className="topbar-group">
-                <Link to="/fraudwiki" className="icon-button" title="Back">
-                    <span className="material-symbols-outlined">arrow_back</span>
-                </Link>
-            </div>
-            <MoneyBar />
-            <div className="topbar-group"></div>
-            </div>
-            <div className="header">
-
-                <h1>Man In The Middle</h1>
-                <div></div>
-            </div>
-
-            <div className="content-container">
-                <div className="description-card">
-                    <p>
-                        Man-In-The-Middle (MITM) attacks involve intercepting communications between two 
-                        parties to eavesdrop, steal data, or manipulate information without their knowledge. 
-                        Attackers often achieve this by compromising network infrastructure or creating rogue 
-                        access points. These attacks can target protocols such as HTTP, HTTPS, DNS, and wireless 
-                        communications.
+        <FraudDetailPage
+            title="Man In The Middle"
+            secondaryCardContent={<FraudProtectionChart attackId="mitm" variant="horizontal" />}
+            infoContent={
+                <>
+                    <p className="info-paragraph">
+                        Man-in-the-middle (MITM) attacks intercept communications between two parties to eavesdrop, steal data, or
+                        modify information. Attackers compromise network infrastructure or create rogue access points to sit inside
+                        the conversation invisibly.
                     </p>
-                    <br />
-                    <p>
-                        <a href="https://www.ibm.com/think/topics/man-in-the-middle" target="_blank" rel="noopener noreferrer">
-                            Reference: Man In The Middle
-                        </a>.
-                    </p>
-                    <br />
-                </div>
-
-                <div className="description-card">
-                    <h3>Common Examples:</h3>
-                    <ul>
-                        <li>Wi-Fi eavesdropping on public networks</li>
-                        <li>SSL stripping to downgrade secure connections</li>
-                        <li>DNS spoofing to redirect traffic to malicious servers</li>
-                        <li>Certificate authority attacks using fraudulent certificates</li>
-                        <li>BGP hijacking to redirect internet traffic</li>
-                    </ul>
-                    <br />
-                </div>
-
-                <div className="description-card">
-                    <h3>Historical Context:</h3>
-                    <p>
-                        MITM attacks predate digital communications, with telephone wiretapping being an 
-                        early example. Digital MITM attacks became more prominent with the growth of 
-                        internet communications, evolving alongside encryption technologies.
-                    </p>
-                </div>
-
-                <div className="description-card">
-                    <h3>Primary Defenses:</h3>
-                    <ul>
-                        <li>
-                            <Link to="/defenses/HttpsAndEncryption">Https And Encryption</Link>
-                        </li>
-                        <li>
-                            <Link to="/defenses/VpnUsage">Vpn Usage</Link>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">list</span>
+                            Common Examples
+                        </h3>
+                        <ul className="info-list">
+                            <li>Wi-Fi eavesdropping on public hotspots</li>
+                            <li>SSL stripping to downgrade secure connections</li>
+                            <li>DNS spoofing that reroutes traffic to malicious servers</li>
+                            <li>Certificate authority breaches issuing fraudulent certificates</li>
+                            <li>BGP hijacking to redirect large volumes of internet traffic</li>
+                        </ul>
+                    </div>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">history_edu</span>
+                            Historical Context
+                        </h3>
+                        <p className="info-paragraph">
+                            MITM predates computers—telephone wiretapping was an early form. Digital MITM attacks grew alongside
+                            internet adoption, evolving to challenge modern encryption.
+                        </p>
+                    </div>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">security</span>
+                            Primary Defenses
+                        </h3>
+                        <ul className="info-list">
+                            <li>
+                                <Link to="/defenses/HttpsAndEncryption" className="info-link">HTTPS And Encryption</Link>
+                            </li>
+                            <li>
+                                <Link to="/defenses/VpnUsage" className="info-link">VPN Usage</Link>
+                            </li>
+                        </ul>
+                    </div>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">link</span>
+                            Reference
+                        </h3>
+                        <ul className="info-list">
+                            <li>
+                                <a
+                                    href="https://www.ibm.com/think/topics/man-in-the-middle"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="info-external-link"
+                                >
+                                    Man In The Middle
+                                    <span className="material-symbols-outlined">open_in_new</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </>
+            }
+        />
     );
 }
 

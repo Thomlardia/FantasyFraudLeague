@@ -1,78 +1,79 @@
 import { Link } from 'react-router-dom';
-import iconBackArrow from '../../images/icons/back_arrow.png'
-import '../../styles/ui.css';
-import '../../styles/shopAndWiki.css';
-import MoneyBar from '../../components/MoneyBar';
+import FraudDetailPage from '../../components/FraudDetailPage';
+import FraudProtectionChart from '../../components/FraudProtectionChart';
+import '../../styles/charts.css';
 
 function AccountTakeover() {
     return (
-        <div className="fraud-container">
-            <div className="topbar">
-            <div className="topbar-group">
-                <Link to="/fraudwiki" className="icon-button" title="Back">
-                    <span className="material-symbols-outlined">arrow_back</span>
-                </Link>
-            </div>
-            <MoneyBar />
-            <div className="topbar-group"></div>
-            </div>
-            <div className="header">
-
-                <h1>Account Takeover</h1>
-                <div></div>
-            </div>
-
-            <div className="content-container">
-                <div className="description-card">
-                    <p>
-                        Account takeover involves unauthorized access to user accounts using stolen credentials, 
-                        social engineering, or exploitation of weak security mechanisms. Once an attacker gains 
-                        access, they can steal data, make fraudulent purchases, or leverage the account 
-                        to launch further attacks.
+        <FraudDetailPage
+            title="Account Takeover"
+            secondaryCardContent={<FraudProtectionChart attackId="accountTakeover" variant="horizontal" />}
+            infoContent={
+                <>
+                    <p className="info-paragraph">
+                        Account takeover occurs when attackers gain unauthorised access to user accounts via stolen credentials,
+                        social engineering, or weak security controls. Once inside, they can steal data, drain funds, or pivot to
+                        additional targets.
                     </p>
-                    <br />
-                    <p>
-                        <a href="https://www.proofpoint.com/us/threat-reference/account-takeover-fraud" target="_blank" rel="noopener noreferrer">
-                            Reference: Account Takeover
-                        </a>.
-                    </p>
-                    <br />
-                </div>
-
-                <div className="description-card">
-                    <h3>Common Examples:</h3>
-                    <ul>
-                        <li>Credential stuffing using leaked usernames and passwords</li>
-                        <li>Session hijacking through malware or network interception</li>
-                        <li>Social engineering to reset account passwords</li>
-                        <li>SIM swapping to bypass SMS authentication</li>
-                        <li>Brute-force attacks against weak passwords</li>
-                    </ul>
-                    <br />
-                </div>
-
-                <div className="description-card">
-                    <h3>Historical Context:</h3>
-                    <p>
-                        Account takeover has grown alongside online services, fueled by massive credential 
-                        leaks and dark web marketplaces. As the value of online accounts increases, 
-                        attackers refine their methods to evade detection and exploit security gaps.
-                    </p>
-                </div>
-
-                <div className="description-card">
-                    <h3>Primary Defenses:</h3>
-                    <ul>
-                        <li>
-                            <Link to="/defenses/MultiFactorAuth">Multi Factor Authentication</Link>
-                        </li>
-                        <li>
-                            <Link to="/defenses/RegularPasswordChanges">Regular Password Changes</Link>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">list</span>
+                            Common Examples
+                        </h3>
+                        <ul className="info-list">
+                            <li>Credential stuffing using leaked usernames and passwords</li>
+                            <li>Session hijacking through malware or network interception</li>
+                            <li>Social engineering to reset account credentials</li>
+                            <li>SIM swapping to bypass SMS-based authentication</li>
+                            <li>Brute-force attacks against weak passwords</li>
+                        </ul>
+                    </div>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">history_edu</span>
+                            Historical Context
+                        </h3>
+                        <p className="info-paragraph">
+                            As online services and credential dumps exploded, account takeover evolved into a major threat. Dark web
+                            marketplaces and credential stuffing tools lowered the bar for attackers to monetise compromised access.
+                        </p>
+                    </div>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">security</span>
+                            Primary Defenses
+                        </h3>
+                        <ul className="info-list">
+                            <li>
+                                <Link to="/defenses/MultiFactorAuth" className="info-link">Multi Factor Authentication</Link>
+                            </li>
+                            <li>
+                                <Link to="/defenses/RegularPasswordChanges" className="info-link">Regular Password Changes</Link>
+                            </li>
+                        </ul>
+                    </div>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">link</span>
+                            Reference
+                        </h3>
+                        <ul className="info-list">
+                            <li>
+                                <a
+                                    href="https://www.proofpoint.com/us/threat-reference/account-takeover-fraud"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="info-external-link"
+                                >
+                                    Account Takeover
+                                    <span className="material-symbols-outlined">open_in_new</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </>
+            }
+        />
     );
 }
 

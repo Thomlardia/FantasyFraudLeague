@@ -1,0 +1,783 @@
+/* Admin Page Specific Styles */
+
+/* Admin Content Wrapper */
+.admin-content {
+  width: min(100%, 1400px);
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 24px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Admin Section Title */
+.admin-section-title {
+  font-family: 'Audiowide', cursive;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--color-text-emphasis);
+  margin: 0 0 24px 0;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+/* Attack Management Container - Blue Background */
+.admin-attacks-container {
+  background:
+    linear-gradient(175deg, rgba(255, 255, 255, 0.18) 0%, rgba(210, 216, 220, 0.08) 100%),
+    #9EB1BC;
+  border-radius: 18px;
+  border: 1px solid #23395B;
+  box-shadow: var(--neo-shadow-3d);
+  padding: 32px 24px;
+}
+
+.attack-mode-toggle {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: #D7D5D5;
+  border: 1px solid var(--neo-sub-border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 24px;
+  box-shadow: 2px 2px 0 rgba(20, 28, 30, 0.18);
+}
+
+.mode-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media (min-width: 640px) {
+  .mode-options {
+    flex-direction: row;
+  }
+}
+
+.mode-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(120, 163, 196, 0.3);
+  background: rgba(120, 163, 196, 0.08);
+  font-family: 'Audiowide', cursive;
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(35, 57, 91, 0.6);
+  cursor: pointer;
+  transition: all 120ms ease;
+}
+
+.mode-option input {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid rgba(120, 163, 196, 0.5);
+  position: relative;
+}
+
+.mode-option input::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: transparent;
+  transform: translate(-50%, -50%);
+  transition: background 120ms ease;
+}
+
+.mode-option.active {
+  border-color: var(--color-chart-blue-dark);
+  background: rgba(120, 163, 196, 0.25);
+  color: var(--color-chart-blue-dark);
+}
+
+.mode-option.active input {
+  border-color: var(--color-chart-blue-dark);
+}
+
+.mode-option.active input::after {
+  background: var(--color-chart-blue-dark);
+}
+
+.mode-option span {
+  pointer-events: none;
+}
+
+.schedule-fields {
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 640px) {
+  .schedule-fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.schedule-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.schedule-field input {
+	border-radius: 10px;
+	border: 1px solid rgba(120, 163, 196, 0.3);
+	padding: 10px 14px;
+	font-family: 'Audiowide', cursive;
+	font-size: 14px;
+	font-weight: 700;
+	background: rgba(120, 163, 196, 0.08);
+	color: rgba(35, 57, 91, 0.75);
+	transition: border-color 120ms ease, background 120ms ease, color 120ms ease;
+}
+
+.schedule-field input:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+
+.schedule-field input:focus {
+	outline: none;
+	border-color: var(--color-chart-blue-dark);
+	background: rgba(120, 163, 196, 0.25);
+	color: var(--color-chart-blue-dark);
+}
+
+.schedule-hint {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.auto-wave-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--neo-sub-border);
+}
+
+.selected-wave-label {
+  font-family: 'Audiowide', cursive;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin: 0;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+/* Grid for Attack Cards - Always stacked vertically */
+.admin-attacks-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Individual Attack Cards - White Background */
+.admin-attack-card {
+  background: #D7D5D5;
+  border-radius: 16px;
+  border: 1px solid var(--neo-sub-border);
+  box-shadow: 3px 3px 0 rgba(20, 28, 30, 0.28);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.admin-card-title {
+  font-family: 'Audiowide', cursive;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--color-text-secondary);
+  margin: 0;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+/* Wave Options - Dot Selection Model */
+.wave-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .wave-options {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.wave-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-family: 'Audiowide', cursive;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all 120ms ease;
+}
+
+.wave-option input {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--color-text-secondary);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.wave-option input::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: transparent;
+  transform: translate(-50%, -50%);
+  transition: background 120ms ease;
+}
+
+.wave-option span {
+  pointer-events: none;
+}
+
+/* Wave Option Color Variants - Random (Blue) */
+.wave-option-random {
+  border-color: rgba(120, 163, 196, 0.3);
+  background: rgba(120, 163, 196, 0.08);
+  color: rgba(35, 57, 91, 0.6);
+}
+
+.wave-option-random input {
+  border-color: rgba(120, 163, 196, 0.5);
+}
+
+.wave-option-random.active {
+  border-color: var(--color-chart-blue-dark);
+  background: rgba(120, 163, 196, 0.25);
+  color: var(--color-chart-blue-dark);
+}
+
+.wave-option-random.active input {
+  border-color: var(--color-chart-blue-dark);
+}
+
+.wave-option-random.active input::after {
+  background: var(--color-chart-blue-dark);
+}
+
+/* Wave Option Color Variants - Easy (Green) */
+.wave-option-easy {
+  border-color: rgba(95, 155, 130, 0.3);
+  background: rgba(95, 155, 130, 0.08);
+  color: rgba(45, 75, 62, 0.6);
+}
+
+.wave-option-easy input {
+  border-color: rgba(95, 155, 130, 0.5);
+}
+
+.wave-option-easy.active {
+  border-color: var(--color-green-dark);
+  background: rgba(95, 155, 130, 0.25);
+  color: var(--color-green-dark);
+}
+
+.wave-option-easy.active input {
+  border-color: var(--color-green-dark);
+}
+
+.wave-option-easy.active input::after {
+  background: var(--color-green-dark);
+}
+
+/* Wave Option Color Variants - Medium (Orange) */
+.wave-option-medium {
+  border-color: rgba(240, 156, 86, 0.3);
+  background: rgba(240, 156, 86, 0.08);
+  color: rgba(150, 75, 40, 0.6);
+}
+
+.wave-option-medium input {
+  border-color: rgba(240, 156, 86, 0.5);
+}
+
+.wave-option-medium.active {
+  border-color: var(--color-chart-orange-dark);
+  background: rgba(240, 156, 86, 0.25);
+  color: var(--color-chart-orange-dark);
+}
+
+.wave-option-medium.active input {
+  border-color: var(--color-chart-orange-dark);
+}
+
+.wave-option-medium.active input::after {
+  background: var(--color-chart-orange-dark);
+}
+
+/* Wave Option Color Variants - Hard (Red) */
+.wave-option-hard {
+  border-color: rgba(224, 94, 94, 0.3);
+  background: rgba(224, 94, 94, 0.08);
+  color: rgba(112, 47, 47, 0.6);
+}
+
+.wave-option-hard input {
+  border-color: rgba(224, 94, 94, 0.5);
+}
+
+.wave-option-hard.active {
+  border-color: var(--color-red-dark);
+  background: rgba(224, 94, 94, 0.25);
+  color: var(--color-red-dark);
+}
+
+.wave-option-hard.active input {
+  border-color: var(--color-red-dark);
+}
+
+.wave-option-hard.active input::after {
+  background: var(--color-red-dark);
+}
+
+/* Attack Grid for Checkboxes */
+.attack-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 4px;
+  scroll-behavior: smooth;
+
+  /* Hide scrollbar but keep scroll functionality - like navigation panel */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.attack-grid::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+@media (min-width: 768px) {
+  .attack-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .attack-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Checkbox Items */
+.attack-checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid rgba(90, 100, 110, 0.4);
+  background: rgba(90, 100, 110, 0.15);
+  font-family: 'Audiowide', cursive;
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(35, 57, 91, 0.75);
+  cursor: pointer;
+  transition: all 120ms ease;
+  margin: 0;
+}
+
+.attack-checkbox-item:hover {
+  background: rgba(90, 100, 110, 0.2);
+  border-color: rgba(90, 100, 110, 0.5);
+}
+
+.attack-checkbox-item:has(input[type="checkbox"]:checked) {
+  background: rgba(95, 155, 130, 0.25);
+  border-color: var(--color-green-dark);
+  color: var(--color-green-dark);
+}
+
+.attack-checkbox-item input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  flex-shrink: 0;
+  background: transparent;
+  border: 2px solid rgba(90, 100, 110, 0.6);
+  border-radius: 3px;
+  position: relative;
+  transition: all 120ms ease;
+}
+
+.attack-checkbox-item input[type="checkbox"]::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: transparent;
+  transform: translate(-50%, -50%);
+  transition: background 120ms ease;
+}
+
+.attack-checkbox-item input[type="checkbox"]:checked {
+  border-color: var(--color-green-dark);
+}
+
+.attack-checkbox-item input[type="checkbox"]:checked::after {
+  background: var(--color-green-dark);
+}
+
+.attack-checkbox-item input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--color-green-dark);
+  outline-offset: 2px;
+}
+
+.attack-checkbox-item span {
+  line-height: 1.3;
+  pointer-events: none;
+}
+
+/* Custom Attack Footer */
+.custom-attack-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding-top: 8px;
+  border-top: 1px solid var(--neo-sub-border);
+}
+
+.selected-count {
+  font-family: 'Audiowide', cursive;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+/* Send Button */
+.send-button {
+  background: #a8b0b5;
+  color: #4a5256;
+  font-weight: 700;
+  padding: 14px 28px;
+  border-radius: 12px;
+  border: 1px solid #6b7479;
+  cursor: not-allowed;
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+  box-shadow: 3px 3px 0 rgba(20, 28, 30, 0.22);
+  font-family: 'Audiowide', cursive;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  min-width: 200px;
+}
+
+.send-button.active {
+  background: var(--color-green-light);
+  color: var(--color-green-dark);
+  border: 1px solid var(--color-green-dark);
+  cursor: pointer;
+  box-shadow: 4px 4px 0 rgba(20, 28, 30, 0.28);
+}
+
+.send-button.active:hover {
+  transform: translate(-1px, -1px);
+  background: var(--color-green-hover);
+  box-shadow: 5px 5px 0 rgba(16, 24, 26, 0.34);
+}
+
+.send-button.active:active {
+  transform: translate(0, 0);
+  box-shadow: 4px 4px 0 rgba(18, 26, 28, 0.3);
+}
+
+/* User Management Styles */
+.admin-users-container {
+  background:
+    linear-gradient(175deg, rgba(255, 255, 255, 0.18) 0%, rgba(210, 216, 220, 0.08) 100%),
+    #9EB1BC;
+  border-radius: 18px;
+  border: 1px solid #23395B;
+  box-shadow: var(--neo-shadow-3d);
+  padding: 32px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.admin-user-info {
+  background: #D7D5D5;
+  border-radius: 12px;
+  border: 1px solid var(--neo-sub-border);
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: 3px 3px 0 rgba(20, 28, 30, 0.28);
+}
+
+.admin-info-text {
+  font-size: 15px;
+  color: var(--color-text-secondary);
+  margin: 8px 0;
+}
+
+.admin-info-text strong {
+  color: var(--color-text-emphasis);
+  font-weight: 700;
+}
+
+.admin-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.admin-action-btn {
+  font-family: 'Audiowide', cursive;
+  color: #23395B;
+  background: #D7D5D5;
+  border: 1px solid var(--neo-sub-border);
+  border-radius: 10px;
+  padding: 12px 24px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+  box-shadow: 3px 3px 0 rgba(20, 28, 30, 0.28);
+  min-width: 160px;
+}
+
+.admin-action-btn:hover:not(:disabled) {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0 rgba(16, 24, 26, 0.34);
+}
+
+.admin-action-btn:active:not(:disabled) {
+  transform: translate(0, 0);
+  box-shadow: 2px 2px 0 rgba(16, 24, 26, 0.28);
+}
+
+.admin-action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.admin-error {
+  background: var(--color-red-light);
+  color: var(--color-red-dark);
+  border: 1px solid var(--color-red-dark);
+  border-radius: 12px;
+  padding: 16px;
+  margin: 20px 0;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.admin-users-list {
+  background: #D7D5D5;
+  border-radius: 12px;
+  border: 1px solid var(--neo-sub-border);
+  padding: 24px;
+  box-shadow: 3px 3px 0 rgba(20, 28, 30, 0.28);
+}
+
+.admin-users-list .admin-section-title {
+  text-align: left;
+  margin-bottom: 16px;
+  font-size: 24px;
+  color: var(--color-text-secondary);
+}
+
+.admin-users-code {
+  background: rgba(255, 255, 255, 0.75);
+  color: var(--color-text-secondary);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--neo-sub-border);
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.6;
+  max-height: 600px;
+  overflow-y: auto;
+  margin: 0;
+  scroll-behavior: smooth;
+  font-family: monospace;
+
+  /* Hide scrollbar but keep scroll functionality */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.admin-users-code::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .admin-content {
+    padding: 20px;
+  }
+
+  .admin-attacks-container,
+  .admin-users-container {
+    padding: 24px 16px;
+  }
+
+  .admin-section-title {
+    font-size: 26px;
+  }
+
+  .attack-grid {
+    grid-template-columns: 1fr;
+    max-height: 350px;
+  }
+
+  .wave-options {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-actions {
+    flex-direction: column;
+  }
+
+  .admin-action-btn {
+    width: 100%;
+  }
+
+  .send-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-content {
+    padding: 16px;
+  }
+
+  .admin-attacks-container,
+  .admin-users-container {
+    padding: 20px 12px;
+  }
+
+  .admin-section-title {
+    font-size: 24px;
+  }
+
+  .admin-card-title {
+    font-size: 18px;
+  }
+
+  .attack-checkbox-item label {
+    font-size: 12px;
+  }
+}
+/* Attack Status Messages */
+.admin-status-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px 24px;
+  border-radius: 12px;
+  border: 1px solid;
+  margin-bottom: 20px;
+  font-size: 15px;
+  font-weight: 600;
+  box-shadow: 3px 3px 0 rgba(20, 28, 30, 0.22);
+  animation: slideIn 300ms ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.admin-status-message .material-symbols-outlined {
+  font-size: 24px;
+}
+
+.admin-status-message p {
+  margin: 0;
+  font-family: 'Audiowide', cursive;
+  letter-spacing: 0.3px;
+}
+
+.admin-status-loading {
+  background: var(--color-chart-blue-light);
+  color: var(--color-chart-blue-dark);
+  border-color: var(--color-chart-blue-dark);
+}
+
+.admin-status-success {
+  background: var(--color-green-light);
+  color: var(--color-green-dark);
+  border-color: var(--color-green-dark);
+}
+
+.admin-status-error {
+  background: var(--color-red-light);
+  color: var(--color-red-dark);
+  border-color: var(--color-red-dark);
+}
+
+/* Disabled button states */
+.wave-option input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.wave-option:has(input:disabled) {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.send-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}

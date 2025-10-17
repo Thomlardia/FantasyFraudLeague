@@ -1,142 +1,69 @@
 import { Link } from 'react-router-dom';
-import { useDefenseOperations } from '../../hooks/defenseHooks.js';
-import '../../styles/ui.css';
-import '../../styles/shopAndWiki.css';
-import MoneyBar from '../../components/MoneyBar';
+import DefenseDetailPage from '../../components/DefenseDetailPage';
 
 function RegularPasswordChanges() {
-    const { defense, loading, actionLoading, error, successMessage, handleBuy, handleUpgrade } = useDefenseOperations('passwordPolicies');
-    
-    function getDefenseLevel() {
-        return defense?.displayLevel || 0;
-    }
-
-    function getUpgradeCost() {
-        return defense?.nextActionCost || 0;
-    }
-
-    function handleUpgradeAction() {
-        if (!defense) return;
-
-        if (defense.isOwned) {
-            handleUpgrade();
-        } else {
-            handleBuy();
-        }
-    }
-
-    const currentLevel = getDefenseLevel();
-    const upgradeCost = getUpgradeCost();
-    const isOwned = defense?.isOwned || false;
-    const isMaxLevel = defense?.isMaxLevel || false;
-
-    // loading state
-    if (loading) {
-        return (
-            <div className="shop-container">
-                <div className="content-container">
-                    <div className="description-card">Loading defense data...</div>
-                </div>
-            </div>
-        );
-    }
-
     return (
-        <div className="shop-container">
-            <div className="topbar">
-            <div className="topbar-group">
-                <Link to="/defenseshop" className="icon-button" title="Back">
-                    <span className="material-symbols-outlined">arrow_back</span>
-                </Link>
-            </div>
-            <MoneyBar />
-            <div className="topbar-group"></div>
-            </div>
-            
-            <div className="header">
-
-                <h1>Regular Password Changes</h1>
-                <div></div>
-            </div>
-
-            <div className="content-container">
-                {/* error display */}
-                {error && (
-                    <div className="description-card" style={{ backgroundColor: '#f8d7da', color: '#721c24' }}>
-                        Error: {error}
-                    </div>
-                )}
-
-                {/* success display */}
-                {successMessage && (
-                    <div className="description-card" style={{ backgroundColor: '#d4edda', color: '#155724' }}>
-                        {successMessage}
-                    </div>
-                )}
-
-                <div className="description-card">
-                    <p>
-                        Regular password changes involve establishing policies that require users to update their passwords at defined intervals, typically every 60-90 days.
+        <DefenseDetailPage
+            defenseKey="regularPasswordChanges"
+            title="Regular Password Changes"
+            infoContent={
+                <>
+                    <p className="info-paragraph">
+                        Regular password changes enforce schedules that require users to refresh credentials on a predictable
+                        schedule, limiting the window of opportunity for attackers to abuse stolen passwords. It can
+                        include ensuring passwords are of a certain length, contain specific characters and even includes
+                        the use of biometrics to gain access to accounts.
                     </p>
-                    <br />
-                    <p>
-                        <a href="https://www.kaspersky.com/resource-center/preemptive-safety/how-often-password-change" target="_blank" rel="noopener noreferrer">
-                            Reference: Regular Password Changes
-                        </a>
-                    </p>
-                </div>
-
-                <div className="description-card">
-                    <h3>Common Examples:</h3>
-                        <ul>
-                            <li>Rotating database admin credentials</li>
-                            <li>Enforcing 90-day password reset in corporate systems</li>
-                            <li>Updating service account keys</li>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">list</span>
+                            Common Examples
+                        </h3>
+                        <ul className="info-list">
+                            <li>Rotating database administrator credentials quarterly</li>
+                            <li>Enforcing 90-day password resets across corporate accounts</li>
+                            <li>Updating shared service account keys and secrets</li>
                         </ul>
-                </div>
-
-                <div className="description-card">
-                    <h3>Defends against:</h3>
-                    <ul>
-                        <li>
-                            <Link to="/frauds/AccountTakeover">Account Takeover</Link>
-                        </li>
-                    </ul>
-                </div>
-
-                <div className="upgrade-section">
-                    <div className="upgrade-header">
-                        <h3>Defense Level: {currentLevel}</h3>
-                        <p>Status: {isOwned ? 'Owned' : 'Not Owned'}</p>
                     </div>
-                    
-                    <div className="upgrade-info">
-                        <div className="upgrade-details">
-                            <span className="upgrade-cost">Cost: ${upgradeCost.toLocaleString()}</span>
-                            <span className="upgrade-level">
-                                {isOwned 
-                                    ? `Next: Level ${currentLevel + 1}`
-                                    : 'Purchase to Own'
-                                }
-                            </span>
-                        </div>
-                        
-                        <button 
-                            className="upgrade-button"
-                            onClick={handleUpgradeAction}
-                            disabled={actionLoading || isMaxLevel}
-                        >
-                            {actionLoading 
-                                ? (isOwned ? 'Upgrading...' : 'Purchasing...')
-                                : isMaxLevel 
-                                    ? 'Max Level Reached' 
-                                    : (isOwned ? 'Upgrade Defense' : 'Purchase Defense')
-                            }
-                        </button>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">shield</span>
+                            Defends Against
+                        </h3>
+                        <ul className="info-list">
+                            <li>
+                                <Link to="/frauds/AccountTakeover" className="info-link">Account Takeover</Link>
+                            </li>
+                            <li>
+                                <Link to="/frauds/BruteForce" className="info-link">Brute Force</Link>
+                            </li>
+                            <li>
+                                <Link to="/frauds/SynIdentityTheft" className="info-link">Synthentic Identity Theft</Link>
+                            </li>
+                        </ul>
                     </div>
-                </div>
-            </div>
-        </div>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">link</span>
+                            Reference
+                        </h3>
+                        <ul className="info-list">
+                            <li>
+                                <a
+                                    href="https://www.kaspersky.com/resource-center/preemptive-safety/how-often-password-change"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="info-external-link"
+                                >
+                                    Regular Password Changes
+                                    <span className="material-symbols-outlined">open_in_new</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    </>
+            }
+        />
     );
 }
 

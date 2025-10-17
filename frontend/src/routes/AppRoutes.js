@@ -18,6 +18,7 @@ const VerifyEmail = lazy(() => import("../pages/VerifyEmail"));
 // only load if relevant
 const Home = lazy(() => import("../pages/Home"));
 const AdminDashboard = lazy(() => import("../pages/AdminDashboard"));
+const UserManagement = lazy(() => import("../pages/UserManagement"));
 
 // player related main pages
 const DefenseShop   = lazy(() => import("../pages/DefenseShop"));
@@ -27,6 +28,8 @@ const Settings      = lazy(() => import("../pages/Settings"));
 // shared pages
 const Leaderboard   = lazy(() => import("../pages/Leaderboard"));
 const FraudWiki     = lazy(() => import("../pages/FraudWiki"));
+const Analysis      = lazy(() => import("../pages/Analysis"));
+const AttackLog     = lazy(() => import("../pages/AttackLog"));
 
 // DEFENSES (lazy)
 const MultiFactorAuth           = lazy(() => import("../pages/defenses/MultiFactorAuth"));
@@ -72,11 +75,19 @@ const BruteForce                = lazy(() => import("../pages/frauds/BruteForce"
 const SyntIdentityTheft         = lazy(() => import("../pages/frauds/SyntIdentityTheft"));
 const AccAndInvFraud            = lazy(() => import("../pages/frauds/AccAndInvFraud"));
 
-const NotFound = () => <div style={{ padding: 24 }}>404 — Not Found</div>;
+const NotFound = () => <div className="simple-page simple-page--centered">404 — Not Found</div>;
+
+const PageLoadingSpinner = () => (
+  <div className="page-loading">
+    <div className="page-loading-spinner">
+      <span className="material-symbols-outlined">hourglass_empty</span>
+    </div>
+  </div>
+);
 
 export default function AppRoutes() {
   return (
-    <Suspense fallback={<div>Loading…</div>}>
+    <Suspense fallback={<PageLoadingSpinner />}>
       <Routes>
         {/* Public */}
         <Route path="/" element={<Hello />} />
@@ -89,9 +100,10 @@ export default function AppRoutes() {
             <Route path="/verify-email" element={<VerifyEmail />} />
               <Route element={<RequireVerified />}>
 
-                {/* ADMIN-only route */}
+                {/* ADMIN-only routes */}
                 <Route element={<RequireRole role="admin" />}>
                   <Route path="/admin" element={<AdminDashboard />} />
+                  <Route path="/admin/users" element={<UserManagement />} />
                 </Route>
 
                 {/* Normal app routes (no auto-redirect for admins) */}
@@ -100,6 +112,8 @@ export default function AppRoutes() {
                 <Route path="/fraudwiki" element={<FraudWiki />} />
                 <Route path="/help" element={<Help />} />
                 <Route path="/leaderboard" element={<Leaderboard />} />
+                <Route path="/analysis" element={<Analysis />} />
+                <Route path="/attacklog" element={<AttackLog />} />
                 <Route path="/settings" element={<Settings />} />
 
                 {/* DEFENSES */}

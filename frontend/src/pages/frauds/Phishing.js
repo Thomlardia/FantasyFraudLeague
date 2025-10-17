@@ -1,75 +1,92 @@
 import { Link } from 'react-router-dom';
-import '../../styles/ui.css';
-import '../../styles/shopAndWiki.css';
-import MoneyBar from '../../components/MoneyBar';
+import FraudDetailPage from '../../components/FraudDetailPage';
+import FraudProtectionChart from '../../components/FraudProtectionChart';
+import '../../styles/charts.css';
 
 function Phishing() {
     return (
-        <div className="fraud-container">
-            <div className="topbar">
-            <div className="topbar-group">
-                <Link to="/fraudwiki" className="icon-button" title="Back">
-                    <span className="material-symbols-outlined">arrow_back</span>
-                </Link>
-            </div>
-            <MoneyBar />
-            <div className="topbar-group"></div>
-            </div>
-            <div className="header">
+        <FraudDetailPage
+            title="Phishing"
+            secondaryCardContent={<FraudProtectionChart attackId="phishing" variant="horizontal" />}
+            infoContent={
+                <>
+                    <p className="info-paragraph">
+                        Phishing is a cybercrime where attackers impersonate trusted organisations through fraudulent emails,
+                        websites, or messages to steal credentials, personal data, or money. These scams rely on urgency and trust,
+                        often mimicking brand visuals and language.
+                    </p>
 
-                <h1><span className="title-icon material-symbols-outlined">phishing</span>Phishing</h1>
-                <div></div>
-            </div>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">list</span>
+                            Common Examples
+                        </h3>
+                        <ul className="info-list">
+                            <li>Fake banking emails requesting account verification</li>
+                            <li>Fraudulent login pages that capture credentials</li>
+                            <li>Urgent payment requests claiming account suspension</li>
+                            <li>Spear phishing targeting specific individuals or teams</li>
+                            <li>Clone phishing where legitimate emails are modified with malicious links</li>
+                        </ul>
+                    </div>
 
-            <div className="content-container">
-                <div className="description-card">
-                <p>
-                    Phishing is a cybercrime where attackers impersonate legitimate organizations through fraudulent emails, websites, or messages to steal sensitive information such as credentials, personal data or money.
-                     Phishing attacks exploit human psychology by creating a sense of urgency or trust. Attackers often replicate the visual design and communication style of trusted brands to deceive victims. These attacks
-                      evolved from simple email scams to sophisticated techniques like spear phishing, clone phishing, and whaling, targeting specific individuals or organizations.
-                </p>
-                <br />
-                <p>
-                    <a href="https://www.cloudflare.com/learning/access-management/phishing-attack" target="_blank" rel="noopener noreferrer">
-                        Reference: Phishing
-                    </a>.
-                </p>
-                <br />
-                </div>
-                <div className="description-card">
-                    <h3>Common Examples:</h3>
-                    <ul>
-                        <li>Fake banking emails requesting account verification</li>
-                        <li>Fraudulent login pages that capture credentials</li>
-                        <li>Urgent payment request messages claiming account suspension</li>
-                        <li>Spear phishing targeting specific individuals or organizations</li>
-                        <li>Clone phishing using legitimate emails with malicious links replaced</li>
-                    </ul>
-                    <br />
-                </div>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">history_edu</span>
+                            Historical Context
+                        </h3>
+                        <p className="info-paragraph">
+                            The term &quot;phishing&quot; emerged in the 1990s, inspired by &quot;fishing&quot; for victims. Attacks
+                            evolved from simple email scams into sophisticated, targeted campaigns run by organised crime groups.
+                        </p>
+                    </div>
 
-                <div className="description-card">
-                    <h3> Historical Context:</h3>
-                    <p> The term "phishing" originated in the mid 1990s, derived from "fishing" - the idea of baiting victims. Early phishing attacks were email scams but they have since evolved into sophisticated operations often run by large crime syndicates</p>
-                </div>
-                
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">security</span>
+                            Primary Defenses
+                        </h3>
+                        <ul className="info-list">
+                            <li>
+                                <Link to="/defenses/MultiFactorAuth" className="info-link">
+                                    Multi Factor Authentication
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/defenses/UserEducation" className="info-link">
+                                    User Education
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/defenses/EmailFiltering" className="info-link">
+                                    Email Filtering
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
 
-                <div className="description-card">
-                    <h3>Primary Defenses:</h3>
-                    <ul>
-                        <li>
-                            <Link to="/defenses/MultiFactorAuth">Multi Factor Authentication</Link>
-                        </li>
-                        <li>
-                            <Link to="/defenses/UserEducation">User Education</Link>
-                        </li>
-                        <li>
-                            <Link to="/defenses/EmailFiltering">Email Filtering</Link>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">link</span>
+                            Reference
+                        </h3>
+                        <ul className="info-list">
+                            <li>
+                                <a
+                                    href="https://www.cloudflare.com/learning/access-management/phishing-attack"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="info-external-link"
+                                >
+                                    Cloudflare: Phishing Attack
+                                    <span className="material-symbols-outlined">open_in_new</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </>
+            }
+        />
     );
 }
 

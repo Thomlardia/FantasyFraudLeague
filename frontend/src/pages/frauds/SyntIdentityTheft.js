@@ -1,78 +1,78 @@
 import { Link } from 'react-router-dom';
-import iconBackArrow from '../../images/icons/back_arrow.png'
-import '../../styles/ui.css';
-import '../../styles/shopAndWiki.css';
-import MoneyBar from '../../components/MoneyBar';
+import FraudDetailPage from '../../components/FraudDetailPage';
+import FraudProtectionChart from '../../components/FraudProtectionChart';
+import '../../styles/charts.css';
 
 function SyntIdentityTheft() {
     return (
-        <div className="fraud-container">
-            <div className="topbar">
-            <div className="topbar-group">
-                <Link to="/fraudwiki" className="icon-button" title="Back">
-                    <span className="material-symbols-outlined">arrow_back</span>
-                </Link>
-            </div>
-            <MoneyBar />
-            <div className="topbar-group"></div>
-            </div>
-            <div className="header">
-
-                <h1>Synthetic Identity Theft</h1>
-                <div></div>
-            </div>
-
-            <div className="content-container">
-                <div className="description-card">
-                    <p>
-                        Synthetic identity theft involves creating fake identities using a mix of real and 
-                        fabricated personal information. Criminals build credit histories with these identities 
-                        and use them to commit fraud. Because no single victim experiences the full impact, 
-                        this type of fraud can go undetected for years.
+        <FraudDetailPage
+            title="Synthetic Identity Theft"
+            secondaryCardContent={<FraudProtectionChart attackId="syntheticIdentity" variant="horizontal" />}
+            infoContent={
+                <>
+                    <p className="info-paragraph">
+                        Synthetic identity theft constructs fake identities by combining real and fabricated personal data. Criminals
+                        slowly build credit histories and use the synthetic identity for fraud, often evading detection for years.
                     </p>
-                    <br />
-                    <p>
-                        <a href="https://www.equifax.com/personal/education/identity-theft/articles/-/learn/synthetic-identity-theft/" target="_blank" rel="noopener noreferrer">
-                            Reference: Synthetic Identity Theft
-                        </a>.
-                    </p>
-                    <br />
-                </div>
-
-                <div className="description-card">
-                    <h3>Common Examples:</h3>
-                    <ul>
-                        <li>Combining real Social Security numbers with fake names and addresses</li>
-                        <li>Creating credit profiles for long-term fraud</li>
-                        <li>Opening bank accounts with synthetic identities</li>
-                        <li>Obtaining government benefits using fabricated identities</li>
-                        <li>Money laundering through synthetic accounts</li>
-                    </ul>
-                    <br />
-                </div>
-
-                <div className="description-card">
-                    <h3>Historical Context:</h3>
-                    <p>
-                        Synthetic identity fraud grew with automated credit systems and fewer in-person checks. 
-                        It has become one of the fastest-growing fraud types, fueled by personal data leaks 
-                        from major breaches.
-                    </p>
-                </div>
-
-                <div className="description-card">
-                    <h3>Primary Defenses:</h3>
-                    <ul>
-                        <li>
-                            <Link to="/defenses/BackgroundChecks">Background Checks</Link>
-                        </li>
-                        <li>
-                            <Link to="/defenses/RegularPasswordChanges">Regular Password Changes</Link>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">list</span>
+                            Common Examples
+                        </h3>
+                        <ul className="info-list">
+                            <li>Pairing real Social Security numbers with invented names and addresses</li>
+                            <li>Creating credit profiles and nurturing them for larger fraud later</li>
+                            <li>Opening bank accounts using synthetic identities</li>
+                            <li>Claiming government benefits with fabricated personas</li>
+                            <li>Laundering money through synthetic accounts</li>
+                        </ul>
+                    </div>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">history_edu</span>
+                            Historical Context
+                        </h3>
+                        <p className="info-paragraph">
+                            Synthetic identity fraud grew alongside automated credit decisions and fewer in-person checks. Massive
+                            data breaches provide the personal data needed to fabricate identities.
+                        </p>
+                    </div>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">security</span>
+                            Primary Defenses
+                        </h3>
+                        <ul className="info-list">
+                            <li>
+                                <Link to="/defenses/BackgroundChecks" className="info-link">Background Checks</Link>
+                            </li>
+                            <li>
+                                <Link to="/defenses/RegularPasswordChanges" className="info-link">Regular Password Changes</Link>
+                            </li>
+                        </ul>
+                    </div>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">link</span>
+                            Reference
+                        </h3>
+                        <ul className="info-list">
+                            <li>
+                                <a
+                                    href="https://www.equifax.com/personal/education/identity-theft/articles/-/learn/synthetic-identity-theft/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="info-external-link"
+                                >
+                                    Synthetic Identity Theft
+                                    <span className="material-symbols-outlined">open_in_new</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </>
+            }
+        />
     );
 }
 

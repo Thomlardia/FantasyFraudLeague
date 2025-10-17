@@ -1,79 +1,79 @@
 import { Link } from 'react-router-dom';
-import '../../styles/ui.css';
-import '../../styles/shopAndWiki.css';
-import MoneyBar from '../../components/MoneyBar';
+import FraudDetailPage from '../../components/FraudDetailPage';
+import FraudProtectionChart from '../../components/FraudProtectionChart';
+import '../../styles/charts.css';
 
 function Deepfake() {
     return (
-        <div className="fraud-container">
-            <div className="topbar">
-            <div className="topbar-group">
-                <Link to="/fraudwiki" className="icon-button" title="Back">
-                    <span className="material-symbols-outlined">arrow_back</span>
-                </Link>
-            </div>
-            <MoneyBar />
-            <div className="topbar-group"></div>
-            </div>
-            <div className="header">
-
-                <h1>Deepfake</h1>
-                <div></div>
-            </div>
-
-            <div className="content-container">
-                <div className="description-card">
-                    <p>
-                        Deepfake fraud involves using AI-generated synthetic media (audio, video, or images) 
-                        to impersonate individuals for fraudulent purposes. This technology relies on 
-                        generative adversarial networks (GANs) to create realistic fake content. 
-                        Attackers typically target high-value individuals like CEOs or trusted contacts 
-                        to authorize fraudulent transactions or gain access to sensitive information.
+        <FraudDetailPage
+            title="Deepfake"
+            secondaryCardContent={<FraudProtectionChart attackId="deepfakeFraud" variant="horizontal" />}
+            infoContent={
+                <>
+                    <p className="info-paragraph">
+                        Deepfake fraud uses AI-generated synthetic media to impersonate trusted voices or faces. Attackers craft
+                        realistic audio, video, or images to authorise payments or extract sensitive information.
                     </p>
-                    <br />
-                    <p>
-                        <a href="https://www.feedzai.com/blog/deepfake-fraud/" target="_blank" rel="noopener noreferrer">
-                            Reference: Deepfake
-                        </a>.
-                    </p>
-                    <br />
-                </div>
-
-                <div className="description-card">
-                    <h3>Common Examples:</h3>
-                    <ul>
-                        <li>Fake CEO voice calls requesting emergency wire transfers</li>
-                        <li>Manipulated video calls during business negotiations</li>
-                        <li>Synthetic identity creation for account opening fraud</li>
-                        <li>Fake audio messages from family members requesting money</li>
-                        <li>Manipulated evidence in legal proceedings</li>
-                    </ul>
-                    <br />
-                </div>
-
-                <div className="description-card">
-                    <h3>Historical Context:</h3>
-                    <p>
-                        The term "deepfake" emerged around 2017, combining "deep learning" and "fake." 
-                        Early deepfakes were mainly used for non-consensual explicit content, 
-                        but fraud applications quickly followed. The first known deepfake fraud 
-                        case occurred in 2019 when a CEO's voice was mimicked to authorize a wire transfer.
-                    </p>
-                </div>
-
-                <div className="description-card">
-                    <h3>Primary Defenses:</h3>
-                    <ul>
-                        <li>
-                            <Link to="/defenses/VerificationProtocols">Verification Protocols</Link>
-                        </li>
-                        <li>
-                            <Link to="/defenses/DeepfakeDetection">Deepfake Detection</Link>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">list</span>
+                            Common Examples
+                        </h3>
+                        <ul className="info-list">
+                            <li>Fake CEO voice calls requesting urgent wire transfers</li>
+                            <li>Manipulated video calls during business negotiations</li>
+                            <li>Synthetic identities used to open accounts</li>
+                            <li>Fake audio messages from relatives requesting money</li>
+                            <li>Manipulated evidence in legal disputes</li>
+                        </ul>
+                    </div>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">history_edu</span>
+                            Historical Context
+                        </h3>
+                        <p className="info-paragraph">
+                            Coined in 2017 by combining &quot;deep learning&quot; and &quot;fake,&quot; the first known deepfake
+                            fraud occurred in 2019 when a CEO&apos;s voice was mimicked to authorise a wire transfer. The threat has
+                            grown rapidly since.
+                        </p>
+                    </div>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">security</span>
+                            Primary Defenses
+                        </h3>
+                        <ul className="info-list">
+                            <li>
+                                <Link to="/defenses/VerificationProtocols" className="info-link">Verification Protocols</Link>
+                            </li>
+                            <li>
+                                <Link to="/defenses/DeepfakeDetection" className="info-link">Deepfake Detection</Link>
+                            </li>
+                        </ul>
+                    </div>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">link</span>
+                            Reference
+                        </h3>
+                        <ul className="info-list">
+                            <li>
+                                <a
+                                    href="https://www.feedzai.com/blog/deepfake-fraud/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="info-external-link"
+                                >
+                                    Deepfake
+                                    <span className="material-symbols-outlined">open_in_new</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </>
+            }
+        />
     );
 }
 

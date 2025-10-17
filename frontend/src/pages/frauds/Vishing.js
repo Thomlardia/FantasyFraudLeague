@@ -1,76 +1,82 @@
 import { Link } from 'react-router-dom';
-import iconBackArrow from '../../images/icons/back_arrow.png'
-import '../../styles/ui.css';
-import '../../styles/shopAndWiki.css';
-import MoneyBar from '../../components/MoneyBar';
+import FraudDetailPage from '../../components/FraudDetailPage';
+import FraudProtectionChart from '../../components/FraudProtectionChart';
+import '../../styles/charts.css';
 
 function Vishing() {
     return (
-        <div className="fraud-container">
-            <div className="topbar">
-            <div className="topbar-group">
-                <Link to="/fraudwiki" className="icon-button" title="Back">
-                    <span className="material-symbols-outlined">arrow_back</span>
-                </Link>
-            </div>
-            <MoneyBar />
-            <div className="topbar-group"></div>
-            </div>
-            <div className="header">
-
-                <h1>Vishing</h1>
-                <div></div>
-            </div>
-
-            <div className="content-container">
-                <div className="description-card">
-                    <p>
-                        Vishing uses phone calls or voice communications to trick victims into 
-                        revealing sensitive information or performing actions that compromise security. 
-                        Attackers often exploit trust in voice conversations, using caller ID spoofing 
-                        and social engineering tactics such as urgency, fear, or authority.
+        <FraudDetailPage
+            title="Vishing"
+            secondaryCardContent={<FraudProtectionChart attackId="vishing" variant="horizontal" />}
+            infoContent={
+                <>
+                    <p className="info-paragraph">
+                        Vishing leverages phone calls or voice messages to trick victims into revealing sensitive information or
+                        taking compromising actions. Attackers rely on caller ID spoofing and psychological tactics such as
+                        urgency, fear, or authority.
                     </p>
-                    <br />
-                    <p>
-                        <a href="https://www.terranovasecurity.com/solutions/security-awareness-training/what-is-vishing" target="_blank" rel="noopener noreferrer">
-                            Reference: Vishing
-                        </a>.
-                    </p>
-                    <br />
-                </div>
-
-                <div className="description-card">
-                    <h3>Common Examples:</h3>
-                    <ul>
-                        <li>Fake bank calls requesting account verification</li>
-                        <li>Tax authority scams threatening legal action</li>
-                        <li>Tech support fraud claiming a system infection</li>
-                        <li>Utility company impersonation threatening disconnection</li>
-                        <li>Charity scams exploiting disasters or crises</li>
-                    </ul>
-                    <br />
-                </div>
-
-                <div className="description-card">
-                    <h3>Historical Context:</h3>
-                    <p>
-                        Vishing has existed since the telephone era but has grown significantly 
-                        with VoIP technologies, which enable caller ID spoofing and large-scale 
-                        robocalling. The COVID-19 pandemic saw a sharp increase as attackers 
-                        targeted remote workers and vulnerable populations.
-                    </p>
-                </div>
-
-                <div className="description-card">
-                    <h3>Primary Defenses:</h3>
-                    <ul>
-                        <li>
-                            <Link to="/defenses/UserEducation">UserEducation</Link>
-                        </li> 
-                    </ul>
-                </div>
-            </div>
-        </div>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">list</span>
+                            Common Examples
+                        </h3>
+                        <ul className="info-list">
+                            <li>Fake bank calls requesting account verification</li>
+                            <li>Tax authority scams threatening legal action</li>
+                            <li>Tech support fraud claiming malware infections</li>
+                            <li>Utility company impersonation threatening disconnection</li>
+                            <li>Charity scams exploiting crises or disasters</li>
+                        </ul>
+                    </div>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">history_edu</span>
+                            Historical Context
+                        </h3>
+                        <p className="info-paragraph">
+                            Vishing dates back to early telephone scams but surged with VoIP and caller ID spoofing. The COVID-19
+                            pandemic saw a spike as attackers targeted remote workers and vulnerable populations.
+                        </p>
+                    </div>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">security</span>
+                            Primary Defenses
+                        </h3>
+                        <ul className="info-list">
+                            <li>
+                                <Link to="/defenses/UserEducation" className="info-link">User Education</Link>
+                            </li>
+                            <li>
+                                <Link to="/defenses/DeepfakeDetection" className="info-link">Deepfake Detection</Link>
+                            </li>
+                            <li>
+                                <Link to="/defenses/VerificationProtocols" className="info-link">Verification Protocols</Link>
+                            </li>
+                        </ul>
+                    </div>
+                    <div className="info-section">
+                        <h3 className="info-section-heading">
+                            <span className="material-symbols-outlined">link</span>
+                            Reference
+                        </h3>
+                        <ul className="info-list">
+                            <li>
+                                <a
+                                    href="https://www.terranovasecurity.com/solutions/security-awareness-training/what-is-vishing"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="info-external-link"
+                                >
+                                    Vishing
+                                    <span className="material-symbols-outlined">open_in_new</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </>
+            }
+        />
     );
 }
 

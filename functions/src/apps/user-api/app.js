@@ -1,7 +1,48 @@
 import { onCall, HttpsError } from "firebase-functions/v2/https";
 import { requireAuth, requireVerified, requireAppCheck } from "../common/authzn.js";
-import { apiGetUserBalance, apiUpdateUserBalance } from "../../domains/wallet/api.js";
-import { apiGetUserDefenses, apiBuyDefense, apiUpgradeDefense } from "../../domains/defense/api.js";
+import { apiGetUserBalance } from "../../domains/wallet/api.js";
+import { apiGetUserDefenses, apiBuyDefense, apiUpgradeDefense, apiSellDefense } from "../../domains/defense/api.js";
+import { apiGetLeaderboardWithUser, apiGetUserRank } from "../../domains/leaderboard/api.js";
+import { apiGetUserAttackLogs, apiGetUpcomingScheduledAttacks } from "../../domains/attack/api.js";
+import { ensureUserProfile } from "../../domains/user/profile.js";
+import { auth as adminAuth } from "../../infra/db/index.js";
+
+export const user_ensureProfile = onCall({ region: "africa-south1", enforceAppCheck: true }, async (request) => {
+  requireAppCheck(request);
+  requireVerified(request);
+
+  const uid = request.auth.uid;
+
+  let email = request.auth.token?.email ?? null;
+  let displayName = request.auth.token?.name ?? null;
+  const providedDisplayName =
+    typeof request.data?.displayName === "string" && request.data.displayName.trim().length > 0
+      ? request.data.displayName.trim()
+      : null;
+  if (!displayName && providedDisplayName) {
+    displayName = providedDisplayName;
+  }
+
+  if (!email || !displayName) {
+    try {
+      const userRecord = await adminAuth.getUser(uid);
+      email = email ?? userRecord.email ?? null;
+      displayName = displayName ?? userRecord.displayName ?? null;
+    } catch (fetchError) {
+      console.error("user_ensureProfile: failed to load user record", fetchError);
+    }
+  }
+
+  const result = await ensureUserProfile({
+    uid,
+    email,
+    displayName,
+  });
+
+  return {
+    status: result.created ? "created" : "exists",
+  };
+});
 
 // Using your proper (request) signature with AppCheck enforcement
 export const user_getBalance = onCall({ region: "africa-south1", enforceAppCheck: true }, async (request) => {
@@ -13,17 +54,6 @@ export const user_getBalance = onCall({ region: "africa-south1", enforceAppCheck
   return balance;
 });
 
-// Adding the user_updateBalance function from develop, but with proper signature
-export const user_updateBalance = onCall({ region: "africa-south1", enforceAppCheck: true }, async (request) => {
-  requireAppCheck(request);
-  requireAuth(request);
-  const { newBalance } = request.data || {};
-  if (typeof newBalance !== "number" || isNaN(newBalance)) {
-    throw new HttpsError("invalid-argument", "newBalance must be a valid number");
-  }
-  return apiUpdateUserBalance(request.auth.uid, newBalance);
-});
-
 // All defense functions use proper (request) signature with AppCheck
 export const user_getDefenses = onCall({ region: "africa-south1", enforceAppCheck: true }, async (request) => {
   requireAppCheck(request);
@@ -31,7 +61,11 @@ export const user_getDefenses = onCall({ region: "africa-south1", enforceAppChec
   return apiGetUserDefenses(request.auth.uid);
 });
 
-export const user_buyDefense = onCall({ region: "africa-south1", enforceAppCheck: true }, async (request) => {
+export const user_buyDefense = onCall({
+  region: "africa-south1",
+  enforceAppCheck: true,
+  consumeAppCheckToken: true  // Prevent replay attacks - single-use token
+}, async (request) => {
   requireAppCheck(request);
   requireVerified(request);
   const { defenseId } = request.data || {};
@@ -41,7 +75,11 @@ export const user_buyDefense = onCall({ region: "africa-south1", enforceAppCheck
   return apiBuyDefense(request.auth.uid, defenseId);
 });
 
-export const user_upgradeDefense = onCall({ region: "africa-south1", enforceAppCheck: true }, async (request) => {
+export const user_upgradeDefense = onCall({
+  region: "africa-south1",
+  enforceAppCheck: true,
+  consumeAppCheckToken: true  // Prevent replay attacks - single-use token
+}, async (request) => {
   requireAppCheck(request);
   requireVerified(request);
   const { defenseId } = request.data || {};
@@ -49,4 +87,58 @@ export const user_upgradeDefense = onCall({ region: "africa-south1", enforceAppC
     throw new HttpsError("invalid-argument", "defenseId must be a non-empty string");
   }
   return apiUpgradeDefense(request.auth.uid, defenseId);
+});
+
+export const user_sellDefense = onCall({
+  region: "africa-south1",
+  enforceAppCheck: true,
+  consumeAppCheckToken: true  // Prevent replay attacks - single-use token
+}, async (request) => {
+  requireAppCheck(request);
+  requireVerified(request);
+  const { defenseId } = request.data || {};
+  if (typeof defenseId !== "string" || !defenseId) {
+    throw new HttpsError("invalid-argument", "defenseId must be a non-empty string");
+  }
+  return apiSellDefense(request.auth.uid, defenseId);
+});
+
+export const user_getLeaderboardWithUser = onCall({ region: "africa-south1", enforceAppCheck: true }, async (request) => {
+  requireAppCheck(request);
+  requireVerified(request);
+  return apiGetLeaderboardWithUser(request.auth.uid);
+});
+
+export const user_getUserRank = onCall({ region: "africa-south1", enforceAppCheck: true }, async (request) => {
+  requireAppCheck(request);
+  requireVerified(request);
+  return apiGetUserRank(request.auth.uid);
+});
+
+export const user_getAttackLogs = onCall({ region: "africa-south1", enforceAppCheck: true }, async (request) => {
+  requireAppCheck(request);
+  requireVerified(request);
+  const { limit } = request.data || {};
+  
+  // Validate limit parameter if provided
+  if (limit !== undefined && limit !== null && (typeof limit !== "number" || limit < 1)) {
+    throw new HttpsError("invalid-argument", "limit must be a positive number");
+  }
+  
+  return apiGetUserAttackLogs(request.auth.uid, limit);
+});
+
+export const user_getScheduledAttacks = onCall({ region: "africa-south1", enforceAppCheck: true }, async (request) => {
+  requireAppCheck(request);
+  requireVerified(request);
+  const { limit } = request.data || {};
+
+  if (limit !== undefined && limit !== null) {
+    if (typeof limit !== "number" || limit < 1) {
+      throw new HttpsError("invalid-argument", "limit must be a positive number");
+    }
+  }
+
+  const resolvedLimit = Math.min(limit || 20, 50);
+  return apiGetUpcomingScheduledAttacks({ limit: resolvedLimit });
 });

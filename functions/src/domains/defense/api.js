@@ -1,7 +1,8 @@
-import { 
-  getUserDefenses, 
-  buyDefense, 
+import {
+  getUserDefenses,
+  buyDefense,
   upgradeDefense,
+  sellDefense,
   clearDefenseCache,
   InsufficientFundsError,
   NotFoundError,
@@ -48,7 +49,7 @@ export async function apiBuyDefense(userId, defenseId) {
 
 /**
  * API: Upgrade a defense for a user.
- * @param {string} userId - The user ID  
+ * @param {string} userId - The user ID
  * @param {string} defenseId - The defense to upgrade
  * @returns {Promise<Object>} Upgraded defense object
  */
@@ -61,6 +62,26 @@ export async function apiUpgradeDefense(userId, defenseId) {
     }
     if (err instanceof NotFoundError) {
       throw new HttpsError("not-found", "Defense not found");
+    }
+    throw new HttpsError("internal", err.message);
+  }
+}
+
+/**
+ * API: Sell a defense for a user.
+ * @param {string} userId - The user ID
+ * @param {string} defenseId - The defense to sell
+ * @returns {Promise<Object>} Sell result with sellPrice and loss
+ */
+export async function apiSellDefense(userId, defenseId) {
+  try {
+    return await sellDefense(userId, defenseId);
+  } catch (err) {
+    if (err instanceof NotFoundError) {
+      throw new HttpsError("not-found", "Defense not found");
+    }
+    if (err.message === "You don't own this defense") {
+      throw new HttpsError("failed-precondition", "You don't own this defense");
     }
     throw new HttpsError("internal", err.message);
   }

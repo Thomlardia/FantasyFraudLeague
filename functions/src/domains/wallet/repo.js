@@ -38,3 +38,17 @@ export async function setBalance(userId, balance) {
     { merge: true }
   );
 }
+
+/**
+ * Sets the netWorth for a user.
+ * @param {string} userId
+ * @param {number} netWorth
+ * returns nothing, updates the user's netWorth in the database.
+ */
+export async function setNetWorth(userId, netWorth) {
+    /* Update or create the netWorth of the user in firestore*/
+  await db.collection(USERS_COLLECTION).doc(userId).set(
+    { netWorth },
+    { merge: true }
+  );
+}

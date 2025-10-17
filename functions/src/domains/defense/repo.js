@@ -107,12 +107,12 @@ export async function updateUserDefenseSummary(userId) {
     getUserOwnedDefenses(userId),
     getAllDefenseTemplates()
   ]);
-  
+
   // create template lookup map
   const templateMap = new Map(templates.map(t => [t.defenseId, t]));
-  
+
   const defenseSummary = {};
-  
+
   // populate summary
   ownedDefenses.forEach(ownedDefense => {
     const template = templateMap.get(ownedDefense.defenseId);
@@ -125,7 +125,7 @@ export async function updateUserDefenseSummary(userId) {
       };
     }
   });
-  
+
   await db.collection("users").doc(userId).update({
     ownedDefenses: defenseSummary,
     ownedDefensesList: ownedDefenses, // Keep in sync

@@ -21,11 +21,11 @@ let isEmulator = false;
 let environment = 'development';
 
 // Detect environment based on environment variables
-const isProduction = process.env.NODE_ENV === 'production' || process.env.USE_PRODUCTION === 'true';
-const useEmulator = process.env.FUNCTIONS_EMULATOR || process.env.FIRESTORE_EMULATOR_HOST || !isProduction;
+// Only use emulator if explicitly told to via emulator environment variables
+const useEmulator = !!(process.env.FUNCTIONS_EMULATOR || process.env.FIRESTORE_EMULATOR_HOST);
 
 // Set environment detection variables
-if (useEmulator && !isProduction) {
+if (useEmulator) {
   isEmulator = true;
   environment = 'emulator';
   console.log('Connected to Firestore emulator for seeding');

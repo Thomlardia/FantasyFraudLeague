@@ -6,6 +6,10 @@ backend/node_modules/
 
 # Build output
 frontend/build/
+frontend/dist/
+
+# Vite cache
+frontend/node_modules/.vite/
 
 ## Firebase
 .firebase/

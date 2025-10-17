@@ -3,6 +3,7 @@ import {
   getUserOwnedDefenses 
 } from "./repo.js";
 import { db } from "../../infra/db/index.js";
+import { FieldValue } from "firebase-admin/firestore";
 
 // in-memory cache for defense templates
 let defenseTemplatesCache = null;
@@ -66,24 +67,27 @@ export async function getUserDefenses(userId) {
   
   return allTemplates.map(template => {
     const userLevel = ownedMap.get(template.defenseId);
-    
+
     // More consistent level handling:
     // - If not owned: level = 0, displayLevel = 0
     // - If owned at level 1: level = 1, displayLevel = 1
     // - If owned at level 2: level = 2, displayLevel = 2, etc.
-    
+
     const actualLevel = userLevel || 0;
     const isOwned = actualLevel > 0;
-    
+    const nextCost = template.cost[actualLevel];
+    const hasNextUpgrade = nextCost && nextCost > 0;
+
     return {
       ...template,
       level: actualLevel,
       isOwned: isOwned,
       displayLevel: actualLevel,
       // Add cost for next action (buy if not owned, upgrade if owned)
-      nextActionCost: isOwned ? template.cost[actualLevel] || 0 : template.cost[0] || 0,
-      canUpgrade: isOwned && actualLevel < template.cost.length,
-      isMaxLevel: isOwned && actualLevel >= template.cost.length
+      nextActionCost: isOwned ? (nextCost || 0) : (template.cost[0] || 0),
+      canUpgrade: isOwned && hasNextUpgrade,
+      isMaxLevel: isOwned && !hasNextUpgrade,
+      defendsAgainst: template.defendsAgainst
     };
   });
 }
@@ -160,11 +164,15 @@ export async function buyDefense(userId, defenseId) {
       }
     };
 
+    // update total spent (netWorth unchanged - buying is an investment, not a loss)
+    const newTotalSpent = (userData.totalSpent) + buyCost;
+
     transaction.update(userDocRef, {
       balance: newBalance,
       ownedDefensesList: newOwnedList,
       ownedDefenses: newOwnedDefenses,
       totalDefensesOwned: newOwnedList.length,
+      totalSpent: newTotalSpent,
     });
     
     return {
@@ -244,16 +252,96 @@ export async function upgradeDefense(userId, defenseId) {
       }
     };
 
+    // update total spent (netWorth unchanged - upgrading is an investment, not a loss)
+    const newTotalSpent = (userData.totalSpent) + upgradeCost;
+
     transaction.update(userDocRef, {
       balance: newBalance,
       ownedDefensesList: newOwnedList,
       ownedDefenses: newOwnedDefenses,
       totalDefensesOwned: newOwnedList.length,
+      totalSpent: newTotalSpent,
     });
     
     return {
       ...template,
       level: newLevel,
+    };
+  });
+}
+
+/**
+ * Sells a defense the user owns, returning 50% of total investment.
+ * Uses Firestore transaction to prevent concurrency issues.
+ * @param {string} userId - The ID of the user selling the defense
+ * @param {string} defenseId - The ID of the defense to sell
+ * @returns {Promise<Object>} Object with sellPrice, loss, and defense info
+ * @throws {Error} If the defense is not found or the user doesn't own it
+ */
+export async function sellDefense(userId, defenseId) {
+  // get template from cache
+  const template = await getCachedDefenseTemplate(defenseId);
+  if (!template) {
+    throw new NotFoundError();
+  }
+
+  // use Firestore transaction to prevent concurrency issues
+  return await db.runTransaction(async (transaction) => {
+    const userDocRef = db.collection("users").doc(userId);
+    const userDoc = await transaction.get(userDocRef);
+
+    if (!userDoc.exists) {
+      throw new Error("User not found");
+    }
+
+    const userData = userDoc.data();
+    const currentBalance = userData.balance || 0;
+    const currentNetWorth = userData.netWorth || 0;
+    const currentTotalSpent = userData.totalSpent || 0;
+    const ownedDefensesList = userData.ownedDefensesList || [];
+
+    // find the owned defense
+    const ownedDefense = ownedDefensesList.find(d => d.defenseId === defenseId);
+    if (!ownedDefense) {
+      throw new Error("You don't own this defense");
+    }
+
+    const currentLevel = ownedDefense.level;
+
+    // Calculate total cost spent on this defense
+    // Sum: cost[0] (buy) + cost[1] + ... + cost[currentLevel-1]
+    let totalCost = 0;
+    for (let i = 0; i < currentLevel; i++) {
+      totalCost += template.cost[i] || 0;
+    }
+
+    const sellPrice = Math.floor(totalCost * 0.5); // 50% refund
+    const loss = totalCost - sellPrice; // 50% loss
+
+    // Remove defense from owned list
+    const newOwnedList = ownedDefensesList.filter(d => d.defenseId !== defenseId);
+
+    // Remove from ownedDefenses object
+    const currentOwnedDefenses = userData.ownedDefenses || {};
+    const newOwnedDefenses = { ...currentOwnedDefenses };
+    delete newOwnedDefenses[defenseId];
+
+    transaction.update(userDocRef, {
+      balance: currentBalance + sellPrice,
+      ownedDefensesList: newOwnedList,
+      ownedDefenses: newOwnedDefenses,
+      totalDefensesOwned: newOwnedList.length,
+      totalSpent: currentTotalSpent - totalCost,
+      netWorth: currentNetWorth - loss, // NetWorth decreases by the loss
+    });
+
+    return {
+      defenseId,
+      defenseName: template.name || defenseId,
+      soldLevel: currentLevel,
+      totalCost,
+      sellPrice,
+      loss,
     };
   });
 }

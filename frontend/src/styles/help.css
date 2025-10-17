@@ -1,0 +1,124 @@
+/* Help Page Layout */
+.help-page {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* allows top alignment with optional offset */
+  min-height: 100vh;
+  padding-top: 6vh; /* slightly moves up while keeping responsive centering */
+  background-color: var(--color-background);
+}
+
+/* Outer Card */
+.help-outer {
+  background-color: #9EB1BC;
+  border-radius: 18px;
+  border: 1px solid var(--neo-sub-border);;
+  padding: 0.8rem;
+  width: 90%;
+  max-width: 1000px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Inner Card */
+.help-container {
+  background-color: #D7D5D5;
+  border-radius: 15px;
+  border: 1px solid var(--neo-sub-border);
+  padding: 2rem;
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.05);
+  text-align: left;
+}
+
+/* Title */
+.help-container h1 {
+  font-size: 2rem;
+  color: var(--color-primary);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Paragraph Styling */
+.help-container p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--color-text-primary);
+  text-align: justify;
+  margin-bottom: 1.5rem;
+}
+
+/* Section Headings */
+.help-section h2 {
+  font-size: 1.5rem;
+  color: var(--color-accent);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Bullet Lists */
+.help-section ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+}
+
+.help-section li {
+  margin-bottom: 0.5rem;
+  color: var(--color-text-primary);
+}
+
+/* Side-by-side layout for text and image */
+.help-section-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap; /* allows stacking on smaller screens */
+}
+
+.help-text {
+  flex: 1 1 55%;
+}
+
+.help-image {
+  flex: 1 1 40%;
+  display: flex;
+  justify-content: center;
+}
+
+.help-image img {
+  max-width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--neo-sub-border);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .help-section-flex {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .help-text, .help-image {
+    flex: 1 1 100%;
+  }
+
+  .help-image img {
+    width: 90%;
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .help-container {
+    padding: 1rem;
+  }
+
+  .help-container h1 {
+    font-size: 1.4rem;
+  }
+
+  .help-container p {
+    font-size: 0.95rem;
+  }
+}

@@ -64,24 +64,25 @@ export default function AuthForm({ mode = "login", redirectTo = "/home" }) {
         required
         autoComplete={mode === "signup" ? "new-password" : "current-password"}
       />
-      <button 
-        type="submit" 
-        disabled={loading}
-        className="splash-button primary"
-      >
-        {loading ? "Please wait…" : mode === "signup" ? "Create account" : "Log in"}
-      </button>
-      {mode === "login" && (
-        <button 
-          type="button" 
-          onClick={onForgot} 
-          className="splash-button secondary"
+      <div className="auth-form-actions">
+        <button
+          type="submit"
+          disabled={loading}
+          className="splash-button auth-primary-button"
         >
-          Forgot password?
+          {loading ? "Please wait…" : mode === "signup" ? "Create account" : "Log in"}
         </button>
-      )}
+        {mode === "login" && (
+          <button
+            type="button"
+            onClick={onForgot}
+            className="splash-button auth-secondary-button"
+          >
+            Forgot password?
+          </button>
+        )}
+      </div>
       {err && <p className="error-message">{err}</p>}
     </form>
   );
 }
-

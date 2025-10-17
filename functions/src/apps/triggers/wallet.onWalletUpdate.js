@@ -1,7 +1,8 @@
 /**
  * Triggers for updating the wallet balance of a user
  */
-import { apiGetUserBalance, apiUpdateUserBalance } from "../../../domains/wallet/api.js"; 
+import { apiGetUserBalance } from "../../domains/wallet/api.js"; 
+import { updateUserBalance } from "../../domains/wallet/service.js";
 
 /**
  * This function still needs to be changed after calculating the actual damage, for now it assumes no defenses.
@@ -16,7 +17,7 @@ export async function onAttackDeduction(attackEvent) {
   const { userId, baseDamage } = attackEvent; /* Get the user id and the amount lost from the attack */
   if (typeof userId === "string" && typeof baseDamage === "number") { /* Check for correct input types */
     const userBalance = await apiGetUserBalance(userId); /* Get the current balance of the user */
-    await apiUpdateUserBalance(userId, userBalance - baseDamage); /* Deduct the amount from the user's balance */
+    await updateUserBalance(userId, userBalance - baseDamage); /* Deduct the amount from the user's balance */
   } else {
     throw new Error("Invalid attack event data"); /* Error if no correct input types */
   }
