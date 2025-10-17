@@ -3,6 +3,7 @@
 */
 // Callable function exports (user)
 export {
+  user_ensureProfile,
   user_getBalance,
   user_getDefenses,
   user_buyDefense,
@@ -28,8 +29,6 @@ export {
   admin_scheduleAttack,
 } from "./apps/admin-api/app.js";
 
-// Background triggers
-export { userDocOnCreate } from "./apps/triggers/identity.onUserCreated.js";
 export { beforeUserCreated } from "./apps/triggers/auth.beforeCreate.js";
 
 // Scheduled jobs

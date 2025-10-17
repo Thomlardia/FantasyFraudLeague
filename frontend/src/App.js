@@ -9,6 +9,7 @@ import { FilterProvider } from "./contexts/FilterContext";
 import AppRoutes from "./routes/AppRoutes";
 import Prefetcher from "./routes/Prefetcher";
 import MatrixBackgroundLayer from "./components/MatrixBackgroundLayer";
+import AccountCreationGate from "./components/AccountCreationGate";
 import { initGA, usePageTracking } from "./analytics/GoogleAnalytics";
 import { reportWebVitals } from "./analytics/PerformanceMonitoring";
 import "./App.css";
@@ -39,19 +40,21 @@ export default function App() {
 
   return (
     <AuthProvider>
-      <WalletProvider>
-        <DefenseProvider>
-          <LeaderboardProvider>
-            <AttackProvider>
-              <FilterProvider>
-                <BrowserRouter>
-                  <AnalyticsWrapper />
-                </BrowserRouter>
-              </FilterProvider>
-            </AttackProvider>
-          </LeaderboardProvider>
-        </DefenseProvider>
-      </WalletProvider>
+      <AccountCreationGate>
+        <WalletProvider>
+          <DefenseProvider>
+            <LeaderboardProvider>
+              <AttackProvider>
+                <FilterProvider>
+                  <BrowserRouter>
+                    <AnalyticsWrapper />
+                  </BrowserRouter>
+                </FilterProvider>
+              </AttackProvider>
+            </LeaderboardProvider>
+          </DefenseProvider>
+        </WalletProvider>
+      </AccountCreationGate>
     </AuthProvider>
   );
 }

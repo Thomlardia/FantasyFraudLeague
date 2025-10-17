@@ -2,8 +2,47 @@ import { onCall, HttpsError } from "firebase-functions/v2/https";
 import { requireAuth, requireVerified, requireAppCheck } from "../common/authzn.js";
 import { apiGetUserBalance } from "../../domains/wallet/api.js";
 import { apiGetUserDefenses, apiBuyDefense, apiUpgradeDefense, apiSellDefense } from "../../domains/defense/api.js";
-import { apiGetLeaderboard, apiGetLeaderboardWithUser, apiGetUserRank } from "../../domains/leaderboard/api.js";
+import { apiGetLeaderboardWithUser, apiGetUserRank } from "../../domains/leaderboard/api.js";
 import { apiGetUserAttackLogs, apiGetUpcomingScheduledAttacks } from "../../domains/attack/api.js";
+import { ensureUserProfile } from "../../domains/user/profile.js";
+import { auth as adminAuth } from "../../infra/db/index.js";
+
+export const user_ensureProfile = onCall({ region: "africa-south1", enforceAppCheck: true }, async (request) => {
+  requireAppCheck(request);
+  requireVerified(request);
+
+  const uid = request.auth.uid;
+
+  let email = request.auth.token?.email ?? null;
+  let displayName = request.auth.token?.name ?? null;
+  const providedDisplayName =
+    typeof request.data?.displayName === "string" && request.data.displayName.trim().length > 0
+      ? request.data.displayName.trim()
+      : null;
+  if (!displayName && providedDisplayName) {
+    displayName = providedDisplayName;
+  }
+
+  if (!email || !displayName) {
+    try {
+      const userRecord = await adminAuth.getUser(uid);
+      email = email ?? userRecord.email ?? null;
+      displayName = displayName ?? userRecord.displayName ?? null;
+    } catch (fetchError) {
+      console.error("user_ensureProfile: failed to load user record", fetchError);
+    }
+  }
+
+  const result = await ensureUserProfile({
+    uid,
+    email,
+    displayName,
+  });
+
+  return {
+    status: result.created ? "created" : "exists",
+  };
+});
 
 // Using your proper (request) signature with AppCheck enforcement
 export const user_getBalance = onCall({ region: "africa-south1", enforceAppCheck: true }, async (request) => {

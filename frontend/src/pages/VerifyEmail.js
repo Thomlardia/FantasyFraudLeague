@@ -1,13 +1,17 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
+import { useAccountSetup } from "../components/AccountCreationGate";
+import { toMessage } from "../auth/errorMap";
 import '../styles/ui.css';
 
 export default function VerifyEmail() {
   const [sending, setSending] = useState(false);
   const [checking, setChecking] = useState(false);
+  const [error, setError] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
+  const { ensureAccount } = useAccountSetup();
   const next = location.state?.from?.pathname || "/home";
 
   const resend = async () => {
@@ -27,13 +31,26 @@ export default function VerifyEmail() {
   const checkAgain = async () => {
     if (!auth.currentUser) return;
     setChecking(true);
+    setError("");
     try {
       await auth.currentUser.reload();
       if (auth.currentUser.emailVerified) {
-        navigate(next, { replace: true });
+        try {
+          await auth.currentUser.getIdToken(true);
+          await ensureAccount();
+          navigate(next, { replace: true });
+        } catch (setupError) {
+          const msg = toMessage(setupError);
+          setError(msg);
+          alert(msg);
+        }
       } else {
         alert("Still not verified. Click the link in your email, then try again.");
       }
+    } catch (err) {
+      const msg = toMessage(err);
+      setError(msg);
+      alert(msg);
     } finally {
       setChecking(false);
     }
@@ -69,6 +86,12 @@ export default function VerifyEmail() {
             <p style={{ textAlign: 'center', color: 'var(--color-text-secondary)', fontSize: '14px', margin: '0 0 16px 0' }}>
               Click the link in your email to verify your account, then return here.
             </p>
+
+            {error && (
+              <p style={{ textAlign: 'center', color: 'var(--color-red-dark)', fontSize: '14px', margin: '0 0 16px 0' }}>
+                {error}
+              </p>
+            )}
 
             <div className="auth-form-actions">
               <button
