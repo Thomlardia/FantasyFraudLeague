@@ -140,6 +140,10 @@ lazy:
 	$(MAKE) seed-test-users
 	$(MAKE) seed-global-defenses
 
+lazy-win:
+	powershell -Command "$$env:FIRESTORE_EMULATOR_HOST='localhost:8080'; $$env:FIREBASE_AUTH_EMULATOR_HOST='localhost:9099'; node functions/scripts/seed.js seed test-users"
+	powershell -Command "$$env:FIRESTORE_EMULATOR_HOST='localhost:8080'; $$env:FIREBASE_AUTH_EMULATOR_HOST='localhost:9099'; node functions/scripts/seed.js seed global-defenses"
+
 # Seed auth users (directly into Firebase Authentication)
 seed-auth-users:
 	$(EMULATOR_ENV) node functions/scripts/seed.js seed auth-users
