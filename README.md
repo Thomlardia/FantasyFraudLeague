@@ -1,13 +1,53 @@
 # Fantasy Fraud League  
 
 ## Authors 
-- Abraham De Villiers (26936844@sun.ac.za)
-- Corbin Nathan (27475808@sun.ac.za)
-- Priyal Bhana (27040607@sun.ac.za)
-- Raymond Van Rooijen (26590565@sun.ac.za)
-- Thomas Rekvelt (29941601@sun.ac.za)
+- Abraham De Villiers 
+- Corbin Nathan 
+- Priyal Bhana 
+- Raymond Van Rooijen 
+- Thomas Rekvelt 
+
+## My Contributions
+- Scrum master sprint 1
+- Frontend design
+- Backend attack functions
+- Backend wallet functions
+- Database architecture 
+
+## Skills and Competencies
+### Software Engineering
+- full stack software development
+  - react.js frontend
+  - node.js backend
+  - firebase database
+  - APIs
+
+### Professional Agile Workflow
+- Working as clients for a financial security company
+- Scrum framework
+  - developing in sprints
+  - managing product and sprint backlog
+  - daily scrums
+  - weekly standups 
+- Frequent discussions with stakeholders, ensuring the development of the correct product
+- Successfully demoing increments to stakeholders
+
+### Teamwork and Github
+- Clear and frequent communication with team members and stakeholders
+- Leadership
+  - Leading meetings
+  - Steering product direction
+  - Keeping up morale
+  - Using skills of team members in correct places
+- GitHub
+  - Branching strategies
+  - Solving merge conflicts 
+  - Managing large codebase
+- Task management using Jira
 
 ## About the Project
+This project was built for the software engineering course at Stellenbosch University in South Africa. It was built over the duration of an entire semester. Collaboration was done with Intersekt, a financial security company. The project is developed on Linux, but works on Windows when using the corresponding make commands. I transferred this repository from the Stellenbosch GitLab to my own personal GitHub to show as a portfolio project. Ownership and intellectual property rights belong to Stellenbosch University.
+
 **Fantasy Fraud League (FFL)** is a security-based fantasy game where players act as bank managers defending against financial fraud.
 Inspired by fantasy sports leagues, players use a virtual budget to buy fraud prevention tools that protect their banks from admin-triggered attacks.
 
