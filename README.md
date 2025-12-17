@@ -46,7 +46,7 @@
 - Task management using Jira
 
 ## About the Project
-This project was built for the software engineering course at Stellenbosch University in South Africa. It was built over the duration of an entire semester. Collaboration was done with Intersekt, a financial security company. The project is developed on Linux, but works on Windows when using the corresponding make commands. I transferred this repository from the Stellenbosch GitLab to my own personal GitHub to show as a portfolio project. Ownership and intellectual property rights belong to Stellenbosch University.
+This project was built for the software engineering course at Stellenbosch University in South Africa. It was built over the duration of an entire semester. Collaboration was done with Entersekt, a financial security company. The project is developed on Linux, but works on Windows when using the corresponding make commands. I transferred this repository from the Stellenbosch GitLab to my own personal GitHub to show as a portfolio project. Ownership and intellectual property rights belong to Stellenbosch University.
 
 **Fantasy Fraud League (FFL)** is a security-based fantasy game where players act as bank managers defending against financial fraud.
 Inspired by fantasy sports leagues, players use a virtual budget to buy fraud prevention tools that protect their banks from admin-triggered attacks.
